@@ -1,6 +1,5 @@
-# Projeto_Integrador2
+# Meus Dependentes
 
-UNIVESP - Projeto Integrador II - Sistema de Gerenciamento de Cuidadores.
 
 ## Este projeto foi feito com:
 
@@ -17,8 +16,8 @@ UNIVESP - Projeto Integrador II - Sistema de Gerenciamento de Cuidadores.
 * Rode as migrações.
 
 ```
-git clone https://github.com/klauvital2021/Projeto_Integrador2.git
-cd Projeto_Integrador2
+git clone https://github.com/klauvital/meus_dependentes.git
+cd meus_dependentes
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt

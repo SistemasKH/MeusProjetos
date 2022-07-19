@@ -100,10 +100,22 @@ class MedicamentoListView(LRM, ListView):
     model = Medicamento
 
     def get_queryset(self):
+        dependente = self.request.GET.get('dependente')
+
+        if dependente:
+            queryset = Medicamento.objects.filter(dependente=dependente)  # noqa E501
+            return queryset
+
         usuario = self.request.user.usuarios.first()
         familia = usuario.familia
         queryset = Medicamento.objects.filter(dependente__familia__nome=familia)  # noqa E501
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        context['form'] = DependentesDaFamiliaForm(user)
+        return context
 
 
 class MedicamentoDetailView(LRM, DetailView):
