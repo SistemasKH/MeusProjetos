@@ -193,7 +193,9 @@ class DependenteAddForm(CustomUserForm):
 
     class Meta:
         model = Dependente
-        fields = CustomUserForm.Meta.fields + (
+        fields = (
+            'first_name',
+            'last_name',
             'data_nascimento',
             'rg',
             'cpf',
@@ -218,11 +220,13 @@ class DependenteAddForm(CustomUserForm):
         self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
 
 
-class DependenteUpdateForm(forms.ModelForm):
+class DependenteUpdateForm(CustomUserForm):
 
     class Meta:
         model = Dependente
         fields = (
+            'first_name',
+            'last_name',
             'data_nascimento',
             'rg',
             'cpf',
