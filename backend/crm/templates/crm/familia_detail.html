@@ -2,9 +2,6 @@
 {% load bootstrap %}
 
 {% block content %}
-
-
-
   <div class="container">
     <h4>Detalhes da Família </h4>
 
@@ -34,11 +31,11 @@
           <td>UF</td>
           <td>{{ object.get_uf_display|default:"---" }}</td>
         </tr>
-
+         <tr>
+              <td colspan="2"><a class ="btn btn-warning" href="{% url 'familia_list' %}" >Voltar</a></td>
+         </tr>
       </tbody>
     </table>
-    <a class ="btn btn-success" href="{% url 'familia_list' %}" >Voltar</a>
+
   </div>
-
-
 {% endblock content %}

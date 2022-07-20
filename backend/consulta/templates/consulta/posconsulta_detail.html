@@ -37,12 +37,15 @@
               <td>Observações</td>
               <td>{{object.observações|default:"---" }}</td>
             </tr>
+            <tr>
+              <td colspan="2"><a class ="btn btn-warning" href="{% url 'posconsulta_list' %}" >Voltar</a></td>
+            </tr>
           </tbody>
 
         </table>
       </div>
     </div>
-    <a class ="btn btn-success" href="{% url 'posconsulta_list' %}" >Voltar</a>
+
   </div>
 
 {% endblock content %}

@@ -21,7 +21,8 @@
         <nav class="container">
           <a class="navbar-brand" href="{% url 'home' %}">Sistema de Gerenciamento WEB para Cuidadores</a>
           <ul class="navbar-nav">
-            {% if user.is_authenticated %}
+
+             {% if user.is_authenticated %}
               <li class="nav-item">
                 <a class="breadcrumb red" href="{% url 'logout' %}">Sair</a>
               </li>
@@ -45,30 +46,42 @@
           {% endfor %}
         {% endif %}
       </nav>
+
       <div>
         {% if user.is_authenticated %}
 
           <nav class="dp-menu">
             <ul>
-              <li><a href="{% url 'familia_list' %}"> Família</a></li>
-              <li><a href="{% url 'dependente_list' %}"> Dependentes</a>
-                <ul>
-                  <li><a href="{% url 'consulta_list' %}"> Consultas</a></li>
-                  <li><a href="{% url 'posconsulta_list' %}"> Pós Consultas</a></li>
-                  <li><a href="{% url 'medicamento_list' %}"> Medicamentos</a></li>
-                  <li><a href="{% url 'medicamento_list' %}"> Medições</a></li>
-                </ul>
-              </li>
-              <li><a href="{% url 'responsavel_list' %}"> Responsáveis</a></li>
-              <li><a href="{% url 'cuidador_list' %}"> Cuidadores</a></li>
+              <li><a href="{% url 'familia_list' %}"> Família </a></li>
+                {% if familia == None %}
+                    <li><a href="{% url 'dependente_list' %}"></a> Dependentes
+                    <ul>
+                      <li><a href="{% url 'consulta_list' %}"></a> Consultas</li>
+                      <li><a href="{% url 'posconsulta_list' %}"></a> Pós Consultas</li>
+                      <li><a href="{% url 'medicamento_list' %}"></a> Medicamentos</li>
+                      <li><a href="{% url 'medicamento_list' %}"></a> Medições</li>
+                    </ul>
+                  </li>
+                  <li><a href="{% url 'responsavel_list' %}"></a> Responsáveis</li>
+                  <li><a href="{% url 'cuidador_list' %}"></a> Cuidadores</li>
+                {% else %}
+                  <li><a href="{% url 'dependente_list' %}">Dependentes</a>
+                    <ul>
+                      <li><a href="{% url 'consulta_list' %}"> Consultas</a></li>
+                      <li><a href="{% url 'posconsulta_list' %}"> Pós Consultas</a></li>
+                      <li><a href="{% url 'medicamento_list' %}"> Medicamentos</a></li>
+                      <li><a href="{% url 'medicamento_list' %}"> Medições</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="{% url 'responsavel_list' %}"> Responsáveis</a></li>
+                  <li><a href="{% url 'cuidador_list' %}"> Cuidadores</a></li>
+                {% endif %}
             </ul>
           </nav>
-
         {% endif %}
 
       </div>
     </header>
-
 
     {% block content %}
 

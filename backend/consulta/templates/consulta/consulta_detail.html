@@ -5,7 +5,7 @@
   <div class="container">
     <h4> <B><label>{{ user.get_full_name }} -  Familia {{ familia}}</label></B></h4>
     <h4> Detalhes da Consulta </h4>
-    <div class="card">
+
 
       <div class="card-body">
         <table class="table">
@@ -43,7 +43,7 @@
             </tr>
             <tr>
               <td>Atendimento</td>
-              <td>{{object.atendimento|default:"---"}}</td>
+              <td>{{object.get_atendimento_display|default:"---"}}</td>
             </tr>
             <tr>
               <td>Motivo Consulta</td>
@@ -70,11 +70,14 @@
               <td>Observação</td>
               <td>{{ object.observacao|default:"---" }}</td>
             </tr>
+            <tr>
+                <td colspan="2"><a class ="btn btn-warning" href="{% url 'consulta_list' %}" >Voltar</a></td>
+            </tr>
 
           </tbody>
         </table>
       </div>
     </div>
-    <a class ="btn btn-success" href="{% url 'consulta_list' %}" >Voltar</a>
-  </div>
+
+
 {% endblock content %}

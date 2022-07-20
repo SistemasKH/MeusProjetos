@@ -71,6 +71,7 @@ class PosConsultaForm(forms.ModelForm):
             self.fields['acompanhante_responsavel'].empty_label = None
 
 
+
 class MedicamentoForm(forms.ModelForm):
 
     class Meta:

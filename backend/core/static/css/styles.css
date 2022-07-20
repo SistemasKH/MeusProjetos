@@ -13,14 +13,14 @@
     width: 100%;
 }
 :root {
-    --cor-fundo: rgb(102, 117, 109);
-    --cor-hover: rgb(118, 180, 145);
+    --cor-fundo: rgb(124, 143, 133);
+    --cor-hover: rgb(0, 137, 193);
     --cor-primaria: rgb(231, 241, 236);
 }
 
 .dp-menu ul {
     list-style-type: none;
-    padding: 0;
+    padding-left: 10px;
 }
 
 .dp-menu ul {
@@ -49,6 +49,7 @@
     display: none;
     left: 0;
     position: absolute;
+    padding-left: 0;
 }
 
 .dp-menu ul li:hover ul {

@@ -4,7 +4,7 @@
   <div class="container">
     <h4> <B><label>{{ user.get_full_name }} -  Familia {{ familia}}</label></B></h4>
     <h4>Detalhes do Responsável </h4>
-    <div class="card">
+
       <div class="card-body">
         <table class="table">
           <tbody>
@@ -45,7 +45,7 @@
 
             <tr>
               <td>Estado Civil</td>
-              <td>{{ object.estado_civil|default:"---" }}</td>
+              <td>{{ object.get_estado_civil_display|default:"---" }}</td>
             </tr>
 
             <tr>
@@ -60,7 +60,7 @@
 
             <tr>
               <td>Parentesco</td>
-              <td>{{ object.parentesco_do_responsavel|default:"---" }}</td>
+              <td>{{ object.get_parentesco_do_responsavel_display|default:"---" }}</td>
             </tr>
 
             <tr>
@@ -82,11 +82,13 @@
               <td>UF</td>
               <td>{{ object.get_uf_display|default:"---" }}</td>
             </tr>
-
+             <tr>
+              <td colspan="2"><a class ="btn btn-success" href="{% url 'responsavel_list' %}" >Voltar</a></td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <a class ="btn btn-success" href="{% url 'responsavel_list' %}" >Voltar</a>
-  </div>
+
+
 {% endblock content %}
