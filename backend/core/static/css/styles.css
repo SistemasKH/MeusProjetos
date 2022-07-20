@@ -12,24 +12,19 @@
 	padding-left: 0;
     width: 100%;
 }
-
 :root {
-    --cor-fundo: rgb(152, 154, 154);
-    --cor-hover: rgb(5, 5, 243);
-    --cor-primaria: rgb(45, 47, 46);
-    --cor-fonte:#ffffff
+    --cor-fundo: rgb(102, 117, 109);
+    --cor-hover: rgb(118, 180, 145);
+    --cor-primaria: rgb(231, 241, 236);
 }
 
 .dp-menu ul {
     list-style-type: none;
     padding: 0;
-    margin-left: 35%;
-    margin-right: 35%;
-
 }
 
 .dp-menu ul {
-      position: center;
+    background-color: var(--cor-fundo);
 }
 
 .dp-menu ul li {
@@ -41,23 +36,19 @@
     color: var(--cor-primaria);
     text-decoration: none;
     display: inline-block;
-    padding: 8px;
+    padding: 10px;
     transition: background .3s;
-
 }
 
 .dp-menu ul li a:hover {
     background-color: var(--cor-hover);
-    color: #FFFFFF;
-    position: relative;
 }
 
 /*sub menu*/
 .dp-menu ul ul {
     display: none;
     left: 0;
-    position: relative;
-    top:-15px;
+    position: absolute;
 }
 
 .dp-menu ul li:hover ul {
@@ -71,7 +62,6 @@
 .dp-menu ul ul li a {
     display: block;
 }
-
 
 #menu-h{
     margin-top: 0;

@@ -4,7 +4,7 @@
 {% block titulo %} Consultas {% endblock %}
 
 {% block content %}
-  <div class = "card">
+
     <div class="card-body">
       <h4> <B><label>{{ user.get_full_name }} -  Familia {{ familia}}</label></B></h4>
       <h5> Lista Consultas </h5>
@@ -37,7 +37,7 @@
             <tr>
               <td><a href="{{ object.get_absolute_url }}">{{ object.data_consulta|date:"d/m/Y" }}</td>
               <td>{{ object.hora }}</td>
-              <td>{{ object.dependente }}</a></td>
+              <td>{{ object.dependente }}</td>
               <td>{{ object.dependente.familia }}</td>
               <td>{{ object.get_especialidade_display|default:"---" }} </td>
               <td>{{ object.nome_especialista|default:"---" }} </td>
@@ -60,7 +60,7 @@
       </table>
 
     </div>
-  </div>
+
 {% endblock %}
 
 {% block js %}

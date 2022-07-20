@@ -20,7 +20,6 @@ class CustomUserForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'email')
 
     def __init__(self, user=None, *args, **kwargs):
-
         super().__init__(*args, **kwargs)
         if user:
             self.fields['first_name'].initial = user.first_name
@@ -193,9 +192,7 @@ class DependenteAddForm(CustomUserForm):
 
     class Meta:
         model = Dependente
-        fields = (
-            'first_name',
-            'last_name',
+        fields = CustomUserForm.Meta.fields + (
             'data_nascimento',
             'rg',
             'cpf',
@@ -220,13 +217,11 @@ class DependenteAddForm(CustomUserForm):
         self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
 
 
-class DependenteUpdateForm(CustomUserForm):
+class DependenteUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Dependente
         fields = (
-            'first_name',
-            'last_name',
             'data_nascimento',
             'rg',
             'cpf',
