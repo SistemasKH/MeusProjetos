@@ -52,13 +52,11 @@ def custom_login(request):
             # Redireciona o Responsável Principal para completar o cadastro dele.
             if has_group(user, 'responsavel_principal'):
                 responsavel = Responsavel.objects.get(user=user)
-
-
                 if responsavel.parentesco_do_responsavel:
                     return redirect(resolve_url(settings.LOGIN_REDIRECT_URL))
                 else:
                     messages.add_message(
-                        request, constants.WARNING, 'Complete seu cadastrado!')
+                        request, constants.WARNING, 'Complete seu cadastrado campo: "Parentesco do Responsável" e adicione sua Família!')
 
 
                 return redirect(resolve_url('responsavel_edit', pk=responsavel.pk))
