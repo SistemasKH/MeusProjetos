@@ -259,6 +259,11 @@ class CuidadorUpdateView(LRM, UpdateView):
     model = Cuidador
     form_class = CuidadorUpdateForm
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
 
 @login_required
 def cuidador_delete(request, pk):

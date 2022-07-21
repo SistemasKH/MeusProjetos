@@ -21,10 +21,12 @@ class CustomUserForm(forms.ModelForm):
 
     def __init__(self, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        if kwargs['instance']:
+            user_instance = kwargs['instance'].user
         if user:
-            self.fields['first_name'].initial = user.first_name
-            self.fields['last_name'].initial = user.last_name
-            self.fields['email'].initial = user.email
+            self.fields['first_name'].initial = user_instance.first_name
+            self.fields['last_name'].initial = user_instance.last_name
+            self.fields['email'].initial = user_instance.email
 
 
 class FamiliaForm(forms.ModelForm):
@@ -150,11 +152,11 @@ class CuidadorAddForm(CustomUserForm):
         self.fields['data_fim'].widget.attrs.update({'class': 'mask-date'})
 
 
-class CuidadorUpdateForm(forms.ModelForm):
+class CuidadorUpdateForm(CustomUserForm):
 
     class Meta:
         model = Cuidador
-        fields = (
+        fields = CustomUserForm.Meta.fields + (
             'data_nascimento',
             'rg',
             'cpf',
@@ -186,6 +188,25 @@ class CuidadorUpdateForm(forms.ModelForm):
         self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
         self.fields['data_inicio'].widget.attrs.update({'class': 'mask-date'})
         self.fields['data_fim'].widget.attrs.update({'class': 'mask-date'})
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+
+        user = instance.user
+
+        first_name = self.cleaned_data['first_name']
+        last_name = self.cleaned_data['last_name']
+        email = self.cleaned_data['email']
+
+        if commit:
+            user.username = email
+            user.email = email
+            user.first_name = first_name
+            user.last_name = last_name
+            user.save()
+
+            instance.save()
+        return instance
 
 
 class DependenteAddForm(CustomUserForm):
