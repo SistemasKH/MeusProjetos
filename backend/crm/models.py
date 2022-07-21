@@ -105,6 +105,5 @@ class Dependente(Usuario):
     class Meta:
         proxy = True
 
-
     def get_absolute_url(self):
         return reverse('dependente_detail', kwargs={'pk': self.pk})

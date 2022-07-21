@@ -5,37 +5,37 @@
 
 {% block content %}
 
-    <div class="card-body">
-      <h4> <B><label>{{ user.get_full_name }} -  Familia {{ familia}}</label></B></h4>
-      <h5> Lista Consultas </h5>
+  <div class="card-body">
+    <h4> <B><label>{{ user.get_full_name }} -  Familia {{ familia}}</label></B></h4>
+    <h5> Lista Consultas </h5>
 
-      <form id="formBuscar" action="." method="GET">
-        {{ form.dependente.label }}
-        {{ form.dependente }}
-      </form>
+    <form id="formBuscar" action="." method="GET">
+      {{ form.dependente.label }}
+      {{ form.dependente }}
+    </form>
 
-      <hr>
-      <a class ="btn btn-success" href="{% url 'consulta_add'  %}">Adicionar</a>
-      <table class = "table table-striped">
-        <thead>
+    <hr>
+    <a class ="btn btn-success" href="{% url 'consulta_add'  %}">Adicionar</a>
+    <table class = "table table-striped">
+      <thead>
+        <tr>
+          <th>Data </th>
+          <th>Hora</th>
+          <th>Dependente</th>
+          <th>Família</th>
+          <th>Especialidade</th>
+          <th>Médico(a)</th>
+          <th>Atendimento</th>
+          <th>Acompanhante</th>
+          <th>Cancelamento</th>
+          <th>Editar/Deletar</th>
+          <th>Pós Consulta</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%  for object in object_list %}
           <tr>
-            <th>Data </th>
-            <th>Hora</th>
-            <th>Dependente</th>
-            <th>Família</th>
-            <th>Especialidade</th>
-            <th>Médico(a)</th>
-            <th>Atendimento</th>
-            <th>Acompanhante</th>
-            <th>Cancelamento</th>
-            <th>Editar/Deletar</th>
-            <th>Pós Consulta</th>
-          </tr>
-        </thead>
-        <tbody>
-          {%  for object in object_list %}
-            <tr>
-              <td><a href="{{ object.get_absolute_url }}">{{ object.data_consulta|date:"d/m/Y" }}</td>
+            <td><a href="{{ object.get_absolute_url }}">{{ object.data_consulta|date:"d/m/Y" }}</td>
               <td>{{ object.hora }}</td>
               <td>{{ object.dependente }}</td>
               <td>{{ object.dependente.familia }}</td>
@@ -55,11 +55,11 @@
                 {% endif %}
               </td>
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+        {% endfor %}
+      </tbody>
+    </table>
 
-    </div>
+  </div>
 
 {% endblock %}
 

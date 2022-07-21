@@ -7,8 +7,10 @@ from django.contrib.auth.views import LoginView
 from django.contrib.messages import constants
 from django.shortcuts import redirect, render, resolve_url
 from django.urls import reverse_lazy
+
 from backend.core.services import has_group
 from backend.crm.models import Responsavel
+
 from .forms import ResponsavelPrincipalForm
 from .services import responsavel_principal_create
 
@@ -22,8 +24,8 @@ def responsavel_principal_add(request):
         if form.is_valid():
             user = form.save(commit=False)
             responsavel_principal_create(form, user)
-            messages.add_message(request, constants.SUCCESS,
-                                 'Cadastrado com sucesso! Faça seu Login')
+            msg = 'Cadastrado com sucesso! Faça seu Login'
+            messages.add_message(request, constants.SUCCESS, msg)
             return redirect(success_url)
 
     context = {'form': form}
@@ -33,7 +35,6 @@ def responsavel_principal_add(request):
 
 def custom_login(request):
     template_name = 'accounts/login.html'
-    #messages.add_message(request, constants.INFO, 'Faça seu login ou cadastre-se no sistema')
     form = AuthenticationForm(request.POST or None)
     context = {'form': form}
 
@@ -55,17 +56,15 @@ def custom_login(request):
                 if responsavel.parentesco_do_responsavel:
                     return redirect(resolve_url(settings.LOGIN_REDIRECT_URL))
                 else:
-                    messages.add_message(
-                        request, constants.WARNING, 'Complete seu cadastrado campo: "Parentesco do Responsável" e adicione sua Família!')
-
+                    msg = 'Complete seu cadastrado campo: "Parentesco do Responsável" e adicione sua Família!'  # noqa E501
+                    messages.add_message(request, constants.WARNING, msg)
 
                 return redirect(resolve_url('responsavel_edit', pk=responsavel.pk))
             else:
                 return redirect(resolve_url(settings.LOGIN_REDIRECT_URL))
 
         # Caso não esteja autenticado.
-        messages.add_message(request, constants.ERROR,
-                             'Usuário ou senha não conferem !')
+        messages.add_message(request, constants.ERROR, 'Usuário ou senha não conferem !')  # noqa E501
         return redirect(resolve_url(settings.LOGIN_REDIRECT_URL))
 
     return render(request, template_name, context)

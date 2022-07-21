@@ -95,7 +95,6 @@ class Medicamento(models.Model):
         ordering = ('dependente', 'medicamento_prescrito')
 
     def __str__(self):
-        #return f'{self.medicamento_prescrito}'
         return f'{self.medicamento_prescrito} - {self.dependente}'
 
     def get_absolute_url(self):
