@@ -38,6 +38,7 @@ class CustomUserForm(forms.ModelForm):
 
 
 class FamiliaForm(forms.ModelForm):
+    required_css_class = 'required'
 
     class Meta:
         model = Familia
@@ -68,6 +69,7 @@ class DataNascimentoForm(forms.ModelForm):
 
 
 class ResponsavelAddForm(CustomUserForm, DataNascimentoForm):
+    required_css_class = 'required'
 
     class Meta:
         model = Responsavel
@@ -93,6 +95,7 @@ class ResponsavelAddForm(CustomUserForm, DataNascimentoForm):
 
 
 class ResponsavelUpdateForm(CustomUserForm, DataNascimentoForm):
+    required_css_class = 'required'
 
     class Meta:
         model = Responsavel
@@ -138,6 +141,8 @@ class ResponsavelUpdateForm(CustomUserForm, DataNascimentoForm):
 
 
 class CuidadorAddForm(CustomUserForm, DataNascimentoForm):
+    required_css_class = 'required'
+
     data_inicio = forms.DateField(
         label='Admissão',
         required=False,
@@ -197,6 +202,8 @@ class CuidadorAddForm(CustomUserForm, DataNascimentoForm):
 
 
 class CuidadorUpdateForm(CustomUserForm, DataNascimentoForm):
+    required_css_class = 'required'
+
     data_inicio = forms.DateField(
         label='Admissão',
         required=False,
@@ -275,6 +282,7 @@ class CuidadorUpdateForm(CustomUserForm, DataNascimentoForm):
 
 
 class DependenteAddForm(CustomUserForm, DataNascimentoForm):
+    required_css_class = 'required'
 
     class Meta:
         model = Dependente
@@ -303,6 +311,8 @@ class DependenteAddForm(CustomUserForm, DataNascimentoForm):
 
 
 class DependenteUpdateForm(forms.ModelForm):
+    required_css_class = 'required'
+
     data_nascimento = forms.DateField(
         label='Data de Nascimento',
         required=False,

@@ -23,6 +23,8 @@ class DependentesDaFamiliaForm(forms.Form):
 
 
 class ConsultaForm(forms.ModelForm):
+    required_css_class = 'required'
+
     data_consulta = forms.DateField(
         label='Data Consulta',
         widget=forms.DateInput(
@@ -72,6 +74,7 @@ class ConsultaForm(forms.ModelForm):
 
 
 class PosConsultaForm(forms.ModelForm):
+    required_css_class = 'required'
 
     class Meta:
         model = PosConsulta
@@ -101,6 +104,8 @@ class PosConsultaForm(forms.ModelForm):
 
 
 class MedicamentoForm(forms.ModelForm):
+    required_css_class = 'required'
+
     data_inicio = forms.DateField(
         label='Data Início',
         required=False,
