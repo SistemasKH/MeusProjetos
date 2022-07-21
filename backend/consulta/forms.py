@@ -23,6 +23,35 @@ class DependentesDaFamiliaForm(forms.Form):
 
 
 class ConsultaForm(forms.ModelForm):
+    data_consulta = forms.DateField(
+        label='Data Consulta',
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+        input_formats=('%Y-%m-%d',),
+    )
+    hora = forms.TimeField(
+        label='Hora',
+        widget=forms.TimeInput(
+            attrs={
+                'type': 'time',
+                'class': 'form-control'
+            }),
+    )
+    cancelamento = forms.DateField(
+        label='Data Cancelamento',
+        required=False,
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+        input_formats=('%Y-%m-%d',),
+    )
 
     class Meta:
         model = Consulta
@@ -72,6 +101,28 @@ class PosConsultaForm(forms.ModelForm):
 
 
 class MedicamentoForm(forms.ModelForm):
+    data_inicio = forms.DateField(
+        label='Data Início',
+        required=False,
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+        input_formats=('%Y-%m-%d',),
+    )
+    data_fim = forms.DateField(
+        label='Data Fim',
+        required=False,
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+        input_formats=('%Y-%m-%d',),
+    )
 
     class Meta:
         model = Medicamento

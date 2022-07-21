@@ -18,11 +18,11 @@ class Consulta(models.Model):
         on_delete=models.CASCADE,
         related_name='consultas'
     )
-    data_consulta = models.DateField('Data Consulta', blank=False, null=False)  # noqa E501
-    hora = models.TimeField('Hora', blank=False, null=False)  # noqa E501
-    especialidade = models.CharField('Especialidade', max_length=30, choices=ESPECIALIDADE_CHOICES, blank=False, null=False)  # noqa E501
+    data_consulta = models.DateField('Data Consulta')
+    hora = models.TimeField('Hora')
+    especialidade = models.CharField('Especialidade', max_length=30, choices=ESPECIALIDADE_CHOICES)  # noqa E501
     local = models.CharField('Local', max_length=100, blank=True, null=True)  # noqa E501
-    nome_especialista = models.CharField('Especialista', max_length=100, blank=False, null=False)  # noqa E501
+    nome_especialista = models.CharField('Especialista', max_length=100)  # noqa E501
     fone_contato = models.CharField('Fone', max_length=100, blank=True, null=True)  # noqa E501
     atendimento = models.CharField('Atendimento', max_length=30, choices=ATENDIMENTO_CHOICES)  # noqa E501
     motivo_consulta = models.CharField('Motivo Consulta', max_length=300, blank=True, null=True)  # noqa E501
@@ -57,7 +57,7 @@ class PosConsulta(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Responsável'
     )
-    diagnostico = models.TextField('Diagnóstico', blank=False, null=False)  # noqa E501
+    diagnostico = models.TextField('Diagnóstico')  # noqa E501
     tratamento = models.TextField('Tratamento', blank=True, null=True)  # noqa E501
     receita = models.ImageField('Upload Receita', upload_to='', blank=True, null=True)  # noqa E501
     observacao = models.TextField('Observação', blank=True, null=True)  # noqa E501
@@ -73,17 +73,17 @@ class PosConsulta(models.Model):
 
 
 class Medicamento(models.Model):
-    medicamento_prescrito = models.CharField('Medicamento Prescrito', max_length=100, blank=False, null=False)  # noqa E501
+    medicamento_prescrito = models.CharField('Medicamento Prescrito', max_length=100)  # noqa E501
     principio_ativo = models.CharField('Princípo Ativo', max_length=40, blank=True, null=False)  # noqa E501
     indicacoes = models.TextField('Indicações', blank=True, null=True)  # noqa E501
     tipo_medicamento = models.CharField('Tipo de Medicamento', max_length=18, choices=TIPO_MEDICAMENTO_CHOICES)  # noqa E501
-    dosagem = models.CharField('Dosagem', max_length=40, blank=False, null=False)  # noqa E501
+    dosagem = models.CharField('Dosagem', max_length=40)  # noqa E501
     posologia = models.CharField('Posologia', max_length=30, choices=POSOLOGIA_CHOICES)  # noqa E501
     uso_continuo = models.CharField('Uso Continuo', max_length=30, choices=USO_CONTINUO_CHOICES)  # noqa E501
-    data_inicio = models.DateField('Dta Inicio', blank=True, null=True)  # noqa E501
-    data_fim = models.DateField('Dta Fim', blank=True, null=True)  # noqa E501
-    forma_uso = models.TextField('Forma de Uso', blank=False, null=False)  # noqa E501
-    orientacao_tratamento = models.TextField('Orientações', blank=False, null=False)  # noqa E501
+    data_inicio = models.DateField('Data Início', blank=True, null=True)  # noqa E501
+    data_fim = models.DateField('Data Fim', blank=True, null=True)  # noqa E501
+    forma_uso = models.TextField('Forma de Uso')  # noqa E501
+    orientacao_tratamento = models.TextField('Orientações')  # noqa E501
     medico_responsavel = models.CharField('Médico Responsável', max_length=100, blank=True, null=True)  # noqa E501
     fornecedor_principal = models.CharField('Fornecedor', max_length=20, choices=FORNECEDOR_PRINCIPAL_CHOICES)  # noqa E501
     dependente = models.ForeignKey(

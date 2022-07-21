@@ -50,12 +50,28 @@ class FamiliaForm(forms.ModelForm):
         )
 
 
-class ResponsavelAddForm(CustomUserForm):
+class DataNascimentoForm(forms.ModelForm):
+    data_nascimento = forms.DateField(
+        label='Data de Nascimento',
+        required=False,
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+        input_formats=('%Y-%m-%d',),
+    )
+
+    class Meta:
+        fields = ('data_nascimento',)
+
+
+class ResponsavelAddForm(CustomUserForm, DataNascimentoForm):
 
     class Meta:
         model = Responsavel
-        fields = CustomUserForm.Meta.fields + (
-            'data_nascimento',
+        fields = CustomUserForm.Meta.fields + DataNascimentoForm.Meta.fields + (
             'rg',
             'cpf',
             'celular_whatsapp',
@@ -76,12 +92,11 @@ class ResponsavelAddForm(CustomUserForm):
         self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
 
 
-class ResponsavelUpdateForm(CustomUserForm):
+class ResponsavelUpdateForm(CustomUserForm, DataNascimentoForm):
 
     class Meta:
         model = Responsavel
-        fields = CustomUserForm.Meta.fields + (
-            'data_nascimento',
+        fields = CustomUserForm.Meta.fields + DataNascimentoForm.Meta.fields + (
             'rg',
             'cpf',
             'celular_whatsapp',
@@ -122,12 +137,33 @@ class ResponsavelUpdateForm(CustomUserForm):
         return instance
 
 
-class CuidadorAddForm(CustomUserForm):
+class CuidadorAddForm(CustomUserForm, DataNascimentoForm):
+    data_inicio = forms.DateField(
+        label='Admissão',
+        required=False,
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+        input_formats=('%Y-%m-%d',),
+    )
+    data_fim = forms.DateField(
+        label='Demissão',
+        required=False,
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+        input_formats=('%Y-%m-%d',),
+    )
 
     class Meta:
         model = Cuidador
-        fields = CustomUserForm.Meta.fields + (
-            'data_nascimento',
+        fields = CustomUserForm.Meta.fields + DataNascimentoForm.Meta.fields + (
             'rg',
             'cpf',
             'celular_whatsapp',
@@ -160,12 +196,33 @@ class CuidadorAddForm(CustomUserForm):
         self.fields['data_fim'].widget.attrs.update({'class': 'mask-date'})
 
 
-class CuidadorUpdateForm(CustomUserForm):
+class CuidadorUpdateForm(CustomUserForm, DataNascimentoForm):
+    data_inicio = forms.DateField(
+        label='Admissão',
+        required=False,
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+        input_formats=('%Y-%m-%d',),
+    )
+    data_fim = forms.DateField(
+        label='Demissão',
+        required=False,
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+        input_formats=('%Y-%m-%d',),
+    )
 
     class Meta:
         model = Cuidador
-        fields = CustomUserForm.Meta.fields + (
-            'data_nascimento',
+        fields = CustomUserForm.Meta.fields + DataNascimentoForm.Meta.fields + (
             'rg',
             'cpf',
             'celular_whatsapp',
@@ -217,12 +274,11 @@ class CuidadorUpdateForm(CustomUserForm):
         return instance
 
 
-class DependenteAddForm(CustomUserForm):
+class DependenteAddForm(CustomUserForm, DataNascimentoForm):
 
     class Meta:
         model = Dependente
-        fields = CustomUserForm.Meta.fields + (
-            'data_nascimento',
+        fields = CustomUserForm.Meta.fields + DataNascimentoForm.Meta.fields + (
             'rg',
             'cpf',
             'celular_whatsapp',
@@ -247,6 +303,17 @@ class DependenteAddForm(CustomUserForm):
 
 
 class DependenteUpdateForm(forms.ModelForm):
+    data_nascimento = forms.DateField(
+        label='Data de Nascimento',
+        required=False,
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+        input_formats=('%Y-%m-%d',),
+    )
 
     class Meta:
         model = Dependente
