@@ -1,5 +1,7 @@
 from django import forms
 
+from backend.core.services import has_group
+
 from .models import Cuidador, Dependente, Familia, Responsavel
 
 
@@ -21,12 +23,18 @@ class CustomUserForm(forms.ModelForm):
 
     def __init__(self, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         if kwargs['instance']:
             user_instance = kwargs['instance'].user
+
         if user:
             self.fields['first_name'].initial = user_instance.first_name
             self.fields['last_name'].initial = user_instance.last_name
             self.fields['email'].initial = user_instance.email
+
+            if not has_group(user, 'responsavel_principal'):
+                self.fields['first_name'].widget.attrs['readonly'] = True
+                self.fields['last_name'].widget.attrs['readonly'] = True
 
 
 class FamiliaForm(forms.ModelForm):

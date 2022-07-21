@@ -1,11 +1,10 @@
-from urllib import request
-
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
-from django.contrib.messages import constants
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
+
+from backend.core.services import has_group
 
 from .forms import (
     CuidadorAddForm,
@@ -201,6 +200,14 @@ class ResponsavelCreateView(LRM, CreateView):
 class ResponsavelUpdateView(LRM, UpdateView):
     model = Responsavel
     form_class = ResponsavelUpdateForm
+
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if not has_group(request.user, 'responsavel_principal') and request.user.email != obj.user.email:  # noqa E501
+            message = 'Você não tem permissão para editar este registro.'
+            messages.error(request, message)
+            return redirect('responsavel_list')
+        return super(ResponsavelUpdateView, self).dispatch(request, *args, **kwargs)
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
