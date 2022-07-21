@@ -93,7 +93,10 @@ class PosConsultaUpdateView(LRM, UpdateView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs.update({'user': self.request.user})
+        kwargs.update({
+            'user': self.request.user,
+            'request': self.request
+        })
         return kwargs
 
 
