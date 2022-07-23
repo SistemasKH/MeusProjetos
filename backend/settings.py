@@ -70,40 +70,17 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-#DEV = config('DEV', default=False, cast=bool)
-'''
-if DEV:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:'''
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': config('POSTGRES_DB', 'SGWC'),
-       'USER': config('POSTGRES_USER', 'postgres'),
-       'PASSWORD': config('POSTGRES_PASSWORD'),
-       'HOST': config('DB_HOST', 'localhost'),
-       'PORT': config('DB_PORT', 5432),
-       }
-   }
-
-
-'''
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'sgwc_banco',
-            'USER': 'root',
-            'PASSWORD': '123456',
-            'HOST': '127.0.0.1',
-            'PORT': 3306,
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('POSTGRES_DB', 'SGWC'),
+        'USER': config('POSTGRES_USER', 'postgres'),
+        'PASSWORD': config('POSTGRES_PASSWORD'),
+        'HOST': config('DB_HOST', 'localhost'),
+        'PORT': config('DB_PORT', 5432),
     }
-'''
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
