@@ -13,6 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='usuario',
             name='parentesco_do_responsavel',
-            field=models.CharField(blank=True, choices=[('F', 'Filho'), ('N', 'Neto'), ('I', 'Irmão'), ('O', 'Outro')], max_length=1, verbose_name='Parentesco do Responsável'),
+            field=models.CharField(blank=True, choices=[('F', 'Filho'), ('N', 'Neto'), (
+                'I', 'Irmão'), ('O', 'Outro')], max_length=1, verbose_name='Parentesco do Responsável'),
         ),
     ]

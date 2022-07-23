@@ -56,16 +56,16 @@ class DependenteCreateView(LRM, CreateView):
     form_class = DependenteAddForm
 
     def form_valid(self, form):
-        # Cria o User.
-        user = user_create(form)
+        # # Cria o User.
+        # user = user_create(form)
 
         self.object = form.save(commit=False)
 
-        # Associa o User ao Dependente
-        self.object.user = user
+        # # Associa o User ao Dependente
+        # self.object.user = user
 
         # Adiciona o Dependente ao grupo 'dependente'.
-        add_to_group_dependente(form, user)
+        # add_to_group_dependente(form, user)
 
         # Associa a Familia.
         usuario = self.request.user.usuarios.first()

@@ -13,11 +13,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='medicamento',
             name='data_fim',
-            field=models.DateField(blank=True, null=True, verbose_name='Data Fim'),
+            field=models.DateField(blank=True, null=True,
+                                   verbose_name='Data Fim'),
         ),
         migrations.AlterField(
             model_name='medicamento',
             name='data_inicio',
-            field=models.DateField(blank=True, null=True, verbose_name='Data Início'),
+            field=models.DateField(blank=True, null=True,
+                                   verbose_name='Data Início'),
         ),
     ]

@@ -32,14 +32,11 @@ class DependenteAdmin(admin.ModelAdmin):
         'cpf',
         'active'
     )
-    # list_display_links = ('dependente',)
     search_fields = (
-        'usuario__user__first_name',
-        'usuario__user__last_name',
-        'usuario__user__email',
+        'first_name',
+        'last_name',
     )
     list_filter = ('active',)
-    # date_hierarchy = 'created'
 
 
 @admin.register(Familia)

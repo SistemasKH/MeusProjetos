@@ -40,7 +40,6 @@ class Usuario(Address, Active):
     dependente_convenio_medico = models.CharField('Convênio', max_length=100, blank=True, null=True)  # noqa E501
     dependente_contato_fone_convenio = models.CharField('Telefone Convênio', max_length=20, blank=True, null=True)  # noqa E501
     dependente_contato_endereco_convenio = models.CharField('Endereço Convênio', max_length=100, blank=True, null=True)  # noqa E501
-    #ativo = models.CharField('Ativo', max_length=10, choices=ATIVO_CHOICES, blank=True, null=True)
 
     class Meta:
         ordering = ('user__first_name', 'user__last_name')
@@ -99,11 +98,39 @@ class Cuidador(Usuario):
         return reverse('cuidador_detail', kwargs={'pk': self.pk})
 
 
-class Dependente(Usuario):
-    objects = DependenteManager()
+class Dependente(Address, Active):
+    first_name = models.CharField('nome', max_length=150, blank=True)
+    last_name = models.CharField('sobrenome', max_length=150, blank=True)
+    familia = models.ForeignKey(
+        'Familia',
+        on_delete=models.SET_NULL,
+        verbose_name='Família',
+        related_name='dependentes',
+        null=True,
+        blank=True
+    )
+    data_nascimento = models.DateField('Data de Nascimento', blank=True, null=True)  # noqa E501
+    rg = models.CharField('RG', max_length=20, blank=True, null=True)  # noqa E501
+    cpf = models.CharField('CPF', max_length=14, blank=True, null=True)  # noqa E501
+    celular_whatsapp = models.CharField('WhatsApp', max_length=20, unique=True, blank=True, null=True)  # noqa E501
+    telefone = models.CharField('Telefone', max_length=20, blank=True, null=True)  # noqa E501
+    estado_civil = models.CharField('Estado Civil', max_length=1, choices=CIVIL_CHOICES, blank=True, null=True)  # noqa E501
+    nome_conjuge = models.CharField('Cônjuge', max_length=100, blank=True, null=True)  # noqa E501
+    naturalidade = models.CharField('Naturalidade', max_length=100, blank=True, null=True)  # noqa E501
+    parentesco_do_responsavel = models.CharField('Parentesco do Responsável', max_length=1, choices=PARENTESCO_CHOICES)  # noqa E501
+    dependente_convenio_medico = models.CharField('Convênio', max_length=100, blank=True, null=True)  # noqa E501
+    dependente_contato_fone_convenio = models.CharField('Telefone Convênio', max_length=20, blank=True, null=True)  # noqa E501
+    dependente_contato_endereco_convenio = models.CharField('Endereço Convênio', max_length=100, blank=True, null=True)  # noqa E501
 
     class Meta:
-        proxy = True
+        ordering = ('first_name',)
+
+    @property
+    def full_name(self):
+        return f'{self.first_name} {self.last_name or ""}'.strip()
+
+    def __str__(self):
+        return self.full_name
 
     def get_absolute_url(self):
         return reverse('dependente_detail', kwargs={'pk': self.pk})

@@ -281,12 +281,15 @@ class CuidadorUpdateForm(CustomUserForm, DataNascimentoForm):
         return instance
 
 
-class DependenteAddForm(CustomUserForm, DataNascimentoForm):
+class DependenteAddForm(DataNascimentoForm):
     required_css_class = 'required'
 
     class Meta:
         model = Dependente
-        fields = CustomUserForm.Meta.fields + DataNascimentoForm.Meta.fields + (
+        fields = (
+            'first_name',
+            'last_name',
+            'data_nascimento',
             'rg',
             'cpf',
             'celular_whatsapp',
@@ -328,6 +331,8 @@ class DependenteUpdateForm(forms.ModelForm):
     class Meta:
         model = Dependente
         fields = (
+            'first_name',
+            'last_name',
             'data_nascimento',
             'rg',
             'cpf',
@@ -348,5 +353,5 @@ class DependenteUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['data_nascimento'].widget.attrs.update({'class': 'mask-date'})  # noqa E501
+        # self.fields['data_nascimento'].widget.attrs.update({'class': 'mask-date'})  # noqa E501
         self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
