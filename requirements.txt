@@ -8,3 +8,4 @@ djhtml==1.5.1
 isort==5.10.1
 Pillow==9.1.1
 python-decouple==3.6
+psycopg2-binary==2.9.3
