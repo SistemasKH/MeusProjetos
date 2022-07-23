@@ -306,7 +306,7 @@ class DependenteAddForm(CustomUserForm, DataNascimentoForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['data_nascimento'].widget.attrs.update({'class': 'mask-date'})  # noqa E501
+        # self.fields['data_nascimento'].widget.attrs.update({'class': 'mask-date'})  # noqa E501
         self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
 
 

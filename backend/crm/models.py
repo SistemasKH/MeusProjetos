@@ -36,7 +36,7 @@ class Usuario(Address, Active):
     estado_civil = models.CharField('Estado Civil', max_length=1, choices=CIVIL_CHOICES, blank=True, null=True)  # noqa E501
     nome_conjuge = models.CharField('Cônjuge', max_length=100, blank=True, null=True)  # noqa E501
     naturalidade = models.CharField('Naturalidade', max_length=100, blank=True, null=True)  # noqa E501
-    parentesco_do_responsavel = models.CharField('Parentesco do Responsável', max_length=1, choices=PARENTESCO_CHOICES, blank=True, null=True)  # noqa E501
+    parentesco_do_responsavel = models.CharField('Parentesco do Responsável', max_length=1, choices=PARENTESCO_CHOICES)  # noqa E501
     dependente_convenio_medico = models.CharField('Convênio', max_length=100, blank=True, null=True)  # noqa E501
     dependente_contato_fone_convenio = models.CharField('Telefone Convênio', max_length=20, blank=True, null=True)  # noqa E501
     dependente_contato_endereco_convenio = models.CharField('Endereço Convênio', max_length=100, blank=True, null=True)  # noqa E501
