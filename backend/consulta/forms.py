@@ -61,7 +61,7 @@ class ConsultaForm(forms.ModelForm):
 
     def __init__(self, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['data_consulta'].widget.attrs.update({'class': 'mask-date'})   # noqa E501
+        #self.fields['data_consulta'].widget.attrs.update({'class': 'mask-date'})   # noqa E501
         self.fields['hora'].widget.attrs.update({'class': 'mask-hora'})
 
         usuario = Usuario.objects.filter(user=user).first()
