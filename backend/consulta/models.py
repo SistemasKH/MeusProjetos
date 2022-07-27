@@ -137,3 +137,6 @@ class Glicose(models.Model):
 
     def __str__(self):
         return f'{self.cuidador} - {self.dependente} - {self.responsavel}'
+
+    def get_absolute_url(self):
+        return reverse("glicose_detail", kwargs={"pk": self.id})
