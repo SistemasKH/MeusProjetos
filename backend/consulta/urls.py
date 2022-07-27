@@ -26,9 +26,18 @@ medicamento_urlpatterns = [
     path('delete/<int:pk>/', v.medicamento_delete, name='medicamento_delete'),  # noqa E501
 ]
 
+glicose_urlpatterns = [
+    path('', v.GlicoseListView.as_view(), name='glicose_list'),  # noqa E501
+    path('<int:pk>/', v.GlicoseDetailView.as_view(), name='glicose_detail'),  # noqa E501
+    path('add/', v.GlicoseCreateView.as_view(), name='glicose_add'),  # noqa E501
+    path('edit/<int:pk>/', v.GlicoseUpdateView.as_view(), name='glicose_edit'),  # noqa E501
+    path('delete/<int:pk>/', v.glicose_delete, name='glicose_delete'),  # noqa E501
+
+]
 
 urlpatterns = [
     path('consulta/', include(consulta_urlpatterns)),
     path('posconsulta/', include(posconsulta_urlpatterns)),
     path('medicamento/', include(medicamento_urlpatterns)),
+    path('glicose/', include(glicose_urlpatterns)),
 ]

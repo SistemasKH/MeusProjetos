@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Consulta, Medicamento, PosConsulta
+from .models import Consulta, Medicamento, PosConsulta, Glicose
 
 
 @admin.register(Consulta)
@@ -37,5 +37,21 @@ class MedicamentoAdmin(admin.ModelAdmin):
     )
     # list_display_links = ('dependente',)
     search_fields = ('medicamento_prescrito',)
+    # list_filter = ('type',)
+    # date_hierarchy = 'created'
+
+@admin.register(Glicose)
+class GlicoseAdmin(admin.ModelAdmin):
+    list_display = (
+        '__str__',
+        'data_medicao',
+        'hora',
+        'taxa_glicose',
+        'estado_alimentar',
+        'tipo_insulina',
+        'qt_insulina',
+    )
+    # list_display_links = ('dependente',)
+    search_fields = ('hora',)
     # list_filter = ('type',)
     # date_hierarchy = 'created'

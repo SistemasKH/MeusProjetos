@@ -1,8 +1,8 @@
 from django import forms
 
-from backend.crm.models import Dependente, Responsavel, Usuario
+from backend.crm.models import Dependente, Responsavel, Usuario, Cuidador
 
-from .models import Consulta, Medicamento, PosConsulta
+from .models import Consulta, Medicamento, PosConsulta, Glicose
 
 
 class DependentesDaFamiliaForm(forms.Form):
@@ -143,3 +143,45 @@ class MedicamentoForm(forms.ModelForm):
 
         #self.fields['data_inicio'].widget.attrs.update({'class': 'mask-date'})
         #self.fields['data_fim'].widget.attrs.update({'class': 'mask-date'})
+
+
+class GlicoseForm(forms.ModelForm):
+    required_css_class = 'required'
+
+    data_medicao = forms.DateField(
+        label='Data',
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+        input_formats=('%Y-%m-%d',),
+    )
+    hora = forms.TimeField(
+        label='Hora',
+        widget=forms.TimeInput(
+            attrs={
+                'type': 'time',
+                'class': 'form-control'
+            }),
+    )
+
+    class Meta:
+        model = Glicose
+        fields = '__all__'
+
+    def __init__(self, user=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        usuario = Usuario.objects.filter(user=user).first()
+        familia = usuario.familia
+
+        queryset = Dependente.objects.filter(familia=familia)
+        self.fields['dependente'].queryset = queryset
+
+        queryset_responsavel = Responsavel.objects.filter(familia=familia)
+        self.fields['responsavel'].queryset = queryset_responsavel
+
+        queryset_cuidador = Cuidador.objects.filter(familia=familia)
+        self.fields['cuidador'].queryset = queryset_cuidador

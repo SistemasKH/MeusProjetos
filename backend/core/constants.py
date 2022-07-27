@@ -99,3 +99,19 @@ FORNECEDOR_PRINCIPAL_CHOICES = (
     ('5', 'Mercado Livre'),
     ('6', 'Outros'),
 )
+
+REFEICAO_CHOICES = (
+    ('1', 'Em jejum'),
+    ('2', 'Após café da manhã'),
+    ('3', 'Antes de almoçar'),
+    ('4', 'Após almoço'),
+    ('5', 'Antes do jantar'),
+    ('6', 'Após jantar'),
+    ('7', 'Antes de dormir'),
+    ('8', 'Na madrugada'),
+)
+
+TIPO_INSULINA_CHOICES = (
+    ('1', 'Lantus'),
+    ('2', 'NovoRapid'),
+)

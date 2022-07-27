@@ -5,9 +5,10 @@ from .forms import (
     ConsultaForm,
     DependentesDaFamiliaForm,
     MedicamentoForm,
-    PosConsultaForm
+    PosConsultaForm,
+    GlicoseForm
 )
-from .models import Consulta, Medicamento, PosConsulta
+from .models import Consulta, Medicamento, PosConsulta, Glicose
 
 
 class ConsultaListView(LRM, ListView):
@@ -151,4 +152,54 @@ class MedicamentoUpdateView(LRM, UpdateView):
 
 
 def medicamento_delete(request):
+    ...
+
+
+class GlicoseListView(LRM, ListView):
+    model = Glicose
+
+    def get_queryset(self):
+        dependente = self.request.GET.get('dependente')
+
+        if dependente:
+            queryset = Glicose.objects.filter(dependente=dependente)  # noqa E501
+            return queryset
+
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+        queryset = Glicose.objects.filter(dependente__familia__nome=familia)  # noqa E501
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        context['form'] = DependentesDaFamiliaForm(user)
+        return context
+
+
+class GlicoseDetailView(LRM, DetailView):
+    model = Glicose
+
+
+class GlicoseCreateView(LRM, CreateView):
+    model = Glicose
+    form_class = GlicoseForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
+
+class GlicoseUpdateView(LRM, UpdateView):
+    model = Glicose
+    form_class = GlicoseForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
+
+def glicose_delete(request):
     ...

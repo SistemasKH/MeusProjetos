@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from backend.crm.models import Dependente, Responsavel, Cuidador
 
 from backend.core.constants import (
     ATENDIMENTO_CHOICES,
@@ -7,9 +8,10 @@ from backend.core.constants import (
     FORNECEDOR_PRINCIPAL_CHOICES,
     POSOLOGIA_CHOICES,
     TIPO_MEDICAMENTO_CHOICES,
-    USO_CONTINUO_CHOICES
+    USO_CONTINUO_CHOICES,
+    REFEICAO_CHOICES,
+    TIPO_INSULINA_CHOICES
 )
-from backend.crm.models import Dependente, Responsavel
 
 
 class Consulta(models.Model):
@@ -99,3 +101,39 @@ class Medicamento(models.Model):
 
     def get_absolute_url(self):
         return reverse("medicamento_detail", kwargs={"pk": self.id})
+
+
+class Glicose(models.Model):
+    dependente = models.ForeignKey(
+        Dependente,
+        on_delete=models.CASCADE,
+        verbose_name='Dependente'
+    )
+    data_medicao = models.DateField('Data')  # noqa E501
+    hora = models.TimeField('Hora')  # noqa E501
+    estado_alimentar = models.CharField('Estado Alimentar', max_length=30, choices=REFEICAO_CHOICES)  # noqa E501
+    taxa_glicose = models.IntegerField('Taxa de Glicose', max_length=3)  # noqa E501
+    alimentos = models.TextField('Alimentação', blank=True, null=True)  # noqa E501
+    tipo_insulina = models.CharField('Tipo da Insulina', max_length=30, choices=TIPO_INSULINA_CHOICES, blank=True, null=True)  # noqa E501
+    qt_insulina = models.IntegerField('Qtdade aplicada', max_length=2, default=0)  # noqa E501
+    observacao = models.TextField('Observação', blank=True, null=True)  # noqa E501
+    media_diaria = models.DecimalField('Media Diária', max_digits=10, decimal_places=2, default=0, blank=True, null=True)  # noqa E501
+    media_mensal = models.DecimalField('Media Mensal', max_digits=10, decimal_places=2, default=0, blank=True, null=True)  # noqa E501
+    responsavel = models.ForeignKey(
+        Responsavel,
+        on_delete=models.CASCADE,
+        verbose_name='Responsável',
+        related_name='Responsavel'
+    )
+    cuidador = models.ForeignKey(
+        Cuidador,
+        on_delete=models.CASCADE,
+        verbose_name='Cuidador',
+        related_name='Cuidador'
+    )
+
+    class Meta:
+        ordering = ('data_medicao', 'hora')
+
+    def __str__(self):
+        return f'{self.cuidador} - {self.dependente} - {self.responsavel}'

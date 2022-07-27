@@ -60,30 +60,32 @@
                   <li><a href="{% url 'consulta_list' %}"></a> Consultas</li>
                   <li><a href="{% url 'posconsulta_list' %}"></a> Pós Consultas</li>
                   <li><a href="{% url 'medicamento_list' %}"></a> Medicamentos</li>
-                  <li><a href="{% url 'medicamento_list' %}"></a> Medições</li>
+                  <li><a href="{% url 'glicose_list' %}"></a>Medições de Glicose</li>
                   <li><a href="{% url 'medicamento_list' %}"></a> Doenças diagnosticadas</li>
                   <li><a href="{% url 'medicamento_list' %}"></a> Rotina</li>
                   <li><a href="{% url 'medicamento_list' %}"></a> Cardápio da Semana</li>
-                  <li><a href="{% url 'medicamento_list' %}"></a> Despesas </li>
                 </ul>
                 </li>
                 <li><a href="{% url 'responsavel_list' %}"></a> Responsáveis</li>
                 <li><a href="{% url 'cuidador_list' %}"></a> Cuidadores</li>
+                <li><a href="{% url 'medicamento_list' %}"></a> Despesas </li>
               {% else %}
                 <li><a href="{% url 'dependente_list' %}">Dependentes</a>
                   <ul>
                     <li><a href="{% url 'consulta_list' %}"> Consultas</a></li>
                     <li><a href="{% url 'posconsulta_list' %}"> Pós Consultas</a></li>
                     <li><a href="{% url 'medicamento_list' %}"> Medicamentos</a></li>
-                    <li><a href="{% url 'medicamento_list' %}"> Medições</a></li>
+                    <li><a href="{% url 'glicose_list' %}">Medições de Glicose</a></li>
                     <li><a href="{% url 'medicamento_list' %}"> Doenças diagnosticadas</a></li>
                     <li><a href="{% url 'medicamento_list' %}"> Rotina</a></li>
                     <li><a href="{% url 'medicamento_list' %}"> Cardápio da Semana</a></li>
-                    <li><a href="{% url 'medicamento_list' %}"> Despesas </a></li>
+
                   </ul>
                 </li>
                 <li><a href="{% url 'responsavel_list' %}"> Responsáveis</a></li>
                 <li><a href="{% url 'cuidador_list' %}"> Cuidadores</a></li>
+                <li><a href="{% url 'medicamento_list' %}"> Despesas </a></li>
+
               {% endif %}
             </ul>
           </nav>
