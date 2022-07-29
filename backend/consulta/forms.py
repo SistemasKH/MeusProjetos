@@ -1,8 +1,10 @@
+from datetime import date
+
 from django import forms
 
-from backend.crm.models import Dependente, Responsavel, Usuario, Cuidador
+from backend.crm.models import Cuidador, Dependente, Responsavel, Usuario
 
-from .models import Consulta, Medicamento, PosConsulta, Glicose
+from .models import Consulta, Glicose, Medicamento, PosConsulta
 
 
 class DependentesDaFamiliaForm(forms.Form):
@@ -171,6 +173,18 @@ class GlicoseForm(forms.ModelForm):
         model = Glicose
         fields = '__all__'
 
+    def calcula_taxa_media_de_glicose(self):
+        hoje = date.today()
+
+        # Média diária com valor inicial pré calculado.
+        glicoses = Glicose.objects.filter(data_medicao=hoje)
+
+        # Soma das taxa de glicose.
+        qs = glicoses.values_list('taxa_glicose', flat=True) or 0
+        soma_taxa_glicose = 0 if isinstance(qs, int) else sum(qs)
+
+        return soma_taxa_glicose / glicoses.count()
+
     def __init__(self, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -185,3 +199,5 @@ class GlicoseForm(forms.ModelForm):
 
         queryset_cuidador = Cuidador.objects.filter(familia=familia)
         self.fields['cuidador'].queryset = queryset_cuidador
+
+        self.fields['media_diaria'].initial = self.calcula_taxa_media_de_glicose()  # noqa E501
