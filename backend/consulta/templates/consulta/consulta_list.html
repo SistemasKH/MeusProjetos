@@ -35,26 +35,26 @@
       <tbody>
         {%  for object in object_list %}
           <tr>
-              <td><a href="{{ object.get_absolute_url }}">{{ object.data_consulta|date:"d/m/Y" }}</a></td>
-              <td>{{ object.hora }}</td>
-              <td>{{ object.dependente }}</td>
-              <td>{{ object.dependente.familia }}</td>
-              <td>{{ object.get_especialidade_display|default:"---" }} </td>
-              <td>{{ object.nome_especialista|default:"---" }} </td>
-              <td>{{ object.get_atendimento_display|default:"---" }} </td>
-              <td>{{ object.acompanhante_responsavel|default:"---" }} </td>
-              <td>{{ object.cancelamento|default:"---" }} </td>
-              <td>
-                <a class ="btn btn-warning btn-sm" href="{% url 'consulta_edit' object.pk %}">Editar</a>
-              </td>
-              <td>
-                {% if object.pos_consultas.all %}
-                  <a class="btn btn-primary btn-sm" href="{% url 'posconsulta_list' %}">Pós Consulta</a>
-                {% else %}
-                  <a class="btn btn-success btn-sm" href="{% url 'posconsulta_add' object.pk %}">Criar Pós Consulta</a>
-                {% endif %}
-              </td>
-            </tr>
+            <td><a href="{{ object.get_absolute_url }}">{{ object.data_consulta|date:"d/m/Y" }}</a></td>
+            <td>{{ object.hora }}</td>
+            <td>{{ object.dependente }}</td>
+            <td>{{ object.dependente.familia }}</td>
+            <td>{{ object.get_especialidade_display|default:"---" }} </td>
+            <td>{{ object.nome_especialista|default:"---" }} </td>
+            <td>{{ object.get_atendimento_display|default:"---" }} </td>
+            <td>{{ object.acompanhante_responsavel|default:"---" }} </td>
+            <td>{{ object.cancelamento|default:"---" }} </td>
+            <td>
+              <a class ="btn btn-warning btn-sm" href="{% url 'consulta_edit' object.pk %}">Editar</a>
+            </td>
+            <td>
+              {% if object.pos_consultas.all %}
+                <a class="btn btn-primary btn-sm" href="{% url 'posconsulta_list' %}">Pós Consulta</a>
+              {% else %}
+                <a class="btn btn-success btn-sm" href="{% url 'posconsulta_add' object.pk %}">Criar Pós Consulta</a>
+              {% endif %}
+            </td>
+          </tr>
         {% endfor %}
       </tbody>
     </table>

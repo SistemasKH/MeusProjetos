@@ -1,17 +1,17 @@
 from django.db import models
 from django.urls import reverse
-from backend.crm.models import Dependente, Responsavel, Cuidador
 
 from backend.core.constants import (
     ATENDIMENTO_CHOICES,
     ESPECIALIDADE_CHOICES,
     FORNECEDOR_PRINCIPAL_CHOICES,
     POSOLOGIA_CHOICES,
-    TIPO_MEDICAMENTO_CHOICES,
-    USO_CONTINUO_CHOICES,
     REFEICAO_CHOICES,
-    TIPO_INSULINA_CHOICES
+    TIPO_INSULINA_CHOICES,
+    TIPO_MEDICAMENTO_CHOICES,
+    USO_CONTINUO_CHOICES
 )
+from backend.crm.models import Cuidador, Dependente, Responsavel
 
 
 class Consulta(models.Model):

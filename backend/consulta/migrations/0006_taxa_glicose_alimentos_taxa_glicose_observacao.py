@@ -13,11 +13,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='taxa_glicose',
             name='alimentos',
-            field=models.TextField(blank=True, null=True, verbose_name='Alimentação'),
+            field=models.TextField(blank=True, null=True,
+                                   verbose_name='Alimentação'),
         ),
         migrations.AddField(
             model_name='taxa_glicose',
             name='observacao',
-            field=models.TextField(blank=True, null=True, verbose_name='Observação'),
+            field=models.TextField(blank=True, null=True,
+                                   verbose_name='Observação'),
         ),
     ]

@@ -258,7 +258,6 @@ class CuidadorUpdateForm(CustomUserForm, DataNascimentoForm):
 
         self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
 
-
     def save(self, commit=True):
         instance = super().save(commit=False)
 

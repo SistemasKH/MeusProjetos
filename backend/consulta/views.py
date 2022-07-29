@@ -4,11 +4,11 @@ from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from .forms import (
     ConsultaForm,
     DependentesDaFamiliaForm,
+    GlicoseForm,
     MedicamentoForm,
-    PosConsultaForm,
-    GlicoseForm
+    PosConsultaForm
 )
-from .models import Consulta, Medicamento, PosConsulta, Glicose
+from .models import Consulta, Glicose, Medicamento, PosConsulta
 
 
 class ConsultaListView(LRM, ListView):

@@ -13,11 +13,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='glicose',
             name='media_diaria',
-            field=models.DecimalField(blank=True, decimal_places=2, default=0, max_digits=10, null=True, verbose_name='Media Diária'),
+            field=models.DecimalField(blank=True, decimal_places=2, default=0,
+                                      max_digits=10, null=True, verbose_name='Media Diária'),
         ),
         migrations.AlterField(
             model_name='glicose',
             name='media_mensal',
-            field=models.DecimalField(blank=True, decimal_places=2, default=0, max_digits=10, null=True, verbose_name='Media Mensal'),
+            field=models.DecimalField(blank=True, decimal_places=2, default=0,
+                                      max_digits=10, null=True, verbose_name='Media Mensal'),
         ),
     ]

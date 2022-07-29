@@ -32,7 +32,7 @@
       {%  for object in object_list %}
         <tr>
           <td>{{ object.dependente }}</td>
-          <td>{{ object.data_medicao }}</td>
+          <td>{{ object.data_medicao|date:"d/m/Y" }}</td>
           <td><a href="{{ object.get_absolute_url }}">{{ object.hora }}</a></td>
           <td>{{ object.get_estado_alimentar_display }}</td>
           <td>{{ object.taxa_glicose }}</td>
