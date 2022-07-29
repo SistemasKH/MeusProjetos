@@ -4,7 +4,7 @@
 ## Este projeto foi feito com:
 
 * [Python 3.10.4](https://www.python.org/)
-* [Django 4.0.5](https://www.djangoproject.com/)
+* [Django 4.0.6](https://www.djangoproject.com/)
 * [Bootstrap 4.0](https://getbootstrap.com/)
 
 ## Como rodar o projeto?
