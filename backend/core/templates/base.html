@@ -47,9 +47,8 @@
           {% endfor %}
         {% endif %}
       </nav>
-
       <div>
-        {% if user.get_full_name != null %}
+        {% if user.get_full_name != Null %}
 
           <nav class="dp-menu">
             <ul>
@@ -70,14 +69,19 @@
                 <li><a href="{% url 'cuidador_list' %}"></a> Cuidadores</li>
                 <li><a href="{% url 'medicamento_list' %}"></a> Despesas </li>
               {% else %}
-                <li><a href="{% url 'dependente_list' %}">Dependentes</a>
+                <li><a class="nav-link dropdown-toggle" href="{% url 'dependente_list' %}">Dependentes</a>
                   <ul>
                     <li><a href="{% url 'consulta_list' %}"> Consultas</a></li>
                     <li><a href="{% url 'posconsulta_list' %}"> Pós Consultas</a></li>
+                    <div class="dropdown-divider"></div>
                     <li><a href="{% url 'medicamento_list' %}"> Medicamentos</a></li>
+                    <div class="dropdown-divider"></div>
                     <li><a href="{% url 'glicose_list' %}">Medições de Glicose</a></li>
+                    <div class="dropdown-divider"></div>
                     <li><a href="{% url 'medicamento_list' %}"> Doenças diagnosticadas</a></li>
+                    <div class="dropdown-divider"></div>
                     <li><a href="{% url 'medicamento_list' %}"> Rotina</a></li>
+                    <div class="dropdown-divider"></div>
                     <li><a href="{% url 'medicamento_list' %}"> Cardápio da Semana</a></li>
 
                   </ul>

@@ -4,9 +4,6 @@
 {% block titulo %} Login {% endblock %}
 
 {% block content %}
-  <div class="card">
-
-
     <div class="container">
 
       <div class="row">
@@ -14,9 +11,7 @@
         </div>
         <div class="col-md">
           <h1>Login</h1>
-          <hr>
-
-          <form action="." method="POST">
+            <form action="." method="POST">
             {% csrf_token %}
 
             <label>Email</label>
@@ -34,6 +29,6 @@
         </div>
       </div>
     </div>
-  </div>
+
 
 {% endblock %}
