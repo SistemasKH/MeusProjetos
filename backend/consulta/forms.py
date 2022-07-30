@@ -63,7 +63,7 @@ class ConsultaForm(forms.ModelForm):
 
     def __init__(self, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        #self.fields['data_consulta'].widget.attrs.update({'class': 'mask-date'})   # noqa E501
+        # self.fields['data_consulta'].widget.attrs.update({'class': 'mask-date'})   # noqa E501
         self.fields['hora'].widget.attrs.update({'class': 'mask-hora'})
 
         usuario = Usuario.objects.filter(user=user).first()
@@ -143,8 +143,8 @@ class MedicamentoForm(forms.ModelForm):
         queryset = Dependente.objects.filter(familia=familia)
         self.fields['dependente'].queryset = queryset
 
-        #self.fields['data_inicio'].widget.attrs.update({'class': 'mask-date'})
-        #self.fields['data_fim'].widget.attrs.update({'class': 'mask-date'})
+        # self.fields['data_inicio'].widget.attrs.update({'class': 'mask-date'})
+        # self.fields['data_fim'].widget.attrs.update({'class': 'mask-date'})
 
 
 class GlicoseForm(forms.ModelForm):
@@ -183,7 +183,10 @@ class GlicoseForm(forms.ModelForm):
         qs = glicoses.values_list('taxa_glicose', flat=True) or 0
         soma_taxa_glicose = 0 if isinstance(qs, int) else sum(qs)
 
-        return soma_taxa_glicose / glicoses.count()
+        try:
+            return soma_taxa_glicose / glicoses.count()
+        except ZeroDivisionError:
+            return soma_taxa_glicose
 
     def __init__(self, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
