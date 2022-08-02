@@ -3,21 +3,21 @@
 
 {% block content %}
 
-    <div class="card-body">
-      <h4> <B><label>{{ user.get_full_name }} -  Familia {{ familia}}</label></B></h4>
-      <hr>
-      <button class ="btn btn-warning" onclick="window.location.href=''">Voltar</button>
-      <hr>
-      <h5><b>Pós Consulta</b></h5>
-      <hr>
+  <div class="card-body">
+    <h4> <B><label>{{ user.get_full_name }} -  Familia {{ familia}}</label></B></h4>
+    <hr>
+    <button class ="btn btn-warning" onclick="window.location.href=''">Voltar</button>
+    <hr>
+    <h5><b>Pós Consulta</b></h5>
+    <hr>
 
-      <form action="." method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form|bootstrap }}
+    <form action="." method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form|bootstrap }}
 
-        <button class ="btn btn-success" type="submit">Salvar</button>
+      <button class ="btn btn-success" type="submit">Salvar</button>
 
-      </form>
+    </form>
 
 
   </div>

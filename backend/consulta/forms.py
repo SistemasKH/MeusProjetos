@@ -4,7 +4,13 @@ from django import forms
 
 from backend.crm.models import Cuidador, Dependente, Responsavel, Usuario
 
-from .models import Consulta, Glicose, Medicamento, PosConsulta, EscalaResponsaveis
+from .models import (
+    Consulta,
+    EscalaResponsaveis,
+    Glicose,
+    Medicamento,
+    PosConsulta
+)
 
 
 class DependentesDaFamiliaForm(forms.Form):
@@ -205,7 +211,7 @@ class GlicoseForm(forms.ModelForm):
     def save(self, commit=True):
         instance = super().save(commit=False)
         if commit:
-            instance.media_diaria = self.calcula_taxa_media_de_glicose(instance)
+            instance.media_diaria = self.calcula_taxa_media_de_glicose(instance)  # noqa E501
             instance.save()
         return instance
 
