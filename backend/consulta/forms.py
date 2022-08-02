@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 
 from django import forms
 
@@ -180,11 +180,25 @@ class GlicoseForm(forms.ModelForm):
         fields = '__all__'
         exclude = ('media_diaria', 'media_mensal')
 
-    def calcula_taxa_media_de_glicose(self, instance):
+    def calcula_taxa_media_diaria_de_glicose(self, instance):
         # Filtra pelo dependente e pela data_medicao.
         glicoses = Glicose.objects.filter(
             dependente=instance.dependente,
             data_medicao=instance.data_medicao,
+        )
+        taxas = [glicose.taxa_glicose for glicose in glicoses]
+        taxas.append(instance.taxa_glicose)
+        try:
+            return sum(taxas) / len(taxas)
+        except ZeroDivisionError:
+            return sum(taxas)
+
+    def calcula_taxa_media_mensal_de_glicose(self, instance):
+        data_final = instance.data_medicao
+        data_inicial = data_final - timedelta(30)
+        glicoses = Glicose.objects.filter(
+            dependente=instance.dependente,
+            data_medicao__range=[data_inicial, data_final]
         )
         taxas = [glicose.taxa_glicose for glicose in glicoses]
         taxas.append(instance.taxa_glicose)
@@ -211,7 +225,8 @@ class GlicoseForm(forms.ModelForm):
     def save(self, commit=True):
         instance = super().save(commit=False)
         if commit:
-            instance.media_diaria = self.calcula_taxa_media_de_glicose(instance)  # noqa E501
+            instance.media_diaria = self.calcula_taxa_media_diaria_de_glicose(instance)  # noqa E501
+            instance.media_mensal = self.calcula_taxa_media_mensal_de_glicose(instance)  # noqa E501
             instance.save()
         return instance
 
