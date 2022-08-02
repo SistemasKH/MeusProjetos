@@ -23,8 +23,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_extensions',
     # apps de terceiros
+    'django_extensions',
     'bootstrapform',
     'django_filters',
     # minhas apps
