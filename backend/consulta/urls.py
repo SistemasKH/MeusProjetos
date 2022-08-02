@@ -35,9 +35,19 @@ glicose_urlpatterns = [
 
 ]
 
+escalaresp_urlpatterns = [
+    path('', v.EscalaRespListView.as_view(), name='escalaresp_list'),  # noqa E501
+    path('<int:pk>/', v.EscalaRespDetailView.as_view(), name='escalaresp_detail'),  # noqa E501
+    path('add/', v.EscalaRespCreateView.as_view(), name='escalaresp_add'),  # noqa E501
+    path('<int:pk>/edit/', v.EscalaRespUpdateView.as_view(), name='escalaresp_edit'),  # noqa E501
+    path('<int:pk>/delete/', v.escalaresp_delete, name='escalaresp_delete'),  # noqa E501
+
+]
+
 urlpatterns = [
     path('consulta/', include(consulta_urlpatterns)),
     path('posconsulta/', include(posconsulta_urlpatterns)),
     path('medicamento/', include(medicamento_urlpatterns)),
     path('glicose/', include(glicose_urlpatterns)),
+    path('escalaresp/', include(escalaresp_urlpatterns)),
 ]

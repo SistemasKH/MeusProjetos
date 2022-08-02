@@ -4,7 +4,7 @@ from django import forms
 
 from backend.crm.models import Cuidador, Dependente, Responsavel, Usuario
 
-from .models import Consulta, Glicose, Medicamento, PosConsulta
+from .models import Consulta, Glicose, Medicamento, PosConsulta, EscalaResponsaveis
 
 
 class DependentesDaFamiliaForm(forms.Form):
@@ -204,3 +204,40 @@ class GlicoseForm(forms.ModelForm):
         self.fields['cuidador'].queryset = queryset_cuidador
 
         self.fields['media_diaria'].initial = self.calcula_taxa_media_de_glicose()  # noqa E501
+
+
+class EscalaRespForm(forms.ModelForm):
+    required_css_class = 'required'
+
+    data_inicio = forms.DateField(
+        label='Data Inicial',
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+        input_formats=('%Y-%m-%d',),
+    )
+    data_fim = forms.DateField(
+        label='Data Final',
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+        input_formats=('%Y-%m-%d',),
+    )
+    hora_inicio = forms.TimeField(
+        label='Hora Combinada',
+        widget=forms.TimeInput(
+            attrs={
+                'type': 'time',
+                'class': 'form-control'
+            }),
+    )
+
+    class Meta:
+        model = EscalaResponsaveis
+        fields = '__all__'

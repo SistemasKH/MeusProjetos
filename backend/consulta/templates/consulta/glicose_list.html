@@ -16,6 +16,7 @@
     <a class ="btn btn-success" href="{% url 'glicose_add' %}">Adicionar</a>
     <table class = "table table-striped">
       <thead>
+        <th>ID</th>
         <th>Dependente</th>
         <th>Data</th>
         <th>Hora</th>
@@ -31,6 +32,7 @@
     <tbody>
       {%  for object in object_list %}
         <tr>
+          <td>{{ object.id }}</td>
           <td>{{ object.dependente }}</td>
           <td>{{ object.data_medicao|date:"d/m/Y" }}</td>
           <td><a href="{{ object.get_absolute_url }}">{{ object.hora }}</a></td>

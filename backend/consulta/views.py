@@ -6,9 +6,10 @@ from .forms import (
     DependentesDaFamiliaForm,
     GlicoseForm,
     MedicamentoForm,
-    PosConsultaForm
+    PosConsultaForm,
+    EscalaRespForm
 )
-from .models import Consulta, Glicose, Medicamento, PosConsulta
+from .models import Consulta, Glicose, Medicamento, PosConsulta, EscalaResponsaveis
 
 
 class ConsultaListView(LRM, ListView):
@@ -202,4 +203,47 @@ class GlicoseUpdateView(LRM, UpdateView):
 
 
 def glicose_delete(request):
+    ...
+
+class EscalaRespCreateView(LRM, CreateView):
+    model = EscalaResponsaveis
+    form_class = GlicoseForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
+
+class EscalaRespDetailView(LRM, DetailView):
+    model = EscalaResponsaveis
+
+
+class EscalaRespListView(LRM, ListView):
+    model = EscalaResponsaveis
+
+    def get_queryset(self):
+        responsavel = self.request.GET.get('responsavel')
+
+        if responsavel:
+            queryset = EscalaResponsaveis.objects.filter(responsavel=responsavel)  # noqa E501
+            return queryset
+
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+        queryset = EscalaResponsaveis.objects.filter(responsavel__familia__nome=familia)  # noqa E501
+        return queryset
+
+
+class EscalaRespUpdateView(LRM, UpdateView):
+    model = EscalaResponsaveis
+    form_class = EscalaRespForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
+
+def escalaresp_delete(request):
     ...

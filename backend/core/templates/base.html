@@ -55,19 +55,9 @@
               <li><a href="{% url 'familia_list' %}"> Família </a></li>
               {% if familia == None %}
                 <li><a href="{% url 'dependente_list' %}"></a> Dependentes</li>
-                <ul>
-                  <li><a href="{% url 'consulta_list' %}"></a> Consultas</li>
-                  <li><a href="{% url 'posconsulta_list' %}"></a> Pós Consultas</li>
-                  <li><a href="{% url 'medicamento_list' %}"></a> Medicamentos</li>
-                  <li><a href="{% url 'glicose_list' %}"></a>Medições de Glicose</li>
-                  <li><a href="{% url 'medicamento_list' %}"></a> Doenças diagnosticadas</li>
-                  <li><a href="{% url 'medicamento_list' %}"></a> Rotina</li>
-                  <li><a href="{% url 'medicamento_list' %}"></a> Cardápio da Semana</li>
-                </ul>
-                </li>
                 <li><a href="{% url 'responsavel_list' %}"></a> Responsáveis</li>
                 <li><a href="{% url 'cuidador_list' %}"></a> Cuidadores</li>
-                <li><a href="{% url 'medicamento_list' %}"></a> Despesas </li>
+                <li><a href="{% url 'medicamento_list' %}"></a> Controle Financeiro </li>
               {% else %}
                 <li><a class="nav-link dropdown-toggle" href="{% url 'dependente_list' %}">Dependentes</a>
                   <ul>
@@ -83,12 +73,16 @@
                     <li><a href="{% url 'medicamento_list' %}"> Rotina</a></li>
                     <div class="dropdown-divider"></div>
                     <li><a href="{% url 'medicamento_list' %}"> Cardápio da Semana</a></li>
-
                   </ul>
                 </li>
-                <li><a href="{% url 'responsavel_list' %}"> Responsáveis</a></li>
-                <li><a href="{% url 'cuidador_list' %}"> Cuidadores</a></li>
-                <li><a href="{% url 'medicamento_list' %}"> Despesas </a></li>
+                <li><a class="nav-link dropdown-toggle" href="{% url 'responsavel_list' %}"> Responsáveis</a>
+                  <ul>
+                    <li><a href="{% url 'escalaresp_list' %}"> Escala</a></li>
+                  </ul>
+                </li>
+                  <li><a href="{% url 'cuidador_list' %}"> Cuidadores</a></li>
+
+                <li><a href="{% url 'medicamento_list' %}"> Controle Financeiro </a></li>
 
               {% endif %}
             </ul>

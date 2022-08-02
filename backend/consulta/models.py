@@ -140,3 +140,27 @@ class Glicose(models.Model):
 
     def get_absolute_url(self):
         return reverse("glicose_detail", kwargs={"pk": self.id})
+
+
+class EscalaResponsaveis(models.Model):
+   responsavel = models.ForeignKey(
+        Responsavel,
+        on_delete=models.CASCADE,
+        verbose_name='Responsável'
+   )
+   data_inicial = models.DateField('Data Inicial')  # noqa E501
+   hora_inicio = models.TimeField('Hora Combinada')  # noqa E501
+   data_fim = models.DateField('Data Final')  # noqa E501
+   qt_dias = models.IntegerField('Qtdade dias', max_length=2, default=0)  # noqa E501
+   observacao = models.TextField('Observação', blank=True, null=True)  # noqa E501
+
+   class Meta:
+       ordering = ('data_inicial', 'hora_inicio')
+
+   def __str__(self):
+        return f'{self.responsavel}'
+
+   def get_absolute_url(self):
+       return reverse("escalaresp_detail", kwargs={"pk": self.id})
+
+
