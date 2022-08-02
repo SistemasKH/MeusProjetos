@@ -172,21 +172,20 @@ class GlicoseForm(forms.ModelForm):
     class Meta:
         model = Glicose
         fields = '__all__'
+        exclude = ('media_diaria', 'media_mensal')
 
-    def calcula_taxa_media_de_glicose(self):
-        hoje = date.today()
-
-        # Média diária com valor inicial pré calculado.
-        glicoses = Glicose.objects.filter(data_medicao=hoje)
-
-        # Soma das taxa de glicose.
-        qs = glicoses.values_list('taxa_glicose', flat=True) or 0
-        soma_taxa_glicose = 0 if isinstance(qs, int) else sum(qs)
-
+    def calcula_taxa_media_de_glicose(self, instance):
+        # Filtra pelo dependente e pela data_medicao.
+        glicoses = Glicose.objects.filter(
+            dependente=instance.dependente,
+            data_medicao=instance.data_medicao,
+        )
+        taxas = [glicose.taxa_glicose for glicose in glicoses]
+        taxas.append(instance.taxa_glicose)
         try:
-            return soma_taxa_glicose / glicoses.count()
+            return sum(taxas) / len(taxas)
         except ZeroDivisionError:
-            return soma_taxa_glicose
+            return sum(taxas)
 
     def __init__(self, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -203,7 +202,12 @@ class GlicoseForm(forms.ModelForm):
         queryset_cuidador = Cuidador.objects.filter(familia=familia)
         self.fields['cuidador'].queryset = queryset_cuidador
 
-        self.fields['media_diaria'].initial = self.calcula_taxa_media_de_glicose()  # noqa E501
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if commit:
+            instance.media_diaria = self.calcula_taxa_media_de_glicose(instance)
+            instance.save()
+        return instance
 
 
 class EscalaRespForm(forms.ModelForm):
