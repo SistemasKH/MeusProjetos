@@ -209,7 +209,7 @@ class GlicoseForm(forms.ModelForm):
 class EscalaRespForm(forms.ModelForm):
     required_css_class = 'required'
 
-    data_inicio = forms.DateField(
+    data_inicial = forms.DateField(
         label='Data Inicial',
         widget=forms.DateInput(
             format='%Y-%m-%d',
@@ -241,3 +241,11 @@ class EscalaRespForm(forms.ModelForm):
     class Meta:
         model = EscalaResponsaveis
         fields = '__all__'
+
+    def __init__(self, user=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        usuario = Usuario.objects.filter(user=user).first()
+        familia = usuario.familia
+        queryset_responsavel = Responsavel.objects.filter(familia=familia)
+        self.fields['responsavel'].queryset = queryset_responsavel

@@ -206,22 +206,6 @@ def glicose_delete(request):
     ...
 
 
-class EscalaRespCreateView(LRM, CreateView):
-    model = EscalaResponsaveis
-    form_class = GlicoseForm
-    template_name = 'consulta/escalaresp_form.html'
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs.update({'user': self.request.user})
-        return kwargs
-
-
-class EscalaRespDetailView(LRM, DetailView):
-    model = EscalaResponsaveis
-    template_name = 'consulta/escalaresp_detail.html'
-
-
 class EscalaRespListView(LRM, ListView):
     model = EscalaResponsaveis
     template_name = 'consulta/escalaresp_list.html'
@@ -237,6 +221,22 @@ class EscalaRespListView(LRM, ListView):
         familia = usuario.familia
         queryset = EscalaResponsaveis.objects.filter(responsavel__familia__nome=familia)  # noqa E501
         return queryset
+
+
+class EscalaRespDetailView(LRM, DetailView):
+    model = EscalaResponsaveis
+    template_name = 'consulta/escalaresp_detail.html'
+
+
+class EscalaRespCreateView(LRM, CreateView):
+    model = EscalaResponsaveis
+    form_class = EscalaRespForm
+    template_name = 'consulta/escalaresp_form.html'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
 
 
 class EscalaRespUpdateView(LRM, UpdateView):
