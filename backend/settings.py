@@ -17,6 +17,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 # Application definition
 
 INSTALLED_APPS = [
+    'backend.accounts',  # <<<
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -27,8 +28,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'bootstrapform',
     'django_filters',
+    'widget_tweaks',
     # minhas apps
-    'backend.accounts',
     'backend.core',
     'backend.crm',
     'backend.consulta',
@@ -73,7 +74,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('POSTGRES_DB', 'SGWC'),
+        'NAME': config('POSTGRES_DB', 'sgwc'),
         'USER': config('POSTGRES_USER', 'postgres'),
         'PASSWORD': config('POSTGRES_PASSWORD'),
         'HOST': config('DB_HOST', 'localhost'),
@@ -82,8 +83,7 @@ DATABASES = {
 }
 
 # Email config
-EMAIL_BACKEND = config(
-    'EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
+EMAIL_BACKEND = config('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')  # noqa E501
 
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', 'webmaster@localhost')
 EMAIL_HOST = config('EMAIL_HOST', 'localhost')  # localhost 0.0.0.0
@@ -118,7 +118,7 @@ LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'America/Sao_Paulo'
 
-USE_I18N = False
+USE_I18N = True
 
 USE_L10N = True
 
