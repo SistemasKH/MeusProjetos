@@ -261,6 +261,9 @@ class CuidadorCreateView(LRM, CreateView):
         self.object.familia = familia
         self.object.save()
 
+        # Envia e-mail para o Cuidador.
+        send_mail_to_user(request=self.request, user=user)
+
         return super().form_valid(form)
 
 
