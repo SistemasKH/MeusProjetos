@@ -3,7 +3,13 @@ from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import (
+    LoginView,
+    PasswordResetCompleteView,
+    PasswordResetConfirmView,
+    PasswordResetDoneView,
+    PasswordResetView
+)
 from django.contrib.messages import constants
 from django.shortcuts import redirect, render, resolve_url
 from django.urls import reverse_lazy
@@ -86,3 +92,15 @@ class CustomLoginView(LoginView):
         else:
 
             return resolve_url(settings.LOGIN_REDIRECT_URL)
+
+
+class MyPasswordResetConfirm(PasswordResetConfirmView):
+
+    def form_valid(self, form):
+        self.user.is_active = True
+        self.user.save()
+        return super(MyPasswordResetConfirm, self).form_valid(form)
+
+
+class MyPasswordResetComplete(PasswordResetCompleteView):
+    ...

@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin as LRM
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
+from backend.accounts.services import send_mail_to_user
 from backend.core.services import has_group
 
 from .forms import (
@@ -152,8 +153,6 @@ def familia_delete(request, pk):
     obj.save()
     return redirect('familia_list')
 
-# crm/views.py
-
 
 class ResponsavelListView(LRM, ListView):
     model = Responsavel
@@ -193,6 +192,9 @@ class ResponsavelCreateView(LRM, CreateView):
         familia = usuario.familia
         self.object.familia = familia
         self.object.save()
+
+        # Envia e-mail para o Responsável.
+        send_mail_to_user(request=self.request, user=user)
 
         return super().form_valid(form)
 
