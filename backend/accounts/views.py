@@ -94,6 +94,17 @@ class CustomLoginView(LoginView):
             return resolve_url(settings.LOGIN_REDIRECT_URL)
 
 
+# Requer
+# registration/password_reset_email.html
+# registration/password_reset_subject.txt
+class MyPasswordReset(PasswordResetView):
+    ...
+
+
+class MyPasswordResetDone(PasswordResetDoneView):
+    ...
+
+
 class MyPasswordResetConfirm(PasswordResetConfirmView):
 
     def form_valid(self, form):
