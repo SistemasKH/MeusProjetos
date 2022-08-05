@@ -37,7 +37,10 @@
             <td>WhatsApp</td>
             <td>{{ object.celular_whatsapp|default:"---" }}</td>
           </tr>
-
+          <tr>
+            <td>Email</td>
+            <td>{{ object.user.email|default:"---" }}</td>
+          </tr>
           <tr>
             <td>Telefone</td>
             <td>{{ object.telefone|default:"---" }}</td>
