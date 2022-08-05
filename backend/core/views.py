@@ -19,6 +19,7 @@ def home(request):
         if usuario.familia == None:
             messages.add_message(request, constants.WARNING,
                                  'Cadastre sua familia')
+
     else:
         context = {}
 
