@@ -1,18 +1,19 @@
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.contrib.auth.decorators import login_required
 
 from .forms import (
     ConsultaForm,
     DependentesDaFamiliaForm,
-    EscalaRespForm,
+    EscalaResponsavelForm,
     GlicoseForm,
     MedicamentoForm,
     PosConsultaForm
 )
 from .models import (
     Consulta,
-    EscalaResponsaveis,
+    EscalaResponsavel,
     Glicose,
     Medicamento,
     PosConsulta
@@ -159,8 +160,11 @@ class MedicamentoUpdateView(LRM, UpdateView):
         return kwargs
 
 
-def medicamento_delete(request):
-    ...
+@login_required
+def medicamento_delete(request, pk):
+    obj = get_object_or_404(Medicamento, pk=pk)
+    obj.delete()
+    return redirect('medicamento_list')
 
 
 class GlicoseListView(LRM, ListView):
@@ -209,36 +213,44 @@ class GlicoseUpdateView(LRM, UpdateView):
         return kwargs
 
 
-def glicose_delete(request):
-    ...
+@login_required
+def glicose_delete(request, pk):
+    obj = get_object_or_404(Glicose, pk=pk)
+    obj.delete()
+    return redirect('glicose_list')
 
 
-class EscalaRespListView(LRM, ListView):
-    model = EscalaResponsaveis
-    template_name = 'consulta/escalaresp_list.html'
+class EscalaResponsavelListView(LRM, ListView):
+    model = EscalaResponsavel
+
 
     def get_queryset(self):
-        responsavel = self.request.GET.get('responsavel')
+        responsavel_presencial = self.request.GET.get('responsavel')
+        responsavel_monitoramento = self.request.GET.get('responsavel')
 
-        if responsavel:
-            queryset = EscalaResponsaveis.objects.filter(responsavel=responsavel)  # noqa E501
+        if responsavel_presencial:
+            queryset = EscalaResponsavel.objects.filter(responsavel_presencial=responsavel)  # noqa E501
+            return queryset
+
+        if responsavel_monitoramento:
+            queryset = EscalaResponsavel.objects.filter(responsavel_monitoramento=responsavel)  # noqa E501
             return queryset
 
         usuario = self.request.user.usuarios.first()
         familia = usuario.familia
-        queryset = EscalaResponsaveis.objects.filter(responsavel__familia__nome=familia)  # noqa E501
+        queryset = EscalaResponsavel.objects.filter(responsavel_presencial__familia__nome=familia,responsavel_monitoramento__familia__nome=familia )  # noqa E501
         return queryset
 
 
-class EscalaRespDetailView(LRM, DetailView):
-    model = EscalaResponsaveis
-    template_name = 'consulta/escalaresp_detail.html'
+class EscalaResponsavelDetailView(LRM, DetailView):
+    model = EscalaResponsavel
 
 
-class EscalaRespCreateView(LRM, CreateView):
-    model = EscalaResponsaveis
-    form_class = EscalaRespForm
-    template_name = 'consulta/escalaresp_form.html'
+
+class EscalaResponsavelCreateView(LRM, CreateView):
+    model = EscalaResponsavel
+    form_class = EscalaResponsavelForm
+
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -246,10 +258,10 @@ class EscalaRespCreateView(LRM, CreateView):
         return kwargs
 
 
-class EscalaRespUpdateView(LRM, UpdateView):
-    model = EscalaResponsaveis
-    form_class = EscalaRespForm
-    template_name = 'consulta/escalaresp_form.html'
+class EscalaResponsavelUpdateView(LRM, UpdateView):
+    model = EscalaResponsavel
+    form_class = EscalaResponsavelForm
+
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -257,5 +269,5 @@ class EscalaRespUpdateView(LRM, UpdateView):
         return kwargs
 
 
-def escalaresp_delete(request):
+def escalaresponsavel_delete(request):
     ...

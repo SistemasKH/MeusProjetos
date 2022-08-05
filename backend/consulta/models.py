@@ -112,10 +112,10 @@ class Glicose(models.Model):
     data_medicao = models.DateField('Data')  # noqa E501
     hora = models.TimeField('Hora')  # noqa E501
     estado_alimentar = models.CharField('Estado Alimentar', max_length=30, choices=REFEICAO_CHOICES)  # noqa E501
-    taxa_glicose = models.IntegerField('Taxa de Glicose', max_length=3)  # noqa E501
+    taxa_glicose = models.IntegerField('Taxa de Glicose')  # noqa E501
     alimentos = models.TextField('Alimentação', blank=True, null=True)  # noqa E501
     tipo_insulina = models.CharField('Tipo da Insulina', max_length=30, choices=TIPO_INSULINA_CHOICES, blank=True, null=True)  # noqa E501
-    qt_insulina = models.IntegerField('Qtdade aplicada', max_length=2, default=0)  # noqa E501
+    qt_insulina = models.IntegerField('Quant. aplicada', default=0)  # noqa E501
     observacao = models.TextField('Observação', blank=True, null=True)  # noqa E501
     media_diaria = models.DecimalField('Media Diária', max_digits=10, decimal_places=2, default=0, blank=True, null=True)  # noqa E501
     media_mensal = models.DecimalField('Media Mensal', max_digits=10, decimal_places=2, default=0, blank=True, null=True)  # noqa E501
@@ -142,23 +142,32 @@ class Glicose(models.Model):
         return reverse("glicose_detail", kwargs={"pk": self.id})
 
 
-class EscalaResponsaveis(models.Model):
-    responsavel = models.ForeignKey(
+class EscalaResponsavel(models.Model):
+    responsavel_presencial = models.ForeignKey(
         Responsavel,
         on_delete=models.CASCADE,
-        verbose_name='Responsável'
+        verbose_name='Resp. Presencial',
+        related_name='responsavel_presencial'
     )
-    data_inicial = models.DateField('Data Inicial')  # noqa E501
-    hora_inicio = models.TimeField('Hora Combinada')  # noqa E501
-    data_fim = models.DateField('Data Final')  # noqa E501
-    qt_dias = models.IntegerField('Qtdade dias', max_length=2, default=0)  # noqa E501
+    data_inicio= models.DateField('Data de Chegada')  # noqa E501
+    hora_inicio = models.TimeField('Hora de Chegada')  # noqa E501
+    data_saida_presencial = models.DateField('Data Saída Presencial', null=True)  # noqa E501
+    qt_dias_presenciais = models.IntegerField('Quant. dias presenciais ', default=0)# noqa E501
+    hora_saida_presencial = models.TimeField('Hora de Saída') # noqa E501
+    responsavel_monitoramento = models.ForeignKey(
+        Responsavel,
+        on_delete=models.CASCADE,
+        verbose_name='Resp. Monitoramento',
+        related_name='responsavel_monitoramento'
+    )# noqa E501
+    data_fim = models.DateField('Data Final do Plantão', null=True)  # noqa E501
     observacao = models.TextField('Observação', blank=True, null=True)  # noqa E501
 
     class Meta:
-        ordering = ('data_inicial', 'hora_inicio')
+        ordering = ('data_inicio', 'hora_inicio')
 
     def __str__(self):
-        return f'{self.responsavel}'
+        return f'{self.responsavel_presencial} - {self.responsavel_monitoramento} '
 
     def get_absolute_url(self):
-        return reverse("escalaresp_detail", kwargs={"pk": self.id})
+        return reverse("escalaresponsavel_detail", kwargs={"pk": self.id})

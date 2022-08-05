@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block titulo %} Escala Responsáveis {% endblock %}
+
+{% block content %}
+
+  <div class="card-body">
+    <h4> <B><label>{{ user.get_full_name }} -  Familia {{ familia}}</label></B></h4>
+    <h5> Escala Responsáveis </h5>
+
+    <form id="formBuscar" action="." method="GET">
+      {{ form.responsavel.label }}
+      {{ form.responsavel}}
+    </form>
+
+    <hr>
+    <a class ="btn btn-success" href="{% url 'escalaresponsavel_add'  %}">Adicionar</a>
+    <table class = "table table-striped">
+      <thead>
+        <tr>
+          <th>Data de Inicio</th>
+          <th>Hora de Chegada</th>
+          <th>Responsável Presencial</th>
+          <th>Dias de plantão presenciais</th>
+          <th>Data de saída presencial</th>
+          <th>Hora de saída presencial</th>
+          <th>Responsável por Monitorar </th>
+          <th>Data Fim</th>
+          <th>Observação</th>
+          <th>Editar/Deletar</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {%  for object in object_list %}
+          <tr>
+            <td><a href="{{ object.get_absolute_url }}">{{ object.data_inicio|date:"d/m/Y" }}</a></td>
+            <td>{{ object.hora_inicio }}</td>
+            <td>{{ object.responsavel_presencial }}</td>
+            <td>{{ object.qt_dias_presenciais }}</td>
+            <td>{{ object.data_saida_presencial|date:"d/m/Y" }}</td>
+            <td>{{ object.hora_saida_presencial }}</td>
+            <td>{{ object.responsavel_monitoramento }}</td>
+            <td>{{ object.data_fim }}</td>
+            <td>{{ object.observacao }}</td>
+            <td>
+              <a class ="btn btn-warning btn-sm" href="{% url 'escalaresponsavel_edit' object.pk %}">Editar</a>
+              <a class ="btn btn-danger btn-sm" href="{% url 'escalaresponsavel_delete' object.pk %}" onclick="return confirm ('Tem certeza que deseja excluir a escala de id: {{ object.id }} ?  ')">Excluir</a>
+            </td>
+
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+
+{% endblock %}
+
+{% block js %}
+  <script>
+    $('#id_responsavel').on('change', function(e){
+      e.preventDefault()
+      $('#formBuscar').submit()
+    })
+  </script>
+{% endblock js %}

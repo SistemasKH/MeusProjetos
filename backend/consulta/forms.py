@@ -6,7 +6,7 @@ from backend.crm.models import Cuidador, Dependente, Responsavel, Usuario
 
 from .models import (
     Consulta,
-    EscalaResponsaveis,
+    EscalaResponsavel,
     Glicose,
     Medicamento,
     PosConsulta
@@ -231,10 +231,10 @@ class GlicoseForm(forms.ModelForm):
         return instance
 
 
-class EscalaRespForm(forms.ModelForm):
+class EscalaResponsavelForm(forms.ModelForm):
     required_css_class = 'required'
 
-    data_inicial = forms.DateField(
+    data_inicio = forms.DateField(
         label='Data Inicial',
         widget=forms.DateInput(
             format='%Y-%m-%d',
@@ -254,8 +254,26 @@ class EscalaRespForm(forms.ModelForm):
             }),
         input_formats=('%Y-%m-%d',),
     )
+    data_saida_presencial = forms.DateField(
+        label='Data Saída Presencial',
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+        input_formats=('%Y-%m-%d',),
+    )
     hora_inicio = forms.TimeField(
-        label='Hora Combinada',
+        label='Hora de Chegada',
+        widget=forms.TimeInput(
+            attrs={
+                'type': 'time',
+                'class': 'form-control'
+            }),
+    )
+    hora_saida_presencial = forms.TimeField(
+        label='Hora de Saída',
         widget=forms.TimeInput(
             attrs={
                 'type': 'time',
@@ -264,7 +282,7 @@ class EscalaRespForm(forms.ModelForm):
     )
 
     class Meta:
-        model = EscalaResponsaveis
+        model = EscalaResponsavel
         fields = '__all__'
 
     def __init__(self, user=None, *args, **kwargs):
@@ -272,5 +290,7 @@ class EscalaRespForm(forms.ModelForm):
 
         usuario = Usuario.objects.filter(user=user).first()
         familia = usuario.familia
-        queryset_responsavel = Responsavel.objects.filter(familia=familia)
-        self.fields['responsavel'].queryset = queryset_responsavel
+        queryset_responsavel_presencial = Responsavel.objects.filter(familia=familia)
+        queryset_responsavel_monitoramento = Responsavel.objects.filter(familia=familia)
+        self.fields['responsavel_presencial'].queryset = queryset_responsavel_presencial
+        self.fields['responsavel_monitoramento'].queryset = queryset_responsavel_monitoramento
