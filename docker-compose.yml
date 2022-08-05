@@ -33,6 +33,16 @@ services:
     networks:
       - dependentes
 
+  mailhog:
+    container_name: mailhog
+    image: mailhog/mailhog
+    restart: always
+    logging:
+      driver: 'none'
+    ports:
+      - 1025:1025
+      - 8025:8025
+
 volumes:
   pgdata:  # mesmo nome do volume externo definido na linha 10
   pgadmin:

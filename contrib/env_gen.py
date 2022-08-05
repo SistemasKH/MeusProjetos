@@ -25,7 +25,7 @@ DB_HOST=localhost
 DB_PORT=5435
 
 #DEFAULT_FROM_EMAIL=
-#EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
 #EMAIL_HOST=localhost
 #EMAIL_PORT=
 #EMAIL_HOST_USER=
