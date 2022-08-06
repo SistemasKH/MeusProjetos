@@ -86,11 +86,11 @@
             <td>{{ object.get_uf_display|default:"---" }}</td>
           </tr>
           <tr>
-             {% if familia != None %}
-                <td colspan="2"><a class ="btn btn-warning" href="{% url 'responsavel_list' %}" >Voltar</a></td>
-             {% else  %}
-                 <td colspan="2"><a class ="btn btn-success" href="{% url 'familia_add' %}" >Cadastrar família</a></td>
-             {% endif %}
+            {% if familia != None %}
+              <td colspan="2"><a class ="btn btn-warning" href="{% url 'responsavel_list' %}" >Voltar</a></td>
+            {% else  %}
+              <td colspan="2"><a class ="btn btn-success" href="{% url 'familia_add' %}" >Cadastrar família</a></td>
+            {% endif %}
           </tr>
         </tbody>
       </table>

@@ -149,17 +149,17 @@ class EscalaResponsavel(models.Model):
         verbose_name='Resp. Presencial',
         related_name='responsavel_presencial'
     )
-    data_inicio= models.DateField('Data de Chegada')  # noqa E501
+    data_inicio = models.DateField('Data de Chegada')  # noqa E501
     hora_inicio = models.TimeField('Hora de Chegada')  # noqa E501
     data_saida_presencial = models.DateField('Data Saída Presencial', null=True)  # noqa E501
-    qt_dias_presenciais = models.IntegerField('Quant. dias presenciais ', default=0)# noqa E501
-    hora_saida_presencial = models.TimeField('Hora de Saída') # noqa E501
+    qt_dias_presenciais = models.IntegerField('Quant. dias presenciais ', default=0)  # noqa E501
+    hora_saida_presencial = models.TimeField('Hora de Saída')  # noqa E501
     responsavel_monitoramento = models.ForeignKey(
         Responsavel,
         on_delete=models.CASCADE,
         verbose_name='Resp. Monitoramento',
         related_name='responsavel_monitoramento'
-    )# noqa E501
+    )
     data_fim = models.DateField('Data Final do Plantão', null=True)  # noqa E501
     observacao = models.TextField('Observação', blank=True, null=True)  # noqa E501
 
@@ -167,7 +167,7 @@ class EscalaResponsavel(models.Model):
         ordering = ('data_inicio', 'hora_inicio')
 
     def __str__(self):
-        return f'{self.responsavel_presencial} - {self.responsavel_monitoramento} '
+        return f'{self.responsavel_presencial} - {self.responsavel_monitoramento}'
 
     def get_absolute_url(self):
         return reverse("escalaresponsavel_detail", kwargs={"pk": self.id})

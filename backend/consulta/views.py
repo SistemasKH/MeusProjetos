@@ -1,7 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
-from django.contrib.auth.decorators import login_required
 
 from .forms import (
     ConsultaForm,
@@ -223,7 +223,6 @@ def glicose_delete(request, pk):
 class EscalaResponsavelListView(LRM, ListView):
     model = EscalaResponsavel
 
-
     def get_queryset(self):
         responsavel_presencial = self.request.GET.get('responsavel')
         responsavel_monitoramento = self.request.GET.get('responsavel')
@@ -238,7 +237,10 @@ class EscalaResponsavelListView(LRM, ListView):
 
         usuario = self.request.user.usuarios.first()
         familia = usuario.familia
-        queryset = EscalaResponsavel.objects.filter(responsavel_presencial__familia__nome=familia,responsavel_monitoramento__familia__nome=familia )  # noqa E501
+        queryset = EscalaResponsavel.objects.filter(
+            responsavel_presencial__familia__nome=familia,
+            responsavel_monitoramento__familia__nome=familia
+        )
         return queryset
 
 
@@ -246,11 +248,9 @@ class EscalaResponsavelDetailView(LRM, DetailView):
     model = EscalaResponsavel
 
 
-
 class EscalaResponsavelCreateView(LRM, CreateView):
     model = EscalaResponsavel
     form_class = EscalaResponsavelForm
-
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -261,7 +261,6 @@ class EscalaResponsavelCreateView(LRM, CreateView):
 class EscalaResponsavelUpdateView(LRM, UpdateView):
     model = EscalaResponsavel
     form_class = EscalaResponsavelForm
-
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
