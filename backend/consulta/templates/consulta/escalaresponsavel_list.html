@@ -1,68 +1,90 @@
 {% extends 'base.html' %}
-{% load bootstrap %}
+{% load static %}
 
-{% block titulo %} Escala Responsáveis {% endblock %}
+{% block title %} Escala Responsáveis {% endblock %}
 
 {% block content %}
+  <!-- <h1 class="h3 mb-2 text-gray-800">Escala Responsáveis</h1> -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Escala Responsáveis</h6>
+        <a href="{% url 'escalaresponsavel_add' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+          class="fas fa-plus fa-sm text-white-50"></i> Adicionar</a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          id="dataTable"
+          class="table table-bordered"
+          width="100%"
+          cellspacing="0"
+        >
+          <thead>
+            <tr>
+              {% for label in labels %}
+                <th>{{ label }}</th>
+              {% endfor %}
+              <th style="min-width:8rem">Acões</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              {% for label in labels %}
+                <th>{{ label }}</th>
+              {% endfor %}
+              <th style="min-width:8rem">Acões</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            {%  for object in object_list %}
+              <tr>
+                <td>
+                  <a href="{{ object.get_absolute_url }}">{{ object.data_inicio|date:"d/m/Y" }}</a>
+                </td>
+                <td>{{ object.hora_inicio }}</td>
+                <td>{{ object.responsavel_presencial }}</td>
+                <td>{{ object.qt_dias_presenciais }}</td>
+                <td>{{ object.data_saida_presencial|date:"d/m/Y" }}</td>
+                <td>{{ object.hora_saida_presencial }}</td>
+                <td>{{ object.responsavel_monitoramento }}</td>
+                <td>{{ object.data_fim }}</td>
+                <td>{{ object.observacao }}</td>
 
-  <div class="card-body">
-    <h4> <B><label>{{ user.get_full_name }} -  Familia {{ familia}}</label></B></h4>
-    <h5> Escala Responsáveis </h5>
-
-    <form id="formBuscar" action="." method="GET">
-      {{ form.responsavel.label }}
-      {{ form.responsavel}}
-    </form>
-
-    <hr>
-    <a class ="btn btn-success" href="{% url 'escalaresponsavel_add'  %}">Adicionar</a>
-    <table class = "table table-striped">
-      <thead>
-        <tr>
-          <th>Data de Inicio</th>
-          <th>Hora de Chegada</th>
-          <th>Responsável Presencial</th>
-          <th>Dias de plantão presenciais</th>
-          <th>Data de saída presencial</th>
-          <th>Hora de saída presencial</th>
-          <th>Responsável por Monitorar </th>
-          <th>Data Fim</th>
-          <th>Observação</th>
-          <th>Editar/Deletar</th>
-
-        </tr>
-      </thead>
-      <tbody>
-        {%  for object in object_list %}
-          <tr>
-            <td><a href="{{ object.get_absolute_url }}">{{ object.data_inicio|date:"d/m/Y" }}</a></td>
-            <td>{{ object.hora_inicio }}</td>
-            <td>{{ object.responsavel_presencial }}</td>
-            <td>{{ object.qt_dias_presenciais }}</td>
-            <td>{{ object.data_saida_presencial|date:"d/m/Y" }}</td>
-            <td>{{ object.hora_saida_presencial }}</td>
-            <td>{{ object.responsavel_monitoramento }}</td>
-            <td>{{ object.data_fim }}</td>
-            <td>{{ object.observacao }}</td>
-            <td>
-              <a class ="btn btn-warning btn-sm" href="{% url 'escalaresponsavel_edit' object.pk %}">Editar</a>
-              <a class ="btn btn-danger btn-sm" href="{% url 'escalaresponsavel_delete' object.pk %}" onclick="return confirm ('Tem certeza que deseja excluir a escala de id: {{ object.id }} ?  ')">Excluir</a>
-            </td>
-
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-
+                <td>
+                  <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
+                  <span
+                    id="linkDeletar"
+                    class ="btn btn-danger btn-sm"
+                    hx-delete="{{ object.delete_url }}"
+                    hx-confirm="Deseja mesmo deletar?"
+                    hx-target="closest tr"
+                    hx-swap="outerHTML swap:500ms"
+                  >
+                    Excluir
+                  </span>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-
-{% endblock %}
+{% endblock content %}
 
 {% block js %}
   <script>
-    $('#id_responsavel').on('change', function(e){
-      e.preventDefault()
-      $('#formBuscar').submit()
-    })
+    document.body.addEventListener('htmx:configRequest', (event) => {
+      event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+    });
+
+    htmx.on("htmx:afterSwap", function(evt) {
+      if (evt.target.id == 'linkDeletar'
+      ) {
+        location.reload();
+      }
+    });
   </script>
 {% endblock js %}

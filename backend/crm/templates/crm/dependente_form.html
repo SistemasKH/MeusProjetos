@@ -1,23 +1,45 @@
 {% extends 'base.html' %}
-{% load bootstrap %}
+{% load widget_tweaks %}
 
 {% block content %}
-
-  <div class="card-body">
-    <h4> <b><label>{{ user.get_full_name }} - Familia {{ familia}}</label></b></h4>
-    <hr>
-    <a href="{% url 'dependente_list' %}" class ="btn btn-warning">Voltar</a>
-    <hr>
-    <h5><b>Dependente</b></h5>
-    <hr>
-    <form action="." method="POST">
-      {% csrf_token %}
-      <div class="col-sm-6">
-        {{  form|bootstrap }}
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">{% if object.pk %}
+          Editar
+        {% else %}
+          Adicionar
+        {% endif %} Dependente</h6>
+        <a href="{{ object.list_url }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
       </div>
-      <button class ="btn btn-success" type="submit">Salvar</button>
+    </div>
+    <div class="card-body col-6 offset-3">
+      <form action="." method="POST">
+        {% csrf_token %}
 
-    </form>
+        {% for field in form.visible_fields %}
+          <div class="mb-3 form-group{% if field.errors %} has-error {% endif %}">
+            <label for="{{ field.id_for_label }}">
+              {% if field.field.required %}
+                <span class="required">{{ field.label }}</span>
+              {% else %}
+                {{ field.label }}
+              {% endif %}
+            </label>
+
+            {% render_field field class="form-control" %}
+
+            {% for error in field.errors %}
+              <span class="text-muted">{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+        <div class="float-right">
+          <button class="btn btn-primary" type="submit">Salvar</button>
+        </div>
+
+      </form>
+    </div>
   </div>
-
-{% endblock %}
+{% endblock content %}

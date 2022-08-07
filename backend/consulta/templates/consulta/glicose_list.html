@@ -1,65 +1,88 @@
 {% extends 'base.html' %}
-{% load bootstrap %}
+{% load static %}
 
-{% block titulo %} Lista taxa de glicose {% endblock %}
+{% block title %} Taxa de Glicose {% endblock %}
 
 {% block content %}
+  <!-- <h1 class="h3 mb-2 text-gray-800">Taxa de Glicose</h1> -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Taxa de Glicose</h6>
+        <a href="{% url 'glicose_add' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+          class="fas fa-plus fa-sm text-white-50"></i> Adicionar</a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          id="dataTable"
+          class="table table-bordered"
+          width="100%"
+          cellspacing="0"
+        >
+          <thead>
+            <tr>
+              {% for label in labels %}
+                <th>{{ label }}</th>
+              {% endfor %}
+              <th style="min-width:8rem">Acões</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              {% for label in labels %}
+                <th>{{ label }}</th>
+              {% endfor %}
+              <th style="min-width:8rem">Acões</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            {%  for object in object_list %}
+              <tr>
+                <td>{{ object.dependente }}</td>
+                <td>{{ object.data_medicao|date:"d/m/Y" }}</td>
+                <td><a href="{{ object.get_absolute_url }}">{{ object.hora }}</a></td>
+                <td>{{ object.get_estado_alimentar_display }}</td>
+                <td>{{ object.taxa_glicose }}</td>
+                <td>{{ object.media_diaria }}</td>
+                <td>{{ object.media_mensal }} </td>
+                <td>{{ object.cuidador }}</td>
+                <td>{{ object.responsavel }} </td>
 
-  <div class="card-body">
-    <h4> <B><label>{{ user.get_full_name }} -  Familia {{ familia}}</label></B></h4>
-    <h5> Lista taxa de glicose</h5>
-    <form id="formBuscar" action="." method="GET">
-      {{ form.dependente.label }}
-      {{ form.dependente }}
-    </form>
-    <hr>
-    <a class ="btn btn-success" href="{% url 'glicose_add' %}">Adicionar</a>
-    <table class = "table table-striped">
-      <thead>
-        <th>ID</th>
-        <th>Dependente</th>
-        <th>Data</th>
-        <th>Hora</th>
-        <th>Estado alimentar</th>
-        <th>Taxa de glicose</th>
-        <th>Média Diária</th>
-        <th>Média Mensal</th>
-        <th>Cuidador</th>
-        <th>Responsável</th>
-
-      </tr>
-    </thead>
-    <tbody>
-      {%  for object in object_list %}
-        <tr>
-          <td>{{ object.id }}</td>
-          <td>{{ object.dependente }}</td>
-          <td>{{ object.data_medicao|date:"d/m/Y" }}</td>
-          <td><a href="{{ object.get_absolute_url }}">{{ object.hora }}</a></td>
-          <td>{{ object.get_estado_alimentar_display }}</td>
-          <td>{{ object.taxa_glicose }}</td>
-          <td>{{ object.media_diaria }}</td>
-          <td>{{ object.media_mensal }} </td>
-          <td>{{ object.cuidador }}</td>
-          <td>{{ object.responsavel }} </td>
-          <td>
-            <a class ="btn btn-warning btn-sm" href="{% url 'glicose_edit' object.pk %}">Editar</a>
-            <a class ="btn btn-danger btn-sm" href="{% url 'glicose_delete' object.pk %}" onclick="return confirm ('Tem certeza que deseja excluir a medição de id: {{ object.id }} ?  ')">Excluir</a>
-          </td>
-        </tr>
-
-      {% endfor %}
-    </tbody>
-  </table>
-
+                <td>
+                  <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
+                  <span
+                    id="linkDeletar"
+                    class ="btn btn-danger btn-sm"
+                    hx-delete="{{ object.delete_url }}"
+                    hx-confirm="Deseja mesmo deletar?"
+                    hx-target="closest tr"
+                    hx-swap="outerHTML swap:500ms"
+                  >
+                    Excluir
+                  </span>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
+{% endblock content %}
 
-{% endblock %}
 {% block js %}
   <script>
-    $('#id_dependente').on('change', function(e){
-      e.preventDefault()
-      $('#formBuscar').submit()
-    })
+    document.body.addEventListener('htmx:configRequest', (event) => {
+      event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+    });
+
+    htmx.on("htmx:afterSwap", function(evt) {
+      if (evt.target.id == 'linkDeletar'
+      ) {
+        location.reload();
+      }
+    });
   </script>
 {% endblock js %}

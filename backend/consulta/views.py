@@ -39,6 +39,18 @@ class ConsultaListView(LRM, ListView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         context['form'] = DependentesDaFamiliaForm(user)
+        context['labels'] = (
+            'Data',
+            'Hora',
+            'Dependente',
+            'Família',
+            'Especialidade',
+            'Médico(a)',
+            'Atendimento',
+            'Acompanhante',
+            'Cancelamento',
+            'Pós Consulta',
+        )
         return context
 
 
@@ -78,6 +90,21 @@ class PosConsultaListView(LRM, ListView):
         familia = usuario.familia
         queryset = PosConsulta.objects.filter(acompanhante_responsavel__familia__nome=familia)  # noqa E501
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['labels'] = (
+            'Consulta',
+            'Data',
+            'Hora',
+            'Especialidade',
+            'Médico',
+            'Acompanhante',
+            'Família',
+            'Diagnóstico',
+            'Tratamento',
+        )
+        return context
 
 
 class PosConsultaDetailView(LRM, DetailView):
@@ -133,6 +160,19 @@ class MedicamentoListView(LRM, ListView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         context['form'] = DependentesDaFamiliaForm(user)
+        context['labels'] = (
+            'Dependente',
+            'Família',
+            'Medicamento',
+            'Principio ativo',
+            'Indicações',
+            'Dosagem',
+            'Uso',
+            'Inicio',
+            'Fim',
+            'Medico',
+            'Fornecedor',
+        )
         return context
 
 
@@ -186,6 +226,17 @@ class GlicoseListView(LRM, ListView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         context['form'] = DependentesDaFamiliaForm(user)
+        context['labels'] = (
+            'Dependente',
+            'Data',
+            'Hora',
+            'Estado alimentar',
+            'Taxa de glicose',
+            'Média Diária',
+            'Média Mensal',
+            'Cuidador',
+            'Responsável',
+        )
         return context
 
 
@@ -242,6 +293,21 @@ class EscalaResponsavelListView(LRM, ListView):
             responsavel_monitoramento__familia__nome=familia
         )
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['labels'] = (
+            'Data de Inicio',
+            'Hora de Chegada',
+            'Responsável Presencial',
+            'Dias de plantão presenciais',
+            'Data de saída presencial',
+            'Hora de saída presencial',
+            'Responsável por Monitorar',
+            'Data Fim',
+            'Observação',
+        )
+        return context
 
 
 class EscalaResponsavelDetailView(LRM, DetailView):

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from backend.core.constants import (
     CIVIL_CHOICES,
@@ -65,6 +65,24 @@ class Familia(Address, Active):
     def get_absolute_url(self):
         return reverse('familia_detail', kwargs={'pk': self.pk})
 
+    @property
+    def list_url(self):
+        return reverse_lazy('familia_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('familia_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('familia_delete', kwargs=kw)
+        return None
+
 
 class Responsavel(Usuario):
     objects = ResponsavelManager()
@@ -76,6 +94,25 @@ class Responsavel(Usuario):
 
     def get_absolute_url(self):
         return reverse('responsavel_detail', kwargs={'pk': self.pk})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('responsavel_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            print(self.pk)
+            return reverse_lazy('responsavel_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('responsavel_delete', kwargs=kw)
+        return None
 
 
 class Cuidador(Usuario):
@@ -96,6 +133,24 @@ class Cuidador(Usuario):
 
     def get_absolute_url(self):
         return reverse('cuidador_detail', kwargs={'pk': self.pk})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('cuidador_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('cuidador_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('cuidador_delete', kwargs=kw)
+        return None
 
 
 class Dependente(Address, Active):
@@ -134,3 +189,21 @@ class Dependente(Address, Active):
 
     def get_absolute_url(self):
         return reverse('dependente_detail', kwargs={'pk': self.pk})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('dependente_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('dependente_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('dependente_delete', kwargs=kw)
+        return None

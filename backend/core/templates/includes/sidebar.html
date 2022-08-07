@@ -1,0 +1,145 @@
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+  <!-- Sidebar - Brand -->
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'home' %}">
+    <div class="sidebar-brand-icon rotate-n-15">
+      <i class="fas fa-laugh-wink"></i>
+    </div>
+    <div class="sidebar-brand-text mx-3">Meus Dependentes</div>
+  </a>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider my-0">
+
+  <!-- Nav Item - Dashboard -->
+  <li class="nav-item active">
+    <a class="nav-link" href="{% url 'home' %}">
+      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <span>Dashboard</span></a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Famílias
+  </div>
+
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'familia_list' %}">
+      <i class="fas fa-fw fa-table"></i>
+      <span>Famílias</span></a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Consultas
+  </div>
+
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+      aria-expanded="true" aria-controls="collapseTwo">
+      <i class="fas fa-fw fa-cog"></i>
+      <span>Consultas</span>
+    </a>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{% url 'consulta_list' %}">Consultas</a>
+        <a class="collapse-item" href="{% url 'posconsulta_list' %}">Pós Consultas</a>
+        <a class="collapse-item" href="{% url 'medicamento_list' %}">Medicamentos</a>
+        <a class="collapse-item" href="{% url 'glicose_list' %}">Glicoses</a>
+        <a class="collapse-item" href="{% url 'escalaresponsavel_list' %}">Escala Responsáveis</a>
+      </div>
+    </div>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Dependentes
+  </div>
+
+  <!-- Nav Item - Tables -->
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'dependente_list' %}">
+      <i class="fas fa-fw fa-table"></i>
+      <span>Dependentes</span></a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Responsáveis
+  </div>
+
+  <!-- Nav Item - Tables -->
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'responsavel_list' %}">
+      <i class="fas fa-fw fa-table"></i>
+      <span>Responsáveis</span></a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Cuidadores
+  </div>
+
+  <!-- Nav Item - Tables -->
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'cuidador_list' %}">
+      <i class="fas fa-fw fa-table"></i>
+      <span>Cuidadores</span></a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Despesas
+  </div>
+
+  <!-- Nav Item - Tables -->
+  <li class="nav-item">
+    <a class="nav-link" href="">
+      <i class="fas fa-fw fa-table"></i>
+      <span>Despesas</span></a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Exemplo
+  </div>
+
+  <!-- Nav Item - Tables -->
+  {% if debug %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'tables' %}">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Tables</span></a>
+    </li>
+  {% endif %}
+
+  <!-- Divider -->
+  <hr class="sidebar-divider d-none d-md-block">
+
+  <!-- Sidebar Toggler (Sidebar) -->
+  <div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+  </div>
+
+</ul>

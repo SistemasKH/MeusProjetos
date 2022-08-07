@@ -1,5 +1,5 @@
 from django.db import models
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from backend.core.constants import (
     ATENDIMENTO_CHOICES,
@@ -47,6 +47,24 @@ class Consulta(models.Model):
     def get_absolute_url(self):
         return reverse("consulta_detail", kwargs={"pk": self.id})
 
+    @property
+    def list_url(self):
+        return reverse_lazy('consulta_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('consulta_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('consulta_delete', kwargs=kw)
+        return None
+
 
 class PosConsulta(models.Model):
     consulta = models.ForeignKey(
@@ -72,6 +90,24 @@ class PosConsulta(models.Model):
 
     def get_absolute_url(self):
         return reverse("posconsulta_detail", kwargs={"pk": self.id})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('posconsulta_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('posconsulta_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('posconsulta_delete', kwargs=kw)
+        return None
 
 
 class Medicamento(models.Model):
@@ -101,6 +137,24 @@ class Medicamento(models.Model):
 
     def get_absolute_url(self):
         return reverse("medicamento_detail", kwargs={"pk": self.id})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('medicamento_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('medicamento_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('medicamento_delete', kwargs=kw)
+        return None
 
 
 class Glicose(models.Model):
@@ -141,6 +195,24 @@ class Glicose(models.Model):
     def get_absolute_url(self):
         return reverse("glicose_detail", kwargs={"pk": self.id})
 
+    @property
+    def list_url(self):
+        return reverse_lazy('glicose_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('glicose_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('glicose_delete', kwargs=kw)
+        return None
+
 
 class EscalaResponsavel(models.Model):
     responsavel_presencial = models.ForeignKey(
@@ -165,9 +237,29 @@ class EscalaResponsavel(models.Model):
 
     class Meta:
         ordering = ('data_inicio', 'hora_inicio')
+        verbose_name = 'Escala Responsável'
+        verbose_name_plural = 'Escalas Responsáveis'
 
     def __str__(self):
         return f'{self.responsavel_presencial} - {self.responsavel_monitoramento}'
 
     def get_absolute_url(self):
-        return reverse("escalaresponsavel_detail", kwargs={"pk": self.id})
+        return reverse('escalaresponsavel_detail', kwargs={"pk": self.id})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('escalaresponsavel_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('escalaresponsavel_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('escalaresponsavel_delete', kwargs=kw)
+        return None
