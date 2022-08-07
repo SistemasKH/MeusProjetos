@@ -1,6 +1,12 @@
 from django.contrib import admin
 
-from .models import Consulta, Glicose, Medicamento, PosConsulta
+from .models import (
+    Consulta,
+    EscalaResponsavel,
+    Glicose,
+    Medicamento,
+    PosConsulta
+)
 
 
 @admin.register(Consulta)
@@ -56,3 +62,18 @@ class GlicoseAdmin(admin.ModelAdmin):
     search_fields = ('hora',)
     # list_filter = ('type',)
     # date_hierarchy = 'created'
+
+
+@admin.register(EscalaResponsavel)
+class EscalaResponsavelAdmin(admin.ModelAdmin):
+    list_display = (
+        '__str__',
+        'responsavel_presencial',
+        'data_inicio',
+        'hora_inicio',
+        'data_saida_presencial',
+        'qt_dias_presenciais',
+        'hora_saida_presencial',
+        'responsavel_monitoramento',
+        'data_fim',
+    )

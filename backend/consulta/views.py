@@ -1,7 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
-from django.contrib.auth.decorators import login_required
 
 from .forms import (
     ConsultaForm,
@@ -39,6 +39,18 @@ class ConsultaListView(LRM, ListView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         context['form'] = DependentesDaFamiliaForm(user)
+        context['labels'] = (
+            'Data',
+            'Hora',
+            'Dependente',
+            'Família',
+            'Especialidade',
+            'Médico(a)',
+            'Atendimento',
+            'Acompanhante',
+            'Cancelamento',
+            'Pós Consulta',
+        )
         return context
 
 
@@ -78,6 +90,21 @@ class PosConsultaListView(LRM, ListView):
         familia = usuario.familia
         queryset = PosConsulta.objects.filter(acompanhante_responsavel__familia__nome=familia)  # noqa E501
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['labels'] = (
+            'Consulta',
+            'Data',
+            'Hora',
+            'Especialidade',
+            'Médico',
+            'Acompanhante',
+            'Família',
+            'Diagnóstico',
+            'Tratamento',
+        )
+        return context
 
 
 class PosConsultaDetailView(LRM, DetailView):
@@ -133,6 +160,19 @@ class MedicamentoListView(LRM, ListView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         context['form'] = DependentesDaFamiliaForm(user)
+        context['labels'] = (
+            'Dependente',
+            'Família',
+            'Medicamento',
+            'Principio ativo',
+            'Indicações',
+            'Dosagem',
+            'Uso',
+            'Inicio',
+            'Fim',
+            'Medico',
+            'Fornecedor',
+        )
         return context
 
 
@@ -186,6 +226,17 @@ class GlicoseListView(LRM, ListView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         context['form'] = DependentesDaFamiliaForm(user)
+        context['labels'] = (
+            'Dependente',
+            'Data',
+            'Hora',
+            'Estado alimentar',
+            'Taxa de glicose',
+            'Média Diária',
+            'Média Mensal',
+            'Cuidador',
+            'Responsável',
+        )
         return context
 
 
@@ -223,7 +274,6 @@ def glicose_delete(request, pk):
 class EscalaResponsavelListView(LRM, ListView):
     model = EscalaResponsavel
 
-
     def get_queryset(self):
         responsavel_presencial = self.request.GET.get('responsavel')
         responsavel_monitoramento = self.request.GET.get('responsavel')
@@ -238,19 +288,35 @@ class EscalaResponsavelListView(LRM, ListView):
 
         usuario = self.request.user.usuarios.first()
         familia = usuario.familia
-        queryset = EscalaResponsavel.objects.filter(responsavel_presencial__familia__nome=familia,responsavel_monitoramento__familia__nome=familia )  # noqa E501
+        queryset = EscalaResponsavel.objects.filter(
+            responsavel_presencial__familia__nome=familia,
+            responsavel_monitoramento__familia__nome=familia
+        )
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['labels'] = (
+            'Data de Inicio',
+            'Hora de Chegada',
+            'Responsável Presencial',
+            'Dias de plantão presenciais',
+            'Data de saída presencial',
+            'Hora de saída presencial',
+            'Responsável por Monitorar',
+            'Data Fim',
+            'Observação',
+        )
+        return context
 
 
 class EscalaResponsavelDetailView(LRM, DetailView):
     model = EscalaResponsavel
 
 
-
 class EscalaResponsavelCreateView(LRM, CreateView):
     model = EscalaResponsavel
     form_class = EscalaResponsavelForm
-
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -261,7 +327,6 @@ class EscalaResponsavelCreateView(LRM, CreateView):
 class EscalaResponsavelUpdateView(LRM, UpdateView):
     model = EscalaResponsavel
     form_class = EscalaResponsavelForm
-
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()

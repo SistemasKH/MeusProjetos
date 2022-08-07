@@ -1,66 +1,77 @@
 {% extends 'base.html' %}
-{% load bootstrap %}
-{% block titulo %} Responsáveis {% endblock %}
+{% load static %}
+
+{% block title %} Responsáveis {% endblock %}
+
 {% block content %}
-
-  <div class="card-body">
-    <h4> <B><label>{{ user.get_full_name }} -  Familia {{ familia}}</label></B></h4>
-    <h5>
-      Lista Responsáveis
-      <a class ="btn btn-success" href="{% url 'responsavel_add' %}"
-      >Adicionar</a>
-    </h5>
-
-    <form action="." method="POST">
-      <table class = "table table-striped">
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>CPF</th>
-            <th>E-mail</th>
-            <th>Data nascimento</th>
-            <th>Cidade</th>
-            <th>Celular - WhatsApp</th>
-            <th>Parentesco</th>
-            <th>Acões</th>
-          </tr>
-        </thead>
-        <tbody>
-          {%  for object in object_list %}
-
+  <!-- <h1 class="h3 mb-2 text-gray-800">Responsáveis</h1> -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Responsáveis</h6>
+        <a href="{% url 'responsavel_add' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+          class="fas fa-plus fa-sm text-white-50"></i> Adicionar</a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          id="dataTable"
+          class="table table-bordered"
+          width="100%"
+          cellspacing="0"
+        >
+          <thead>
             <tr>
-              <td>
-                <a href="{{ object.get_absolute_url }}">{{ object.user.get_full_name }}</a>
-              </td>
-              <td>{{ object.cpf|default:"---" }}</td>
-              <td>{{ object.user.email }} </td>
-              <td>{{ object.data_nascimento|date:"d/m/Y"|default:"---" }} </td>
-              <td>{{ object.cidade|default:"---" }} </td>
-              <td>{{ object.celular_whatsapp|default:"---" }} </td>
-              <td>{{ object.get_parentesco_do_responsavel_display|default:"---" }} </td>
-              <td>
-                <a class ="btn btn-warning btn-sm" href="{% url 'responsavel_edit' object.id %}">Editar</a>
-                <span
-                  id="linkDeletar"
-                  class ="btn btn-danger btn-sm"
-                  hx-delete="{% url 'responsavel_delete' object.pk %}"
-                  hx-confirm="Deseja mesmo deletar?"
-                  hx-target="closest tr"
-                  hx-swap="outerHTML swap:500ms"
-                >
-                  Excluir
-                </span>
-              </td>
-            </td>
+              {% for label in labels %}
+                <th>{{ label }}</th>
+              {% endfor %}
+              <th style="min-width:8rem">Acões</th>
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </form>
+          </thead>
+          <tfoot>
+            <tr>
+              {% for label in labels %}
+                <th>{{ label }}</th>
+              {% endfor %}
+              <th style="min-width:8rem">Acões</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            {%  for object in object_list %}
+              <tr>
+                <td>
+                  <a href="{{ object.get_absolute_url }}">{{ object.user.get_full_name }}</a>
+                </td>
+                <td>{{ object.cpf|default:"---" }}</td>
+                <td>{{ object.user.email }} </td>
+                <td>{{ object.data_nascimento|date:"d/m/Y"|default:"---" }} </td>
+                <td>{{ object.cidade|default:"---" }} </td>
+                <td>{{ object.celular_whatsapp|default:"---" }} </td>
+                <td>{{ object.get_parentesco_do_responsavel_display|default:"---" }} </td>
+                <td>{{ object.active|yesno:"Sim,Não" }} </td>
 
+                <td>
+                  <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
+                  <span
+                    id="linkDeletar"
+                    class ="btn btn-danger btn-sm"
+                    hx-delete="{{ object.delete_url }}"
+                    hx-confirm="Deseja mesmo deletar?"
+                    hx-target="closest tr"
+                    hx-swap="outerHTML swap:500ms"
+                  >
+                    Excluir
+                  </span>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-
-{% endblock %}
+{% endblock content %}
 
 {% block js %}
   <script>

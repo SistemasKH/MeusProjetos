@@ -2,8 +2,12 @@ import datetime
 import decimal
 
 from django.db import models
+<<<<<<< HEAD
 from django.urls import reverse
 from datetime import date, time, timedelta
+=======
+from django.urls import reverse, reverse_lazy
+>>>>>>> 6424c114c4783e02d85569ae6aaf520db9bb478b
 
 from backend.core.constants import (
     ATENDIMENTO_CHOICES,
@@ -51,6 +55,24 @@ class Consulta(models.Model):
     def get_absolute_url(self):
         return reverse("consulta_detail", kwargs={"pk": self.id})
 
+    @property
+    def list_url(self):
+        return reverse_lazy('consulta_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('consulta_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('consulta_delete', kwargs=kw)
+        return None
+
 
 class PosConsulta(models.Model):
     consulta = models.ForeignKey(
@@ -76,6 +98,24 @@ class PosConsulta(models.Model):
 
     def get_absolute_url(self):
         return reverse("posconsulta_detail", kwargs={"pk": self.id})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('posconsulta_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('posconsulta_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('posconsulta_delete', kwargs=kw)
+        return None
 
 
 class Medicamento(models.Model):
@@ -105,6 +145,24 @@ class Medicamento(models.Model):
 
     def get_absolute_url(self):
         return reverse("medicamento_detail", kwargs={"pk": self.id})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('medicamento_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('medicamento_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('medicamento_delete', kwargs=kw)
+        return None
 
 
 class Glicose(models.Model):
@@ -145,6 +203,24 @@ class Glicose(models.Model):
     def get_absolute_url(self):
         return reverse("glicose_detail", kwargs={"pk": self.id})
 
+    @property
+    def list_url(self):
+        return reverse_lazy('glicose_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('glicose_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('glicose_delete', kwargs=kw)
+        return None
+
 
 class EscalaResponsavel(models.Model):
     responsavel_presencial = models.ForeignKey(
@@ -153,25 +229,33 @@ class EscalaResponsavel(models.Model):
         verbose_name='Resp. Presencial',
         related_name='responsavel_presencial'
     )
-    data_inicio= models.DateField('Data de Chegada')  # noqa E501
+    data_inicio = models.DateField('Data de Chegada')  # noqa E501
     hora_inicio = models.TimeField('Hora de Chegada')  # noqa E501
     data_saida_presencial = models.DateField('Data Saída Presencial', null=True)  # noqa E501
+<<<<<<< HEAD
     qt_dias_presenciais = models.IntegerField('Quant. dias presenciais ', default=0)# noqa E501
     qt_horas_presentes = models.DecimalField('Quant. horas', decimal_places=2, default=0, max_digits=4,)  # noqa E501
     hora_saida_presencial = models.TimeField('Hora de Saída') # noqa E501
+=======
+    qt_dias_presenciais = models.IntegerField('Quant. dias presenciais ', default=0)  # noqa E501
+    hora_saida_presencial = models.TimeField('Hora de Saída')  # noqa E501
+>>>>>>> 6424c114c4783e02d85569ae6aaf520db9bb478b
     responsavel_monitoramento = models.ForeignKey(
         Responsavel,
         on_delete=models.CASCADE,
         verbose_name='Resp. Monitoramento',
         related_name='responsavel_monitoramento'
-    )# noqa E501
+    )
     data_fim = models.DateField('Data Final do Plantão', null=True)  # noqa E501
     observacao = models.TextField('Observação', blank=True, null=True)  # noqa E501
 
     class Meta:
         ordering = ('data_inicio', 'hora_inicio')
+        verbose_name = 'Escala Responsável'
+        verbose_name_plural = 'Escalas Responsáveis'
 
     def __str__(self):
+<<<<<<< HEAD
         return f'{self.responsavel_presencial} - {self.responsavel_monitoramento} - {self.qt_horas_presenciais} '
 
     def get_absolute_url(self):
@@ -209,3 +293,27 @@ class EscalaResponsavel(models.Model):
 
 
 
+=======
+        return f'{self.responsavel_presencial} - {self.responsavel_monitoramento}'
+
+    def get_absolute_url(self):
+        return reverse('escalaresponsavel_detail', kwargs={"pk": self.id})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('escalaresponsavel_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('escalaresponsavel_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('escalaresponsavel_delete', kwargs=kw)
+        return None
+>>>>>>> 6424c114c4783e02d85569ae6aaf520db9bb478b
