@@ -55,6 +55,14 @@
           <!-- Begin Page Content -->
           <div class="container-fluid">
 
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert {{ message.tags }}" role="alert">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+
             {% block content %}
               <!-- Page Heading -->
               <div class="d-sm-flex align-items-center justify-content-between mb-4">
