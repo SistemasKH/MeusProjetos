@@ -1,63 +1,60 @@
-{% extends "base.html" %}
-{% load bootstrap %}
+{% extends 'base.html' %}
+
+{% block title %} Escalas de Responsáveis {% endblock %}
 
 {% block content %}
-  <div class="container">
-    <h4> <B><label>{{ user.get_full_name }} -  Familia {{ familia}}</label></B></h4>
-    <h4> Detalhes da Escala </h4>
-
-
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Detalhes da Escala do Responsável</h6>
+        <a href="{{ object.list_url }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
+      </div>
+    </div>
     <div class="card-body">
-      <table class="table">
-        <tbody>
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Data de Inicio</td>
+              <td>{{object.data_inicio|date:"d/m/Y"|default:"---"}}</td>
+            </tr>
 
-          <tr>
-            <td>Data de Inicio</td>
-            <td>{{object.data_inicio|date:"d/m/Y"|default:"---"}}</td>
-          </tr>
+            <tr>
+              <td>Hora de inicio</td>
+              <td>{{object.hora_inicio|default:"---" }}</td>
+            </tr>
 
-          <tr>
-            <td>Hora de inicio</td>
-            <td>{{object.hora_inicio|default:"---" }}</td>
-          </tr>
-
-          <tr>
-            <td>Responsável presencial</td>
-            <td>{{object.responsavel_presencial|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Quant. dias presenciais</td>
-            <td>{{object.qt_dias_presenciais|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Data de saída Presencial </td>
-            <td>{{object.data_saida_presencial|date:"d/m/Y"|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Hora saída presencial</td>
-            <td>{{object.hora_saida_presencial|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Responsável por Monitorar</td>
-            <td>{{object.responsavel_monitoramento|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Data final do plantão</td>
-            <td>{{object.data_fim |date:"d/m/Y" |default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Observações</td>
-            <td>{{object.observacao|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td colspan="2"><a class ="btn btn-warning" href="{% url 'escalaresponsavel_list' %}" >Voltar</a></td>
-          </tr>
-        </tbody>
-
-      </table>
-
+            <tr>
+              <td>Responsável presencial</td>
+              <td>{{object.responsavel_presencial|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Quant. dias presenciais</td>
+              <td>{{object.qt_dias_presenciais|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Data de saída Presencial </td>
+              <td>{{object.data_saida_presencial|date:"d/m/Y"|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Hora saída presencial</td>
+              <td>{{object.hora_saida_presencial|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Responsável por Monitorar</td>
+              <td>{{object.responsavel_monitoramento|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Data final do plantão</td>
+              <td>{{object.data_fim |date:"d/m/Y" |default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Observações</td>
+              <td>{{object.observacao|default:"---"}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-
-
 {% endblock content %}

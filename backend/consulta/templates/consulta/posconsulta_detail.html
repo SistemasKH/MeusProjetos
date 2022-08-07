@@ -1,12 +1,18 @@
-{% extends "base.html" %}
-{% load bootstrap %}
+{% extends 'base.html' %}
+
+{% block title %} Pós-Consultas {% endblock %}
 
 {% block content %}
-  <div class="container">
-    <div class="card">
-      <div class="card-body">
-        <table class="table-responsive">
-
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Detalhes da Pós-Consulta</h6>
+        <a href="{{ object.list_url }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
           <tbody>
             <tr>
               <td>Consulta</td>
@@ -35,17 +41,11 @@
             </tr>
             <tr>
               <td>Observações</td>
-              <td>{{object.observações|default:"---" }}</td>
-            </tr>
-            <tr>
-              <td colspan="2"><a class ="btn btn-warning" href="{% url 'posconsulta_list' %}" >Voltar</a></td>
+              <td>{{object.observacao|default:"---" }}</td>
             </tr>
           </tbody>
-
         </table>
       </div>
     </div>
-
   </div>
-
 {% endblock content %}

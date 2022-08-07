@@ -1,41 +1,47 @@
-{% extends "base.html" %}
-{% load bootstrap %}
+{% extends 'base.html' %}
+
+{% block title %} Famílias {% endblock %}
 
 {% block content %}
-  <div class="container">
-    <h4>Detalhes da Família </h4>
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Detalhes da Família</h6>
+        <a href="{{ object.list_url }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Nome</td>
+              <td>{{ object.nome }}</td>
+            </tr>
 
-    <table class="table">
-      <tbody>
-        <tr>
-          <td>Nome</td>
-          <td>{{ object.nome }}</td>
-        </tr>
+            <tr>
+              <td>Endereço</td>
+              <td>{{ object.endereco|default:"---" }}</td>
+            </tr>
 
-        <tr>
-          <td>Endereço</td>
-          <td>{{ object.endereco|default:"---" }}</td>
-        </tr>
+            <tr>
+              <td>Bairro</td>
+              <td>{{ object.bairro|default:"---" }}</td>
+            </tr>
 
-        <tr>
-          <td>Bairro</td>
-          <td>{{ object.bairro|default:"---" }}</td>
-        </tr>
+            <tr>
+              <td>Cidade</td>
+              <td>{{ object.cidade|default:"---" }}</td>
+            </tr>
 
-        <tr>
-          <td>Cidade</td>
-          <td>{{ object.cidade|default:"---" }}</td>
-        </tr>
-
-        <tr>
-          <td>UF</td>
-          <td>{{ object.get_uf_display|default:"---" }}</td>
-        </tr>
-        <tr>
-          <td colspan="2"><a class ="btn btn-warning" href="{% url 'familia_list' %}" >Voltar</a></td>
-        </tr>
-      </tbody>
-    </table>
-
+            <tr>
+              <td>UF</td>
+              <td>{{ object.get_uf_display|default:"---" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 {% endblock content %}
+

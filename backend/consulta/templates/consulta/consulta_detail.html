@@ -1,83 +1,91 @@
-{% extends "base.html" %}
-{% load bootstrap %}
+{% extends 'base.html' %}
+
+{% block title %} Consultas {% endblock %}
 
 {% block content %}
-  <div class="container">
-    <h4> <B><label>{{ user.get_full_name }} -  Familia {{ familia}}</label></B></h4>
-    <h4> Detalhes da Consulta </h4>
-
-
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Detalhes da Consulta</h6>
+        <a href="{{ object.list_url }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
+      </div>
+    </div>
     <div class="card-body">
-      <table class="table">
-        <tbody>
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Dependente</td>
+              <td>{{object.dependente|default:"---"}}</td>
+            </tr>
 
-          <tr>
-            <td>Dependente</td>
-            <td>{{object.dependente|default:"---"}}</td>
-          </tr>
+            <tr>
+              <td>Data</td>
+              <td>{{object.data_consulta|date:"d/m/Y"|default:"---" }}</td>
+            </tr>
 
-          <tr>
-            <td>Data</td>
-            <td>{{object.data_consulta|date:"d/m/Y"|default:"---" }}</td>
-          </tr>
+            <tr>
+              <td>Hora</td>
+              <td>{{object.hora|default:"---"}}</td>
+            </tr>
 
-          <tr>
-            <td>Hora</td>
-            <td>{{object.hora|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Local</td>
-            <td>{{object.local|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Especialidade</td>
-            <td>{{object.consulta.get_especialidade_display|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Médico(a)</td>
-            <td>{{object.nome_especialista|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Fone Contato</td>
-            <td>{{object.fone_contato|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Atendimento</td>
-            <td>{{object.get_atendimento_display|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Motivo Consulta</td>
-            <td>{{object.motivo_consulta|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Sintomas</td>
-            <td>{{object.sintomas|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Acompanhante</td>
-            <td>{{object.acompanhante_responsavel}} </td>
-          </tr>
-          <tr>
-            <td>Data do Cancelamento</td>
-            <td>{{object.cancelamento|date:"d/m/Y"|default:"---" }}</td>
-          </tr>
+            <tr>
+              <td>Local</td>
+              <td>{{object.local|default:"---"}}</td>
+            </tr>
 
-          <tr>
-            <td>Motivo do Cancelamento</td>
-            <td>{{ object.motivo_cancelamento|default:"---" }}</td>
-          </tr>
-          <tr>
-            <td>Observação</td>
-            <td>{{ object.observacao|default:"---" }}</td>
-          </tr>
-          <tr>
-            <td colspan="2"><a class ="btn btn-warning" href="{% url 'consulta_list' %}" >Voltar</a></td>
-          </tr>
+            <tr>
+              <td>Especialidade</td>
+              <td>{{object.consulta.get_especialidade_display|default:"---"}}</td>
+            </tr>
 
-        </tbody>
-      </table>
+            <tr>
+              <td>Médico(a)</td>
+              <td>{{object.nome_especialista|default:"---"}}</td>
+            </tr>
+
+            <tr>
+              <td>Fone Contato</td>
+              <td>{{object.fone_contato|default:"---"}}</td>
+            </tr>
+
+            <tr>
+              <td>Atendimento</td>
+              <td>{{object.get_atendimento_display|default:"---"}}</td>
+            </tr>
+
+            <tr>
+              <td>Motivo Consulta</td>
+              <td>{{object.motivo_consulta|default:"---"}}</td>
+            </tr>
+
+            <tr>
+              <td>Sintomas</td>
+              <td>{{object.sintomas|default:"---"}}</td>
+            </tr>
+
+            <tr>
+              <td>Acompanhante</td>
+              <td>{{object.acompanhante_responsavel}} </td>
+            </tr>
+
+            <tr>
+              <td>Data do Cancelamento</td>
+              <td>{{object.cancelamento|date:"d/m/Y"|default:"---" }}</td>
+            </tr>
+
+            <tr>
+              <td>Motivo do Cancelamento</td>
+              <td>{{ object.motivo_cancelamento|default:"---" }}</td>
+            </tr>
+
+            <tr>
+              <td>Observação</td>
+              <td>{{ object.observacao|default:"---" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-
-
 {% endblock content %}

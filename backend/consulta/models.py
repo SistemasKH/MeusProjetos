@@ -1,5 +1,5 @@
 from django.db import models
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from backend.core.constants import (
     ATENDIMENTO_CHOICES,
@@ -47,6 +47,10 @@ class Consulta(models.Model):
     def get_absolute_url(self):
         return reverse("consulta_detail", kwargs={"pk": self.id})
 
+    @property
+    def list_url(self):
+        return reverse_lazy('consulta_list')
+
 
 class PosConsulta(models.Model):
     consulta = models.ForeignKey(
@@ -72,6 +76,10 @@ class PosConsulta(models.Model):
 
     def get_absolute_url(self):
         return reverse("posconsulta_detail", kwargs={"pk": self.id})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('posconsulta_list')
 
 
 class Medicamento(models.Model):
@@ -101,6 +109,10 @@ class Medicamento(models.Model):
 
     def get_absolute_url(self):
         return reverse("medicamento_detail", kwargs={"pk": self.id})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('medicamento_list')
 
 
 class Glicose(models.Model):
@@ -141,6 +153,10 @@ class Glicose(models.Model):
     def get_absolute_url(self):
         return reverse("glicose_detail", kwargs={"pk": self.id})
 
+    @property
+    def list_url(self):
+        return reverse_lazy('glicose_list')
+
 
 class EscalaResponsavel(models.Model):
     responsavel_presencial = models.ForeignKey(
@@ -172,4 +188,8 @@ class EscalaResponsavel(models.Model):
         return f'{self.responsavel_presencial} - {self.responsavel_monitoramento}'
 
     def get_absolute_url(self):
-        return reverse("escalaresponsavel_detail", kwargs={"pk": self.id})
+        return reverse('escalaresponsavel_detail', kwargs={"pk": self.id})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('escalaresponsavel_list')

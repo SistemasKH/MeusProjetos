@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from backend.core.constants import (
     CIVIL_CHOICES,
@@ -65,6 +65,10 @@ class Familia(Address, Active):
     def get_absolute_url(self):
         return reverse('familia_detail', kwargs={'pk': self.pk})
 
+    @property
+    def list_url(self):
+        return reverse_lazy('familia_list')
+
 
 class Responsavel(Usuario):
     objects = ResponsavelManager()
@@ -76,6 +80,10 @@ class Responsavel(Usuario):
 
     def get_absolute_url(self):
         return reverse('responsavel_detail', kwargs={'pk': self.pk})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('responsavel_list')
 
 
 class Cuidador(Usuario):
@@ -96,6 +104,10 @@ class Cuidador(Usuario):
 
     def get_absolute_url(self):
         return reverse('cuidador_detail', kwargs={'pk': self.pk})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('cuidador_list')
 
 
 class Dependente(Address, Active):
@@ -134,3 +146,7 @@ class Dependente(Address, Active):
 
     def get_absolute_url(self):
         return reverse('dependente_detail', kwargs={'pk': self.pk})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('dependente_list')
