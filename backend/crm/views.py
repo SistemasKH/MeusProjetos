@@ -45,6 +45,16 @@ class DependenteListView(LRM, ListView):
             context['minha_familia'] = True
         else:
             context['minha_familia'] = False
+
+        context['labels'] = (
+            'Nome',
+            'Data nascimento',
+            'Cidade',
+            'Telefone',
+            'Nome do Convênio',
+            'Contato do Convênio',
+            'Ativo',
+        )
         return context
 
 
@@ -111,6 +121,15 @@ class FamiliaListView(LRM, ListView):
             context['minha_familia'] = True
         else:
             context['minha_familia'] = False
+
+        context['labels'] = (
+            'Nome',
+            'Endereço',
+            'Bairro',
+            'Cidade',
+            'UF',
+            'Ativo',
+        )
         return context
 
 
@@ -165,6 +184,20 @@ class ResponsavelListView(LRM, ListView):
         else:
             queryset = Responsavel.objects.filter(active=True)
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['labels'] = (
+            'Nome',
+            'CPF',
+            'E-mail',
+            'Data nascimento',
+            'Cidade',
+            'Celular - WhatsApp',
+            'Parentesco',
+            'Ativo',
+        )
+        return context
 
 
 class ResponsavelDetailView(LRM, DetailView):
@@ -233,6 +266,21 @@ class CuidadorListView(LRM, ListView):
         familia = usuario.familia
         queryset = Cuidador.objects.filter(familia__nome=familia, active=True)  # noqa E501
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['labels'] = (
+            'Nome',
+            'Data Nascimento',
+            'Cidade',
+            'Cel/Whats',
+            'Carga Horária',
+            'Turno',
+            'Adicional',
+            'Data Pagamento',
+            'Ativo',
+        )
+        return context
 
 
 class CuidadorDetailView(LRM, DetailView):

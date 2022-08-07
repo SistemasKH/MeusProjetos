@@ -165,6 +165,8 @@ class EscalaResponsavel(models.Model):
 
     class Meta:
         ordering = ('data_inicio', 'hora_inicio')
+        verbose_name = 'Escala Responsável'
+        verbose_name_plural = 'Escalas Responsáveis'
 
     def __str__(self):
         return f'{self.responsavel_presencial} - {self.responsavel_monitoramento}'
