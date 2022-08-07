@@ -30,6 +30,9 @@
     <!-- htmx -->
     <script src="https://unpkg.com/htmx.org@1.8.0"></script>
 
+    <!-- Custom styles for this page -->
+    <link href="{% static 'css/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+
     {% block css %}{% endblock css %}
 
   </head>
@@ -54,7 +57,37 @@
 
             {% block content %}
               <!-- Page Heading -->
-              <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+              <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                  class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+              </div>
+
+              <!-- ou -->
+
+              <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+              <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                For more information about DataTables, please visit the <a target="_blank"
+                  href="https://datatables.net">official DataTables documentation</a>.</p>
+
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Titulo</h6>
+                </div>
+                <div class="card-body">
+                  <!-- Novo conteúdo aqui
+                  Em tables usar
+                  id="dataTable" -->
+
+                  <!-- <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                      </table>
+                    </div>
+                  </div> -->
+
+                </div>
+              </div>
             {% endblock content %}
 
           </div>
@@ -84,15 +117,15 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Deseja mesmo sair?</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <!-- <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div> -->
           <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Voltar</button>
+            <a class="btn btn-primary" href="{% url 'logout' %}">Sair</a>
           </div>
         </div>
       </div>
@@ -107,6 +140,13 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{% static 'js/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'js/datatables/dataTables.bootstrap4.min.js' %}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{% static 'js/datatables/datatables-demo.js' %}"></script>
 
     {% block js %}{% endblock js %}
   </body>

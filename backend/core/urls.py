@@ -3,5 +3,6 @@ from django.urls import path
 from backend.core import views as v
 
 urlpatterns = [
-    path('', v.home, name='home')
+    path('', v.home, name='home'),
+    path('table/', v.tables, name='tables'),
 ]

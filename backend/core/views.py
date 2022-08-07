@@ -8,19 +8,22 @@ from django.shortcuts import render
 from backend.crm.models import Usuario
 
 
-# @login_required
+@login_required
 def home(request):
     user = request.user
-    # usuario = Usuario.objects.filter(user=user).first()
-    # if usuario:
-    #     messages.add_message(request, constants.SUCCESS,
-    #                          'Você entrou no sistema!')
-    #     context = {'familia': usuario.familia}
-    #     if usuario.familia == None:
-    #         messages.add_message(request, constants.WARNING,
-    #                              'Cadastre sua familia')
-
-    # else:
+    usuario = Usuario.objects.filter(user=user).first()
     context = {}
 
-    return render(request, 'home.html', context)
+    if usuario:
+        messages.add_message(request, constants.SUCCESS, 'Você entrou no sistema!')
+        context = {'familia': usuario.familia}
+
+        if usuario.familia == None:
+            messages.add_message(request, constants.WARNING, 'Cadastre sua familia')
+
+    return render(request, 'index.html', context)
+
+
+def tables(request):
+    template_name = 'tables.html'
+    return render(request, template_name)

@@ -1,19 +1,83 @@
-{% extends 'base.html' %}
-{% load bootstrap %}
+{% extends 'base_login.html' %}
+<!-- { load bootstrap %} -->
 
 {% block title %}Cadastro{% endblock %}
 
 {% block content %}
-  <div class="card">
-    <div class="alert alert-success" role="alert"> Faca seu cadastro para acessar o sistema !</div>
-    <div class="container">
-      <h2>Cadastro</h2>
-
-      <form method="post">
-        {% csrf_token %}
-        {{ form|bootstrap }}
-        <button class="btn btn-success" type="submit">Cadastrar</button>
-      </form>
+  <div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+      <!-- Nested Row within Card Body -->
+      <div class="row">
+        <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+        <div class="col-lg-7">
+          <div class="p-5">
+            <div class="text-center">
+              <h1 class="h4 text-gray-900 mb-4">Cadastre-se</h1>
+            </div>
+            <form class="user" action="." method="POST">
+              {% csrf_token %}
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <input
+                    id="id_first_name"
+                    name="first_name"
+                    type="text"
+                    class="form-control form-control-user"
+                    placeholder="Nome"
+                  >
+                </div>
+                <div class="col-sm-6">
+                  <input
+                    id="id_last_name"
+                    name="last_name"
+                    type="text"
+                    class="form-control form-control-user"
+                    placeholder="Sobrenome"
+                  >
+                </div>
+              </div>
+              <div class="form-group">
+                <input
+                  id="id_email"
+                  name="email"
+                  type="email"
+                  class="form-control form-control-user"
+                  placeholder="E-mail"
+                >
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <input
+                    id="id_password1"
+                    name="password1"
+                    type="password"
+                    class="form-control form-control-user"
+                    placeholder="Senha"
+                  >
+                </div>
+                <div class="col-sm-6">
+                  <input
+                    id="id_password2"
+                    name="password2"
+                    type="password"
+                    class="form-control form-control-user"
+                    placeholder="Repita a senha"
+                  >
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-user btn-block">
+                Cadastrar
+              </button>
+              <hr>
+              <div class="text-center">
+                <a href="{% url 'login' %}" class="btn btn-secondary btn-user btn-block">
+                  Login
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 {% endblock %}
