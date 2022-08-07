@@ -57,7 +57,7 @@
                   {% endif %}
                 </td>
                 <td>
-                  <a class ="btn btn-warning btn-sm" href="{% url 'consulta_edit' object.pk %}">Editar</a>
+                  <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
                 </td>
               </tr>
             {% endfor %}

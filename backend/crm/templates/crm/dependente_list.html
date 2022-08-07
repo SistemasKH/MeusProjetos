@@ -50,11 +50,11 @@
                 <td>{{ object.active|yesno:"Sim,Não" }} </td>
 
                 <td>
-                  <a class ="btn btn-warning btn-sm" href="{% url 'dependente_edit' object.id %}">Editar</a>
+                  <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
                   <span
                     id="linkDeletar"
                     class ="btn btn-danger btn-sm"
-                    hx-delete="{% url 'dependente_delete' object.pk %}"
+                    hx-delete="{{ object.delete_url }}"
                     hx-confirm="Deseja mesmo deletar?"
                     hx-target="closest tr"
                     hx-swap="outerHTML swap:500ms"

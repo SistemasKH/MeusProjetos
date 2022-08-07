@@ -51,6 +51,20 @@ class Consulta(models.Model):
     def list_url(self):
         return reverse_lazy('consulta_list')
 
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('consulta_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('consulta_delete', kwargs=kw)
+        return None
+
 
 class PosConsulta(models.Model):
     consulta = models.ForeignKey(
@@ -80,6 +94,20 @@ class PosConsulta(models.Model):
     @property
     def list_url(self):
         return reverse_lazy('posconsulta_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('posconsulta_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('posconsulta_delete', kwargs=kw)
+        return None
 
 
 class Medicamento(models.Model):
@@ -113,6 +141,20 @@ class Medicamento(models.Model):
     @property
     def list_url(self):
         return reverse_lazy('medicamento_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('medicamento_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('medicamento_delete', kwargs=kw)
+        return None
 
 
 class Glicose(models.Model):
@@ -157,6 +199,20 @@ class Glicose(models.Model):
     def list_url(self):
         return reverse_lazy('glicose_list')
 
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('glicose_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('glicose_delete', kwargs=kw)
+        return None
+
 
 class EscalaResponsavel(models.Model):
     responsavel_presencial = models.ForeignKey(
@@ -193,3 +249,17 @@ class EscalaResponsavel(models.Model):
     @property
     def list_url(self):
         return reverse_lazy('escalaresponsavel_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('escalaresponsavel_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('escalaresponsavel_delete', kwargs=kw)
+        return None

@@ -69,6 +69,20 @@ class Familia(Address, Active):
     def list_url(self):
         return reverse_lazy('familia_list')
 
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('familia_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('familia_delete', kwargs=kw)
+        return None
+
 
 class Responsavel(Usuario):
     objects = ResponsavelManager()
@@ -84,6 +98,21 @@ class Responsavel(Usuario):
     @property
     def list_url(self):
         return reverse_lazy('responsavel_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            print(self.pk)
+            return reverse_lazy('responsavel_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('responsavel_delete', kwargs=kw)
+        return None
 
 
 class Cuidador(Usuario):
@@ -108,6 +137,20 @@ class Cuidador(Usuario):
     @property
     def list_url(self):
         return reverse_lazy('cuidador_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('cuidador_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('cuidador_delete', kwargs=kw)
+        return None
 
 
 class Dependente(Address, Active):
@@ -150,3 +193,17 @@ class Dependente(Address, Active):
     @property
     def list_url(self):
         return reverse_lazy('dependente_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('dependente_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('dependente_delete', kwargs=kw)
+        return None
