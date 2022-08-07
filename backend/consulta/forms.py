@@ -69,7 +69,6 @@ class ConsultaForm(forms.ModelForm):
 
     def __init__(self, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # self.fields['data_consulta'].widget.attrs.update({'class': 'mask-date'})   # noqa E501
         self.fields['hora'].widget.attrs.update({'class': 'mask-hora'})
 
         usuario = Usuario.objects.filter(user=user).first()
@@ -91,18 +90,11 @@ class PosConsultaForm(forms.ModelForm):
     def __init__(self, request, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # pega o penúltimo item da lista
-        # sendo que a lista é ex:
-        # '/consulta/posconsulta/add/3/'
-        # request.path.split('/')
-        # ['', 'consulta', 'posconsulta', 'add', '3', '']
-        # ou seja, nesse caso retorna o número 3.
-        consulta_pk = request.path.split('/')[-2]
-        consulta = Consulta.objects.filter(pk=consulta_pk)
+        consulta = Consulta.objects.filter(pk=self.instance.consulta.pk)
         self.fields['consulta'].queryset = consulta
 
         acompanhante_responsavel = consulta.first().acompanhante_responsavel
-        queryset = Responsavel.objects.filter(pk=acompanhante_responsavel.pk)  # noqa E501
+        queryset = Responsavel.objects.filter(pk=acompanhante_responsavel.pk)
         self.fields['acompanhante_responsavel'].queryset = queryset
 
         if len(consulta) == 1:
@@ -148,9 +140,6 @@ class MedicamentoForm(forms.ModelForm):
         familia = usuario.familia
         queryset = Dependente.objects.filter(familia=familia)
         self.fields['dependente'].queryset = queryset
-
-        # self.fields['data_inicio'].widget.attrs.update({'class': 'mask-date'})
-        # self.fields['data_fim'].widget.attrs.update({'class': 'mask-date'})
 
 
 class GlicoseForm(forms.ModelForm):
