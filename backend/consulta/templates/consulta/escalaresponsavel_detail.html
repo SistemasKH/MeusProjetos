@@ -26,16 +26,17 @@
             <td>{{object.responsavel_presencial|default:"---"}}</td>
           </tr>
           <tr>
-            <td>Quant. dias presenciais</td>
-            <td>{{object.qt_dias_presenciais|default:"---"}}</td>
-          </tr>
-          <tr>
             <td>Data de saída Presencial </td>
             <td>{{object.data_saida_presencial|date:"d/m/Y"|default:"---"}}</td>
           </tr>
           <tr>
             <td>Hora saída presencial</td>
             <td>{{object.hora_saida_presencial|default:"---"}}</td>
+          </tr>
+           <tr>
+            <td>Quant. dias e horas presenciais</td>
+            <td>{{object.conta_dias|default:"---"}} datas sendo
+                {{ object.conta_horas|default:"---" }} horas </td>
           </tr>
           <tr>
             <td>Responsável por Monitorar</td>

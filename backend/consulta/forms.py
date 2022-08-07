@@ -284,6 +284,7 @@ class EscalaResponsavelForm(forms.ModelForm):
     class Meta:
         model = EscalaResponsavel
         fields = '__all__'
+        exclude = ('qt_dias_presenciais','qt_horas_presentes')
 
     def __init__(self, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -294,3 +295,9 @@ class EscalaResponsavelForm(forms.ModelForm):
         queryset_responsavel_monitoramento = Responsavel.objects.filter(familia=familia)
         self.fields['responsavel_presencial'].queryset = queryset_responsavel_presencial
         self.fields['responsavel_monitoramento'].queryset = queryset_responsavel_monitoramento
+
+
+
+
+
+

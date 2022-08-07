@@ -22,7 +22,7 @@
           <th>Data de Inicio</th>
           <th>Hora de Chegada</th>
           <th>Responsável Presencial</th>
-          <th>Dias de plantão presenciais</th>
+          <th>Quant.horas presenciais</th>
           <th>Data de saída presencial</th>
           <th>Hora de saída presencial</th>
           <th>Responsável por Monitorar </th>
@@ -38,7 +38,7 @@
             <td><a href="{{ object.get_absolute_url }}">{{ object.data_inicio|date:"d/m/Y" }}</a></td>
             <td>{{ object.hora_inicio }}</td>
             <td>{{ object.responsavel_presencial }}</td>
-            <td>{{ object.qt_dias_presenciais }}</td>
+            <td>{{ object.qt_horas_presentes}}</td>
             <td>{{ object.data_saida_presencial|date:"d/m/Y" }}</td>
             <td>{{ object.hora_saida_presencial }}</td>
             <td>{{ object.responsavel_monitoramento }}</td>

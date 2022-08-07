@@ -1,5 +1,9 @@
+import datetime
+import decimal
+
 from django.db import models
 from django.urls import reverse
+from datetime import date, time, timedelta
 
 from backend.core.constants import (
     ATENDIMENTO_CHOICES,
@@ -153,6 +157,7 @@ class EscalaResponsavel(models.Model):
     hora_inicio = models.TimeField('Hora de Chegada')  # noqa E501
     data_saida_presencial = models.DateField('Data Saída Presencial', null=True)  # noqa E501
     qt_dias_presenciais = models.IntegerField('Quant. dias presenciais ', default=0)# noqa E501
+    qt_horas_presentes = models.DecimalField('Quant. horas', decimal_places=2, default=0, max_digits=4,)  # noqa E501
     hora_saida_presencial = models.TimeField('Hora de Saída') # noqa E501
     responsavel_monitoramento = models.ForeignKey(
         Responsavel,
@@ -167,7 +172,40 @@ class EscalaResponsavel(models.Model):
         ordering = ('data_inicio', 'hora_inicio')
 
     def __str__(self):
-        return f'{self.responsavel_presencial} - {self.responsavel_monitoramento} '
+        return f'{self.responsavel_presencial} - {self.responsavel_monitoramento} - {self.qt_horas_presenciais} '
 
     def get_absolute_url(self):
         return reverse("escalaresponsavel_detail", kwargs={"pk": self.id})
+
+    def conta_dias(self):
+        dias = ((self.data_saida_presencial) - (self.data_inicio))
+        self.qt_dias_presenciais = dias.days
+        self.save()
+        return dias.days
+
+    def conta_horas(self):
+        inicio = self.hora_inicio
+        hora_em_minutos_inicio = (inicio.hour) * 60
+        minutos_inicio = inicio.minute
+        inicio_min = hora_em_minutos_inicio + minutos_inicio
+
+        saida = self.hora_saida_presencial
+        hora_em_minutos_saida = (saida.hour) * 60
+        minutos_saida = saida.minute
+        saida_min = hora_em_minutos_saida + minutos_saida
+
+        dia_minutos = 1440
+
+        min_primeiro_dia = (dia_minutos - inicio_min)
+        min_ultimo_dia = saida_min
+
+        total_horas = (min_primeiro_dia + min_ultimo_dia)/60
+        dias = self.conta_dias()
+        horas = (((dias - 2)*24) + total_horas)
+        self.qt_horas_presentes = horas
+        self.save()
+        return horas
+
+
+
+

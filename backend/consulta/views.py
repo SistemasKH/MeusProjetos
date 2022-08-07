@@ -269,5 +269,8 @@ class EscalaResponsavelUpdateView(LRM, UpdateView):
         return kwargs
 
 
-def escalaresponsavel_delete(request):
-    ...
+@login_required
+def escalaresponsavel_delete(request, pk):
+    obj = get_object_or_404(Glicose, pk=pk)
+    obj.delete()
+    return redirect('escalaresponsavel_list')
