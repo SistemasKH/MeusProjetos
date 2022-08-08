@@ -11,57 +11,6 @@
       </div>
     </div>
     <div class="card-body">
-<<<<<<< HEAD
-      <table class="table">
-        <tbody>
-
-          <tr>
-            <td>Data de Inicio</td>
-            <td>{{object.data_inicio|date:"d/m/Y"|default:"---"}}</td>
-          </tr>
-
-          <tr>
-            <td>Hora de inicio</td>
-            <td>{{object.hora_inicio|default:"---" }}</td>
-          </tr>
-
-          <tr>
-            <td>Responsável presencial</td>
-            <td>{{object.responsavel_presencial|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Data de saída Presencial </td>
-            <td>{{object.data_saida_presencial|date:"d/m/Y"|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Hora saída presencial</td>
-            <td>{{object.hora_saida_presencial|default:"---"}}</td>
-          </tr>
-           <tr>
-            <td>Quant. dias e horas presenciais</td>
-            <td>{{object.conta_dias|default:"---"}} datas sendo
-                {{ object.conta_horas|default:"---" }} horas </td>
-          </tr>
-          <tr>
-            <td>Responsável por Monitorar</td>
-            <td>{{object.responsavel_monitoramento|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Data final do plantão</td>
-            <td>{{object.data_fim |date:"d/m/Y" |default:"---"}}</td>
-          </tr>
-          <tr>
-            <td>Observações</td>
-            <td>{{object.observacao|default:"---"}}</td>
-          </tr>
-          <tr>
-            <td colspan="2"><a class ="btn btn-warning" href="{% url 'escalaresponsavel_list' %}" >Voltar</a></td>
-          </tr>
-        </tbody>
-
-      </table>
-
-=======
       <div class="table-responsive">
         <table class="table">
           <tbody>
@@ -106,7 +55,6 @@
           </tbody>
         </table>
       </div>
->>>>>>> 6424c114c4783e02d85569ae6aaf520db9bb478b
     </div>
   </div>
 {% endblock content %}
