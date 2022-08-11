@@ -17,7 +17,7 @@
       <div class="table-responsive">
         <table
           id="dataTable"
-          class="table table-bordered"
+          class="table table-striped"
           width="100%"
           cellspacing="0"
         >
@@ -45,13 +45,12 @@
                 </td>
                 <td>{{ object.hora_inicio }}</td>
                 <td>{{ object.responsavel_presencial }}</td>
-                <td>{{ object.qt_dias_presenciais }}</td>
                 <td>{{ object.data_saida_presencial|date:"d/m/Y" }}</td>
                 <td>{{ object.hora_saida_presencial }}</td>
                 <td>{{ object.qt_horas_presentes }}</td>
                 <td>{{ object.responsavel_monitoramento }}</td>
-                <td>{{ object.data_fim }}</td>
-                <td>{{ object.observacao }}</td>
+                <td>{{ object.data_fim|date:"d/m/Y"  }}</td>
+
 
                 <td>
                   <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>

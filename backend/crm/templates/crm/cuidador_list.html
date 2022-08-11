@@ -17,7 +17,7 @@
       <div class="table-responsive">
         <table
           id="dataTable"
-          class="table table-bordered"
+          class="table table-striped"
           width="100%"
           cellspacing="0"
         >
@@ -29,14 +29,7 @@
               <th style="min-width:8rem">Acões</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              {% for label in labels %}
-                <th>{{ label }}</th>
-              {% endfor %}
-              <th style="min-width:8rem">Acões</th>
-            </tr>
-          </tfoot>
+
           <tbody>
             {%  for object in object_list %}
               <tr>
@@ -48,7 +41,6 @@
                 <td>{{ object.celular_whatsapp|default:"---" }} </td>
                 <td>{{ object.carga_horaria_semanal|default:"---" }} </td>
                 <td>{{ object.get_turno_trabalho_display|default:"---" }} </td>
-                <td>{{ object.adicional|default:"---" }} </td>
                 <td>{{ object.dia_pagamento|default:"---" }} </td>
                 <td>{{ object.active|yesno:"Sim,Não" }} </td>
 

@@ -15,7 +15,7 @@ def home(request):
     context = {}
 
     if usuario:
-        messages.add_message(request, constants.SUCCESS, 'Você entrou no sistema!')
+        #messages.add_message(request, constants.SUCCESS, 'Você entrou no sistema!')
         context = {'familia': usuario.familia}
 
         if usuario.familia == None:

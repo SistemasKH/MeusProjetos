@@ -192,11 +192,9 @@ class ResponsavelListView(LRM, ListView):
         context = super().get_context_data(**kwargs)
         context['labels'] = (
             'Nome',
-            'CPF',
-            'E-mail',
-            'Data nascimento',
+            'Dta_Nasc.',
             'Cidade',
-            'Celular - WhatsApp',
+            'Cel_Whats',
             'Parentesco',
             'Ativo',
         )
@@ -274,13 +272,12 @@ class CuidadorListView(LRM, ListView):
         context = super().get_context_data(**kwargs)
         context['labels'] = (
             'Nome',
-            'Data Nascimento',
+            'Dta_Nasc.',
             'Cidade',
-            'Cel/Whats',
-            'Carga Horária',
+            'Cel_Whats',
+            'Carga_Hr',
             'Turno',
-            'Adicional',
-            'Data Pagamento',
+            'Dta_Pag.',
             'Ativo',
         )
         return context

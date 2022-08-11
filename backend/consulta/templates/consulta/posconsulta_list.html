@@ -17,7 +17,7 @@
       <div class="table-responsive">
         <table
           id="dataTable"
-          class="table table-bordered"
+          class="table table-striped"
           width="100%"
           cellspacing="0"
         >
@@ -29,26 +29,17 @@
               <th style="min-width:8rem">Acões</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              {% for label in labels %}
-                <th>{{ label }}</th>
-              {% endfor %}
-              <th style="min-width:8rem">Acões</th>
-            </tr>
-          </tfoot>
           <tbody>
             {%  for object in object_list %}
               <tr>
                 <td>
                   <a href="{{ object.get_absolute_url }}">{{ object }}</a>
                 </td>
-                <td>{{ object.consulta.data_consulta }}</td>
+                <td>{{ object.consulta.data_consulta|date:"d/m/Y" }}</td>
                 <td>{{ object.consulta.hora }}</td>
                 <td>{{ object.consulta.get_especialidade_display }}</td>
                 <td>{{ object.consulta.nome_especialista }}</td>
                 <td>{{ object.acompanhante_responsavel }}</td>
-                <td>{{ object.acompanhante_responsavel.familia }}</td>
                 <td>{{ object.diagnostico }} </td>
                 <td>{{ object.tratamento}} </td>
 

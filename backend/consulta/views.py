@@ -43,10 +43,8 @@ class ConsultaListView(LRM, ListView):
             'Data',
             'Hora',
             'Dependente',
-            'Família',
             'Especialidade',
             'Médico(a)',
-            'Atendimento',
             'Acompanhante',
             'Cancelamento',
             'Pós Consulta',
@@ -100,7 +98,6 @@ class PosConsultaListView(LRM, ListView):
             'Especialidade',
             'Médico',
             'Acompanhante',
-            'Família',
             'Diagnóstico',
             'Tratamento',
         )
@@ -162,12 +159,10 @@ class MedicamentoListView(LRM, ListView):
         context['form'] = DependentesDaFamiliaForm(user)
         context['labels'] = (
             'Dependente',
-            'Família',
             'Medicamento',
-            'Principio ativo',
+            'Substância',
             'Indicações',
             'Dosagem',
-            'Uso',
             'Inicio',
             'Fim',
             'Medico',
@@ -230,10 +225,9 @@ class GlicoseListView(LRM, ListView):
             'Dependente',
             'Data',
             'Hora',
-            'Estado alimentar',
-            'Taxa de glicose',
-            'Média Diária',
-            'Média Mensal',
+            'Período',
+            'Taxa',
+            'M_Diária',
             'Cuidador',
             'Responsável',
         )
@@ -297,16 +291,14 @@ class EscalaResponsavelListView(LRM, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['labels'] = (
-            'Data de Inicio',
-            'Hora de Chegada',
-            'Responsável Presencial',
-            'Dias de plantão presenciais',
-            'Data de saída presencial',
-            'Hora de saída presencial',
-            'Quant. horas presenciais',
-            'Responsável por Monitorar',
-            'Data Fim',
-            'Observação',
+            'Dta+Início',
+            'Hr_Início',
+            'Resp_Presencial',
+            'Dta_Saída ',
+            'Hr_Saida',
+            'Carga_hr',
+            'Resp_Monit.',
+            'Dta_Fim',
         )
         return context
 
