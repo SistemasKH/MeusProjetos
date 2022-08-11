@@ -104,9 +104,11 @@ class FamiliaListView(LRM, ListView):
     model = Familia
 
     def get_queryset(self):
+        queryset = super().get_queryset()
         usuario = self.request.user.usuarios.first()
-        familia = usuario.familia
-        queryset = Familia.objects.filter(nome=familia, active=True)
+        if usuario:
+            familia = usuario.familia
+            queryset = Familia.objects.filter(nome=familia, active=True)
 
         return queryset
 
@@ -116,11 +118,12 @@ class FamiliaListView(LRM, ListView):
         '''
         context = super().get_context_data(**kwargs)
         usuario = self.request.user.usuarios.first()
-        familia = usuario.familia
-        if familia:
-            context['minha_familia'] = True
-        else:
-            context['minha_familia'] = False
+        if usuario:
+            familia = usuario.familia
+            if familia:
+                context['minha_familia'] = True
+            else:
+                context['minha_familia'] = False
 
         context['labels'] = (
             'Nome',

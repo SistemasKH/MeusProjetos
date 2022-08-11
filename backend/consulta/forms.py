@@ -284,12 +284,3 @@ class EscalaResponsavelForm(forms.ModelForm):
         queryset_responsavel_monitoramento = Responsavel.objects.filter(familia=familia)
         self.fields['responsavel_presencial'].queryset = queryset_responsavel_presencial
         self.fields['responsavel_monitoramento'].queryset = queryset_responsavel_monitoramento
-<<<<<<< HEAD
-
-
-
-
-
-
-=======
->>>>>>> 6424c114c4783e02d85569ae6aaf520db9bb478b

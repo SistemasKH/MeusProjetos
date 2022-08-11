@@ -1,13 +1,9 @@
 import datetime
 import decimal
-
 from django.db import models
-<<<<<<< HEAD
-from django.urls import reverse
 from datetime import date, time, timedelta
-=======
 from django.urls import reverse, reverse_lazy
->>>>>>> 6424c114c4783e02d85569ae6aaf520db9bb478b
+
 
 from backend.core.constants import (
     ATENDIMENTO_CHOICES,
@@ -232,14 +228,14 @@ class EscalaResponsavel(models.Model):
     data_inicio = models.DateField('Data de Chegada')  # noqa E501
     hora_inicio = models.TimeField('Hora de Chegada')  # noqa E501
     data_saida_presencial = models.DateField('Data Saída Presencial', null=True)  # noqa E501
-<<<<<<< HEAD
+
     qt_dias_presenciais = models.IntegerField('Quant. dias presenciais ', default=0)# noqa E501
     qt_horas_presentes = models.DecimalField('Quant. horas', decimal_places=2, default=0, max_digits=4,)  # noqa E501
     hora_saida_presencial = models.TimeField('Hora de Saída') # noqa E501
-=======
+
     qt_dias_presenciais = models.IntegerField('Quant. dias presenciais ', default=0)  # noqa E501
     hora_saida_presencial = models.TimeField('Hora de Saída')  # noqa E501
->>>>>>> 6424c114c4783e02d85569ae6aaf520db9bb478b
+
     responsavel_monitoramento = models.ForeignKey(
         Responsavel,
         on_delete=models.CASCADE,
@@ -255,8 +251,7 @@ class EscalaResponsavel(models.Model):
         verbose_name_plural = 'Escalas Responsáveis'
 
     def __str__(self):
-<<<<<<< HEAD
-        return f'{self.responsavel_presencial} - {self.responsavel_monitoramento} - {self.qt_horas_presenciais} '
+        return f'{self.responsavel_presencial} - {self.responsavel_monitoramento} - {self.qt_horas_presentes} '
 
     def get_absolute_url(self):
         return reverse("escalaresponsavel_detail", kwargs={"pk": self.id})
@@ -290,15 +285,6 @@ class EscalaResponsavel(models.Model):
         self.save()
         return horas
 
-
-
-
-=======
-        return f'{self.responsavel_presencial} - {self.responsavel_monitoramento}'
-
-    def get_absolute_url(self):
-        return reverse('escalaresponsavel_detail', kwargs={"pk": self.id})
-
     @property
     def list_url(self):
         return reverse_lazy('escalaresponsavel_list')
@@ -316,4 +302,4 @@ class EscalaResponsavel(models.Model):
             kw = {'pk': self.pk}
             return reverse_lazy('escalaresponsavel_delete', kwargs=kw)
         return None
->>>>>>> 6424c114c4783e02d85569ae6aaf520db9bb478b
+
