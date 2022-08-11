@@ -284,3 +284,37 @@ class EscalaResponsavelForm(forms.ModelForm):
         queryset_responsavel_monitoramento = Responsavel.objects.filter(familia=familia)
         self.fields['responsavel_presencial'].queryset = queryset_responsavel_presencial
         self.fields['responsavel_monitoramento'].queryset = queryset_responsavel_monitoramento
+
+    def conta_dias(self, instance):
+        dias = ((instance.data_saida_presencial) - (instance.data_inicio))
+        instance.qt_dias_presenciais = dias.days
+        return dias.days
+
+    def conta_horas(self, instance):
+        inicio = instance.hora_inicio
+        hora_em_minutos_inicio = (inicio.hour) * 60
+        minutos_inicio = inicio.minute
+        inicio_min = hora_em_minutos_inicio + minutos_inicio
+        saida = instance.hora_saida_presencial
+        hora_em_minutos_saida = (saida.hour) * 60
+        minutos_saida = saida.minute
+        saida_min = hora_em_minutos_saida + minutos_saida
+        dia_minutos = 1440
+        min_primeiro_dia = (dia_minutos - inicio_min)
+        min_ultimo_dia = saida_min
+        total_horas = (min_primeiro_dia + min_ultimo_dia) / 60
+        dias = self.conta_dias(instance)
+        horas = (((dias - 2) * 24) + total_horas)
+        instance.qt_horas_presentes = horas
+        print('salvando')
+        return horas
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        self.conta_dias(instance)
+        self.conta_horas(instance)
+
+        if commit:
+            instance.save()
+
+        return instance
