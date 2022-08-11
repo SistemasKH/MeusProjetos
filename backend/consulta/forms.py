@@ -273,7 +273,7 @@ class EscalaResponsavelForm(forms.ModelForm):
     class Meta:
         model = EscalaResponsavel
         fields = '__all__'
-        exclude = ('qt_dias_presenciais','qt_horas_presentes')
+        exclude = ('qt_dias_presenciais', 'qt_horas_presentes')
 
     def __init__(self, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
