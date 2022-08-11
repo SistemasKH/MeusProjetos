@@ -303,6 +303,7 @@ class EscalaResponsavelListView(LRM, ListView):
             'Dias de plantão presenciais',
             'Data de saída presencial',
             'Hora de saída presencial',
+            'Quant. horas presenciais',
             'Responsável por Monitorar',
             'Data Fim',
             'Observação',
