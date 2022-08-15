@@ -47,7 +47,7 @@ class ConsultaListView(LRM, ListView):
             'Médico(a)',
             'Acompanhante',
             'Cancelamento',
-            'Pós Consulta',
+            'Pós_Consulta',
         )
         return context
 
@@ -99,7 +99,7 @@ class PosConsultaListView(LRM, ListView):
             'Médico',
             'Acompanhante',
             'Diagnóstico',
-            'Tratamento',
+
         )
         return context
 

@@ -9,36 +9,42 @@
   </a>
 
   <!-- Divider -->
-  <hr class="sidebar-divider my-0">
-
-  <!-- Nav Item - Dashboard -->
-  <li class="nav-item active">
-    <a class="nav-link" href="{% url 'home' %}">
-      <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>Home</span></a>
-  </li>
-
-  <!-- Divider -->
   <hr class="sidebar-divider">
 
-  <!-- Heading -->
+  <!-- Heading
   <div class="sidebar-heading">
     Famílias
-  </div>
-
+  </div>-->
+{% if familia != None %}
   <li class="nav-item">
-    <a class="nav-link" href="{% url 'familia_list' %}">
+      <a class="nav-link" href="{% url 'familia_list' %}">
       <i class="fas fa-fw fa-table"></i>
       <span>Famílias</span></a>
+
   </li>
 
   <!-- Divider -->
   <hr class="sidebar-divider">
 
-  <!-- Heading -->
+  <!-- Heading
+  <div class="sidebar-heading">
+    Dependentes
+  </div>-->
+
+  <!-- Nav Item - Tables -->
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'dependente_list' %}">
+    <i class="fas fa-fw fa-table"></i>
+    <span>Dependentes</span></a>
+  </li>
+
+  <!-- Heading
   <div class="sidebar-heading">
     Consultas
-  </div>
+  </div>-->
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
 
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -50,25 +56,25 @@
       <div class="bg-white py-2 collapse-inner rounded">
         <a class="collapse-item" href="{% url 'consulta_list' %}">Consultas</a>
         <a class="collapse-item" href="{% url 'posconsulta_list' %}">Pós Consultas</a>
-        <a class="collapse-item" href="{% url 'medicamento_list' %}">Medicamentos</a>
-        <a class="collapse-item" href="{% url 'glicose_list' %}">Glicoses</a>
+
       </div>
     </div>
   </li>
+   <!-- Divider -->
+ <hr class="sidebar-divider">
 
-  <!-- Divider -->
+
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'medicamento_list' %}">
+      <i class="fas fa-fw fa-table"></i>
+      <span>Medicamentos</span></a>
+  </li>
   <hr class="sidebar-divider">
 
-  <!-- Heading -->
-  <div class="sidebar-heading">
-    Dependentes
-  </div>
-
-  <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="{% url 'dependente_list' %}">
+    <a class="nav-link" href="{% url 'glicose_list' %}">
       <i class="fas fa-fw fa-table"></i>
-      <span>Dependentes</span></a>
+      <span>Medição Glicose</span></a>
   </li>
 
   <!-- Divider -->
@@ -97,48 +103,65 @@
   <!-- Divider -->
   <hr class="sidebar-divider">
 
-  <!-- Heading -->
+  <!-- Heading
   <div class="sidebar-heading">
     Cuidadores
-  </div>
+  </div>-->
 
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="{% url 'cuidador_list' %}">
-      <i class="fas fa-fw fa-table"></i>
-      <span>Cuidadores</span></a>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCuidadores"
+      aria-expanded="true" aria-controls="collapse">
+      <i class="fas fa-fw fa-cog"></i>
+      <span>Cuidadores</span>
+    </a>
+    <div id="collapseCuidadores" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{% url 'cuidador_list' %}">Cuidadores</a>
+        <a class="collapse-item" href="">Escala Cuidadores</a>
+
+      </div>
+    </div>
   </li>
 
   <!-- Divider -->
   <hr class="sidebar-divider">
 
   <!-- Heading -->
-  <div class="sidebar-heading">
-    Despesas
-  </div>
+  <!--<div class="sidebar-heading">
+    Controle Financeiro
+  </div>-->
 
   <!-- Nav Item - Tables -->
   <li class="nav-item">
     <a class="nav-link" href="">
       <i class="fas fa-fw fa-table"></i>
-      <span>Despesas</span></a>
+      <span>Controle Financeiro</span></a>
   </li>
+
+ {% else %}
+   <li class="nav-item">
+      <a class="nav-link" href="{% url 'familia_list' %}">
+      <i class="fas fa-fw fa-table"></i>
+      <span>Famílias</span></a>
+   </li>
+{% endif %}
 
   <!-- Divider -->
   <hr class="sidebar-divider">
 
-  <!-- Heading -->
-  <div class="sidebar-heading">
+  <!--   Heading -->
+  <!-- <div class="sidebar-heading">
     Exemplo
-  </div>
+  </div>-->
 
-  <!-- Nav Item - Tables -->
+  <!-- Nav Item - Tables
   {% if debug %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'tables' %}">
         <i class="fas fa-fw fa-table"></i>
         <span>Tables</span></a>
-    </li>
+    </li>-->
   {% endif %}
 
   <!-- Divider-->
