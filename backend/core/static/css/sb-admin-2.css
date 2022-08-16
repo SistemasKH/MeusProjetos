@@ -10869,19 +10869,19 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("../media/idosos3.jpg") 50% 0 no-repeat fixed;
+  background: url("/media/idosos3.jpg");
   background-position: center;
   background-size: cover;
 }
 
 .bg-register-image {
-  background: url("../media/idosos3.jpg")no-repeat fixed;
+  background: url("../media/idosos5.jpg")no-repeat fixed;
   background-position: center;
   background-size: cover;
 }
 
 .bg-password-image {
-  background: url("../media/idosos3.jpg");
+  background: url("../media/casal.jpg");
   background-position: center;
   background-size: cover;
 }
