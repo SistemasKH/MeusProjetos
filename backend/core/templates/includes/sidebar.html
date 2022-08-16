@@ -134,17 +134,20 @@
 
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="">
-      <i class="fas fa-fw fa-table"></i>
-      <span>Controle Financeiro</span></a>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinanceiro"
+      aria-expanded="true" aria-controls="collapse">
+      <i class="fas fa-fw fa-cog"></i>
+      <span>Controle Financeiro</span>
+    </a>
+    <div id="collapseFinanceiro" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{% url 'financeiro' %}">Despesas</a>
+
+
+      </div>
+    </div>
   </li>
 
- {% else %}
-   <li class="nav-item">
-      <a class="nav-link" href="{% url 'familia_list' %}">
-      <i class="fas fa-fw fa-table"></i>
-      <span>Famílias</span></a>
-   </li>
 {% endif %}
 
   <!-- Divider -->

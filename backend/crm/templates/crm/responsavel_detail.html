@@ -7,7 +7,11 @@
     <div class="card-header py-3">
       <div class="d-sm-flex align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Detalhes do Responsável</h6>
-        <a href="{{ object.list_url }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
+           {% if familia != None %}
+                <a href="{{ object.list_url }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
+           {% else %}
+               <a href="{% url 'familia_add' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" class="fas fa-plus fa-sm text-white-50"> Adicionar Familia</a>
+           {% endif %}
       </div>
     </div>
     <div class="card-body">

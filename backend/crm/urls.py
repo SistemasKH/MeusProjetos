@@ -26,7 +26,7 @@ responsavel_urlpatterns = [
     path('add/', v.ResponsavelCreateView.as_view(), name='responsavel_add'),  # noqa E501
     path('<int:pk>/edit/', v.ResponsavelUpdateView.as_view(), name='responsavel_edit'),  # noqa E501
     path('<int:pk>/delete/', v.responsavel_delete, name='responsavel_delete'),  # noqa E501
-
+    path('financeiro/', v.financeiro, name='financeiro'),
 ]
 
 cuidador_urlpatterns = [
