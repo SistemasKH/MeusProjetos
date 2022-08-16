@@ -595,6 +595,7 @@ pre code {
   flex-wrap: wrap;
   margin-right: -0.75rem;
   margin-left: -0.75rem;
+  background-color: #F5F5F5;
 }
 
 .no-gutters {
@@ -4534,6 +4535,7 @@ input[type="button"].btn-block {
   flex: 1 1 auto;
   min-height: 1px;
   padding: 1.25rem;
+  background-color: #F5F5F5;
 }
 
 .card-title {
@@ -10869,21 +10871,24 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("/media/idosos3.jpg");
+  background: url("../media/idosos3.jpg");
   background-position: center;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .bg-register-image {
   background: url("../media/idosos5.jpg")no-repeat fixed;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .bg-password-image {
   background: url("../media/casal.jpg");
   background-position: center;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 form.user .custom-checkbox.small label {
