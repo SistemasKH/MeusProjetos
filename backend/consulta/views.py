@@ -66,6 +66,16 @@ class ConsultaListView(LRM, ListView):
 class ConsultaDetailView(LRM, DetailView):
     model = Consulta
 
+    def dispatch(self, request, *args, **kwargs):
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+
+        if not familia:
+            message = 'Favor cadastrar a sua família!'
+            messages.error(request, message)
+            return redirect('familia_list')
+        return super().dispatch(request, *args, **kwargs)
+
 
 class ConsultaCreateView(LRM, CreateView):
     model = Consulta
@@ -127,6 +137,16 @@ class PosConsultaListView(LRM, ListView):
 
 class PosConsultaDetailView(LRM, DetailView):
     model = PosConsulta
+
+    def dispatch(self, request, *args, **kwargs):
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+
+        if not familia:
+            message = 'Favor cadastrar a sua família!'
+            messages.error(request, message)
+            return redirect('familia_list')
+        return super().dispatch(request, *args, **kwargs)
 
 
 class PosConsultaCreateView(LRM, CreateView):
@@ -205,6 +225,16 @@ class MedicamentoListView(LRM, ListView):
 class MedicamentoDetailView(LRM, DetailView):
     model = Medicamento
 
+    def dispatch(self, request, *args, **kwargs):
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+
+        if not familia:
+            message = 'Favor cadastrar a sua família!'
+            messages.error(request, message)
+            return redirect('familia_list')
+        return super().dispatch(request, *args, **kwargs)
+
 
 class MedicamentoCreateView(LRM, CreateView):
     model = Medicamento
@@ -277,6 +307,16 @@ class GlicoseListView(LRM, ListView):
 
 class GlicoseDetailView(LRM, DetailView):
     model = Glicose
+
+    def dispatch(self, request, *args, **kwargs):
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+
+        if not familia:
+            message = 'Favor cadastrar a sua família!'
+            messages.error(request, message)
+            return redirect('familia_list')
+        return super().dispatch(request, *args, **kwargs)
 
 
 class GlicoseCreateView(LRM, CreateView):
@@ -356,6 +396,16 @@ class EscalaResponsavelListView(LRM, ListView):
 
 class EscalaResponsavelDetailView(LRM, DetailView):
     model = EscalaResponsavel
+
+    def dispatch(self, request, *args, **kwargs):
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+
+        if not familia:
+            message = 'Favor cadastrar a sua família!'
+            messages.error(request, message)
+            return redirect('familia_list')
+        return super().dispatch(request, *args, **kwargs)
 
 
 class EscalaResponsavelCreateView(LRM, CreateView):

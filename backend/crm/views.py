@@ -75,6 +75,16 @@ class DependenteListView(LRM, ListView):
 class DependenteDetailView(LRM, DetailView):
     model = Dependente
 
+    def dispatch(self, request, *args, **kwargs):
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+
+        if not familia:
+            message = 'Favor cadastrar a sua família!'
+            messages.error(request, message)
+            return redirect('familia_list')
+        return super().dispatch(request, *args, **kwargs)
+
 
 class DependenteCreateView(LRM, CreateView):
     model = Dependente
@@ -228,6 +238,16 @@ class ResponsavelListView(LRM, ListView):
 class ResponsavelDetailView(LRM, DetailView):
     model = Responsavel
 
+    def dispatch(self, request, *args, **kwargs):
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+
+        if not familia:
+            message = 'Favor cadastrar a sua família!'
+            messages.error(request, message)
+            return redirect('familia_list')
+        return super().dispatch(request, *args, **kwargs)
+
 
 class ResponsavelCreateView(LRM, CreateView):
     model = Responsavel
@@ -319,6 +339,16 @@ class CuidadorListView(LRM, ListView):
 
 class CuidadorDetailView(LRM, DetailView):
     model = Cuidador
+
+    def dispatch(self, request, *args, **kwargs):
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+
+        if not familia:
+            message = 'Favor cadastrar a sua família!'
+            messages.error(request, message)
+            return redirect('familia_list')
+        return super().dispatch(request, *args, **kwargs)
 
 
 class CuidadorCreateView(LRM, CreateView):
