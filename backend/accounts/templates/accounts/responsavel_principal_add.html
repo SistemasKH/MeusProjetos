@@ -10,13 +10,13 @@
         <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
         <div class="col-lg-7">
           <div class="p-5">
-               {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert {{ message.tags }}" role="alert">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                {% endif %}
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert {{ message.tags }}" role="alert">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
 
             <div class="text-center">
               <h1 class="h4 text-gray-900 mb-4">Cadastre-se</h1>

@@ -1,9 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
-from django.shortcuts import render
+
 from backend.accounts.services import send_mail_to_user
 from backend.core.services import has_group
 
@@ -24,8 +24,10 @@ from .services import (
     user_create
 )
 
+
 def financeiro(request):
     return render(request, 'crm/financeiro.html')
+
 
 class DependenteListView(LRM, ListView):
     model = Dependente
