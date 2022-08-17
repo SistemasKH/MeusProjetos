@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
 from django.shortcuts import get_object_or_404, redirect
@@ -22,6 +23,16 @@ from .models import (
 
 class ConsultaListView(LRM, ListView):
     model = Consulta
+
+    def dispatch(self, request, *args, **kwargs):
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+
+        if not familia:
+            message = 'Favor cadastrar a sua família!'
+            messages.error(request, message)
+            return redirect('familia_list')
+        return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         dependente = self.request.GET.get('dependente')
@@ -83,6 +94,16 @@ def consulta_delete(request):
 class PosConsultaListView(LRM, ListView):
     model = PosConsulta
 
+    def dispatch(self, request, *args, **kwargs):
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+
+        if not familia:
+            message = 'Favor cadastrar a sua família!'
+            messages.error(request, message)
+            return redirect('familia_list')
+        return super().dispatch(request, *args, **kwargs)
+
     def get_queryset(self):
         usuario = self.request.user.usuarios.first()
         familia = usuario.familia
@@ -140,6 +161,16 @@ def posconsulta_delete(request):
 
 class MedicamentoListView(LRM, ListView):
     model = Medicamento
+
+    def dispatch(self, request, *args, **kwargs):
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+
+        if not familia:
+            message = 'Favor cadastrar a sua família!'
+            messages.error(request, message)
+            return redirect('familia_list')
+        return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         dependente = self.request.GET.get('dependente')
@@ -205,6 +236,16 @@ def medicamento_delete(request, pk):
 class GlicoseListView(LRM, ListView):
     model = Glicose
 
+    def dispatch(self, request, *args, **kwargs):
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+
+        if not familia:
+            message = 'Favor cadastrar a sua família!'
+            messages.error(request, message)
+            return redirect('familia_list')
+        return super().dispatch(request, *args, **kwargs)
+
     def get_queryset(self):
         dependente = self.request.GET.get('dependente')
 
@@ -267,6 +308,16 @@ def glicose_delete(request, pk):
 
 class EscalaResponsavelListView(LRM, ListView):
     model = EscalaResponsavel
+
+    def dispatch(self, request, *args, **kwargs):
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+
+        if not familia:
+            message = 'Favor cadastrar a sua família!'
+            messages.error(request, message)
+            return redirect('familia_list')
+        return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         responsavel_presencial = self.request.GET.get('responsavel')

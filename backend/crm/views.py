@@ -32,6 +32,16 @@ def financeiro(request):
 class DependenteListView(LRM, ListView):
     model = Dependente
 
+    def dispatch(self, request, *args, **kwargs):
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+
+        if not familia:
+            message = 'Favor cadastrar a sua família!'
+            messages.error(request, message)
+            return redirect('familia_list')
+        return super().dispatch(request, *args, **kwargs)
+
     def get_queryset(self):
         usuario = self.request.user.usuarios.first()
         familia = usuario.familia
@@ -183,6 +193,16 @@ def familia_delete(request, pk):
 class ResponsavelListView(LRM, ListView):
     model = Responsavel
 
+    def dispatch(self, request, *args, **kwargs):
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+
+        if not familia:
+            message = 'Favor cadastrar a sua família!'
+            messages.error(request, message)
+            return redirect('familia_list')
+        return super().dispatch(request, *args, **kwargs)
+
     def get_queryset(self):
         usuario = self.request.user.usuarios.first()
         if usuario:
@@ -265,6 +285,16 @@ def responsavel_delete(request, pk):
 
 class CuidadorListView(LRM, ListView):
     model = Cuidador
+
+    def dispatch(self, request, *args, **kwargs):
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+
+        if not familia:
+            message = 'Favor cadastrar a sua família!'
+            messages.error(request, message)
+            return redirect('familia_list')
+        return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         usuario = self.request.user.usuarios.first()
