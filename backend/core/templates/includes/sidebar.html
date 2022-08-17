@@ -15,259 +15,131 @@
   <div class="sidebar-heading">
     Famílias
   </div>-->
-  {% if familia != None  %}
-    <li class="nav-item" >
-      <a class="nav-link" href="{% url 'familia_list' %}">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Famílias</span></a>
-    </li>
+  <li class="nav-item" >
+    <a class="nav-link" href="{% url 'familia_list' %}">
+      <i class="fas fa-fw fa-table"></i>
+      <span>Famílias</span></a>
+  </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+  <!-- Divider -->
+  <hr class="sidebar-divider">
 
-    <!-- Heading
+  <!-- Heading
   <div class="sidebar-heading">
     Dependentes
   </div>-->
 
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'dependente_list' %}">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Dependentes</span></a>
-    </li>
+  <!-- Nav Item - Tables -->
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'dependente_list' %}">
+      <i class="fas fa-fw fa-table"></i>
+      <span>Dependentes</span></a>
+  </li>
 
-    <!-- Heading
+  <!-- Heading
   <div class="sidebar-heading">
     Consultas
   </div>-->
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+  <!-- Divider -->
+  <hr class="sidebar-divider">
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Consultas</span>
-      </a>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="{% url 'consulta_list' %}">Consultas</a>
-          <a class="collapse-item" href="{% url 'posconsulta_list' %}">Pós Consultas</a>
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+      aria-expanded="true" aria-controls="collapseTwo">
+      <i class="fas fa-fw fa-cog"></i>
+      <span>Consultas</span>
+    </a>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{% url 'consulta_list' %}">Consultas</a>
+        <a class="collapse-item" href="{% url 'posconsulta_list' %}">Pós Consultas</a>
 
-        </div>
       </div>
-    </li>
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'medicamento_list' %}">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Medicamentos</span></a>
-    </li>
-    <hr class="sidebar-divider">
+    </div>
+  </li>
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'medicamento_list' %}">
+      <i class="fas fa-fw fa-table"></i>
+      <span>Medicamentos</span></a>
+  </li>
+  <hr class="sidebar-divider">
 
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'glicose_list' %}">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Medição Glicose</span></a>
-    </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'glicose_list' %}">
+      <i class="fas fa-fw fa-table"></i>
+      <span>Medição Glicose</span></a>
+  </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+  <!-- Divider -->
+  <hr class="sidebar-divider">
 
-    <!-- Heading -->
-    <!--<div class="sidebar-heading">
+  <!-- Heading -->
+  <!--<div class="sidebar-heading">
     Responsáveis
   </div>-->
 
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+  <!-- Nav Item - Tables -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
 
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Responsáveis</span>
-      </a>
+      <i class="fas fa-fw fa-cog"></i>
+      <span>Responsáveis</span>
+    </a>
 
-      <div id="collapseUtilities" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="{% url 'responsavel_list' %}">Responsáveis</a>
-          <a class="collapse-item" href="{% url 'escalaresponsavel_list' %}">Escala Responsáveis</a>
-        </div>
+    <div id="collapseUtilities" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{% url 'responsavel_list' %}">Responsáveis</a>
+        <a class="collapse-item" href="{% url 'escalaresponsavel_list' %}">Escala Responsáveis</a>
       </div>
-    </li>
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+    </div>
+  </li>
+  <!-- Divider -->
+  <hr class="sidebar-divider">
 
-    <!-- Heading
+  <!-- Heading
   <div class="sidebar-heading">
     Cuidadores
   </div>-->
 
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCuidadores"
-        aria-expanded="true" aria-controls="collapse">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Cuidadores</span>
-      </a>
-      <div id="collapseCuidadores" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="{% url 'cuidador_list' %}">Cuidadores</a>
-          <a class="collapse-item" href="{% url 'escalaresponsavel_list' %}">Escala Cuidadores</a>
-        </div>
+  <!-- Nav Item - Tables -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCuidadores"
+      aria-expanded="true" aria-controls="collapse">
+      <i class="fas fa-fw fa-cog"></i>
+      <span>Cuidadores</span>
+    </a>
+    <div id="collapseCuidadores" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{% url 'cuidador_list' %}">Cuidadores</a>
+        <a class="collapse-item" href="{% url 'escalaresponsavel_list' %}">Escala Cuidadores</a>
       </div>
-    </li>
+    </div>
+  </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+  <!-- Divider -->
+  <hr class="sidebar-divider">
 
-    <!-- Heading -->
-    <!--<div class="sidebar-heading">
+  <!-- Heading -->
+  <!--<div class="sidebar-heading">
     Controle Financeiro
   </div>-->
 
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinanceiro"
-        aria-expanded="true" aria-controls="collapse">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Controle Financeiro</span>
-      </a>
-      <div id="collapseFinanceiro" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="{% url 'financeiro' %}">Despesas</a>
-        </div>
+  <!-- Nav Item - Tables -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinanceiro"
+      aria-expanded="true" aria-controls="collapse">
+      <i class="fas fa-fw fa-cog"></i>
+      <span>Controle Financeiro</span>
+    </a>
+    <div id="collapseFinanceiro" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{% url 'financeiro' %}">Despesas</a>
       </div>
-    </li>
-  {% else %}
-
-    <li class="nav-item" >
-      <a class="nav-link" href="">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Famílias</span></a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading
-  <div class="sidebar-heading">
-    Dependentes
-  </div>-->
-
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-      <a class="nav-link" href="">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Dependentes</span></a>
-    </li>
-
-    <!-- Heading
-  <div class="sidebar-heading">
-    Consultas
-  </div>-->
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Consultas</span>
-      </a>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="">Consultas</a>
-          <a class="collapse-item" href="">Pós Consultas</a>
-
-        </div>
-      </div>
-    </li>
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-    <li class="nav-item">
-      <a class="nav-link" href="">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Medicamentos</span></a>
-    </li>
-    <hr class="sidebar-divider">
-
-    <li class="nav-item">
-      <a class="nav-link" href="">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Medição Glicose</span></a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <!--<div class="sidebar-heading">
-    Responsáveis
-  </div>-->
-
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Responsáveis</span>
-      </a>
-
-      <div id="collapseUtilities" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="">Responsáveis</a>
-          <a class="collapse-item" href="">Escala Responsáveis</a>
-        </div>
-      </div>
-    </li>
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading
-  <div class="sidebar-heading">
-    Cuidadores
-  </div>-->
-
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCuidadores"
-        aria-expanded="true" aria-controls="collapse">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Cuidadores</span>
-      </a>
-      <div id="collapseCuidadores" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="">Cuidadores</a>
-          <a class="collapse-item" href="">Escala Cuidadores</a>
-        </div>
-      </div>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <!--<div class="sidebar-heading">
-    Controle Financeiro
-  </div>-->
-
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinanceiro"
-        aria-expanded="true" aria-controls="collapse">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Controle Financeiro</span>
-      </a>
-      <div id="collapseFinanceiro" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="">Despesas</a>
-        </div>
-      </div>
-    </li>
-  {% endif %}
+    </div>
+  </li>
 
 
 
