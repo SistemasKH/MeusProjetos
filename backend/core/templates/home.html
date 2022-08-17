@@ -8,18 +8,14 @@
 {% block content %}
   <div class ="card-body">
     <h4>Olá <b>{{ user.get_full_name }}</b></h4>
-      {% if familia != None %}
-         <h5><b>{{ familia }}</b> Seja bem-vindo!</h5>
-      {% else %}
-         <div class="d-sm-flex align-items-center justify-content-between">
+      {% if familia == None %}
+          <div class="d-sm-flex align-items-center justify-content-between">
             <a href="{% url 'familia_add' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" class="fas fa-plus fa-sm text-white-50">
-                <i class="fas fa-plus fa-sm text-white-50"></i>Add Família</a>
-         </div>
+                <i class="fas fa-plus fa-sm text-white-50"></i>Adicionar Família</a>
+          </div>
       {% endif %}
-
-    <div>
-      <img id="img-home" src="{% static 'media/brasileiros_idosos.jpg' %}"  >
-    </div>
+        <div class="row">
+           <div class="col-lg-6 d-none d-lg-block bg-grafico-image"></div>
+        </div>
   </div>
-
 {% endblock %}

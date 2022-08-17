@@ -4,24 +4,18 @@
 {% block titulo %} Home {% endblock %}
 
 {% block content %}
-   <div class="card shadow mb-4">
-    <div class="card-header py-3">
-      <div class="d-sm-flex align-items-center justify-content-between">
-        <h4>Olá <b>{{ user.get_full_name }}</b></h4>
-      {% if familia != None %}
-         <h4><b>Família: {{ familia }}</b> Seja bem-vindo!</h4>
-      {% else %}
-         <div class="d-sm-flex align-items-center justify-content-between">
-            <a href="{% url 'familia_add' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" class="fas fa-plus fa-sm text-white-50"> Add Família</a>
-         </div>
+    <div class ="card-body">
+    <h4>Olá <b>{{ user.get_full_name }}</b></h4>
+      {% if familia == None %}
+          <div class="d-sm-flex align-items-center justify-content-between">
+            <a href="{% url 'familia_add' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" class="fas fa-plus fa-sm text-white-50">
+                <i class="fas fa-plus fa-sm text-white-50"></i>Adicionar Família</a>
+          </div>
       {% endif %}
-      </div>
+        <div class="bg-grafico-image">
+           <img src="media/brasileiros_idosos.jpg"/>
+
+        </div>
 </div>
-
-    <div class="card-body">
-        <img class ="img_home" width="70%" src="{% static 'media/brasileiros_idosos.jpg' %}">
-    </div>
-  </div>
-
 
 {% endblock %}

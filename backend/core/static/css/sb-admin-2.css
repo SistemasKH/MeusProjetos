@@ -10869,7 +10869,12 @@ a:focus {
     height: calc(20rem - 43px) !important;
   }
 }
+.bg-grafico-image {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 
+}
 .bg-login-image {
   background: url("../media/idosos3.jpg");
   background-position: center;

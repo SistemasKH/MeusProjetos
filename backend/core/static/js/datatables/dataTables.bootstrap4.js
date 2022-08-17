@@ -10,6 +10,7 @@
  * controls using Bootstrap. See http://datatables.net/manual/styling/bootstrap
  * for further information.
  */
+
 (function( factory ){
 	if ( typeof define === 'function' && define.amd ) {
 		// AMD
@@ -178,7 +179,26 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 		$(host).find( '[data-dt-idx='+activeEl+']' ).trigger('focus');
 	}
 };
-
+/* Language */
+	$(document).ready(function () {
+    $('#dataTable').DataTable({
+        "language": {
+            "lengthMenu": "Visualizar _MENU_ registros por pagina",
+            "zeroRecords": "Nada encontrado, desculpe",
+            "info": "Mostrando pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "Não há registros disponíveis",
+            "infoFiltered": "(Filtrando de _MAX_ total registros)",
+			"search": "Pesquisar",
+			"print": "Imprimir",
+			"paginate": {
+				"next": "Próximo",
+				"previous": "Anterior",
+				"first": "Primeiro",
+				"last": "Último"
+    },
+        },
+    });
+});
 
 return DataTable;
 }));
