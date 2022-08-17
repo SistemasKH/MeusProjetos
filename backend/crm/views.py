@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from backend.accounts.services import send_mail_to_user
+from backend.core.mixins import PermissaoFamiliaMixin
 from backend.core.services import has_group
 
 from .forms import (
@@ -29,18 +30,8 @@ def financeiro(request):
     return render(request, 'crm/financeiro.html')
 
 
-class DependenteListView(LRM, ListView):
+class DependenteListView(LRM, PermissaoFamiliaMixin, ListView):
     model = Dependente
-
-    def dispatch(self, request, *args, **kwargs):
-        usuario = self.request.user.usuarios.first()
-        familia = usuario.familia
-
-        if not familia:
-            message = 'Favor cadastrar a sua família!'
-            messages.error(request, message)
-            return redirect('familia_list')
-        return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         usuario = self.request.user.usuarios.first()
@@ -72,18 +63,8 @@ class DependenteListView(LRM, ListView):
         return context
 
 
-class DependenteDetailView(LRM, DetailView):
+class DependenteDetailView(LRM, PermissaoFamiliaMixin, DetailView):
     model = Dependente
-
-    def dispatch(self, request, *args, **kwargs):
-        usuario = self.request.user.usuarios.first()
-        familia = usuario.familia
-
-        if not familia:
-            message = 'Favor cadastrar a sua família!'
-            messages.error(request, message)
-            return redirect('familia_list')
-        return super().dispatch(request, *args, **kwargs)
 
 
 class DependenteCreateView(LRM, CreateView):
@@ -200,18 +181,8 @@ def familia_delete(request, pk):
     return redirect('familia_list')
 
 
-class ResponsavelListView(LRM, ListView):
+class ResponsavelListView(LRM, PermissaoFamiliaMixin, ListView):
     model = Responsavel
-
-    def dispatch(self, request, *args, **kwargs):
-        usuario = self.request.user.usuarios.first()
-        familia = usuario.familia
-
-        if not familia:
-            message = 'Favor cadastrar a sua família!'
-            messages.error(request, message)
-            return redirect('familia_list')
-        return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         usuario = self.request.user.usuarios.first()
@@ -235,18 +206,8 @@ class ResponsavelListView(LRM, ListView):
         return context
 
 
-class ResponsavelDetailView(LRM, DetailView):
+class ResponsavelDetailView(LRM, PermissaoFamiliaMixin, DetailView):
     model = Responsavel
-
-    def dispatch(self, request, *args, **kwargs):
-        usuario = self.request.user.usuarios.first()
-        familia = usuario.familia
-
-        if not familia:
-            message = 'Favor cadastrar a sua família!'
-            messages.error(request, message)
-            return redirect('familia_list')
-        return super().dispatch(request, *args, **kwargs)
 
 
 class ResponsavelCreateView(LRM, CreateView):
@@ -303,18 +264,8 @@ def responsavel_delete(request, pk):
     return redirect('responsavel_list')
 
 
-class CuidadorListView(LRM, ListView):
+class CuidadorListView(LRM, PermissaoFamiliaMixin, ListView):
     model = Cuidador
-
-    def dispatch(self, request, *args, **kwargs):
-        usuario = self.request.user.usuarios.first()
-        familia = usuario.familia
-
-        if not familia:
-            message = 'Favor cadastrar a sua família!'
-            messages.error(request, message)
-            return redirect('familia_list')
-        return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         usuario = self.request.user.usuarios.first()
@@ -337,18 +288,8 @@ class CuidadorListView(LRM, ListView):
         return context
 
 
-class CuidadorDetailView(LRM, DetailView):
+class CuidadorDetailView(LRM, PermissaoFamiliaMixin, DetailView):
     model = Cuidador
-
-    def dispatch(self, request, *args, **kwargs):
-        usuario = self.request.user.usuarios.first()
-        familia = usuario.familia
-
-        if not familia:
-            message = 'Favor cadastrar a sua família!'
-            messages.error(request, message)
-            return redirect('familia_list')
-        return super().dispatch(request, *args, **kwargs)
 
 
 class CuidadorCreateView(LRM, CreateView):
