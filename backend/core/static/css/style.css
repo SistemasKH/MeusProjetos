@@ -13,21 +13,21 @@ thead{
    text-align : center;
 }
 .bg-login-image {
-  background: url("../media/idosos3.jpg");
+  background: url("../img/my_img/idosos3.jpg");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
 .bg-register-image {
-  background: url("../media/idosos5.jpg");
+  background: url("../img/my_img/idosos5.jpg");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
 .bg-password-image {
-  background: url("../media/casal.jpg");
+  background: url("../img/my_img/casal.jpg");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
