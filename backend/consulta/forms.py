@@ -1,3 +1,4 @@
+import decimal
 from datetime import date, timedelta
 
 from django import forms
@@ -359,12 +360,14 @@ class JornadaTrabalhoForm(forms.ModelForm):
         self.fields['cuidador'].queryset = queryset_cuidador
 
     def conta_horas(self, instance):
-        #inicio = instance.dh_entrada
-        #saida = instance.dh_saida
-        #horas_trabalhadas = (saida - inicio)
-        #self.horas_trabalhadas_diaria = float(horas_trabalhadas)
-        #return horas_trabalhadas
-        return
+        inicio = instance.dh_entrada
+        saida = instance.dh_saida
+        if saida.day == inicio.day:
+            horas = (saida.hour - inicio.hour)
+            minutos = (saida.minute - inicio.minute)
+            horas_minutos = (horas, minutos)
+            return horas_minutos
+
 
     def soma_horas_semanal(self):
         return

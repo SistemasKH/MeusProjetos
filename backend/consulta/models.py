@@ -279,9 +279,9 @@ class JornadaTrabalho(models.Model):
     )
     dh_entrada = models.DateTimeField('Data/Hora entrada')  # noqa E501
     dh_saida = models.DateTimeField('Data/Hora saída')  # noqa E501
-    horas_trabalhadas_diaria = models.DecimalField('Horas Diarias', decimal_places=2, default=0, max_digits=4)  # noqa E501
-    soma_horas_semanal = models.DecimalField('Horas semanais', decimal_places=2, default=0, max_digits=4)
-    soma_horas_mensal = models.DecimalField('Horas mensais', decimal_places=2, default=0, max_digits=4)
+    horas_trabalhadas_diaria = models.DateTimeField('Horas Diarias')  # noqa E501
+    soma_horas_semanal = models.DateTimeField('Horas semanais')
+    soma_horas_mensal = models.DateTimeField('Horas mensais')
     responsavel_dia = models.ForeignKey(
         Responsavel,
         on_delete=models.CASCADE,
