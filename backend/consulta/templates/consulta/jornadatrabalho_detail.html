@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %} Jornada de Trabalho {% endblock %}
+
+{% block content %}
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Detalhes da Jornada Diária</h6>
+        <a href="{{ object.list_url }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+
+            <tr>
+              <td>Prestador de Serviço</td>
+              <td>{{object.cuidador|default:"---"}}</td>
+            </tr>
+
+            <tr>
+              <td>Data/Hora entrada</td>
+              <td>{{object.dh_entrada|date:"d/m/Y H:i"|default:"---" }}</td>
+            </tr>
+
+            <tr>
+              <td>Data/Hora saída</td>
+              <td>{{object.dh_saida|date:"d/m/Y H:i"|default:"---" }}</td>
+            </tr>
+            <tr>
+              <td>Horas dia</td>
+              <td>{{object.horas_trabalhadas_diaria|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Acumulado horas - Semanal </td>
+              <td>{{object.soma_horas_semanal|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Acumulado horas - Mensal </td>
+              <td>{{object.soma_horas_mensal|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Responsável do Dia</td>
+              <td>{{object.responsavel_dia|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Observações</td>
+              <td>{{object.observacao|default:"---"}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

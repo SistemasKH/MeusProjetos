@@ -268,3 +268,53 @@ class EscalaResponsavel(models.Model):
             kw = {'pk': self.pk}
             return reverse_lazy('escalaresponsavel_delete', kwargs=kw)
         return None
+
+
+class JornadaTrabalho(models.Model):
+    cuidador = models.ForeignKey(
+        Cuidador,
+        on_delete=models.CASCADE,
+        verbose_name='funcionario',
+        related_name='funcionario'
+    )
+    dh_entrada = models.DateTimeField('Data/Hora entrada')  # noqa E501
+    dh_saida = models.DateTimeField('Data/Hora saída')  # noqa E501
+    horas_trabalhadas_diaria = models.DecimalField('Horas Diarias', decimal_places=2, default=0, max_digits=4)  # noqa E501
+    soma_horas_semanal = models.DecimalField('Horas semanais', decimal_places=2, default=0, max_digits=4)
+    soma_horas_mensal = models.DecimalField('Horas mensais', decimal_places=2, default=0, max_digits=4)
+    responsavel_dia = models.ForeignKey(
+        Responsavel,
+        on_delete=models.CASCADE,
+        verbose_name='Responsavel do dia',
+        related_name='responsavel_dia'
+    )
+    observacao = models.TextField('Observação', blank=True, null=True)  # noqa E501
+
+    class Meta:
+        ordering = 'dh_entrada',
+        verbose_name = 'Jornada de Trabalho',
+        verbose_name_plural = 'Joranadas de Trabalho'
+
+    def __str__(self):
+        return f'{self.cuidador} -  {self.dh_entrada} - {self.responsavel_dia} - {self.horas_trabalhadas_diaria} - {self. soma_horas_semanal} - {self. soma_horas_mensal} '
+
+    def get_absolute_url(self):
+        return reverse("jornadatrabalho_detail", kwargs={"pk": self.id})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('jornadatrabalho_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('jornadatrabalho_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('jornadatrabalho_delete', kwargs=kw)
+        return None

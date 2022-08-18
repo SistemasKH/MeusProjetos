@@ -10870,27 +10870,26 @@ a:focus {
   }
 }
 .bg-grafico-image {
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-
+   display: block;
+   margin: 5% auto;
+   text-align : center;
 }
 .bg-login-image {
-  background: url("../media/idosos3.jpg");
+  background: url("../img/my_img/idosos3.jpg");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
 .bg-register-image {
-  background: url("../media/idosos5.jpg")no-repeat fixed;
+  background: url("../img/my_img/idosos5.jpg");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
 .bg-password-image {
-  background: url("../media/casal.jpg");
+  background: url("../img/my_img/casal.jpg");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;

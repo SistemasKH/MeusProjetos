@@ -9,9 +9,9 @@ from .models import (
     EscalaResponsavel,
     Glicose,
     Medicamento,
-    PosConsulta
+    PosConsulta,
+    JornadaTrabalho
 )
-
 
 class DependentesDaFamiliaForm(forms.Form):
     dependente = forms.ModelChoiceField(
@@ -317,4 +317,65 @@ class EscalaResponsavelForm(forms.ModelForm):
         if commit:
             instance.save()
 
+        return instance
+
+class JornadaTrabalhoForm(forms.ModelForm):
+    required_css_class = 'required'
+
+    dh_entrada = forms.DateTimeField(
+        label='Entrada',
+        widget=forms.DateTimeInput(
+            format='%Y-%m-%dT%H:%M',
+            attrs={
+                'type': 'datetime-local',
+                'class': 'form-control'
+            }),
+        input_formats=('%Y-%m-%dT%H:%M',),
+    )
+    dh_saida = forms.DateTimeField(
+        label='Saída',
+        widget=forms.DateTimeInput(
+            format='%Y-%m-%dT%H:%M',
+            attrs={
+                'type': 'datetime-local',
+                'class': 'form-control'
+            }),
+        input_formats=('%Y-%m-%dT%H:%M',),
+    )
+
+    class Meta:
+        model = JornadaTrabalho
+        fields = '__all__'
+        exclude = ('horas_trabalhadas_diaria', 'soma_horas_semanal', 'soma_horas_mensal')
+
+    def __init__(self, user=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        usuario = Usuario.objects.filter(user=user).first()
+        familia = usuario.familia
+        queryset_responsavel_dia = Responsavel.objects.filter(familia=familia)
+        queryset_cuidador = Cuidador.objects.filter(familia=familia)
+        self.fields['responsavel_dia'].queryset = queryset_responsavel_dia
+        self.fields['cuidador'].queryset = queryset_cuidador
+
+    def conta_horas(self, instance):
+        #inicio = instance.dh_entrada
+        #saida = instance.dh_saida
+        #horas_trabalhadas = (saida - inicio)
+        #self.horas_trabalhadas_diaria = float(horas_trabalhadas)
+        #return horas_trabalhadas
+        return
+
+    def soma_horas_semanal(self):
+        return
+
+
+    def soma_horas_mensal(self):
+        return
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        self.conta_horas(instance)
+        if commit:
+            instance.save()
         return instance

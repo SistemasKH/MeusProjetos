@@ -42,10 +42,19 @@ escalaresp_urlpatterns = [
     path('<int:pk>/delete/', v.escalaresponsavel_delete, name='escalaresponsavel_delete'),  # noqa E501
 ]
 
+jornadatrabalho_urlpatterns = [
+    path('', v.JornadaTrabalhoListView.as_view(), name='jornadatrabalho_list'),  # noqa E501
+    path('<int:pk>/', v.JornadaTrabalhoDetailView.as_view(), name='jornadatrabalho_detail'),  # noqa E501
+    path('add/', v.JornadaTrabalhoCreateView.as_view(), name='jornadatrabalho_add'),  # noqa E501
+    path('<int:pk>/edit/', v.JornadaTrabalhoUpdateView.as_view(), name='jornadatrabalho_edit'),  # noqa E501
+    path('<int:pk>/delete/', v.jornadatrabalho_delete, name='jornadatrabalho_delete'),  # noqa E501
+]
+
 urlpatterns = [
     path('consulta/', include(consulta_urlpatterns)),
     path('posconsulta/', include(posconsulta_urlpatterns)),
     path('medicamento/', include(medicamento_urlpatterns)),
     path('glicose/', include(glicose_urlpatterns)),
     path('escalaresp/', include(escalaresp_urlpatterns)),
+    path('jornadatrabalho/', include(jornadatrabalho_urlpatterns)),
 ]

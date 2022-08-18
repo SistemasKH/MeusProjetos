@@ -14,14 +14,16 @@ from .forms import (
     EscalaResponsavelForm,
     GlicoseForm,
     MedicamentoForm,
-    PosConsultaForm
+    PosConsultaForm,
+    JornadaTrabalhoForm
 )
 from .models import (
     Consulta,
     EscalaResponsavel,
     Glicose,
     Medicamento,
-    PosConsulta
+    PosConsulta,
+    JornadaTrabalho
 )
 
 
@@ -296,7 +298,7 @@ class EscalaResponsavelListView(LRM, PermissaoFamiliaMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['labels'] = (
-            'Dta+Início',
+            'Dta_Início',
             'Hr_Início',
             'Resp_Presencial',
             'Dta_Saída ',
@@ -337,3 +339,73 @@ def escalaresponsavel_delete(request, pk):
     obj = get_object_or_404(Glicose, pk=pk)
     obj.delete()
     return redirect('escalaresponsavel_list')
+
+
+class JornadaTrabalhoListView(LRM, PermissaoFamiliaMixin, ListView):
+    model = JornadaTrabalho
+
+    def get_queryset(self):
+        responsavel_dia = self.request.GET.get('responsavel_dia')
+        cuidador = self.request.GET.get('cuidador')
+
+        if responsavel_dia:
+            queryset = JornadaTrabalho.objects.filter(responsavel_dia=responsavel)  # noqa E501
+            return queryset
+
+        if cuidador:
+            queryset = JornadaTrabalho.objects.filter(cuidador=cuidador)  # noqa E501
+            return queryset
+
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+        queryset = JornadaTrabalho.objects.filter(
+            responsavel_dia__familia__nome=familia,
+            cuidador__familia__nome=familia
+        )
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['labels'] = (
+            'Prestador Serviço',
+            'Data/Hora Entrada',
+            'Data/Hora Saída',
+            'Quant horas dia',
+            'Acumulado semanal',
+            'Acumulado mensal',
+            'Responsavel dia',
+            'Observação',
+        )
+        return context
+
+
+class JornadaTrabalhoDetailView(LRM, PermissaoFamiliaMixin, DetailView):
+    model = JornadaTrabalho
+
+
+class JornadaTrabalhoCreateView(LRM, CreateView):
+    model = JornadaTrabalho
+    form_class = JornadaTrabalhoForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
+
+class JornadaTrabalhoUpdateView(LRM, UpdateView):
+    model = JornadaTrabalho
+    form_class = JornadaTrabalhoForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
+
+@login_required
+def jornadatrabalho_delete(request, pk):
+    obj = get_object_or_404(Glicose, pk=pk)
+    obj.delete()
+    return redirect('jornadatrabalho_list')
+

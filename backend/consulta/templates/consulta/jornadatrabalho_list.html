@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Escala Responsáveis {% endblock %}
+
+{% block content %}
+  <!-- <h1 class="h3 mb-2 text-gray-800">Escala Responsáveis</h1> -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary"> Jornada de Trabalho </h6>
+        <a href="{% url 'jornadatrabalho_add' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+          class="fas fa-plus fa-sm text-white-50"></i> Adicionar</a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          id="dataTable"
+          class="table table-striped"
+          width="100%"
+          cellspacing="0"
+        >
+          <thead>
+            <tr>
+              {% for label in labels %}
+                <th>{{ label }}</th>
+              {% endfor %}
+              <th style="min-width:8rem">Acões</th>
+            </tr>
+          </thead>
+
+           <tbody>
+            {%  for object in object_list %}
+              <tr>
+               <td>{{ object.cuidador }}</td>
+               <td><a href="{{ object.get_absolute_url }}"> {{ object.dh_entrada|date:"d/m/Y H:i:s"|default:"---" }}</a></td>
+               <td>{{ object.dh_saida|date:"d/m/Y H:i:s"|default:"---" }}</td>
+               <td>{{ object.horas_trabalhadas_diaria}}</td>
+               <td>{{ object.soma_horas_semanal }}</td>
+               <td>{{ object.soma_horas_mensal }}</td>
+               <td>{{ object.responsavel_dia }}</td>
+               <td>{{ object.observacao }}</td>
+                <td>
+                  <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
+                  <span
+                    id="linkDeletar"
+                    class ="btn btn-danger btn-sm"
+                    hx-delete="{{ object.delete_url }}"
+                    hx-confirm="Deseja mesmo deletar?"
+                    hx-target="closest tr"
+                    hx-swap="outerHTML swap:500ms"
+                    >
+                    Excluir
+                  </span>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block js %}
+  <script>
+    document.body.addEventListener('htmx:configRequest', (event) => {
+      event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+    });
+
+    htmx.on("htmx:afterSwap", function(evt) {
+      if (evt.target.id == 'linkDeletar'
+      ) {
+        location.reload();
+      }
+    });
+  </script>
+{% endblock js %}
