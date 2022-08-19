@@ -74,16 +74,30 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('POSTGRES_DB', 'sgwc'),
+        'NAME': config('POSTGRES_DB', 'SGWC'),
         'USER': config('POSTGRES_USER', 'postgres'),
         'PASSWORD': config('POSTGRES_PASSWORD'),
         'HOST': config('DB_HOST', 'localhost'),
         'PORT': config('DB_PORT', 5432),
     }
 }
+'''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'SGWC',
+        'USER': 'postgres',
+        'PASSWORD': 'nathan09',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
 
 # Email config
 EMAIL_BACKEND = config('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')  # noqa E501

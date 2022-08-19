@@ -10880,21 +10880,18 @@ a:focus {
   background-size: contain;
   background-repeat: no-repeat;
 }
-
 .bg-register-image {
   background: url("../img/my_img/idosos5.jpg");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
-
 .bg-password-image {
   background: url("../img/my_img/casal.jpg");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
-
 form.user .custom-checkbox.small label {
   line-height: 1.5rem;
 }

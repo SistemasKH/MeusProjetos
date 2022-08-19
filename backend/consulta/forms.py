@@ -362,11 +362,9 @@ class JornadaTrabalhoForm(forms.ModelForm):
     def conta_horas(self, instance):
         inicio = instance.dh_entrada
         saida = instance.dh_saida
-        if saida.day == inicio.day:
-            horas = (saida.hour - inicio.hour)
-            minutos = (saida.minute - inicio.minute)
-            horas_minutos = (horas, minutos)
-            return horas_minutos
+        duracao = saida - inicio
+        instance.horas_trabalhadas_diaria = duracao
+        return instance.horas_trabalhadas_diaria
 
 
     def soma_horas_semanal(self):
