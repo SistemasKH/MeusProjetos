@@ -55,6 +55,7 @@ class ConsultaListView(LRM, PermissaoFamiliaMixin, ListView):
             'Acompanhante',
             'Cancelamento',
             'Pós_Consulta',
+
         )
         return context
 

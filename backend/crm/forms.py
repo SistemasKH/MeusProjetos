@@ -90,7 +90,6 @@ class ResponsavelAddForm(CustomUserForm, DataNascimentoForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        #self.fields['data_nascimento'].widget.attrs.update({'class': 'mask-date'})  # noqa E501
         self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
 
 
@@ -116,8 +115,6 @@ class ResponsavelUpdateForm(CustomUserForm, DataNascimentoForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        #self.fields['data_nascimento'].widget.attrs.update({'class': 'mask-date'})  # noqa E501
         self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
 
     def save(self, commit=True):
@@ -194,11 +191,7 @@ class CuidadorAddForm(CustomUserForm, DataNascimentoForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        #self.fields['data_nascimento'].widget.attrs.update({'class': 'mask-date'})  # noqa E501
         self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
-        #self.fields['data_inicio'].widget.attrs.update({'class': 'mask-date'})
-        #self.fields['data_fim'].widget.attrs.update({'class': 'mask-date'})
 
 
 class CuidadorUpdateForm(CustomUserForm, DataNascimentoForm):
@@ -255,7 +248,6 @@ class CuidadorUpdateForm(CustomUserForm, DataNascimentoForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
         self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
 
     def save(self, commit=True):
@@ -305,8 +297,6 @@ class DependenteAddForm(DataNascimentoForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        # self.fields['data_nascimento'].widget.attrs.update({'class': 'mask-date'})  # noqa E501
         self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
 
 
@@ -349,6 +339,4 @@ class DependenteUpdateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        # self.fields['data_nascimento'].widget.attrs.update({'class': 'mask-date'})  # noqa E501
         self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})

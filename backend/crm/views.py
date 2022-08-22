@@ -40,9 +40,8 @@ class DependenteListView(LRM, PermissaoFamiliaMixin, ListView):
         return queryset
 
     def get_context_data(self, **kwargs):
-        '''
-        Verifica se já existe uma família.
-        '''
+       #Verifica se já existe uma família.
+
         context = super().get_context_data(**kwargs)
         usuario = self.request.user.usuarios.first()
         familia = usuario.familia

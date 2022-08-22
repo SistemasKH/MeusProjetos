@@ -39,7 +39,21 @@
                 <td>{{ object.nome_especialista|default:"---" }} </td>
                 <td>{{ object.acompanhante_responsavel|default:"---" }} </td>
                 <td>{{ object.cancelamento|default:"---" }} </td>
-                <td>
+
+            <td>
+              {% if object.pos_consultas.all %}
+                <a class="btn btn-primary btn-sm" href="{% url 'posconsulta_list' %}">Pós Consulta</a>
+              {% else %}
+                <a class="btn btn-success btn-sm" href="{% url 'posconsulta_add' object.pk %}">Criar Pós Consulta</a>
+              {% endif %}
+            </td>
+            <td>
+              <a class ="btn btn-warning btn-sm" href="{% url 'consulta_edit' object.pk %}">Editar</a>
+            </td>
+          </tr>
+
+
+                  <!--<td>
                   {% if object.pos_consultas.all %}
                     <a class="btn btn-primary btn-sm" href="{% url 'posconsulta_list' %}">Pós Consulta</a>
                   {% else %}
@@ -49,7 +63,7 @@
                 <td>
                   <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
                 </td>
-              </tr>
+              </tr>-->
             {% endfor %}
           </tbody>
         </table>

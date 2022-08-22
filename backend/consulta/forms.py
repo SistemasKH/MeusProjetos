@@ -317,7 +317,6 @@ class EscalaResponsavelForm(forms.ModelForm):
 
         if commit:
             instance.save()
-
         return instance
 
 class JornadaTrabalhoForm(forms.ModelForm):

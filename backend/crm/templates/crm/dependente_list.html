@@ -37,7 +37,7 @@
                   <a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
                 <td>{{ object.data_nascimento|date:"d/m/Y"|default:"---" }}</td>
                 <td>{{ object.cidade|default:"---" }} </td>
-                <td>{{ object.celular_whatsapp|default:"---" }} </td>
+                <td>{{ object.telefone|default:"---" }} </td>
                 <td>{{ object.dependente_convenio_medico }} </td>
                 <td>{{ object.dependente_contato_fone_convenio }} </td>
                 <td>{{ object.active|yesno:"Sim,Não" }} </td>
