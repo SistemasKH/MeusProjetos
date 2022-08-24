@@ -86,7 +86,6 @@ DATABASES = {
 }
 
 
-
 # Email config
 EMAIL_BACKEND = config('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')  # noqa E501
 

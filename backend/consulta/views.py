@@ -13,17 +13,17 @@ from .forms import (
     DependentesDaFamiliaForm,
     EscalaResponsavelForm,
     GlicoseForm,
+    JornadaTrabalhoForm,
     MedicamentoForm,
-    PosConsultaForm,
-    JornadaTrabalhoForm
+    PosConsultaForm
 )
 from .models import (
     Consulta,
     EscalaResponsavel,
     Glicose,
+    JornadaTrabalho,
     Medicamento,
-    PosConsulta,
-    JornadaTrabalho
+    PosConsulta
 )
 
 
@@ -409,4 +409,3 @@ def jornadatrabalho_delete(request, pk):
     obj = get_object_or_404(Glicose, pk=pk)
     obj.delete()
     return redirect('jornadatrabalho_list')
-

@@ -9,10 +9,11 @@ from .models import (
     Consulta,
     EscalaResponsavel,
     Glicose,
+    JornadaTrabalho,
     Medicamento,
-    PosConsulta,
-    JornadaTrabalho
+    PosConsulta
 )
+
 
 class DependentesDaFamiliaForm(forms.Form):
     dependente = forms.ModelChoiceField(
@@ -319,6 +320,7 @@ class EscalaResponsavelForm(forms.ModelForm):
             instance.save()
         return instance
 
+
 class JornadaTrabalhoForm(forms.ModelForm):
     required_css_class = 'required'
 
@@ -365,10 +367,8 @@ class JornadaTrabalhoForm(forms.ModelForm):
         instance.horas_trabalhadas_diaria = duracao
         return instance.horas_trabalhadas_diaria
 
-
     def soma_horas_semanal(self):
         return
-
 
     def soma_horas_mensal(self):
         return

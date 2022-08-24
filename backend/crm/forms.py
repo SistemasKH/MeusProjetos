@@ -88,10 +88,6 @@ class ResponsavelAddForm(CustomUserForm, DataNascimentoForm):
             'uf',
         )
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
-
 
 class ResponsavelUpdateForm(CustomUserForm, DataNascimentoForm):
     required_css_class = 'required'
@@ -112,10 +108,6 @@ class ResponsavelUpdateForm(CustomUserForm, DataNascimentoForm):
             'cidade',
             'uf',
         )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
 
     def save(self, commit=True):
         instance = super().save(commit=False)
@@ -189,10 +181,6 @@ class CuidadorAddForm(CustomUserForm, DataNascimentoForm):
             'observacao',
         )
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
-
 
 class CuidadorUpdateForm(CustomUserForm, DataNascimentoForm):
     required_css_class = 'required'
@@ -246,10 +234,6 @@ class CuidadorUpdateForm(CustomUserForm, DataNascimentoForm):
             'observacao',
         )
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
-
     def save(self, commit=True):
         instance = super().save(commit=False)
 
@@ -295,10 +279,6 @@ class DependenteAddForm(DataNascimentoForm):
             'dependente_contato_endereco_convenio',
         )
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
-
 
 class DependenteUpdateForm(forms.ModelForm):
     required_css_class = 'required'
@@ -336,7 +316,3 @@ class DependenteUpdateForm(forms.ModelForm):
             'dependente_contato_fone_convenio',
             'dependente_contato_endereco_convenio',
         )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['cpf'].widget.attrs.update({'class': 'mask-cpf'})
