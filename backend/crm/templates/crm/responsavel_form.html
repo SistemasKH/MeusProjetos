@@ -26,7 +26,11 @@
               {% endif %}
             </label>
 
-            {% render_field field class="form-control" %}
+            {% if field.label == 'CPF' %}
+              {% render_field field class="form-control mask-cpf" %}
+            {% else %}
+              {% render_field field class="form-control" %}
+            {% endif %}
 
             {% for error in field.errors %}
               <span class="text-muted">{{ error }}</span>
