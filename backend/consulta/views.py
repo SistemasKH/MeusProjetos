@@ -1,11 +1,13 @@
+from PIL.ImageChops import constant
 from django.contrib import messages
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
-
+from django.contrib import messages
 from backend.core.mixins import PermissaoFamiliaMixin
 
 from .forms import (
@@ -230,12 +232,14 @@ class GlicoseListView(LRM, PermissaoFamiliaMixin, ListView):
         user = self.request.user
         context['form'] = DependentesDaFamiliaForm(user)
         context['labels'] = (
+            'ID',
             'Dependente',
             'Data',
             'Hora',
             'Período',
             'Taxa',
             'M_Diária',
+            'M_Mensal',
             'Cuidador',
             'Responsável',
         )
@@ -270,6 +274,8 @@ class GlicoseUpdateView(LRM, UpdateView):
 def glicose_delete(request, pk):
     obj = get_object_or_404(Glicose, pk=pk)
     obj.delete()
+    msg = 'Excluído com sucesso! '
+    messages.add_message(request, messages.SUCCESS, msg)
     return redirect('glicose_list')
 
 

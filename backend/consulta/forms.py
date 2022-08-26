@@ -92,7 +92,11 @@ class PosConsultaForm(forms.ModelForm):
     def __init__(self, request, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        consulta = Consulta.objects.filter(pk=self.instance.consulta.pk)
+        consulta_pk = request.path.split('/')[-2]
+        consulta = Consulta.objects.filter(pk=consulta_pk)
+        #self.fields['consulta'].queryset = consulta
+
+        #consulta = Consulta.objects.filter(pk=self.instance.consulta.pk)
         self.fields['consulta'].queryset = consulta
 
         acompanhante_responsavel = consulta.first().acompanhante_responsavel
@@ -217,7 +221,7 @@ class GlicoseForm(forms.ModelForm):
         instance = super().save(commit=False)
         if commit:
             instance.media_diaria = self.calcula_taxa_media_diaria_de_glicose(instance)  # noqa E501
-            instance.media_mensal = self.calcula_taxa_media_mensal_de_glicose(instance)  # noqa E501
+            instance.media = self.calcula_taxa_media_mensal_de_glicose(instance)  # noqa E501
             instance.save()
         return instance
 

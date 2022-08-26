@@ -10,7 +10,7 @@
         {% else %}
           Adicionar
         {% endif %} Medicamento</h6>
-        <a href="{{ object.list_url }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
+        <a href="{% url 'medicamento_list' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
       </div>
     </div>
     <div class="card-body col-6 offset-3">
