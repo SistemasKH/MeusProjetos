@@ -42,7 +42,7 @@
 
                 <td>
                   {% if object.pos_consultas.all %}
-                    <a class="btn btn-primary btn-sm" href="{% url 'posconsulta_list' %}">Pós Consulta</a>
+                    <a class="btn btn-primary btn-sm" href="{% url 'posconsulta_detail' object.pk  %}">Pós Consulta</a>
                   {% else %}
                     <a class="btn btn-success btn-sm" href="{% url 'posconsulta_add' object.pk %}">Criar Pós Consulta</a>
                   {% endif %}
