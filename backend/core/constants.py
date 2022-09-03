@@ -12,6 +12,7 @@ REGIME_CHOICES = (
     ('PJ', 'PJ'),
     ('FREE', 'Free Lance'),
     ('PS', 'Prestação Serviços'),
+    ('Outros', 'Outros'),
 )
 
 TURNO_CHOICES = (
@@ -39,6 +40,7 @@ TIPO_MEDICAMENTO_CHOICES = (
     ('9', 'Solução'),
     ('10', 'Spray'),
     ('11', 'Supositório'),
+    ('12', 'Outros'),
 )
 
 ESPECIALIDADE_CHOICES = (
@@ -65,11 +67,12 @@ ESPECIALIDADE_CHOICES = (
     ('21', 'Pneumologia'),
     ('22', 'Proctologia'),
     ('23', 'Psicologia'),
-    ('24', 'Reumatologia'),
-    ('25', 'Traumatologia'),
-    ('26', 'Urologia'),
-    ('27', 'Outras'),
-    ('28', 'Reumatologia'),
+    ('24', 'Psiquiatria'),
+    ('25', 'Reumatologia'),
+    ('26', 'Traumatologia'),
+    ('27', 'Urologia'),
+    ('28', 'Outras'),
+
 
 )
 
@@ -84,6 +87,8 @@ POSOLOGIA_CHOICES = (
     ('2 vezes ', '2 vezes'),
     ('3 vezes ', '3 vezes'),
     ('4 vezes ', '4 vezes'),
+    ('5 vezes ', '5 vezes'),
+    ('6 vezes ', '6 vezes'),
 )
 
 USO_CONTINUO_CHOICES = (
@@ -114,4 +119,5 @@ REFEICAO_CHOICES = (
 TIPO_INSULINA_CHOICES = (
     ('1', 'Lantus'),
     ('2', 'NovoRapid'),
+    ('3', 'Nenhuma'),
 )
