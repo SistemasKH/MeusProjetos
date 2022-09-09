@@ -296,8 +296,6 @@ class EscalaResponsavelForm(forms.ModelForm):
         instance.qt_dias_presenciais = dias.days
         return dias.days
 
-    def horas(number):
-        return str(number)[:2] + ':' + str(number)[2:]
 
     def conta_horas(self, instance):
         inicio = instance.hora_inicio
@@ -311,13 +309,27 @@ class EscalaResponsavelForm(forms.ModelForm):
         dia_minutos = 1440
         min_primeiro_dia = (dia_minutos - inicio_min)
         min_ultimo_dia = saida_min
-        total_horas = (min_primeiro_dia + min_ultimo_dia) / 60
         dias = self.conta_dias(instance)
-        if dias > 1:
-            horas = horas(dias * 24)
-            horas = (horas + total_horas)
+
+        if (dias >= 1):
+            total_horas = (min_primeiro_dia + min_ultimo_dia) / 60
+
+            if (dias == 1):
+                horas = total_horas
+
+            elif (dias == 2):
+                horas = total_horas + 24
+
+            elif (dias >= 3):
+                horas = ((dias - 2) * 24)
+                horas = (horas + total_horas)
+
         else:
-            horas = total_horas
+            total_horas_dia = (saida.hour - inicio.hour)*60
+            total_minutos_dias = (saida.minute - inicio.minute) + total_horas_dia
+            total_horas_dia = total_minutos_dias / 60
+            horas = total_horas_dia
+            instance.qt_dias_presenciais = 1
         instance.qt_horas_presentes = horas
         return horas
 

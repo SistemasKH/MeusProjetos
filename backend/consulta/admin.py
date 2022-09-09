@@ -74,6 +74,7 @@ class EscalaResponsavelAdmin(admin.ModelAdmin):
         'data_saida_presencial',
         'qt_dias_presenciais',
         'hora_saida_presencial',
+        'qt_horas_presentes',
         'responsavel_monitoramento',
         'data_fim',
     )
