@@ -143,9 +143,11 @@ class PosConsultaUpdateView(LRM, UpdateView):
         })
         return kwargs
 
-
+@login_required()
 def posconsulta_delete(request):
-    ...
+    obj = get_object_or_404(PosConsulta, pk=pk)
+    obj.delete()
+    return redirect('consulta_list')
 
 
 class MedicamentoListView(LRM, PermissaoFamiliaMixin, ListView):

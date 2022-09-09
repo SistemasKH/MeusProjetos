@@ -80,6 +80,8 @@ ATENDIMENTO_CHOICES = (
     ('1', 'Primeira'),
     ('2', 'Retorno-Exames'),
     ('3', 'Retorno'),
+    ('4', 'Emergência'),
+    ('5', 'Remoto')
 )
 
 POSOLOGIA_CHOICES = (

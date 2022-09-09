@@ -92,15 +92,15 @@ class PosConsultaForm(forms.ModelForm):
     def __init__(self, request, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        #consulta_pk = request.path.split('/')[-2]
-        #consulta = Consulta.objects.filter(pk=consulta_pk)
+        consulta_pk = request.path.split('/')[-2]
+        consulta = Consulta.objects.filter(pk=consulta_pk)
         #self.fields['consulta'].queryset = consulta
 
-        consulta = Consulta.objects.filter(pk=self.instance.consulta.pk)
+        #consulta = Consulta.objects.filter(pk=self.instance.consulta.pk)
         self.fields['consulta'].queryset = consulta
 
         acompanhante_responsavel = consulta.first().acompanhante_responsavel
-        queryset = Responsavel.objects.filter(pk=acompanhante_responsavel.pk)
+        queryset = Responsavel.objects.filter(pk=acompanhante_responsavel.pk)  # noqa E501
         self.fields['acompanhante_responsavel'].queryset = queryset
 
         if len(consulta) == 1:

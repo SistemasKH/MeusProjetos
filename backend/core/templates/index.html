@@ -6,12 +6,12 @@
 {% block content %}
   <div class ="card-body">
     <h4>Olá <b>{{ user.get_full_name }}</b></h4>
-    {% if familia == None %}
-      <div class="d-sm-flex align-items-center justify-content-between">
-        <a href="{% url 'familia_add' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" class="fas fa-plus fa-sm text-white-50">
-          <i class="fas fa-plus fa-sm text-white-50"></i>Adicionar Família</a>
-      </div>
-    {% endif %}
+         {% if not familia %}
+              <div class="d-sm-flex align-items-center justify-content-between">
+                <a href="{% url 'familia_add' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" class="fas fa-plus fa-sm text-white-50">
+                  <i class="fas fa-plus fa-sm text-white-50"></i>Adicionar Família</a>
+              </div>
+          {% endif %}
     <div class="bg-grafico-image">
       <img src="../../static/img/my_img/brasileiros_idosos.jpg"/>
 

@@ -34,7 +34,7 @@ def responsavel_principal_add(request):
             messages.add_message(request, constants.SUCCESS, msg)
             return redirect(success_url)
         else:
-            msg = 'A senha é fraca, tente uma de oito digitos, letras e numeros'
+            msg = 'A senha é fraca, tente uma de oito digitos, combinando letras e numeros'
             messages.add_message(request, constants.ERROR, msg)
             return redirect('responsavel_principal_add')
 
