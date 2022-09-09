@@ -386,8 +386,8 @@ class JornadaTrabalhoForm(forms.ModelForm):
         inicio = instance.dh_entrada
         saida = instance.dh_saida
         duracao = saida - inicio
-        instance.horas_trabalhadas_diaria = duracao
-        return instance.horas_trabalhadas_diaria
+        instance.horas_trabalhadas_diaria = duracao.hours
+        return duracao.hours
 
     def soma_horas_semanal(self):
         return
@@ -398,6 +398,7 @@ class JornadaTrabalhoForm(forms.ModelForm):
     def save(self, commit=True):
         instance = super().save(commit=False)
         self.conta_horas(instance)
+
         if commit:
             instance.save()
         return instance

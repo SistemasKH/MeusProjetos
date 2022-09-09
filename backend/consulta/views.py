@@ -143,7 +143,7 @@ class PosConsultaUpdateView(LRM, UpdateView):
         })
         return kwargs
 
-@login_required()
+@login_required
 def posconsulta_delete(request):
     obj = get_object_or_404(PosConsulta, pk=pk)
     obj.delete()
@@ -345,7 +345,7 @@ class EscalaResponsavelUpdateView(LRM, UpdateView):
 
 @login_required
 def escalaresponsavel_delete(request, pk):
-    obj = get_object_or_404(Glicose, pk=pk)
+    obj = get_object_or_404(EscalaResponsavel, pk=pk)
     obj.delete()
     return redirect('escalaresponsavel_list')
 
@@ -414,6 +414,6 @@ class JornadaTrabalhoUpdateView(LRM, UpdateView):
 
 @login_required
 def jornadatrabalho_delete(request, pk):
-    obj = get_object_or_404(Glicose, pk=pk)
+    obj = get_object_or_404(JornadaTrabalho, pk=pk)
     obj.delete()
     return redirect('jornadatrabalho_list')
