@@ -35,13 +35,20 @@
               <td>{{object.tratamento|default:"---" }}</td>
             </tr>
             <tr>
-              <td>Receita {% if object.receita %}</td>
-                <td><img src="{{ object.receita.url }}" with="70%" alt="{{ object.receita.url }}">
-              {% endif %}</td>
-            </tr>
-            <tr>
               <td>Observações</td>
               <td>{{object.observacao|default:"---" }}</td>
+            </tr>
+            <tr>
+              {% if object.receitas.all %}
+                <td>Receita</td>
+                <td>
+                  {% for item in object.receitas.all %}
+                    {% if item.receita %}
+                      <img src="{{ item.receita.url }}" with="70%" alt="{{ item.receita.url }}">
+                    {% endif %}
+                  {% endfor %}
+                </td>
+              {% endif %}
             </tr>
           </tbody>
         </table>

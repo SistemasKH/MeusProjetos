@@ -83,7 +83,6 @@ class PosConsulta(models.Model):
     )
     diagnostico = models.TextField('Diagnóstico')  # noqa E501
     tratamento = models.TextField('Tratamento', blank=True, null=True)  # noqa E501
-    receita = models.ImageField('Upload Receita', upload_to='', blank=True, null=True)  # noqa E501
     observacao = models.TextField('Observação', blank=True, null=True)  # noqa E501
 
     def __str__(self):
@@ -112,6 +111,23 @@ class PosConsulta(models.Model):
             kw = {'pk': self.pk}
             return reverse_lazy('posconsulta_delete', kwargs=kw)
         return None
+
+
+class Receita(models.Model):
+    '''
+    Insere várias receitas para a mesma pós-consulta.
+    '''
+    pos_consulta = models.ForeignKey(
+        PosConsulta,
+        on_delete=models.SET_NULL,
+        related_name='receitas',
+        null=True,
+        blank=True
+    )
+    receita = models.ImageField('Upload Receita', upload_to='', blank=True, null=True)  # noqa E501
+
+    def __str__(self):
+        return f'{self.pos_consulta}-{self.receita}'
 
 
 class Medicamento(models.Model):

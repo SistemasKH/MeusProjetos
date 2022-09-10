@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
@@ -6,7 +5,6 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
-from PIL.ImageChops import constant
 
 from backend.core.mixins import PermissaoFamiliaMixin
 
@@ -25,7 +23,8 @@ from .models import (
     Glicose,
     JornadaTrabalho,
     Medicamento,
-    PosConsulta
+    PosConsulta,
+    Receita
 )
 
 
@@ -129,6 +128,19 @@ class PosConsultaCreateView(LRM, CreateView):
             'request': self.request
         })
         return kwargs
+
+    def form_valid(self, form):
+        self.object = form.save()
+        pos_consulta = self.object
+        receitas = self.request.FILES.getlist('receita')
+
+        for receita in receitas:
+            Receita.objects.create(
+                pos_consulta=pos_consulta,
+                receita=receita
+            )
+
+        return super().form_valid(form)
 
 
 class PosConsultaUpdateView(LRM, UpdateView):

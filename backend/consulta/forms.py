@@ -1,4 +1,3 @@
-from datetime import date, timedelta
 import calendar
 import datetime
 import decimal
@@ -88,9 +87,20 @@ class ConsultaForm(forms.ModelForm):
 class PosConsultaForm(forms.ModelForm):
     required_css_class = 'required'
 
+    receita = forms.ImageField(
+        widget=forms.ClearableFileInput(attrs={'multiple': True})
+    )
+
     class Meta:
         model = PosConsulta
-        fields = '__all__'
+        fields = (
+            'consulta',
+            'acompanhante_responsavel',
+            'diagnostico',
+            'tratamento',
+            'receita',
+            'observacao',
+        )
 
     def __init__(self, request, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)

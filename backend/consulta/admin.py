@@ -6,7 +6,8 @@ from .models import (
     Glicose,
     JornadaTrabalho,
     Medicamento,
-    PosConsulta
+    PosConsulta,
+    Receita
 )
 
 
@@ -25,8 +26,14 @@ class ConsultaAdmin(admin.ModelAdmin):
     # date_hierarchy = 'created'
 
 
+class ReceitaInline(admin.TabularInline):
+    model = Receita
+    extra = 0
+
+
 @admin.register(PosConsulta)
 class PosConsultaAdmin(admin.ModelAdmin):
+    inlines = (ReceitaInline,)
     list_display = (
         '__str__',
         'consulta',
