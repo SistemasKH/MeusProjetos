@@ -1,3 +1,4 @@
+import datetime
 import decimal
 from datetime import date, timedelta
 
@@ -383,11 +384,12 @@ class JornadaTrabalhoForm(forms.ModelForm):
         self.fields['cuidador'].queryset = queryset_cuidador
 
     def conta_horas(self, instance):
-        inicio = instance.dh_entrada
+        #TODO
+        entrada = instance.dh_entrada
         saida = instance.dh_saida
-        duracao = saida - inicio
-        instance.horas_trabalhadas_diaria = duracao.hours
-        return duracao.hours
+        duracao = (saida - entrada)
+        instance.horas_trabalhadas_diaria = duracao
+        return duracao
 
     def soma_horas_semanal(self):
         return
