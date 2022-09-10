@@ -28,6 +28,21 @@ python manage.py cria_grupos
 ```
 
 
+## Como resetar o banco
+
+Se estiver usando docker, deve deletar o volume.
+
+```
+docker container exec -it sgwc psql
+
+DROP DATABASE sgwc;
+CREATE DATABASE sgwc;
+```
+
+
+
+
+
 ## Links
 
 https://www.djangoproject.com/

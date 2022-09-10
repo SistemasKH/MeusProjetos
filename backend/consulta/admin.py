@@ -4,6 +4,7 @@ from .models import (
     Consulta,
     EscalaResponsavel,
     Glicose,
+    JornadaTrabalho,
     Medicamento,
     PosConsulta
 )
@@ -78,3 +79,6 @@ class EscalaResponsavelAdmin(admin.ModelAdmin):
         'responsavel_monitoramento',
         'data_fim',
     )
+
+
+admin.site.register(JornadaTrabalho)
