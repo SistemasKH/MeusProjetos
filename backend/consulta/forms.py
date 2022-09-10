@@ -1,6 +1,8 @@
+from datetime import date, timedelta
+import calendar
 import datetime
 import decimal
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 
 from django import forms
 
@@ -95,9 +97,9 @@ class PosConsultaForm(forms.ModelForm):
 
         consulta_pk = request.path.split('/')[-2]
         consulta = Consulta.objects.filter(pk=consulta_pk)
-        #self.fields['consulta'].queryset = consulta
+        # self.fields['consulta'].queryset = consulta
 
-        #consulta = Consulta.objects.filter(pk=self.instance.consulta.pk)
+        # consulta = Consulta.objects.filter(pk=self.instance.consulta.pk)
         self.fields['consulta'].queryset = consulta
 
         acompanhante_responsavel = consulta.first().acompanhante_responsavel
@@ -343,6 +345,20 @@ class EscalaResponsavelForm(forms.ModelForm):
         return instance
 
 
+def primeiro_dia_da_semana():
+    hoje = date.today()
+    dia_da_semana_hoje = calendar.weekday(year=hoje.year, month=hoje.month, day=hoje.day)
+    primeiro_dia = hoje - timedelta(days=dia_da_semana_hoje)
+    return primeiro_dia
+
+
+def ultimo_dia_da_semana():
+    hoje = date.today()
+    dia_da_semana_hoje = calendar.weekday(year=hoje.year, month=hoje.month, day=hoje.day)
+    ultimo_dia = hoje + timedelta(days=6) - timedelta(days=dia_da_semana_hoje)
+    return ultimo_dia
+
+
 class JornadaTrabalhoForm(forms.ModelForm):
     required_css_class = 'required'
 
@@ -390,15 +406,27 @@ class JornadaTrabalhoForm(forms.ModelForm):
         instance.horas_trabalhadas_diaria = duracao
         return duracao
 
-    def soma_horas_semanal(self):
-        return
+    def soma_horas_semanal(self, instance):
+        jornadas = JornadaTrabalho.objects.filter(
+            cuidador=instance.cuidador,
+            dh_entrada__range=[primeiro_dia_da_semana(), ultimo_dia_da_semana()]
+        )
 
-    def soma_horas_mensal(self):
-        return
+        soma_horas_semanal = timedelta(seconds=0)
+
+        for jornada in jornadas:
+            soma_horas_semanal += jornada.horas_trabalhadas_diaria
+
+        instance.soma_horas_semanal = soma_horas_semanal + self.conta_horas(instance)
+
+    def soma_horas_mensal(self, instance):
+        instance.soma_horas_mensal = timedelta(hours=26)
 
     def save(self, commit=True):
         instance = super().save(commit=False)
         self.conta_horas(instance)
+        self.soma_horas_semanal(instance)
+        self.soma_horas_mensal(instance)
 
         if commit:
             instance.save()

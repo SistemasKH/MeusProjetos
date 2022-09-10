@@ -81,4 +81,14 @@ class EscalaResponsavelAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(JornadaTrabalho)
+@admin.register(JornadaTrabalho)
+class JornadaTrabalhoAdmin(admin.ModelAdmin):
+    list_display = (
+        '__str__',
+        'cuidador',
+        'dh_entrada',
+        'dh_saida',
+        'horas_trabalhadas_diaria',
+        'soma_horas_semanal',
+        'soma_horas_mensal',
+    )
