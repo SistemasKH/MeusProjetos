@@ -1,13 +1,13 @@
-from PIL.ImageChops import constant
-from django.contrib import messages
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
-from django.contrib import messages
+from PIL.ImageChops import constant
+
 from backend.core.mixins import PermissaoFamiliaMixin
 
 from .forms import (
@@ -142,6 +142,7 @@ class PosConsultaUpdateView(LRM, UpdateView):
             'request': self.request
         })
         return kwargs
+
 
 @login_required
 def posconsulta_delete(request):

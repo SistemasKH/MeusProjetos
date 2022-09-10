@@ -13,11 +13,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='cuidador',
             name='regime_contratacao',
-            field=models.CharField(blank=True, choices=[('CLT', 'CLT'), ('PJ', 'PJ'), ('FREE', 'Free Lance'), ('PS', 'Prestação Serviços'), ('Outros', 'Outros')], max_length=10, null=True, verbose_name='Contratação'),
+            field=models.CharField(blank=True, choices=[('CLT', 'CLT'), ('PJ', 'PJ'), ('FREE', 'Free Lance'), (
+                'PS', 'Prestação Serviços'), ('Outros', 'Outros')], max_length=10, null=True, verbose_name='Contratação'),
         ),
         migrations.AlterField(
             model_name='usuario',
             name='parentesco_do_responsavel',
-            field=models.CharField(choices=[('F', 'Filho'), ('N', 'Neto'), ('I', 'Irmão'), ('O', 'Outro')], default='F', max_length=1, verbose_name='Parentesco do Responsável'),
+            field=models.CharField(choices=[('F', 'Filho'), ('N', 'Neto'), ('I', 'Irmão'), ('O', 'Outro')],
+                                   default='F', max_length=1, verbose_name='Parentesco do Responsável'),
         ),
     ]

@@ -297,7 +297,6 @@ class EscalaResponsavelForm(forms.ModelForm):
         instance.qt_dias_presenciais = dias.days
         return dias.days
 
-
     def conta_horas(self, instance):
         inicio = instance.hora_inicio
         hora_em_minutos_inicio = (inicio.hour) * 60
@@ -384,7 +383,7 @@ class JornadaTrabalhoForm(forms.ModelForm):
         self.fields['cuidador'].queryset = queryset_cuidador
 
     def conta_horas(self, instance):
-        #TODO
+        # TODO
         entrada = instance.dh_entrada
         saida = instance.dh_saida
         duracao = (saida - entrada)

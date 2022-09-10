@@ -53,7 +53,7 @@
 
                 <td>
                   <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
-                   <a class ="btn btn-danger btn-sm" href="{% url 'glicose_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar o taxa de glicose de id: {{ object.id }} ?  ')">Excluir</a>
+                  <a class ="btn btn-danger btn-sm" href="{% url 'glicose_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar o taxa de glicose de id: {{ object.id }} ?  ')">Excluir</a>
                 </td>
               </tr>
             {% endfor %}
