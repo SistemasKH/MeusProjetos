@@ -44,7 +44,9 @@
                 <td>
                   {% for item in object.receitas.all %}
                     {% if item.receita %}
-                      <img src="{{ item.receita.url }}" with="70%" alt="{{ item.receita.url }}">
+                     <a href="{{ item.receita.url }}">
+                        <img src="{{ item.receita.url }}" style="width: 20vw" alt="{{ item.receita.url }}">
+                     </a>
                     {% endif %}
                   {% endfor %}
                 </td>
