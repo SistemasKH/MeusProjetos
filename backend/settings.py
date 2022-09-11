@@ -50,6 +50,12 @@ MIDDLEWARE = [
 
 ]
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+if SESSION_EXPIRE_AT_BROWSER_CLOSE:
+    max_age = None
+    expires = None
+
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
