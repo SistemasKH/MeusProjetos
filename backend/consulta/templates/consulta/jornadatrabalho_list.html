@@ -37,9 +37,9 @@
                 <td>{{ object.cuidador }}</td>
                 <td><a href="{{ object.get_absolute_url }}"> {{ object.dh_entrada|date:"d/m/Y H:i:s"|default:"---" }}</a></td>
                 <td>{{ object.dh_saida|date:"d/m/Y H:i:s"|default:"---" }}</td>
-                <td>{{ object.horas_trabalhadas_diaria}}</td>
-                <td>{{ object.soma_horas_semanal }} - {{ object.soma_horas_semanal|duration_to_hours }}</td>
-                <td>{{ object.soma_horas_mensal }}</td>
+                <td>{{ object.horas_trabalhadas_diaria|duration_to_hours }}</td>
+                <td>{{ object.soma_horas_semanal|duration_to_hours }}</td>
+                <td>{{ object.soma_horas_mensal|duration_to_hours }}</td>
                 <td>{{ object.responsavel_dia }}</td>
                 <td>{{ object.observacao }}</td>
                 <td>
