@@ -1,6 +1,4 @@
 import calendar
-import datetime
-import decimal
 from datetime import date, datetime, timedelta
 
 from django import forms
@@ -309,6 +307,7 @@ class EscalaResponsavelForm(forms.ModelForm):
         instance.qt_dias_presenciais = dias.days
         return dias.days
 
+
     def conta_horas(self, instance):
         inicio = instance.hora_inicio
         hora_em_minutos_inicio = (inicio.hour) * 60
@@ -333,7 +332,7 @@ class EscalaResponsavelForm(forms.ModelForm):
                 horas = total_horas + 24
 
             elif (dias >= 3):
-                horas = ((dias - 2) * 24)
+                horas = ((dias - 1) * 24)
                 horas = (horas + total_horas)
 
         else:
@@ -354,13 +353,11 @@ class EscalaResponsavelForm(forms.ModelForm):
             instance.save()
         return instance
 
-
 def primeiro_dia_da_semana():
     hoje = date.today()
     dia_da_semana_hoje = calendar.weekday(year=hoje.year, month=hoje.month, day=hoje.day)
     primeiro_dia = hoje - timedelta(days=dia_da_semana_hoje)
     return primeiro_dia
-
 
 def ultimo_dia_da_semana():
     hoje = date.today()
