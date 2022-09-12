@@ -322,18 +322,19 @@ class EscalaResponsavelForm(forms.ModelForm):
         min_ultimo_dia = saida_min
         dias = self.conta_dias(instance)
 
-        if (dias >= 1):
+        if (dias >= 3):
             total_horas = (min_primeiro_dia + min_ultimo_dia) / 60
+            horas = ((dias - 1) * 24)
+            horas = (horas + total_horas)
 
-            if (dias == 1):
-                horas = total_horas
+        elif (dias == 2):
+            total_horas = (min_primeiro_dia + min_ultimo_dia) / 60
+            horas = total_horas + 24
 
-            elif (dias == 2):
-                horas = total_horas + 24
-
-            elif (dias >= 3):
-                horas = ((dias - 1) * 24)
-                horas = (horas + total_horas)
+        elif (dias == 1):
+            total_horas = (min_primeiro_dia + min_ultimo_dia) / 60
+            horas = total_horas
+            instance.qt_dias_presenciais = 1
 
         else:
             total_horas_dia = (saida.hour - inicio.hour)*60
@@ -353,17 +354,17 @@ class EscalaResponsavelForm(forms.ModelForm):
             instance.save()
         return instance
 
-def primeiro_dia_da_semana():
-    hoje = date.today()
-    dia_da_semana_hoje = calendar.weekday(year=hoje.year, month=hoje.month, day=hoje.day)
-    primeiro_dia = hoje - timedelta(days=dia_da_semana_hoje)
-    return primeiro_dia
+    def primeiro_dia_da_semana():
+        hoje = date.today()
+        dia_da_semana_hoje = calendar.weekday(year=hoje.year, month=hoje.month, day=hoje.day)
+        primeiro_dia = hoje - timedelta(days=dia_da_semana_hoje)
+        return primeiro_dia
 
-def ultimo_dia_da_semana():
-    hoje = date.today()
-    dia_da_semana_hoje = calendar.weekday(year=hoje.year, month=hoje.month, day=hoje.day)
-    ultimo_dia = hoje + timedelta(days=6) - timedelta(days=dia_da_semana_hoje)
-    return ultimo_dia
+    def ultimo_dia_da_semana():
+        hoje = date.today()
+        dia_da_semana_hoje = calendar.weekday(year=hoje.year, month=hoje.month, day=hoje.day)
+        ultimo_dia = hoje + timedelta(days=6) - timedelta(days=dia_da_semana_hoje)
+        return ultimo_dia
 
 
 class JornadaTrabalhoForm(forms.ModelForm):

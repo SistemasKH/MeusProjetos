@@ -245,7 +245,7 @@ class EscalaResponsavel(models.Model):
     hora_inicio = models.TimeField('Hora de Chegada')  # noqa E501
     data_saida_presencial = models.DateField('Data Saída Presencial', null=True)  # noqa E501
     qt_dias_presenciais = models.IntegerField('Quant. dias presenciais ', default=0)  # noqa E501
-    qt_horas_presentes = models.DecimalField('Quant. horas', decimal_places=2, default=0, max_digits=4)  # noqa E501
+    qt_horas_presentes = models.DecimalField('Quant. horas', decimal_places=2, default=0, max_digits=6)  # noqa E501
     hora_saida_presencial = models.TimeField('Hora de Saída')  # noqa E501
     responsavel_monitoramento = models.ForeignKey(
         Responsavel,
