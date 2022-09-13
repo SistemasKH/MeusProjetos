@@ -425,6 +425,7 @@ class JornadaTrabalhoForm(forms.ModelForm):
         instance.soma_horas_semanal = soma_horas_semanal + self.conta_horas(instance)
 
     def soma_horas_mensal(self, instance):
+        #TODO
         instance.soma_horas_mensal = timedelta(hours=26)
 
     def save(self, commit=True):
