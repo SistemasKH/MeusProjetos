@@ -105,9 +105,9 @@ class PosConsultaForm(forms.ModelForm):
 
         consulta_pk = request.path.split('/')[-2]
         consulta = Consulta.objects.filter(pk=consulta_pk)
-        # self.fields['consulta'].queryset = consulta
+        #self.fields['consulta'].queryset = consulta
 
-        # consulta = Consulta.objects.filter(pk=self.instance.consulta.pk)
+        #consulta = Consulta.objects.filter(pk=self.instance.consulta.pk)
         self.fields['consulta'].queryset = consulta
 
         acompanhante_responsavel = consulta.first().acompanhante_responsavel
@@ -232,7 +232,7 @@ class GlicoseForm(forms.ModelForm):
         instance = super().save(commit=False)
         if commit:
             instance.media_diaria = self.calcula_taxa_media_diaria_de_glicose(instance)  # noqa E501
-            instance.media = self.calcula_taxa_media_mensal_de_glicose(instance)  # noqa E501
+            instance.media_mensal = self.calcula_taxa_media_mensal_de_glicose(instance)  # noqa E501
             instance.save()
         return instance
 
@@ -354,18 +354,6 @@ class EscalaResponsavelForm(forms.ModelForm):
             instance.save()
         return instance
 
-    def primeiro_dia_da_semana():
-        hoje = date.today()
-        dia_da_semana_hoje = calendar.weekday(year=hoje.year, month=hoje.month, day=hoje.day)
-        primeiro_dia = hoje - timedelta(days=dia_da_semana_hoje)
-        return primeiro_dia
-
-    def ultimo_dia_da_semana():
-        hoje = date.today()
-        dia_da_semana_hoje = calendar.weekday(year=hoje.year, month=hoje.month, day=hoje.day)
-        ultimo_dia = hoje + timedelta(days=6) - timedelta(days=dia_da_semana_hoje)
-        return ultimo_dia
-
 
 class JornadaTrabalhoForm(forms.ModelForm):
     required_css_class = 'required'
@@ -406,8 +394,19 @@ class JornadaTrabalhoForm(forms.ModelForm):
         self.fields['responsavel_dia'].queryset = queryset_responsavel_dia
         self.fields['cuidador'].queryset = queryset_cuidador
 
+    def primeiro_dia_da_semana():
+        hoje = date.today()
+        dia_da_semana_hoje = calendar.weekday(year=hoje.year, month=hoje.month, day=hoje.day)
+        primeiro_dia = hoje - timedelta(days=dia_da_semana_hoje)
+        return primeiro_dia
+
+    def ultimo_dia_da_semana():
+        hoje = date.today()
+        dia_da_semana_hoje = calendar.weekday(year=hoje.year, month=hoje.month, day=hoje.day)
+        ultimo_dia = hoje + timedelta(days=6) - timedelta(days=dia_da_semana_hoje)
+        return ultimo_dia
+
     def conta_horas(self, instance):
-        # TODO
         entrada = instance.dh_entrada
         saida = instance.dh_saida
         duracao = (saida - entrada)
@@ -424,7 +423,6 @@ class JornadaTrabalhoForm(forms.ModelForm):
 
         for jornada in jornadas:
             soma_horas_semanal += jornada.horas_trabalhadas_diaria
-
         instance.soma_horas_semanal = soma_horas_semanal + self.conta_horas(instance)
 
     def soma_horas_mensal(self, instance):

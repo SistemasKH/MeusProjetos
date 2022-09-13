@@ -309,7 +309,7 @@ class JornadaTrabalho(models.Model):
     class Meta:
         ordering = 'dh_entrada',
         verbose_name = 'Jornada de Trabalho',
-        verbose_name_plural = 'Joranadas de Trabalho'
+        verbose_name_plural = 'Jornadas de Trabalho'
 
     def __str__(self):
         return f'{self.cuidador} -  {self.dh_entrada} - {self.responsavel_dia} - {self.horas_trabalhadas_diaria} - {self. soma_horas_semanal} - {self. soma_horas_mensal} '
