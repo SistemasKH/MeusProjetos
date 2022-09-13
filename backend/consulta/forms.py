@@ -307,7 +307,6 @@ class EscalaResponsavelForm(forms.ModelForm):
         instance.qt_dias_presenciais = dias.days
         return dias.days
 
-
     def conta_horas(self, instance):
         inicio = instance.hora_inicio
         hora_em_minutos_inicio = (inicio.hour) * 60
@@ -416,7 +415,7 @@ class JornadaTrabalhoForm(forms.ModelForm):
     def soma_horas_semanal(self, instance):
         jornadas = JornadaTrabalho.objects.filter(
             cuidador=instance.cuidador,
-            dh_entrada__range=[primeiro_dia_da_semana(), ultimo_dia_da_semana()]
+            dh_entrada__range=[self.primeiro_dia_da_semana(), self.ultimo_dia_da_semana()]
         )
 
         soma_horas_semanal = timedelta(seconds=0)

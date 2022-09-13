@@ -71,10 +71,10 @@ class Consulta(models.Model):
 
 
 class PosConsulta(models.Model):
-    consulta = models.ForeignKey(
+    consulta = models.OneToOneField(
         Consulta,
         on_delete=models.CASCADE,
-        related_name='pos_consultas'
+        related_name='pos_consulta'
     )
     acompanhante_responsavel = models.ForeignKey(
         Responsavel,
