@@ -394,15 +394,17 @@ class JornadaTrabalhoForm(forms.ModelForm):
         self.fields['cuidador'].queryset = queryset_cuidador
 
     def primeiro_dia_da_semana(self):
-        hoje = date.today()
+        hoje = self.instance.dh_entrada
         dia_da_semana_hoje = calendar.weekday(year=hoje.year, month=hoje.month, day=hoje.day)
         primeiro_dia = hoje - timedelta(days=dia_da_semana_hoje)
+        print("primeiro dia :", primeiro_dia)
         return primeiro_dia
 
     def ultimo_dia_da_semana(self):
-        hoje = date.today()
+        hoje = self.instance.dh_entrada
         dia_da_semana_hoje = calendar.weekday(year=hoje.year, month=hoje.month, day=hoje.day)
         ultimo_dia = hoje + timedelta(days=6) - timedelta(days=dia_da_semana_hoje)
+        print("ultimo dia :", ultimo_dia)
         return ultimo_dia
 
     def conta_horas(self, instance):
