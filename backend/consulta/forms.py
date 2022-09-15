@@ -415,6 +415,7 @@ class JornadaTrabalhoForm(forms.ModelForm):
         return duracao
 
     def soma_horas_semanal(self, instance):
+        entrada = self.instance.dh_entrada
         jornadas = JornadaTrabalho.objects.filter(
             cuidador=instance.cuidador,
             dh_entrada__range=[self.primeiro_dia_da_semana(), self.ultimo_dia_da_semana()]
@@ -423,12 +424,29 @@ class JornadaTrabalhoForm(forms.ModelForm):
         soma_horas_semanal = timedelta(seconds=0)
 
         for jornada in jornadas:
-            soma_horas_semanal += jornada.horas_trabalhadas_diaria
-        instance.soma_horas_semanal = soma_horas_semanal + self.conta_horas(instance)
+            if jornada.dh_entrada <= entrada:
+                soma_horas_semanal += jornada.horas_trabalhadas_diaria
+        instance.soma_horas_semanal = soma_horas_semanal
 
     def soma_horas_mensal(self, instance):
-        #TODO
-        instance.soma_horas_mensal = timedelta(hours=26)
+        entrada = self.instance.dh_entrada
+        ano = self.instance.dh_entrada.year
+        mes = self.instance.dh_entrada.month
+        print("mes e ano : ", mes, ano)
+        jornadas = JornadaTrabalho.objects.filter(
+            cuidador=instance.cuidador,
+            dh_entrada__month=mes,
+            dh_entrada__year=ano,
+        )
+
+        print("Linhas do mes  e ano selecionados", jornadas)
+        soma_horas_mensal = timedelta(seconds=0)
+
+        for jornada in jornadas:
+            if jornada.dh_entrada <= entrada:
+                soma_horas_mensal += jornada.horas_trabalhadas_diaria
+        instance.soma_horas_mensal = soma_horas_mensal
+        #instance.soma_horas_mensal = timedelta(hours=26)
 
     def save(self, commit=True):
         instance = super().save(commit=False)
