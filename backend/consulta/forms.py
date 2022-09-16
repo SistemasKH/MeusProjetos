@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 import calendar
 from datetime import date, datetime, timedelta
 from django.contrib import messages
@@ -393,6 +394,16 @@ class JornadaTrabalhoForm(forms.ModelForm):
         self.fields['responsavel_dia'].queryset = queryset_responsavel_dia
         self.fields['cuidador'].queryset = queryset_cuidador
 
+    def clean(self):
+        self.cleaned_data = super().clean()
+
+        if self.cleaned_data.get('dh_saida') < self.cleaned_data.get('dh_entrada'):
+            msg = 'A data de entrada deve ser menor que a data de saída.'
+            self.add_error('dh_entrada', msg)
+            raise ValidationError(msg)
+
+        return self.cleaned_data
+
     def primeiro_dia_da_semana(self):
         hoje = self.instance.dh_entrada
         dia_da_semana_hoje = calendar.weekday(year=hoje.year, month=hoje.month, day=hoje.day)
@@ -432,7 +443,6 @@ class JornadaTrabalhoForm(forms.ModelForm):
         else:
             instance.soma_horas_semanal = soma_horas_semanal
 
-
     def soma_horas_mensal(self, instance):
         entrada = self.instance.dh_entrada
         ano = self.instance.dh_entrada.year
@@ -447,7 +457,7 @@ class JornadaTrabalhoForm(forms.ModelForm):
 
         for jornada in jornadas:
             if (entrada >= jornada.dh_entrada):
-               soma_horas_mensal += jornada.horas_trabalhadas_diaria
+                soma_horas_mensal += jornada.horas_trabalhadas_diaria
         if self.instance.soma_horas_mensal == None:
             instance.soma_horas_mensal = soma_horas_mensal + self.conta_horas(instance)
         else:
