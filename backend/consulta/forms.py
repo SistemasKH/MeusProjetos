@@ -1,8 +1,8 @@
 import calendar
 from datetime import date, datetime, timedelta
-
+from django.contrib import messages
+from django.shortcuts import redirect, render, resolve_url
 from django import forms
-
 from backend.crm.models import Cuidador, Dependente, Responsavel, Usuario
 
 from .models import (
@@ -420,13 +420,18 @@ class JornadaTrabalhoForm(forms.ModelForm):
             cuidador=instance.cuidador,
             dh_entrada__range=[self.primeiro_dia_da_semana(), self.ultimo_dia_da_semana()]
         )
-
-        soma_horas_semanal = timedelta(seconds=0)
+        print("Linhas da semana selecionados", jornadas)
+        soma_horas_semanal = timedelta(0)
 
         for jornada in jornadas:
-            if jornada.dh_entrada <= entrada:
+            if (entrada >= jornada.dh_entrada):
                 soma_horas_semanal += jornada.horas_trabalhadas_diaria
-        instance.soma_horas_semanal = soma_horas_semanal
+
+        if self.instance.soma_horas_semanal == None:
+            instance.soma_horas_semanal = soma_horas_semanal + self.conta_horas(instance)
+        else:
+            instance.soma_horas_semanal = soma_horas_semanal
+
 
     def soma_horas_mensal(self, instance):
         entrada = self.instance.dh_entrada
@@ -438,15 +443,15 @@ class JornadaTrabalhoForm(forms.ModelForm):
             dh_entrada__month=mes,
             dh_entrada__year=ano,
         )
-
-        print("Linhas do mes  e ano selecionados", jornadas)
-        soma_horas_mensal = timedelta(seconds=0)
+        soma_horas_mensal = timedelta(0)
 
         for jornada in jornadas:
-            if jornada.dh_entrada <= entrada:
-                soma_horas_mensal += jornada.horas_trabalhadas_diaria
-        instance.soma_horas_mensal = soma_horas_mensal
-        #instance.soma_horas_mensal = timedelta(hours=26)
+            if (entrada >= jornada.dh_entrada):
+               soma_horas_mensal += jornada.horas_trabalhadas_diaria
+        if self.instance.soma_horas_mensal == None:
+            instance.soma_horas_mensal = soma_horas_mensal + self.conta_horas(instance)
+        else:
+            instance.soma_horas_mensal = soma_horas_mensal
 
     def save(self, commit=True):
         instance = super().save(commit=False)
