@@ -303,6 +303,16 @@ class EscalaResponsavelForm(forms.ModelForm):
         self.fields['responsavel_presencial'].queryset = queryset_responsavel_presencial
         self.fields['responsavel_monitoramento'].queryset = queryset_responsavel_monitoramento
 
+    def clean(self):
+        self.cleaned_data = super().clean()
+
+        if self.cleaned_data.get('data_saida_presencial') < self.cleaned_data.get('data_inicio'):
+            msg = 'A data de entrada deve ser menor que a data de saída.'
+            self.add_error('data_inicio', msg)
+            raise ValidationError(msg)
+
+        return self.cleaned_data
+
     def conta_dias(self, instance):
         dias = ((instance.data_saida_presencial) - (instance.data_inicio))
         instance.qt_dias_presenciais = dias.days
