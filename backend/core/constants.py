@@ -21,9 +21,9 @@ TURNO_CHOICES = (
 )
 
 PARENTESCO_CHOICES = (
-    ('F', 'Filho'),
-    ('N', 'Neto'),
-    ('I', 'Irmão'),
+    ('F', 'Filho(a)'),
+    ('N', 'Neto(a)'),
+    ('I', 'Irmão(a)'),
     ('O', 'Outro'),
 
 )
@@ -82,6 +82,14 @@ ATENDIMENTO_CHOICES = (
     ('3', 'Retorno'),
     ('4', 'Emergência'),
     ('5', 'Remoto')
+)
+
+CANCELAMENTO_CONSULTA_CHOICES = (
+    ('1', 'A pedido do médico'),
+    ('2', 'A pedido dos responsáveis'),
+    ('3', 'Não é mais necessária'),
+    ('4', 'Outros'),
+
 )
 
 POSOLOGIA_CHOICES = (

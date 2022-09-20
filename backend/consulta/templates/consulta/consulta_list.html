@@ -38,13 +38,15 @@
                 <td>{{ object.get_especialidade_display|default:"---" }} </td>
                 <td>{{ object.nome_especialista|default:"---" }} </td>
                 <td>{{ object.acompanhante_responsavel|default:"---" }} </td>
-                <td>{{ object.cancelamento|default:"---" }}</td>
+                <td>{{ object.cancelamento|date:"d/m/Y"}}</td>
 
                 <td>
                   {% if object.pos_consulta %}
                     <a class="btn btn-primary btn-sm" href="{% url 'posconsulta_detail' object.pos_consulta.pk  %}">{{ object.pos_consultas.all }} Pós Consulta</a>
+                  {% elif object.cancelamento != None %}
+                     <a class="btn btn-danger btn-sm" href="{% url 'consulta_detail' object.pk %}">Cancelada</a>
                   {% else %}
-                    <a class="btn btn-success btn-sm" href="{% url 'posconsulta_add' object.pk %}">Criar Pós Consulta</a>
+                      <a class="btn btn-success btn-sm" href="{% url 'posconsulta_add' object.pk %}">Criar Pós Consulta</a>
                   {% endif %}
                 </td>
                 <td>

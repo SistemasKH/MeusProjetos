@@ -13,7 +13,8 @@ from backend.core.constants import (
     REFEICAO_CHOICES,
     TIPO_INSULINA_CHOICES,
     TIPO_MEDICAMENTO_CHOICES,
-    USO_CONTINUO_CHOICES
+    USO_CONTINUO_CHOICES,
+    CANCELAMENTO_CONSULTA_CHOICES
 )
 from backend.crm.models import Cuidador, Dependente, Responsavel
 
@@ -40,7 +41,7 @@ class Consulta(models.Model):
         verbose_name='Acompanhante Responsável'
     )
     cancelamento = models.DateField('Data Cancelamento', blank=True, null=True)  # noqa E501
-    motivo_cancelamento = models.CharField('Motivo Cancelamento', max_length=30, choices=ATENDIMENTO_CHOICES, blank=True, null=True)  # noqa E501
+    motivo_cancelamento = models.CharField('Motivo Cancelamento', max_length=30, choices=CANCELAMENTO_CONSULTA_CHOICES, blank=True, null=True)  # noqa E501
 
     class Meta:
         ordering = ('data_consulta', 'hora')

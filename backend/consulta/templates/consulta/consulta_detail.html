@@ -76,7 +76,7 @@
 
             <tr>
               <td>Motivo do Cancelamento</td>
-              <td>{{ object.motivo_cancelamento|default:"---" }}</td>
+              <td>{{ object.get_motivo_cancelamento_display|default:"---" }}</td>
             </tr>
 
             <tr>
