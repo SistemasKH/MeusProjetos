@@ -21,7 +21,7 @@ def home(request):
         if usuario.familia == None:
             messages.add_message(request, constants.WARNING, 'Cadastre sua familia')
 
-    return render(request, 'index.html', context)
+    return render(request, 'home.html', context)
 
 
 def tables(request):

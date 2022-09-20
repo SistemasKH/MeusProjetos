@@ -167,7 +167,10 @@ class PosConsultaUpdateView(LRM, UpdateView):
 def posconsulta_delete(request, pk):
     obj = get_object_or_404(PosConsulta, pk=pk)
     obj.delete()
+    msg = 'Excluído com sucesso!'
+    messages.add_message(request, messages.SUCCESS, msg)
     return redirect('consulta_list')
+
 
 
 class MedicamentoListView(LRM, PermissaoFamiliaMixin, ListView):
@@ -230,7 +233,10 @@ class MedicamentoUpdateView(LRM, UpdateView):
 @login_required
 def medicamento_delete(request, pk):
     obj = get_object_or_404(Medicamento, pk=pk)
-    obj.delete()
+    obj.active = False
+    obj.save()
+    msg = 'Excluído com sucesso!'
+    messages.add_message(request, messages.SUCCESS, msg)
     return redirect('medicamento_list')
 
 
@@ -299,6 +305,7 @@ def glicose_delete(request, pk):
     msg = 'Excluído com sucesso! '
     messages.add_message(request, messages.SUCCESS, msg)
     return redirect('glicose_list')
+    #TODO recalcular as glicoses diarias e mensais
 
 
 class EscalaResponsavelListView(LRM, PermissaoFamiliaMixin, ListView):
@@ -367,6 +374,8 @@ class EscalaResponsavelUpdateView(LRM, UpdateView):
 def escalaresponsavel_delete(request, pk):
     obj = get_object_or_404(EscalaResponsavel, pk=pk)
     obj.delete()
+    msg = 'Excluído com sucesso!'
+    messages.add_message(request, messages.SUCCESS, msg)
     return redirect('escalaresponsavel_list')
 
 
@@ -436,4 +445,6 @@ class JornadaTrabalhoUpdateView(LRM, UpdateView):
 def jornadatrabalho_delete(request, pk):
     obj = get_object_or_404(JornadaTrabalho, pk=pk)
     obj.delete()
+    msg = 'Excluído com sucesso!'
+    messages.add_message(request, messages.SUCCESS, msg)
     return redirect('jornadatrabalho_list')

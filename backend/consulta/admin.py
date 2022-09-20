@@ -52,6 +52,7 @@ class PosConsultaAdmin(admin.ModelAdmin):
 class MedicamentoAdmin(admin.ModelAdmin):
     list_display = (
         '__str__',
+
     )
     # list_display_links = ('dependente',)
     search_fields = ('medicamento_prescrito',)

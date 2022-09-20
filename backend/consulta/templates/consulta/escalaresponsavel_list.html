@@ -54,16 +54,7 @@
 
                 <td>
                   <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
-                  <span
-                    id="linkDeletar"
-                    class ="btn btn-danger btn-sm"
-                    hx-delete="{{ object.delete_url }}"
-                    hx-confirm="Deseja mesmo deletar?"
-                    hx-target="closest tr"
-                    hx-swap="outerHTML swap:500ms"
-                  >
-                    Excluir
-                  </span>
+                  <a class ="btn btn-danger btn-sm" href="{% url 'escalaresponsavel_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar a escala do responsável do dia : {{ object.data_inicio }} ?  ')">Excluir</a>
                 </td>
               </tr>
             {% endfor %}
