@@ -5,7 +5,7 @@
 
 {% block content %}
   <div class ="card-body">
-    <h4>Olá <b>{{ user.get_full_name }}</b></h4>
+    <h5>Olá <b>{{ user.get_full_name }}</b></h5>
     {% if not familia %}
       <div class="d-sm-flex align-items-center justify-content-between">
         <a href="{% url 'familia_add' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" class="fas fa-plus fa-sm text-white-50">
@@ -13,7 +13,7 @@
       </div>
     {% endif %}
     <div class="bg-grafico-image">
-        <img src="../../static/img/my_img/brasileiros_idosos.jpg"/>
+        <img src="../../static/img/my_img/brasileiros_idosos.jpg" style="width: 50vw">/>
     </div>
   </div>
 {% endblock %}

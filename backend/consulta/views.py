@@ -260,7 +260,7 @@ class GlicoseListView(LRM, PermissaoFamiliaMixin, ListView):
         user = self.request.user
         context['form'] = DependentesDaFamiliaForm(user)
         context['labels'] = (
-            'ID',
+
             'Dependente',
             'Data',
             'Hora',

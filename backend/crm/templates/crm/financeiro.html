@@ -1,23 +1,22 @@
-<html class="h-100">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Em construção</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    {% extends 'base.html' %}
-    {% load static %}
+{% extends 'base.html' %}
 
-    {% block title %} Famílias {% endblock %}
+{% block title %} Financeiro {% endblock %}
 
-    {% block content %}
-      <div class="d-flex h-100">
-        <div class="offset-md-4 col-md-4 offset-sm-3 col-sm-6 my-auto text-center">
-          <div class="shadow-sm rounded border text-dark p-5" style="background: rgba(255,255,255,.4)">
-            <img src="https://imagens.san.psi.br/servico/cogs.gif" style="height:150px;">
-            <h4 class="my-4">EM CONSTRUÇÃO</h4>
-            <div class="mb-2">Este site foi hospedado nos Meus Dependentes, mas ainda está em desenvolvimento.</div>
-            <div>Volte em breve!</div>
-          </div>
-        </div>
+{% block content %}
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Financeiro</h6>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
       </div>
-    {% endblock content %}
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+          <img src="../../../static/img/my_img/site_construcao.jpg" style="width: 50vw">/>
+          <h4 class="my-4">EM CONSTRUÇÃO</h4>
+          <div class="mb-2">Este site foi hospedado nos Meus Dependentes, mas ainda está em desenvolvimento.</div>
+          <div>Volte em breve!</div>
+      </div>
+    </div>
+</div>
+{% endblock content %}

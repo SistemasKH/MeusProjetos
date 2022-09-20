@@ -64,7 +64,7 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #858796;
+  color: #3A3A3B;
   text-align: left;
   background-color: #fff;
 }
@@ -10470,9 +10470,6 @@ a:focus {
   z-index: 1;
 }
 
-.sidebar .sidebar-brand .sidebar-brand-icon i {
-  font-size: 2rem;
-}
 
 .sidebar .sidebar-brand .sidebar-brand-text {
   display: none;
@@ -10880,12 +10877,7 @@ a:focus {
   background-size: contain;
   background-repeat: no-repeat;
 }
-.bg-register-image {
-  background: url("../img/my_img/idosos5.jpg");
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
+
 .bg-password-image {
   background: url("../img/my_img/casal.jpg");
   background-position: center;

@@ -8,7 +8,6 @@ thead{
   color: #2B2B2C;
 }
 .bg-grafico-image {
-   background:url("../img/my_img/brasileiros_idosos.jpg");
    display: block;
    margin: 5% auto;
    text-align : center;
@@ -20,19 +19,6 @@ thead{
   background-repeat: no-repeat;
 }
 
-.bg-register-image {
-  background: url("../img/my_img/casal.jpg");
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.bg-password-image {
-  background: url("../img/my_img/casal.jpg");
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
 .card-body{
   background-color: #F5F5F5;
 }
