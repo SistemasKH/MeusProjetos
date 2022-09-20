@@ -25,7 +25,7 @@ from .services import (
     user_create
 )
 
-
+@login_required
 def financeiro(request):
     return render(request, 'crm/financeiro.html')
 

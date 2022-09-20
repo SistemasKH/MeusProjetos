@@ -504,6 +504,7 @@ mark,
 
 .figure-img {
   margin-bottom: 0.5rem;
+  align-items: center;
   line-height: 1;
 }
 

@@ -37,10 +37,14 @@ cuidador_urlpatterns = [
     path('<int:pk>/delete/', v.cuidador_delete, name='cuidador_delete'),  # noqa E501
 
 ]
+financeiro_urlpatterns =[
+    path('financeiro.html', v.financeiro, name='financeiro'),
+]
 
 urlpatterns = [
     path('dependente/', include(dependente_urlpatterns)),
     path('familia/', include(familia_urlpatterns)),
     path('responsavel/', include(responsavel_urlpatterns)),
     path('cuidador/', include(cuidador_urlpatterns)),
+    path('financeiro/', include(financeiro_urlpatterns)),
 ]
