@@ -34,10 +34,7 @@
               <td>Tratamento</td>
               <td>{{object.tratamento|default:"---" }}</td>
             </tr>
-            <tr>
-              <td>Observações</td>
-              <td>{{object.observacao|default:"---" }}</td>
-            </tr>
+
             <tr>
               {% if object.receitas.all %}
                 <td>Receita</td>
@@ -51,6 +48,24 @@
                   {% endfor %}
                 </td>
               {% endif %}
+            </tr>
+            <tr>
+              {% if object.exames.all %}
+                <td>Exames</td>
+                <td>
+                  {% for item in object.exames.all %}
+                    {% if item.exame %}
+                     <a href="{{ item.exame.url }}">
+                        <img src="{{ item.exame.url }}" style="width: 20vw" alt="{{ item.exame.url }}">
+                     </a>
+                    {% endif %}
+                  {% endfor %}
+                </td>
+              {% endif %}
+            </tr>
+            <tr>
+              <td>Observações</td>
+              <td>{{object.observacao|default:"---" }}</td>
             </tr>
           </tbody>
         </table>

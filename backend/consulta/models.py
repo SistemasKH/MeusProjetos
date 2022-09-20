@@ -129,6 +129,22 @@ class Receita(models.Model):
     def __str__(self):
         return f'{self.pos_consulta}-{self.receita}'
 
+class Exame(models.Model):
+    '''
+    Insere vários pedido de exames para a mesma pós-consulta.
+    '''
+    pos_consulta = models.ForeignKey(
+        PosConsulta,
+        on_delete=models.SET_NULL,
+        related_name='exames',
+        null=True,
+        blank=True
+    )
+    exame = models.ImageField('Upload Exames',  upload_to='', blank=True, null=True)  # noqa E501
+
+    def __str__(self):
+        return f'{self.pos_consulta}-{self.exame}'
+
 
 class Medicamento(models.Model):
     medicamento_prescrito = models.CharField('Medicamento Prescrito', max_length=100)  # noqa E501

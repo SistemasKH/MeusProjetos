@@ -89,6 +89,9 @@ class PosConsultaForm(forms.ModelForm):
     receita = forms.ImageField(
         widget=forms.ClearableFileInput(attrs={'multiple': True})
     )
+    exame = forms.ImageField(
+        widget=forms.ClearableFileInput(attrs={'multiple': True})
+    )
 
     class Meta:
         model = PosConsulta
@@ -98,6 +101,7 @@ class PosConsultaForm(forms.ModelForm):
             'diagnostico',
             'tratamento',
             'receita',
+            'exame',
             'observacao',
         )
 

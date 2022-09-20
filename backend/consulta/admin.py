@@ -7,7 +7,8 @@ from .models import (
     JornadaTrabalho,
     Medicamento,
     PosConsulta,
-    Receita
+    Receita,
+    Exame
 )
 
 
@@ -30,6 +31,9 @@ class ReceitaInline(admin.TabularInline):
     model = Receita
     extra = 0
 
+class ExameInline(admin.TabularInline):
+    model = Exame
+    extra = 0
 
 @admin.register(PosConsulta)
 class PosConsultaAdmin(admin.ModelAdmin):

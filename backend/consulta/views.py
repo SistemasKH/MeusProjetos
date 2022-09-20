@@ -24,7 +24,8 @@ from .models import (
     JornadaTrabalho,
     Medicamento,
     PosConsulta,
-    Receita
+    Receita,
+    Exame
 )
 
 
@@ -133,11 +134,17 @@ class PosConsultaCreateView(LRM, CreateView):
         self.object = form.save()
         pos_consulta = self.object
         receitas = self.request.FILES.getlist('receita')
+        exames = self.request.FILES.getlist('exame')
 
         for receita in receitas:
             Receita.objects.create(
                 pos_consulta=pos_consulta,
                 receita=receita
+            )
+        for exame in exames:
+            Exame.objects.create(
+                pos_consulta=pos_consulta,
+                exame=exame
             )
 
         return super().form_valid(form)
@@ -157,7 +164,7 @@ class PosConsultaUpdateView(LRM, UpdateView):
 
 
 @login_required
-def posconsulta_delete(request):
+def posconsulta_delete(request, pk):
     obj = get_object_or_404(PosConsulta, pk=pk)
     obj.delete()
     return redirect('consulta_list')
