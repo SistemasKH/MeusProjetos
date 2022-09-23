@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
-
+from django.db.models import F
 from backend.core.mixins import PermissaoFamiliaMixin
 
 from .forms import (
@@ -305,7 +305,6 @@ def glicose_delete(request, pk):
     msg = 'Excluído com sucesso! '
     messages.add_message(request, messages.SUCCESS, msg)
     return redirect('glicose_list')
-    #TODO recalcular as glicoses diarias e mensais
 
 
 class EscalaResponsavelListView(LRM, PermissaoFamiliaMixin, ListView):

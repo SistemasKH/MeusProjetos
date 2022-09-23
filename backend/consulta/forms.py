@@ -166,7 +166,7 @@ class MedicamentoForm(forms.ModelForm):
 
 class GlicoseForm(forms.ModelForm):
     required_css_class = 'required'
-    #TODO recalcular todas as vezes que tiver edição ou exclusão
+    #TODO Glicose recalcular todas as vezes que tiver edição ou exclusão
 
     data_medicao = forms.DateField(
         label='Data',
@@ -245,7 +245,7 @@ class GlicoseForm(forms.ModelForm):
 
 class EscalaResponsavelForm(forms.ModelForm):
     required_css_class = 'required'
-    # TODO recalcular todas as vezes que tiver edição ou exclusão
+    # TODO Escala recalcular todas as vezes que tiver edição ou exclusão
 
     data_inicio = forms.DateField(
         label='Data Inicial',
@@ -373,7 +373,7 @@ class EscalaResponsavelForm(forms.ModelForm):
 
 class JornadaTrabalhoForm(forms.ModelForm):
     required_css_class = 'required'
-    # TODO recalcular todas as vezes que tiver edição ou exclusão
+    # TODO Jornada recalcular todas as vezes que tiver edição ou exclusão
 
     dh_entrada = forms.DateTimeField(
         label='Entrada',
