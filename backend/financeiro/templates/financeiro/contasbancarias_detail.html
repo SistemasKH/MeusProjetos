@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %} Conta Bancária {% endblock %}
+
+{% block content %}
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Detalhes da Conta Bancária</h6>
+        <a href="{{ object.list_url }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Dependente</td>
+              <td>{{object.titular_dependente|default:"---"}}</td>
+            </tr>
+
+            <tr>
+              <td>Data da abertura</td>
+              <td>{{object.data_abertura|date:"d/m/Y"|default:"---" }}</td>
+            </tr>
+            <tr>
+              <td>Tipo de conta</td>
+              <td>{{object.get_conta_display|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Número do banco</td>
+              <td>{{object.numero_banco|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Nome do banco</td>
+              <td>{{object.nome_banco|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Agência</td>
+              <td>{{object.agencia|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Número da Conta</td>
+              <td>{{object.numero_conta|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Conjunta</td>
+              <td>{{object.get_conjunta_display|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Saldo Inicial</td>
+              <td>{{object.saldo_inicial|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Saldo Atual</td>
+              <td>{{object.saldo_inicial|default:"---"}}</td>
+            <tr>
+              <td>Data Encerramento</td>
+              <td>{{object.data_encerramento|date:"d/m/Y"|default:"---"}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

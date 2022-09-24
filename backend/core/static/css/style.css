@@ -18,7 +18,10 @@ thead{
   background-size: contain;
   background-repeat: no-repeat;
 }
-
+.logo {
+    background: url("../../static/img/my_img/casal_rosto.png");
+    width: 70px;
+}
 .card-body{
   background-color: #F5F5F5;
 }

@@ -26,7 +26,7 @@ responsavel_urlpatterns = [
     path('add/', v.ResponsavelCreateView.as_view(), name='responsavel_add'),  # noqa E501
     path('<int:pk>/edit/', v.ResponsavelUpdateView.as_view(), name='responsavel_edit'),  # noqa E501
     path('<int:pk>/delete/', v.responsavel_delete, name='responsavel_delete'),  # noqa E501
-    path('financeiro/', v.financeiro, name='financeiro'),
+
 ]
 
 cuidador_urlpatterns = [
@@ -37,14 +37,10 @@ cuidador_urlpatterns = [
     path('<int:pk>/delete/', v.cuidador_delete, name='cuidador_delete'),  # noqa E501
 
 ]
-financeiro_urlpatterns =[
-    path('financeiro.html', v.financeiro, name='financeiro'),
-]
 
 urlpatterns = [
     path('dependente/', include(dependente_urlpatterns)),
     path('familia/', include(familia_urlpatterns)),
     path('responsavel/', include(responsavel_urlpatterns)),
     path('cuidador/', include(cuidador_urlpatterns)),
-    path('financeiro/', include(financeiro_urlpatterns)),
 ]

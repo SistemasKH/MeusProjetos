@@ -9,6 +9,7 @@ urlpatterns = [
     path('accounts/', include('backend.accounts.urls')),
     path('crm/', include('backend.crm.urls')),
     path('consulta/', include('backend.consulta.urls')),
+    path('financeiro/', include('backend.financeiro.urls')),
 
 ]
 

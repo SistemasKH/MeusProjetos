@@ -503,6 +503,7 @@ mark,
 }
 
 .figure-img {
+  background: url("../../static/img/my_img/casal_rosto.png");
   margin-bottom: 0.5rem;
   align-items: center;
   line-height: 1;
@@ -10470,7 +10471,6 @@ a:focus {
   letter-spacing: 0.05rem;
   z-index: 1;
 }
-
 
 .sidebar .sidebar-brand .sidebar-brand-text {
   display: none;

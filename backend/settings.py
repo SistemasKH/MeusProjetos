@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'backend.core',
     'backend.crm',
     'backend.consulta',
-
+    'backend.financeiro',
 ]
 
 MIDDLEWARE = [

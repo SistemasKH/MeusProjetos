@@ -131,3 +131,13 @@ TIPO_INSULINA_CHOICES = (
     ('2', 'NovoRapid'),
     ('3', 'Nenhuma'),
 )
+
+TIPO_CONJUNTA_CHOICES = (
+    ('1', 'sim'),
+    ('2', 'Não'),
+)
+
+TIPO_CONTA_CHOICES = (
+    ('1', 'Corrente'),
+    ('2', 'Poupança'),
+)

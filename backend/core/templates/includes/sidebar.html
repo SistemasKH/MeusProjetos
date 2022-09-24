@@ -1,3 +1,4 @@
+{% load static %}
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
@@ -130,7 +131,9 @@
     </a>
     <div id="collapseFinanceiro" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="{% url 'financeiro' %}">Despesas</a>
+        <a class="collapse-item" href="{% url 'contasbancarias_list' %}">Contas Bancárias</a>
+        <a class="collapse-item" href="#">Créditos Bancários</a>
+        <a class="collapse-item" href="#">Despesas Bancárias</a>
       </div>
     </div>
   </li>
