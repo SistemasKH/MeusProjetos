@@ -128,7 +128,7 @@ class Receita(models.Model):
     receita = models.ImageField('Upload Receita', upload_to='', blank=True, null=True)  # noqa E501
 
     def __str__(self):
-        return f'{self.pos_consulta}-{self.receita}'
+        return f'{self.pos_consulta} - {self.receita}'
 
 class Exame(models.Model):
     '''

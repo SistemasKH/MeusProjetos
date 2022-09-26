@@ -1,10 +1,8 @@
-from .forms import ContasBancariasForm
-from .models import ContasBancarias
+from .forms import ContasBancariasForm, CreditoForm
+from .models import ContasBancarias, Credito, Comprovante
 from backend.consulta.forms import DependentesDaFamiliaForm
-from backend.crm.models import Dependente, Responsavel
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.contrib import messages
-from django.shortcuts import redirect, render, resolve_url
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
 from django.shortcuts import get_object_or_404, redirect, render
 from backend.core.mixins import PermissaoFamiliaMixin
@@ -73,9 +71,83 @@ class ContasBancariasUpdateView(LRM, UpdateView):
 
 def contas_bancarias_delete(request, pk):
     obj = get_object_or_404(ContasBancarias, pk=pk)
-    obj.active = False
-    obj.save()
+    obj.delete()
     msg = 'Excluído com sucesso!'
     messages.add_message(request, messages.SUCCESS, msg)
     return redirect('contasbancarias_list')
+
+
+
+class CreditoListView(LRM, PermissaoFamiliaMixin, ListView):
+    model = Credito
+
+    def get_queryset(self):
+        conta_credito = self.request.GET.get('conta_credito')
+
+        if conta_credito:
+            queryset = ContasBancarias.objects.filter(conta=conta_credito)  # noqa E501
+            return queryset
+
+        usuario = self.request.user.usuarios.first()
+        familia = usuario.familia
+        queryset = Credito.objects.filter(responsavel_lancamento__familia__nome=familia)  # noqa E501
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        context['labels'] = (
+            'Entrada',
+            'Referência',
+            'Depositante',
+            'Valor',
+            'Conta',
+            'Responsavel',
+
+        )
+        return context
+
+
+class CreditoDetailView(LRM, PermissaoFamiliaMixin, DetailView):
+    model = Credito
+
+
+class CreditoCreateView(LRM, CreateView):
+    model = Credito
+    form_class = CreditoForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
+    def form_valid(self, form):
+        self.object = form.save()
+        credito = self.object
+        comprovantes = self.request.FILES.getlist('comprovante')
+
+        for comprovante in comprovantes:
+            Comprovante.objects.create(
+                credito=credito,
+                comprovante=comprovante
+            )
+
+        return super().form_valid(form)
+
+class CreditoUpdateView(LRM, UpdateView):
+    model = Credito
+    form_class = CreditoForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
+
+def credito_delete(request, pk):
+    obj = get_object_or_404(Credito, pk=pk)
+    obj.delete()
+    msg = 'Excluído com sucesso!'
+    messages.add_message(request, messages.SUCCESS, msg)
+    return redirect('credito_list')
 

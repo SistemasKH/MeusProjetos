@@ -141,3 +141,12 @@ TIPO_CONTA_CHOICES = (
     ('1', 'Corrente'),
     ('2', 'Poupança'),
 )
+
+CREDITO_REF_CHOICES = (
+    ('1', 'Salário'),
+    ('2', 'Salário com 13º'),
+    ('3', 'Reembolso'),
+    ('4', 'Transferência entre contas'),
+    ('5', 'Credito juros'),
+    ('6', 'Outros'),
+)

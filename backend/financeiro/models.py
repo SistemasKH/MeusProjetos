@@ -4,9 +4,9 @@ from django.urls import reverse, reverse_lazy
 from backend.crm.models import Dependente, Responsavel
 from backend.core.constants import (
     TIPO_CONTA_CHOICES,
-    TIPO_CONJUNTA_CHOICES
+    TIPO_CONJUNTA_CHOICES,
+    CREDITO_REF_CHOICES
 )
-
 
 class ContasBancarias(models.Model):
     titular_dependente = models.ForeignKey(
@@ -57,3 +57,71 @@ class ContasBancarias(models.Model):
             kw = {'pk': self.pk}
             return reverse_lazy('contas_bancarias_delete', kwargs=kw)
         return None
+
+
+class Credito(models.Model):
+
+    data_entrada = models.DateField('Data Entrada') # noqa E501
+    referencia = models.CharField('Referência', max_length=30, choices=CREDITO_REF_CHOICES)  # noqa E501
+    depositante = models.CharField('Depositante', max_length=100, blank=True, null=True)  # noqa E501
+    valor = models.DecimalField('Valor',  max_digits=15, decimal_places=2, default=0)  # noqa E501
+    conta_credito = models.ForeignKey(
+        ContasBancarias,
+        on_delete=models.CASCADE,
+        verbose_name='Conta Crédito'
+    )
+    responsavel_lancamento = models.ForeignKey(
+        Responsavel,
+        on_delete=models.CASCADE,
+        verbose_name='Responsável'
+    )
+    observacao = models.CharField('Observação', max_length=300, blank=True, null=True)  # noqa E501
+
+    class Meta:
+        ordering = ['-data_entrada']
+        verbose_name = 'Crédito Bancário'
+        verbose_name_plural = 'Creditos Bancários'
+
+    def __str__(self):
+        return f'{self.pk} - {self.data_entrada} - {self.depositante} - {self.conta_bancaria} - {self.responsavel_lancamento}'  # noqa E501
+
+    def get_upload_to(instance, filename):
+        return instance.get_upload_to(filename)
+
+    def get_absolute_url(self):
+        return reverse("credito_detail", kwargs={"pk": self.id})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('credito_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('credito_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('credito_delete', kwargs=kw)
+        return None
+
+
+class Comprovante(models.Model):
+    '''
+    Insere vários comprovantes para o mesmo crédito.
+    '''
+    credito = models.ForeignKey(
+        Credito,
+        on_delete=models.SET_NULL,
+        related_name='comprovantes',
+        null=True,
+        blank=True
+    )
+    comprovante = models.ImageField('Upload Comprovante', upload_to='', blank=True, null=True)  # noqa E501
+
+    def __str__(self):
+        return f'{self.credito}-{self.comprovante}'
