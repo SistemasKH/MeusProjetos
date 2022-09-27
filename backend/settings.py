@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 #     }
 # }
 
-default_dburl = 'sqlite:///' + BASE_DIR.joinpath('db.sqlite3')
+default_dburl = 'sqlite:///' + str(BASE_DIR / 'db.sqlite3')
 DATABASES = {
     'default': config('DATABASE_URL', default=default_dburl, cast=dburl)
 }
