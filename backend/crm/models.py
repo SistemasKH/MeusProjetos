@@ -8,7 +8,7 @@ from backend.core.constants import (
     REGIME_CHOICES,
     TURNO_CHOICES
 )
-from SGWC.backend.core.models import Active, Address
+from backend.core.models import Active, Address
 
 from .managers import DependenteManager, ResponsavelManager
 
