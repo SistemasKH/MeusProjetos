@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from decouple import Csv, config
+from dj_database_url import parse as dburl
 from django.contrib.messages import constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -80,17 +81,21 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('POSTGRES_DB', 'SGWC'),
-        'USER': config('POSTGRES_USER', 'postgres'),
-        'PASSWORD': config('POSTGRES_PASSWORD'),
-        'HOST': config('DB_HOST', 'localhost'),
-        'PORT': config('DB_PORT', 5432),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('POSTGRES_DB', 'SGWC'),
+#         'USER': config('POSTGRES_USER', 'postgres'),
+#         'PASSWORD': config('POSTGRES_PASSWORD'),
+#         'HOST': config('DB_HOST', 'localhost'),
+#         'PORT': config('DB_PORT', 5432),
+#     }
+# }
 
+default_dburl = 'sqlite:///' + BASE_DIR.joinpath('db.sqlite3')
+DATABASES = {
+    'default': config('DATABASE_URL', default=default_dburl, cast=dburl)
+}
 
 # Email config
 EMAIL_BACKEND = config('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')  # noqa E501
