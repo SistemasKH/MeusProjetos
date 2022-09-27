@@ -9,12 +9,12 @@
     <div class="card-header py-3">
       <div class="d-sm-flex align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Dependentes</h6>
-        <a href="{% url 'dependente_add' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+        <a href="{% url 'dependente_add' %}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
           class="fas fa-plus fa-sm text-white-50"></i> Adicionar</a>
       </div>
     </div>
     <div class="card-body">
-      <div class="table-responsive">
+      <div class="table-responsive-sm">
         <table
           id="dataTable"
           class="table table-striped"
@@ -34,13 +34,12 @@
             {%  for object in object_list %}
               <tr>
                 <td>
-                  <a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
-                <td>{{ object.data_nascimento|date:"d/m/Y"|default:"---" }}</td>
+                <a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
                 <td>{{ object.cidade|default:"---" }} </td>
                 <td>{{ object.telefone|default:"---" }} </td>
                 <td>{{ object.dependente_convenio_medico }} </td>
-                <td>{{ object.dependente_contato_fone_convenio }} </td>
-                <td>{{ object.active|yesno:"Sim,Não" }} </td>
+
+
 
                 <td>
                   <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>

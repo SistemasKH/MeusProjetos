@@ -47,12 +47,9 @@ class DependenteListView(LRM, PermissaoFamiliaMixin, ListView):
 
         context['labels'] = (
             'Nome',
-            'Data nascimento',
             'Cidade',
             'Telefone',
             'Nome do Convênio',
-            'Contato do Convênio',
-            'Ativo',
         )
         return context
 
@@ -126,11 +123,9 @@ class FamiliaListView(LRM, ListView):
 
         context['labels'] = (
             'Nome',
-            'Endereço',
-            'Bairro',
             'Cidade',
             'UF',
-            'Ativo',
+
         )
         return context
 

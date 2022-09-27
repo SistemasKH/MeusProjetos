@@ -10,15 +10,15 @@
       <div class="d-sm-flex align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Famílias</h6>
         {% if familia == None %}
-          <a href="{% url 'familia_add' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" class="fas fa-plus fa-sm text-white-50"> Adicionar</a>
+          <a href="{% url 'familia_add' %}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm" class="fas fa-plus fa-sm text-white-50"> Adicionar</a>
         {% endif %}
       </div>
     </div>
     <div class="card-body">
-      <div class="table-responsive">
+      <div class="table-responsive-sm">
         <table
           id="dataTable"
-          class="table table-striped"
+          class="table"
           width="100%"
           cellspacing="0"
         >
@@ -37,11 +37,9 @@
                 <td>
                   <a href="{{ object.get_absolute_url }}">{{ object.nome }}</a>
                 </td>
-                <td>{{ object.endereco|default:"---" }}</td>
-                <td>{{ object.bairro|default:"---" }}</td>
                 <td>{{ object.cidade|default:"---" }} </td>
                 <td>{{ object.get_uf_display|default:"---" }} </td>
-                <td>{{ object.active|yesno:"Sim,Não" }}</td>
+
 
                 <td>
                   <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
