@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.safestring import mark_safe
 from django.urls import reverse, reverse_lazy
 from backend.crm.models import Dependente, Responsavel
 from backend.core.constants import (
@@ -35,7 +36,7 @@ class ContasBancarias(models.Model):
         verbose_name_plural = 'Contas Bancárias'
 
     def __str__(self):
-        return f'{self.titular_dependente} - {self.nome_banco}'
+        return f'{self.titular_dependente} - {self.nome_banco} - {self.conta} - {self.saldo_inicial}- {self.saldo_atual}'
 
     def get_absolute_url(self):
         return reverse("contasbancarias_detail", kwargs={"pk": self.id})
@@ -83,7 +84,7 @@ class Credito(models.Model):
         verbose_name_plural = 'Creditos Bancários'
 
     def __str__(self):
-        return f'{self.pk} - {self.data_entrada} - {self.depositante} - {self.conta_bancaria} - {self.responsavel_lancamento}'  # noqa E501
+        return f'{self.pk} - {self.data_entrada} - {self.depositante} - {self.conta_credito} - {self.valor} - {self.comprovantes} -{self.responsavel_lancamento}'  # noqa E501
 
     def get_upload_to(instance, filename):
         return instance.get_upload_to(filename)
@@ -110,6 +111,7 @@ class Credito(models.Model):
         return None
 
 
+
 class Comprovante(models.Model):
     '''
     Insere vários comprovantes para o mesmo crédito.
@@ -121,7 +123,12 @@ class Comprovante(models.Model):
         null=True,
         blank=True
     )
-    comprovante = models.ImageField('Upload Comprovante', upload_to='', blank=True, null=True)  # noqa E501
+    comprovante = models.ImageField('Upload Comprovante', upload_to='creditos/', blank=True, null=True)  # noqa E501
+
 
     def __str__(self):
         return f'{self.credito}-{self.comprovante}'
+
+
+
+

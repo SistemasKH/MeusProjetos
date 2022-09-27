@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
 from django.shortcuts import get_object_or_404, redirect, render
 from backend.core.mixins import PermissaoFamiliaMixin
-
+from django.utils.safestring import mark_safe
 
 
 class ContasBancariasListView(LRM, PermissaoFamiliaMixin, ListView):
@@ -121,6 +121,7 @@ class CreditoCreateView(LRM, CreateView):
         kwargs.update({'user': self.request.user})
         return kwargs
 
+
     def form_valid(self, form):
         self.object = form.save()
         credito = self.object
@@ -134,6 +135,7 @@ class CreditoCreateView(LRM, CreateView):
 
         return super().form_valid(form)
 
+
 class CreditoUpdateView(LRM, UpdateView):
     model = Credito
     form_class = CreditoForm
@@ -143,10 +145,24 @@ class CreditoUpdateView(LRM, UpdateView):
         kwargs.update({'user': self.request.user})
         return kwargs
 
+    def form_valid(self, form):
+        self.object = form.save()
+        credito = self.object
+        comprovantes = self.request.FILES.getlist('comprovante')
+
+        for comprovante in comprovantes:
+            Comprovante.objects.update(
+                credito=credito,
+                comprovante=comprovante
+            )
+
+        return super().form_valid(form)
+
 
 def credito_delete(request, pk):
     obj = get_object_or_404(Credito, pk=pk)
     obj.delete()
+
     msg = 'Excluído com sucesso!'
     messages.add_message(request, messages.SUCCESS, msg)
     return redirect('credito_list')

@@ -125,7 +125,7 @@ class Receita(models.Model):
         null=True,
         blank=True
     )
-    receita = models.ImageField('Upload Receita', upload_to='', blank=True, null=True)  # noqa E501
+    receita = models.ImageField('Upload Receita', upload_to='receitas/', blank=True, null=True)  # noqa E501
 
     def __str__(self):
         return f'{self.pos_consulta} - {self.receita}'
@@ -141,7 +141,7 @@ class Exame(models.Model):
         null=True,
         blank=True
     )
-    exame = models.ImageField('Upload Exames',  upload_to='', blank=True, null=True)  # noqa E501
+    exame = models.ImageField('Upload Exames',  upload_to='exames/', blank=True, null=True)  # noqa E501
 
     def __str__(self):
         return f'{self.pos_consulta}-{self.exame}'

@@ -2,8 +2,6 @@ from django import forms
 from backend.crm.models import Dependente, Usuario, Responsavel
 from .models import ContasBancarias, Credito, Comprovante
 from django.forms.widgets import ClearableFileInput
-from django.shortcuts import redirect, render, resolve_url
-from django.contrib import messages
 
 
 class ContasBancariasForm(forms.ModelForm):
