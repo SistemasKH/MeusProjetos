@@ -1,10 +1,12 @@
 {% load static %}
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+<nav class="navbar navbar-expand navbar-light bg-gradient-light topbar mb-0 static-top shadow">
+
 
   <!-- Sidebar Toggle (Topbar) -->
   <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
     <i class="fa fa-bars"></i>
   </button>
+  <h5 style="margin-left: 10px ; margin-top:16px; color:#0B2C8C"> {% if familia %} Família: {% endif %}<b>{{ familia|default:"" }}</b> </h5>
 
   <!-- Topbar Search -->
   <!-- <form
@@ -19,7 +21,7 @@
       </div>
     </div>
   </form> -->
-  <h6><b><label> {% if familia %}  Família {% endif %} {{ familia|default:"" }}</label></b></h6>
+
 
   <!-- Topbar Navbar -->
   <ul class="navbar-nav ml-auto">
@@ -171,15 +173,16 @@
     <li class="nav-item dropdown no-arrow">
       <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ user.get_full_name }}</span>
+        <span class="mr-2 d-none d-lg-inline text-gray-600 ">{{ user.get_full_name }}</span>
         <img class="img-profile rounded-circle"
           src="{% static 'img/undraw_profile.svg' %}">
       </a>
       <!-- Dropdown - User Information -->
       <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
         aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#" >
-              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+          <!--Configurar para a pagina de detalhes do responsável} -->
+          <a class="dropdown-item" href="{{ crm.responsavel.get_absolute_url }} " >
+              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-600"></i>
               Perfil
             </a>
         <!--<a class="dropdown-item" href="#">
@@ -192,7 +195,7 @@
         </a>-->
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-          <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+          <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-600"></i>
           Sair
         </a>
       </div>

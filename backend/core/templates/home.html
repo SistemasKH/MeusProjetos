@@ -5,7 +5,7 @@
 
 {% block content %}
   <div class ="card-body">
-    <h5>Olá <b>{{ user.get_full_name }}</b></h5>
+    <h5 style="color:#363638">Olá <b>{{ user.get_full_name }}</b></h5>
     {% if not familia %}
       <div class="d-sm-flex align-items-center justify-content-between">
         <a href="{% url 'familia_add' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" class="fas fa-plus fa-sm text-white-50">

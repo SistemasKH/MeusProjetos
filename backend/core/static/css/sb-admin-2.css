@@ -574,6 +574,7 @@ pre code {
   }
 }
 
+
 @media (min-width: 768px) {
   .container, .container-sm, .container-md {
     max-width: 720px;
@@ -692,7 +693,7 @@ pre code {
 
 .col-6 {
   flex: 0 0 50%;
-  max-width: 50%;
+  max-width: 70%;
 }
 
 .col-7 {
@@ -794,7 +795,7 @@ pre code {
 }
 
 .offset-3 {
-  margin-left: 25%;
+  margin-left: 20%;
 }
 
 .offset-4 {
@@ -884,9 +885,12 @@ pre code {
     flex: 0 0 41.66667%;
     max-width: 41.66667%;
   }
+  .col-6 {
+    max-width: 70%;
+}
   .col-sm-6 {
     flex: 0 0 50%;
-    max-width: 50%;
+    max-width: 70%;
   }
   .col-sm-7 {
     flex: 0 0 58.33333%;
@@ -967,8 +971,11 @@ pre code {
     margin-left: 16.66667%;
   }
   .offset-sm-3 {
-    margin-left: 25%;
+    margin-left: 20%;
   }
+  .offset-3  {
+    margin-left: 20%;
+}
   .offset-sm-4 {
     margin-left: 33.33333%;
   }
@@ -4564,7 +4571,7 @@ input[type="button"].btn-block {
 .card-header {
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
-  background-color: #f8f9fc;
+  bg-color: #E9E9E9;
   border-bottom: 1px solid #e3e6f0;
 }
 
