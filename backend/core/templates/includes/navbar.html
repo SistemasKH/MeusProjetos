@@ -181,7 +181,7 @@
       <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
         aria-labelledby="userDropdown">
           <!--Configurar para a pagina de detalhes do responsável} -->
-          <a class="dropdown-item" href="{{ crm.responsavel.get_absolute_url }} " >
+          <a class="dropdown-item" href="{% url 'responsavel_detail' user.usuarios.first.pk %}" >
               <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-600"></i>
               Perfil
             </a>
