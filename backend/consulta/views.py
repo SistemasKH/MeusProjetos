@@ -1,11 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
+from django.db.models import F
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
-from django.db.models import F
+
 from backend.core.mixins import PermissaoFamiliaMixin
 
 from .forms import (
@@ -20,12 +21,12 @@ from .forms import (
 from .models import (
     Consulta,
     EscalaResponsavel,
+    Exame,
     Glicose,
     JornadaTrabalho,
     Medicamento,
     PosConsulta,
-    Receita,
-    Exame
+    Receita
 )
 
 
@@ -170,7 +171,6 @@ def posconsulta_delete(request, pk):
     msg = 'Excluído com sucesso!'
     messages.add_message(request, messages.SUCCESS, msg)
     return redirect('consulta_list')
-
 
 
 class MedicamentoListView(LRM, PermissaoFamiliaMixin, ListView):

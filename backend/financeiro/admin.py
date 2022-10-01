@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import ContasBancarias, Credito, Comprovante
+
+from .models import Comprovante, ContasBancarias, Credito
+
 
 @admin.register(ContasBancarias)
 class ContasBancariasAdmin(admin.ModelAdmin):
@@ -12,6 +14,7 @@ class ContasBancariasAdmin(admin.ModelAdmin):
     # list_filter = ('type',)
     # date_hierarchy = 'created'
 
+
 @admin.register(Credito)
 class CreditoAdmin(admin.ModelAdmin):
     list_display = (
@@ -22,6 +25,7 @@ class CreditoAdmin(admin.ModelAdmin):
     search_fields = ('referencia',)
     # list_filter = ('type',)
     # date_hierarchy = 'created'
+
 
 class ComprovanteInline(admin.TabularInline):
     model = Comprovante

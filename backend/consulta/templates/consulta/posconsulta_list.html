@@ -42,8 +42,8 @@
                 <td>{{ object.diagnostico }} </td>
 
                 <td>
-                   <a class ="btn btn-warning btn-sm" href="{% url 'posconsulta_edit' object.pk %}">Editar </a>
-                   <a class ="btn btn-danger btn-sm" href="{% url 'posconsulta_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar a pós consulta : {{ object.consulta}} ?  ')">Excluir</a>
+                  <a class ="btn btn-warning btn-sm" href="{% url 'posconsulta_edit' object.pk %}">Editar </a>
+                  <a class ="btn btn-danger btn-sm" href="{% url 'posconsulta_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar a pós consulta : {{ object.consulta}} ?  ')">Excluir</a>
 
                 </td>
               </tr>

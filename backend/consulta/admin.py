@@ -3,12 +3,12 @@ from django.contrib import admin
 from .models import (
     Consulta,
     EscalaResponsavel,
+    Exame,
     Glicose,
     JornadaTrabalho,
     Medicamento,
     PosConsulta,
-    Receita,
-    Exame
+    Receita
 )
 
 
@@ -31,9 +31,11 @@ class ReceitaInline(admin.TabularInline):
     model = Receita
     extra = 0
 
+
 class ExameInline(admin.TabularInline):
     model = Exame
     extra = 0
+
 
 @admin.register(PosConsulta)
 class PosConsultaAdmin(admin.ModelAdmin):

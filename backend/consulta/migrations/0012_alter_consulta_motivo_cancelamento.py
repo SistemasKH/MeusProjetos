@@ -13,6 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='consulta',
             name='motivo_cancelamento',
-            field=models.CharField(blank=True, choices=[('1', 'A pedido do médico'), ('2', 'A pedido dos responsáveis'), ('3', 'Não é mais necessária'), ('4', 'Outros')], max_length=30, null=True, verbose_name='Motivo Cancelamento'),
+            field=models.CharField(blank=True, choices=[('1', 'A pedido do médico'), ('2', 'A pedido dos responsáveis'), (
+                '3', 'Não é mais necessária'), ('4', 'Outros')], max_length=30, null=True, verbose_name='Motivo Cancelamento'),
         ),
     ]

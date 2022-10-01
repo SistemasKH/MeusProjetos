@@ -1,12 +1,14 @@
-from .forms import ContasBancariasForm, CreditoForm
-from .models import ContasBancarias, Credito, Comprovante
-from backend.consulta.forms import DependentesDaFamiliaForm
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
 from django.shortcuts import get_object_or_404, redirect, render
-from backend.core.mixins import PermissaoFamiliaMixin
 from django.utils.safestring import mark_safe
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
+
+from backend.consulta.forms import DependentesDaFamiliaForm
+from backend.core.mixins import PermissaoFamiliaMixin
+
+from .forms import ContasBancariasForm, CreditoForm
+from .models import Comprovante, ContasBancarias, Credito
 
 
 class ContasBancariasListView(LRM, PermissaoFamiliaMixin, ListView):
@@ -77,7 +79,6 @@ def contas_bancarias_delete(request, pk):
     return redirect('contasbancarias_list')
 
 
-
 class CreditoListView(LRM, PermissaoFamiliaMixin, ListView):
     model = Credito
 
@@ -120,7 +121,6 @@ class CreditoCreateView(LRM, CreateView):
         kwargs = super().get_form_kwargs()
         kwargs.update({'user': self.request.user})
         return kwargs
-
 
     def form_valid(self, form):
         self.object = form.save()
@@ -166,4 +166,3 @@ def credito_delete(request, pk):
     msg = 'Excluído com sucesso!'
     messages.add_message(request, messages.SUCCESS, msg)
     return redirect('credito_list')
-

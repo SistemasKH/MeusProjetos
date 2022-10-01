@@ -25,6 +25,7 @@ from .services import (
     user_create
 )
 
+
 class DependenteListView(LRM, PermissaoFamiliaMixin, ListView):
     model = Dependente
 

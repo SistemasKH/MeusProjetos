@@ -13,6 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='comprovante',
             name='comprovante',
-            field=models.ImageField(blank=True, default=None, null=True, upload_to='', verbose_name='Upload Comprovante'),
+            field=models.ImageField(blank=True, default=None, null=True,
+                                    upload_to='', verbose_name='Upload Comprovante'),
         ),
     ]

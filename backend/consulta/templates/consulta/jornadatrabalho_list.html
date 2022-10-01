@@ -44,7 +44,7 @@
                 <td>
                   <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
                   <a class ="btn btn-danger btn-sm" href="{% url 'jornadatrabalho_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar a jornada de trabalho de : {{ object.dh_entrada }} ?  ')">Excluir</a>
-                    <span
+                  <span
                     id="linkDeletar"
                     class ="btn btn-danger btn-sm"
                     hx-delete="{{ object.delete_url }}"

@@ -44,9 +44,9 @@
                   {% if object.pos_consulta %}
                     <a class="btn btn-primary btn-sm" href="{% url 'posconsulta_detail' object.pos_consulta.pk  %}">{{ object.pos_consultas.all }} Pós Consulta</a>
                   {% elif object.cancelamento != None %}
-                     <a class="btn btn-danger btn-sm" href="{% url 'consulta_detail' object.pk %}">Cancelada</a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'consulta_detail' object.pk %}">Cancelada</a>
                   {% else %}
-                      <a class="btn btn-success btn-sm" href="{% url 'posconsulta_add' object.pk %}">Criar Pós Consulta</a>
+                    <a class="btn btn-success btn-sm" href="{% url 'posconsulta_add' object.pk %}">Criar Pós Consulta</a>
                   {% endif %}
                 </td>
                 <td>

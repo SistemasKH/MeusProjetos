@@ -1,7 +1,9 @@
 from django import forms
-from backend.crm.models import Dependente, Usuario, Responsavel
-from .models import ContasBancarias, Credito, Comprovante
 from django.forms.widgets import ClearableFileInput
+
+from backend.crm.models import Dependente, Responsavel, Usuario
+
+from .models import Comprovante, ContasBancarias, Credito
 
 
 class ContasBancariasForm(forms.ModelForm):

@@ -13,6 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='escalaresponsavel',
             name='qt_dias_presenciais',
-            field=models.DecimalField(decimal_places=2, default=0, max_digits=6, verbose_name='Quant. dias presenciais '),
+            field=models.DecimalField(decimal_places=2, default=0, max_digits=6,
+                                      verbose_name='Quant. dias presenciais '),
         ),
     ]

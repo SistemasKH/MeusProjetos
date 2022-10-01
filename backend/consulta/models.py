@@ -7,14 +7,14 @@ from django.urls import reverse, reverse_lazy
 
 from backend.core.constants import (
     ATENDIMENTO_CHOICES,
+    CANCELAMENTO_CONSULTA_CHOICES,
     ESPECIALIDADE_CHOICES,
     FORNECEDOR_PRINCIPAL_CHOICES,
     POSOLOGIA_CHOICES,
     REFEICAO_CHOICES,
     TIPO_INSULINA_CHOICES,
     TIPO_MEDICAMENTO_CHOICES,
-    USO_CONTINUO_CHOICES,
-    CANCELAMENTO_CONSULTA_CHOICES
+    USO_CONTINUO_CHOICES
 )
 from backend.crm.models import Cuidador, Dependente, Responsavel
 
@@ -129,6 +129,7 @@ class Receita(models.Model):
 
     def __str__(self):
         return f'{self.pos_consulta} - {self.receita}'
+
 
 class Exame(models.Model):
     '''

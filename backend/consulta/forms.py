@@ -1,9 +1,11 @@
-from django.core.exceptions import ValidationError
 import calendar
 from datetime import date, datetime, timedelta
-from django.contrib import messages
-from django.shortcuts import redirect, render, resolve_url
+
 from django import forms
+from django.contrib import messages
+from django.core.exceptions import ValidationError
+from django.shortcuts import redirect, render, resolve_url
+
 from backend.crm.models import Cuidador, Dependente, Responsavel, Usuario
 
 from .models import (
@@ -109,7 +111,7 @@ class PosConsultaForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         if not self.instance.diagnostico:
-            #codigo para criar pós consulta
+            # codigo para criar pós consulta
             consulta_pk = request.path.split('/')[-2]
             consulta = Consulta.objects.filter(pk=consulta_pk)
             self.fields['consulta'].queryset = consulta
@@ -169,7 +171,7 @@ class MedicamentoForm(forms.ModelForm):
 
 class GlicoseForm(forms.ModelForm):
     required_css_class = 'required'
-    #TODO Glicose recalcular todas as vezes que tiver edição ou exclusão
+    # TODO Glicose recalcular todas as vezes que tiver edição ou exclusão
 
     data_medicao = forms.DateField(
         label='Data',

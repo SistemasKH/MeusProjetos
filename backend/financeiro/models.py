@@ -1,13 +1,15 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.utils.safestring import mark_safe
 from django.urls import reverse, reverse_lazy
-from backend.crm.models import Dependente, Responsavel
+from django.utils.safestring import mark_safe
+
 from backend.core.constants import (
-    TIPO_CONTA_CHOICES,
+    CREDITO_REF_CHOICES,
     TIPO_CONJUNTA_CHOICES,
-    CREDITO_REF_CHOICES
+    TIPO_CONTA_CHOICES
 )
+from backend.crm.models import Dependente, Responsavel
+
 
 class ContasBancarias(models.Model):
     titular_dependente = models.ForeignKey(
@@ -25,10 +27,9 @@ class ContasBancarias(models.Model):
     numero_conta = models.CharField('Número conta', max_length=30)  # noqa E501
     conjunta = models.CharField('Conjunta', max_length=30, choices=TIPO_CONJUNTA_CHOICES)
     saldo_inicial = models.DecimalField('Saldo Inicial', max_digits=15, decimal_places=2, default=0)  # noqa E501
-    saldo_atual = models.DecimalField('Saldo Atual', max_digits=15, decimal_places=2, default=0 )  # noqa E501
-    data_encerramento = models.DateField('Data Encerramento', blank=True, null=True )  # noqa E501
-    observacao = models.TextField('Observação', blank=True, null=True)# noqa E501
-
+    saldo_atual = models.DecimalField('Saldo Atual', max_digits=15, decimal_places=2, default=0)  # noqa E501
+    data_encerramento = models.DateField('Data Encerramento', blank=True, null=True)  # noqa E501
+    observacao = models.TextField('Observação', blank=True, null=True)  # noqa E501
 
     class Meta:
         ordering = ('nome_banco',)
@@ -62,7 +63,7 @@ class ContasBancarias(models.Model):
 
 class Credito(models.Model):
 
-    data_entrada = models.DateField('Data Entrada') # noqa E501
+    data_entrada = models.DateField('Data Entrada')  # noqa E501
     referencia = models.CharField('Referência', max_length=30, choices=CREDITO_REF_CHOICES)  # noqa E501
     depositante = models.CharField('Depositante', max_length=100, blank=True, null=True)  # noqa E501
     valor = models.DecimalField('Valor',  max_digits=15, decimal_places=2, default=0)  # noqa E501
@@ -111,7 +112,6 @@ class Credito(models.Model):
         return None
 
 
-
 class Comprovante(models.Model):
     '''
     Insere vários comprovantes para o mesmo crédito.
@@ -125,10 +125,5 @@ class Comprovante(models.Model):
     )
     comprovante = models.ImageField('Upload Comprovante', upload_to='creditos/', blank=True, null=True)  # noqa E501
 
-
     def __str__(self):
         return f'{self.credito}-{self.comprovante}'
-
-
-
-

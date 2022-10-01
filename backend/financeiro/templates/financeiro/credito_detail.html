@@ -39,19 +39,19 @@
               <td>Responsável</td>
               <td>{{object.responsavel_lancamento|default:"---"}}</td>
             </tr>
-             <tr>
+            <tr>
               <td>Observação</td>
               <td>{{object.observacao|default:"---"}}</td>
             </tr>
             <tr>
-                {% if object.comprovantes.all %}
+              {% if object.comprovantes.all %}
                 <td>Comprovante</td>
                 <td>
                   {% for item in object.comprovantes.all %}
                     {% if item.comprovante %}
-                     <a href="{{ item.comprovante.url }}">
+                      <a href="{{ item.comprovante.url }}">
                         <img src="{{ item.comprovante.url }}" style="width: 20vw" alt="{{ item.comprovante.url }}">
-                     </a>
+                      </a>
                     {% endif %}
                   {% endfor %}
                 </td>

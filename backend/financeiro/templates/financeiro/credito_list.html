@@ -41,7 +41,7 @@
 
 
                 <td><a class ="btn btn-warning btn-sm" href="{% url 'credito_edit' object.id %}">Editar</a>
-                <a class ="btn btn-danger btn-sm" href="{% url 'credito_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar o credito : {{ object.get_referencia_display }} ?  ')">Excluir</a></td>
+                  <a class ="btn btn-danger btn-sm" href="{% url 'credito_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar o credito : {{ object.get_referencia_display }} ?  ')">Excluir</a></td>
 
               </tr>
             {% endfor %}

@@ -41,9 +41,9 @@
                 <td>
                   {% for item in object.receitas.all %}
                     {% if item.receita %}
-                     <a href="{{ item.receita.url }}">
+                      <a href="{{ item.receita.url }}">
                         <img src="{{ item.receita.url }}" style="width: 20vw" alt="{{ item.receita.url }}">
-                     </a>
+                      </a>
                     {% endif %}
                   {% endfor %}
                 </td>
@@ -55,9 +55,9 @@
                 <td>
                   {% for item in object.exames.all %}
                     {% if item.exame %}
-                     <a href="{{ item.exame.url }}">
+                      <a href="{{ item.exame.url }}">
                         <img src="{{ item.exame.url }}" style="width: 20vw" alt="{{ item.exame.url }}">
-                     </a>
+                      </a>
                     {% endif %}
                   {% endfor %}
                 </td>

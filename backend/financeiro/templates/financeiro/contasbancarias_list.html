@@ -46,7 +46,7 @@
                 <td>{{object.data_encerramento|date:"d/m/Y"|default:"---"}}</td>
 
                 <td><a class ="btn btn-warning btn-sm" href="{% url 'contasbancarias_edit' object.id %}">Editar</a>
-                <a class ="btn btn-danger btn-sm" href="{% url 'contas_bancarias_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar a conta : {{ object.nome_banco }} ?  ')">Excluir</a></td>
+                  <a class ="btn btn-danger btn-sm" href="{% url 'contas_bancarias_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar a conta : {{ object.nome_banco }} ?  ')">Excluir</a></td>
 
               </tr>
             {% endfor %}
