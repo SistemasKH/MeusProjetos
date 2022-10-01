@@ -13,6 +13,7 @@ from backend.crm.models import Cuidador, Dependente, Responsavel, Usuario
 from .models import (
     Consulta,
     EscalaResponsavel,
+    Exame,
     Glicose,
     JornadaTrabalho,
     Medicamento,
@@ -151,7 +152,7 @@ class ImagePreviewWidget(forms.widgets.FileInput):
 
     def render(self, name, value, attrs=None, **kwargs):
         input_html = super().render(name, value, attrs=None, **kwargs)
-        img_html = mark_safe(f'<br><br><img src="{value.url}"/>')
+        img_html = mark_safe(f'<br><br><img src="{value.url}" style="max-width:500px"/>')
         return f'{input_html}{img_html}'
 
 
@@ -164,6 +165,17 @@ class ReceitaForm(forms.ModelForm):
     class Meta:
         model = Receita
         fields = ('pos_consulta', 'id', 'receita')
+
+
+ReceitasFormset = inlineformset_factory(
+    PosConsulta,
+    Receita,
+    form=ReceitaForm,
+    extra=0,
+    can_delete=False,
+    min_num=1,
+    validate_min=True,
+)
 
 
 class ReceitaAddForm(forms.ModelForm):
@@ -190,15 +202,50 @@ class ReceitaAddForm(forms.ModelForm):
             self.fields['pos_consulta'].widget = forms.HiddenInput()
 
 
-ReceitasFormset = inlineformset_factory(
+class ExameForm(forms.ModelForm):
+    '''
+    Exames da pós-consulta.
+    '''
+    exame = forms.ImageField(widget=ImagePreviewWidget,)
+
+    class Meta:
+        model = Exame
+        fields = ('pos_consulta', 'id', 'exame')
+
+
+ExamesFormset = inlineformset_factory(
     PosConsulta,
-    Receita,
-    form=ReceitaForm,
+    Exame,
+    form=ExameForm,
     extra=0,
     can_delete=False,
     min_num=1,
     validate_min=True,
 )
+
+
+class ExameAddForm(forms.ModelForm):
+    '''
+    Insere vários Exames ao editar uma pós-consulta.
+    '''
+    exame = forms.ImageField(
+        widget=forms.ClearableFileInput(attrs={'multiple': True})
+    )
+
+    class Meta:
+        model = Exame
+        fields = ('pos_consulta', 'exame')
+
+    def __init__(self, pos_consulta_pk=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        queryset = PosConsulta.objects.filter(pk=pos_consulta_pk)
+        self.fields['pos_consulta'].queryset = queryset
+
+        if len(queryset) == 1:
+            # Remove os tracinhos.
+            self.fields['pos_consulta'].empty_label = None
+            self.fields['pos_consulta'].widget = forms.HiddenInput()
 
 
 class MedicamentoForm(forms.ModelForm):

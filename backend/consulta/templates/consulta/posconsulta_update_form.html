@@ -17,7 +17,7 @@
         <a href="{% url 'posconsulta_list' %}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
       </div>
     </div>
-    <div class="card-body col-6 offset-3">
+    <div class="card-body col-10 offset-1">
       <form action="." method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
@@ -39,14 +39,16 @@
           </div>
         {% endfor %}
 
-        {{ formset.management_form }}
+        {{ formset_receita.management_form }}
+        {{ formset_exame.management_form }}
 
         <div class="row">
-          <div class="cols">
+          <div class="cols"></div>
+          <div class="col">
 
             <legend>Receitas</legend>
 
-            {% for receita_form in formset %}
+            {% for receita_form in formset_receita %}
               <div id="receita" class="form-inline">
                 <div id="item-{{ forloop.counter0 }}" class="form-group">
                   {{ receita_form.pos_consulta }}
@@ -56,7 +58,6 @@
                     {{ receita_form.receita.label }}
                     {{ receita_form.receita }}
                     <a
-                      id="linkDeletar"
                       class="close"
                       type="button"
                       hx-delete="{% url 'receita_delete' receita_form.id.value %}"
@@ -84,6 +85,47 @@
               </a>
             </div>
           </div>
+          <div class="col">
+
+            <legend>Exames</legend>
+
+            {% for exame_form in formset_exame %}
+              <div id="exame" class="form-inline">
+                <div id="item-{{ forloop.counter0 }}" class="form-group">
+                  {{ exame_form.pos_consulta }}
+                  {{ exame_form.id }}
+
+                  {% if exame_form.exame.value %}
+                    {{ exame_form.exame.label }}
+                    {{ exame_form.exame }}
+                    <a
+                      class="close"
+                      type="button"
+                      hx-delete="{% url 'exame_delete' exame_form.id.value %}"
+                      hx-target="closest div"
+                      hx-swap="outerHTML"
+                    >
+                      <span aria-hidden="true">
+                        <i class="fa fa-times fa-2x text-danger"></i>
+                      </span>
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+
+            <div>
+              <a
+                class="btn btn-success"
+                data-toggle="modal"
+                data-target="#exameAddModal"
+                hx-get="{% url 'exame_add_form' object.pk %}"
+                hx-target="#exameModalBody"
+              >
+                <i class="fa fa-plus"></i> Adicionar Exame
+              </a>
+            </div>
+          </div>
         </div>
         <div class="float-right">
           <button class="btn btn-primary" type="submit">Salvar</button>
@@ -107,6 +149,31 @@
           <div id="receitaModalBody" class="modal-body">
             <!-- O novo conteúdo será inserido aqui. -->
             <!-- Formulário de Receita -->
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Salvar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exame Modal-->
+  <div class="modal fade" id="exameAddModal" tabindex="-1" role="dialog" aria-labelledby="exameModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exameModalLabel">Adicionar Novo Exame</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <form action="{% url 'exame_add_form' object.pk %}" method="POST" enctype="multipart/form-data">
+          <div id="exameModalBody" class="modal-body">
+            <!-- O novo conteúdo será inserido aqui. -->
+            <!-- Formulário de Exame -->
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>

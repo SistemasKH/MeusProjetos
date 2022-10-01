@@ -14,6 +14,8 @@ from .forms import (
     ConsultaForm,
     DependentesDaFamiliaForm,
     EscalaResponsavelForm,
+    ExameAddForm,
+    ExamesFormset,
     GlicoseForm,
     JornadaTrabalhoForm,
     MedicamentoForm,
@@ -157,30 +159,53 @@ class PosConsultaCreateView(LRM, CreateView):
 
 @login_required
 def pos_consulta_update(request, pk):
+    '''
+    Edita os dados da pós-consulta.
+    '''
     template_name = 'consulta/posconsulta_update_form.html'
     instance = PosConsulta.objects.get(pk=pk)
 
+    # Edita os dados da pós-consulta.
     form = PosConsultaUpdateForm(request.POST or None, instance=instance, prefix='main')
-    formset = ReceitasFormset(request.POST or None, instance=instance, prefix='items')
+    # Edita as imagens das Receitas.
+    formset_receita = ReceitasFormset(request.POST or None, instance=instance, prefix='items-receita')
+    # Edita as imagens dos Exames.
+    formset_exame = ExamesFormset(request.POST or None, instance=instance, prefix='items-exame')
 
     if request.method == 'POST':
-        if form.is_valid() and formset.is_valid():
+        if form.is_valid() and formset_receita.is_valid() and formset_exame.is_valid():
             form.save()
 
-            # Salva as receitas
-            novas_receitas = [item for item in request.FILES.values()]
+            # Salva as Receitas
+            novas_receitas = [item[1] for item in request.FILES.items() if 'receita' in item[0]]
 
-            dados_do_formset = formset.cleaned_data
+            dados_do_formset_receita = formset_receita.cleaned_data
 
-            for item in zip(novas_receitas, dados_do_formset):
+            for item in zip(novas_receitas, dados_do_formset_receita):
                 receita_antiga = item[1]['id']
                 receita_nova = item[0]
                 receita_antiga.receita = receita_nova
-                receita_antiga.save()
+                receita_antiga.save()  # A receita antiga é atualizada para a nova.
+
+            # Salva os Exames
+            novos_exames = [item[1] for item in request.FILES.items() if 'exame' in item[0]]
+
+            dados_do_formset_exame = formset_exame.cleaned_data
+
+            for item in zip(novos_exames, dados_do_formset_exame):
+                exame_antigo = item[1]['id']
+                exame_novo = item[0]
+                exame_antigo.exame = exame_novo
+                exame_antigo.save()  # O exame antigo é atualizado para o novo.
 
             return redirect('posconsulta_detail', pk=instance.pk)
 
-    context = {'object': instance, 'form': form, 'formset': formset}
+    context = {
+        'object': instance,
+        'form': form,
+        'formset_receita': formset_receita,
+        'formset_exame': formset_exame,
+    }
     return render(request, template_name, context)
 
 
@@ -208,13 +233,28 @@ def receita_add_form(request, pos_consulta_pk):
     return render(request, template_name, context)
 
 
-@login_required
-def posconsulta_delete(request, pk):
-    obj = get_object_or_404(PosConsulta, pk=pk)
-    obj.delete()
-    msg = 'Excluído com sucesso!'
-    messages.add_message(request, messages.SUCCESS, msg)
-    return redirect('consulta_list')
+def exame_add_form(request, pos_consulta_pk):
+    '''
+    Adiciona um formulário de Exames no modal para inserir Exames na Pós-Consulta.
+    Método acionado via hx-get em posconsulta_update_form.html para alimentar exameAddModal.
+    '''
+    template_name = 'consulta/hx/exame_form_hx.html'
+    form = ExameAddForm(pos_consulta_pk, request.POST or None)
+
+    if request.method == 'POST':
+        pos_consulta = PosConsulta.objects.get(pk=pos_consulta_pk)
+        exames = request.FILES.getlist('exame')
+
+        for exame in exames:
+            Exame.objects.create(
+                pos_consulta=pos_consulta,
+                exame=exame
+            )
+
+        return redirect('posconsulta_edit', pk=pos_consulta.pk)
+
+    context = {'form': form}
+    return render(request, template_name, context)
 
 
 @login_required
@@ -224,6 +264,24 @@ def receita_delete(request, pk):
     msg = 'Excluído com sucesso!'
     messages.add_message(request, messages.SUCCESS, msg)
     return HttpResponse('')
+
+
+@login_required
+def exame_delete(request, pk):
+    obj = get_object_or_404(Exame, pk=pk)
+    obj.delete()
+    msg = 'Excluído com sucesso!'
+    messages.add_message(request, messages.SUCCESS, msg)
+    return HttpResponse('')
+
+
+@login_required
+def posconsulta_delete(request, pk):
+    obj = get_object_or_404(PosConsulta, pk=pk)
+    obj.delete()
+    msg = 'Excluído com sucesso!'
+    messages.add_message(request, messages.SUCCESS, msg)
+    return redirect('consulta_list')
 
 
 class MedicamentoListView(LRM, PermissaoFamiliaMixin, ListView):

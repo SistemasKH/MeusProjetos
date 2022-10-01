@@ -16,11 +16,16 @@ posconsulta_urlpatterns = [
     path('add/<int:consulta_pk>/', v.PosConsultaCreateView.as_view(), name='posconsulta_add'),  # noqa E501
     path('<int:pk>/edit/', v.pos_consulta_update, name='posconsulta_edit'),  # noqa E501
     path('<int:pk>/delete/', v.posconsulta_delete, name='posconsulta_delete'),  # noqa E501
-    path('<int:pos_consulta_pk>/receita-add/', v.receita_add_form, name='receita_add_form')  # noqa E501
+    path('<int:pos_consulta_pk>/receita-add/', v.receita_add_form, name='receita_add_form'),  # noqa E501
+    path('<int:pos_consulta_pk>/exame-add/', v.exame_add_form, name='exame_add_form'),  # noqa E501
 ]
 
 receita_urlpatterns = [
-    path('<int:pk>/delete/', v.receita_delete, name='receita_delete')  # noqa E501
+    path('<int:pk>/delete/', v.receita_delete, name='receita_delete'),  # noqa E501
+]
+
+exame_urlpatterns = [
+    path('<int:pk>/delete/', v.exame_delete, name='exame_delete'),  # noqa E501
 ]
 
 medicamento_urlpatterns = [
@@ -59,6 +64,7 @@ urlpatterns = [
     path('consulta/', include(consulta_urlpatterns)),
     path('posconsulta/', include(posconsulta_urlpatterns)),
     path('receita/', include(receita_urlpatterns)),
+    path('exame/', include(exame_urlpatterns)),
     path('medicamento/', include(medicamento_urlpatterns)),
     path('glicose/', include(glicose_urlpatterns)),
     path('escalaresp/', include(escalaresp_urlpatterns)),
