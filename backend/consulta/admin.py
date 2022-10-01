@@ -21,10 +21,6 @@ class ConsultaAdmin(admin.ModelAdmin):
         'hora',
         'especialidade',
     )
-    # list_display_links = ('dependente',)
-    # search_fields = ('name',)
-    # list_filter = ('type',)
-    # date_hierarchy = 'created'
 
 
 class ReceitaInline(admin.TabularInline):
@@ -39,15 +35,11 @@ class ExameInline(admin.TabularInline):
 
 @admin.register(PosConsulta)
 class PosConsultaAdmin(admin.ModelAdmin):
-    inlines = (ReceitaInline,)
+    inlines = (ReceitaInline, ExameInline)
     list_display = (
         '__str__',
         'consulta',
     )
-    # list_display_links = ('dependente',)
-    # search_fields = ('name',)
-    # list_filter = ('type',)
-    # date_hierarchy = 'created'
 
 
 @admin.register(Medicamento)
@@ -56,10 +48,7 @@ class MedicamentoAdmin(admin.ModelAdmin):
         '__str__',
 
     )
-    # list_display_links = ('dependente',)
     search_fields = ('medicamento_prescrito',)
-    # list_filter = ('type',)
-    # date_hierarchy = 'created'
 
 
 @admin.register(Glicose)
