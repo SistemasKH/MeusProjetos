@@ -4,7 +4,9 @@ from datetime import date, datetime, timedelta
 from django import forms
 from django.contrib import messages
 from django.core.exceptions import ValidationError
+from django.forms import inlineformset_factory
 from django.shortcuts import redirect, render, resolve_url
+from django.utils.safestring import mark_safe
 
 from backend.crm.models import Cuidador, Dependente, Responsavel, Usuario
 
@@ -14,7 +16,8 @@ from .models import (
     Glicose,
     JornadaTrabalho,
     Medicamento,
-    PosConsulta
+    PosConsulta,
+    Receita
 )
 
 
@@ -128,6 +131,74 @@ class PosConsultaForm(forms.ModelForm):
             # Remove os tracinhos.
             self.fields['consulta'].empty_label = None
             self.fields['acompanhante_responsavel'].empty_label = None
+
+
+class PosConsultaUpdateForm(forms.ModelForm):
+    required_css_class = 'required'
+
+    class Meta:
+        model = PosConsulta
+        fields = (
+            'consulta',
+            'acompanhante_responsavel',
+            'diagnostico',
+            'tratamento',
+            'observacao',
+        )
+
+
+class ImagePreviewWidget(forms.widgets.FileInput):
+
+    def render(self, name, value, attrs=None, **kwargs):
+        input_html = super().render(name, value, attrs=None, **kwargs)
+        img_html = mark_safe(f'<br><br><img src="{value.url}"/>')
+        return f'{input_html}{img_html}'
+
+
+class ReceitaForm(forms.ModelForm):
+    '''
+    Receitas da pós-consulta.
+    '''
+    receita = forms.ImageField(widget=ImagePreviewWidget,)
+
+    class Meta:
+        model = Receita
+        fields = ('pos_consulta', 'id', 'receita')
+
+
+class ReceitaAddForm(forms.ModelForm):
+    '''
+    Insere várias Receitas ao editar uma pós-consulta.
+    '''
+    receita = forms.ImageField(
+        widget=forms.ClearableFileInput(attrs={'multiple': True})
+    )
+
+    class Meta:
+        model = Receita
+        fields = ('pos_consulta', 'receita')
+
+    def __init__(self, pos_consulta_pk=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        queryset = PosConsulta.objects.filter(pk=pos_consulta_pk)
+        self.fields['pos_consulta'].queryset = queryset
+
+        if len(queryset) == 1:
+            # Remove os tracinhos.
+            self.fields['pos_consulta'].empty_label = None
+            self.fields['pos_consulta'].widget = forms.HiddenInput()
+
+
+ReceitasFormset = inlineformset_factory(
+    PosConsulta,
+    Receita,
+    form=ReceitaForm,
+    extra=0,
+    can_delete=False,
+    min_num=1,
+    validate_min=True,
+)
 
 
 class MedicamentoForm(forms.ModelForm):

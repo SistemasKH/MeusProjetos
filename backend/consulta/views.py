@@ -2,8 +2,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
 from django.db.models import F
+from django.forms import modelformset_factory
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
@@ -16,7 +17,10 @@ from .forms import (
     GlicoseForm,
     JornadaTrabalhoForm,
     MedicamentoForm,
-    PosConsultaForm
+    PosConsultaForm,
+    PosConsultaUpdateForm,
+    ReceitaAddForm,
+    ReceitasFormset
 )
 from .models import (
     Consulta,
@@ -151,17 +155,57 @@ class PosConsultaCreateView(LRM, CreateView):
         return super().form_valid(form)
 
 
-class PosConsultaUpdateView(LRM, UpdateView):
-    model = PosConsulta
-    form_class = PosConsultaForm
+@login_required
+def pos_consulta_update(request, pk):
+    template_name = 'consulta/posconsulta_update_form.html'
+    instance = PosConsulta.objects.get(pk=pk)
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs.update({
-            'user': self.request.user,
-            'request': self.request
-        })
-        return kwargs
+    form = PosConsultaUpdateForm(request.POST or None, instance=instance, prefix='main')
+    formset = ReceitasFormset(request.POST or None, instance=instance, prefix='items')
+
+    if request.method == 'POST':
+        if form.is_valid() and formset.is_valid():
+            form.save()
+
+            # Salva as receitas
+            novas_receitas = [item for item in request.FILES.values()]
+
+            dados_do_formset = formset.cleaned_data
+
+            for item in zip(novas_receitas, dados_do_formset):
+                receita_antiga = item[1]['id']
+                receita_nova = item[0]
+                receita_antiga.receita = receita_nova
+                receita_antiga.save()
+
+            return redirect('posconsulta_detail', pk=instance.pk)
+
+    context = {'object': instance, 'form': form, 'formset': formset}
+    return render(request, template_name, context)
+
+
+def receita_add_form(request, pos_consulta_pk):
+    '''
+    Adiciona um formulário de Receitas no modal para inserir Receitas na Pós-Consulta.
+    Método acionado via hx-get em posconsulta_update_form.html para alimentar receitaAddModal.
+    '''
+    template_name = 'consulta/hx/receita_form_hx.html'
+    form = ReceitaAddForm(pos_consulta_pk, request.POST or None)
+
+    if request.method == 'POST':
+        pos_consulta = PosConsulta.objects.get(pk=pos_consulta_pk)
+        receitas = request.FILES.getlist('receita')
+
+        for receita in receitas:
+            Receita.objects.create(
+                pos_consulta=pos_consulta,
+                receita=receita
+            )
+
+        return redirect('posconsulta_edit', pk=pos_consulta.pk)
+
+    context = {'form': form}
+    return render(request, template_name, context)
 
 
 @login_required
@@ -171,6 +215,15 @@ def posconsulta_delete(request, pk):
     msg = 'Excluído com sucesso!'
     messages.add_message(request, messages.SUCCESS, msg)
     return redirect('consulta_list')
+
+
+@login_required
+def receita_delete(request, pk):
+    obj = get_object_or_404(Receita, pk=pk)
+    obj.delete()
+    msg = 'Excluído com sucesso!'
+    messages.add_message(request, messages.SUCCESS, msg)
+    return HttpResponse('')
 
 
 class MedicamentoListView(LRM, PermissaoFamiliaMixin, ListView):
