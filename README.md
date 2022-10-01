@@ -39,7 +39,20 @@ DROP DATABASE sgwc;
 CREATE DATABASE sgwc;
 ```
 
+## Deploy no Heroku
 
+```
+git add .
+git commit -m 'mensagem'
+git push
+
+git push heroku main
+
+heroku run python manage.py migrate
+
+# Se der erro
+heroku logs --tail
+```
 
 
 
