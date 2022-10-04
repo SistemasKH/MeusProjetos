@@ -15,6 +15,18 @@
     </div>
     <div class="card-body">
       <div class="table-responsive-sm">
+        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div class="row">
+                <div class="dataTables_length" id="dataTable_length" style="margin-bottom: 1%">
+                    <form id="formBuscar" action="." method="GET">
+                        {{ form.dependente.label }}
+                        {{ form.dependente }}
+                    </form>
+                </div>
+
+             </div>
+        </div>
+        <div class="row">
         <table
           id="dataTable"
           class="table table-striped"
@@ -56,12 +68,18 @@
             {% endfor %}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   </div>
 {% endblock content %}
-
 {% block js %}
+   <script>
+    $('#id_dependente').on('change', function(e){
+      e.preventDefault()
+      $('#formBuscar').submit()
+    })
+  </script>
   <script>
     document.body.addEventListener('htmx:configRequest', (event) => {
       event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';

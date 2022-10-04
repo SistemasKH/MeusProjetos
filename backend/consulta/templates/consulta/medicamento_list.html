@@ -9,12 +9,27 @@
     <div class="card-header py-3">
       <div class="d-sm-flex align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Medicamentos</h6>
-        <a href="{% url 'medicamento_add' %}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+         <a href="{% url 'medicamento_add' %}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
           class="fas fa-plus fa-sm text-white-50"></i> Adicionar</a>
       </div>
     </div>
     <div class="card-body">
-      <div class="table-responsive-sm">
+        <div class="table-responsive-sm">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                <div class="row">
+
+                        <div class="dataTables_length" id="dataTable_length" style="margin-bottom: 1%">
+                            <form id="formBuscar" action="." method="GET">
+                                {{ form.dependente.label }}
+                                {{ form.dependente }}
+                             </form>
+                        </div>
+
+                </div>
+            </div>
+
+
+       <div class="row">
         <table
           id="dataTable"
           class="table table-striped"
@@ -22,6 +37,7 @@
           cellspacing="0"
         >
           <thead>
+
             <tr>
               {% for label in labels %}
                 <th>{{ label }}</th>
@@ -31,8 +47,7 @@
           </thead>
           <tbody>
             {%  for object in object_list %}
-              <tr>
-                <td>{{ object.dependente }}</td>
+                <tr>
                 <td><a href="{{ object.get_absolute_url }}">{{ object.medicamento_prescrito }}</a> </td>
                 <td>{{ object.principio_ativo }}</td>
                 <td>{{ object.indicacoes }} </td>
@@ -51,12 +66,20 @@
             {% endfor %}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   </div>
 {% endblock content %}
 
 {% block js %}
+   <script>
+    $('#id_dependente').on('change', function(e){
+      e.preventDefault()
+      $('#formBuscar').submit()
+    })
+  </script>
+
   <script>
     document.body.addEventListener('htmx:configRequest', (event) => {
       event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';

@@ -110,9 +110,10 @@ FORNECEDOR_PRINCIPAL_CHOICES = (
     ('1', 'Farmácia Hospital'),
     ('2', 'Farmácia Popular'),
     ('3', 'Farmácia - Drogaria'),
-    ('4', 'Drogaria - Site'),
-    ('5', 'Mercado Livre'),
-    ('6', 'Outros'),
+    ('4', 'Farmácia de Manipulação'),
+    ('5', 'Drogaria - Site'),
+    ('6', 'Mercado Livre'),
+    ('7', 'Outros'),
 )
 
 REFEICAO_CHOICES = (

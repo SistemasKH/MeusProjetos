@@ -304,7 +304,6 @@ class MedicamentoListView(LRM, PermissaoFamiliaMixin, ListView):
         user = self.request.user
         context['form'] = DependentesDaFamiliaForm(user)
         context['labels'] = (
-            'Dependente',
             'Medicamento',
             'Substância',
             'Indicações',
