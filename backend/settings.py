@@ -107,7 +107,7 @@ DATABASES = {
 }
 
 # Email config
-EMAIL_BACKEND = config('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')  # noqa E501
+EMAIL_BACKEND = config('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')  # noqa E501
 
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', 'webmaster@localhost')
 EMAIL_HOST = config('EMAIL_HOST', 'localhost')  # localhost 0.0.0.0
