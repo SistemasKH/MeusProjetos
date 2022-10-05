@@ -16,6 +16,7 @@
   <div class="sidebar-heading">
     Famílias
   </div>-->
+  {% if not user|has_group:"cuidador" %}
   <li class="nav-item" >
     <a class="nav-link" href="{% url 'familia_list' %}">
       <i class="fas fa-fw fa-table"></i>
@@ -24,7 +25,7 @@
 
   <!-- Divider -->
   <hr class="sidebar-divider">
-
+  {% endif %}
   <!-- Heading
   <div class="sidebar-heading">
     Dependentes
@@ -54,8 +55,9 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <a class="collapse-item" href="{% url 'consulta_list' %}">Consultas</a>
-        <a class="collapse-item" href="{% url 'posconsulta_list' %}">Pós Consultas</a>
-
+        {% if not user|has_group:"cuidador" %}
+          <a class="collapse-item" href="{% url 'posconsulta_list' %}">Pós Consultas</a>
+        {% endif %}
       </div>
     </div>
   </li>
@@ -121,8 +123,9 @@
   </li>
 
   <!-- Divider -->
-  <hr class="sidebar-divider">
   {% if not user|has_group:"cuidador" %}
+  <hr class="sidebar-divider">
+
 
 
   <li class="nav-item">

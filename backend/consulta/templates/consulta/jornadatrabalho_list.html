@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load duration_tags %}
+{% load usergroup_tags %}
 
 {% block title %} Escala Responsáveis {% endblock %}
 
@@ -26,7 +27,9 @@
               {% for label in labels %}
                 <th>{{ label }}</th>
               {% endfor %}
+              {% if not user|has_group:"cuidador" %}
               <th style="min-width:8rem">Acões</th>
+              {% endif %}
             </tr>
           </thead>
 
@@ -41,7 +44,8 @@
                 <td>{{ object.soma_horas_mensal|duration_to_hours }}</td>
                 <td>{{ object.responsavel_dia }}</td>
                 <td>{{ object.observacao }}</td>
-                <td>
+                {% if not user|has_group:"cuidador" %}
+                  <td>
                   <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
                   <a class ="btn btn-danger btn-sm" href="{% url 'jornadatrabalho_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar a jornada de trabalho de : {{ object.dh_entrada }} ?  ')">Excluir</a>
                   <span
@@ -55,6 +59,7 @@
                     Excluir
                   </span>
                 </td>
+               {% endif %}
               </tr>
             {% endfor %}
           </tbody>
