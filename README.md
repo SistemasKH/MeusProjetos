@@ -49,6 +49,7 @@ git push
 git push heroku main
 
 heroku run python manage.py migrate
+heroku run python manage.py cria_grupos  # caso precise
 
 # Se der erro
 heroku logs --tail
