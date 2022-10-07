@@ -1,13 +1,20 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from django.utils.safestring import mark_safe
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from backend.consulta.forms import DependentesDaFamiliaForm
 from backend.core.mixins import PermissaoFamiliaMixin
 
-from .forms import ContasBancariasForm, CreditoForm
+from .forms import (
+    ComprovanteAddForm,
+    ComprovantesFormset,
+    ContasBancariasForm,
+    CreditoForm,
+    CreditoUpdateForm
+)
 from .models import Comprovante, ContasBancarias, Credito
 
 
@@ -96,7 +103,6 @@ class CreditoListView(LRM, PermissaoFamiliaMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user = self.request.user
         context['labels'] = (
             'Entrada',
             'Referência',
@@ -136,29 +142,45 @@ class CreditoCreateView(LRM, CreateView):
         return super().form_valid(form)
 
 
-class CreditoUpdateView(LRM, UpdateView):
-    model = Credito
-    form_class = CreditoForm
+@login_required
+def credito_update(request, pk):
+    '''
+    Edita os dados de crédito.
+    '''
+    template_name = 'financeiro/credito_update_form.html'
+    instance = get_object_or_404(Credito, pk=pk)
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs.update({'user': self.request.user})
-        return kwargs
+    # Edita os dados de crédito.
+    form = CreditoUpdateForm(request.POST or None, instance=instance, prefix='main')
+    # Edita as imagens dos Comprovantes.
+    formset_comprovante = ComprovantesFormset(request.POST or None, instance=instance, prefix='items')
 
-    def form_valid(self, form):
-        self.object = form.save()
-        credito = self.object
-        comprovantes = self.request.FILES.getlist('comprovante')
+    if request.method == 'POST':
+        if form.is_valid() and formset_comprovante.is_valid():
+            form.save()
 
-        for comprovante in comprovantes:
-            Comprovante.objects.update(
-                credito=credito,
-                comprovante=comprovante
-            )
+            # Salva os Comprovantes
+            novos_comprovantes = [item[1] for item in request.FILES.items()]
 
-        return super().form_valid(form)
+            dados_do_formset_comprovante = formset_comprovante.cleaned_data
+
+            for item in zip(novos_comprovantes, dados_do_formset_comprovante):
+                comprovante_antigo = item[1]['id']
+                comprovante_novo = item[0]
+                comprovante_antigo.comprovante = comprovante_novo
+                comprovante_antigo.save()  # O comprovante antigo é atualizado para o novo.
+
+            return redirect('credito_detail', pk=instance.pk)
+
+    context = {
+        'object': instance,
+        'form': form,
+        'formset_comprovante': formset_comprovante,
+    }
+    return render(request, template_name, context)
 
 
+@login_required
 def credito_delete(request, pk):
     obj = get_object_or_404(Credito, pk=pk)
     obj.delete()
@@ -166,3 +188,36 @@ def credito_delete(request, pk):
     msg = 'Excluído com sucesso!'
     messages.add_message(request, messages.SUCCESS, msg)
     return redirect('credito_list')
+
+
+def comprovante_add_form(request, credito_pk):
+    '''
+    Adiciona um formulário de Comprovantes no modal para inserir Comprovantes em Credito.
+    Método acionado via hx-get em credito_update_form.html para alimentar comprovanteAddModal.
+    '''
+    template_name = 'financeiro/hx/comprovante_form_hx.html'
+    form = ComprovanteAddForm(credito_pk, request.POST or None)
+
+    if request.method == 'POST':
+        credito = Credito.objects.get(pk=credito_pk)
+        comprovantes = request.FILES.getlist('comprovante')
+
+        for comprovante in comprovantes:
+            Comprovante.objects.create(
+                credito=credito,
+                comprovante=comprovante
+            )
+
+        return redirect('credito_edit', pk=credito.pk)
+
+    context = {'form': form}
+    return render(request, template_name, context)
+
+
+@login_required
+def comprovante_delete(request, pk):
+    obj = get_object_or_404(Comprovante, pk=pk)
+    obj.delete()
+    msg = 'Excluído com sucesso!'
+    messages.add_message(request, messages.SUCCESS, msg)
+    return HttpResponse('')
