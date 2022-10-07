@@ -10,15 +10,15 @@
     <div class="card-header py-3">
       <div class="d-sm-flex align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Medicamentos</h6>
-         {% if not user|has_group:"cuidador" %}
+        {% if not user|has_group:"cuidador" %}
           <a href="{% url 'medicamento_add' %}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-          class="fas fa-plus fa-sm text-white-50"></i> Adicionar</a>
-         {% endif %}
+            class="fas fa-plus fa-sm text-white-50"></i> Adicionar</a>
+        {% endif %}
       </div>
     </div>
     <div class="card-body">
-        <div class="table-responsive-sm">
-            <table
+      <div class="table-responsive-sm">
+        <table
           id="dataTable"
           class="table table-striped"
           width="100%"
@@ -31,13 +31,13 @@
                 <th>{{ label }}</th>
               {% endfor %}
               {% if not user|has_group:"cuidador" %}
-                 <th style="min-width:8rem">Acões</th>
-               {% endif %}
+                <th style="min-width:8rem">Acões</th>
+              {% endif %}
             </tr>
           </thead>
           <tbody>
             {%  for object in object_list %}
-                <tr>
+              <tr>
                 <td><a href="{{ object.get_absolute_url }}">{{ object.medicamento_prescrito }}</a> </td>
                 <td>{{ object.principio_ativo }}</td>
                 <td>{{ object.indicacoes }} </td>
@@ -48,23 +48,23 @@
                 <td>{{ object.get_fornecedor_principal_display }} </td>
 
                 {% if not user|has_group:"cuidador" %}
-                    <td>
-                      <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
-                      <a class ="btn btn-danger btn-sm" href="{% url 'medicamento_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar o medicamento : {{ object.medicamento_prescrito }} ?  ')">Excluir</a>
-                    </td>
+                  <td>
+                    <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
+                    <a class ="btn btn-danger btn-sm" href="{% url 'medicamento_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar o medicamento : {{ object.medicamento_prescrito }} ?  ')">Excluir</a>
+                  </td>
                 {% endif %}
               </tr>
             {% endfor %}
           </tbody>
         </table>
-        </div>
       </div>
     </div>
+  </div>
 
 {% endblock content %}
 
 {% block js %}
-   <script>
+  <script>
     $('#id_dependente').on('change', function(e){
       e.preventDefault()
       $('#formBuscar').submit()

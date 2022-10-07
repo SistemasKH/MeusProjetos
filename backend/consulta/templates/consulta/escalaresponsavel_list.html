@@ -11,7 +11,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Escala Responsáveis</h6>
         {% if not user|has_group:"cuidador" %}
           <a href="{% url 'escalaresponsavel_add' %}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-          class="fas fa-plus fa-sm text-white-50"></i> Adicionar</a>
+            class="fas fa-plus fa-sm text-white-50"></i> Adicionar</a>
         {% endif %}
       </div>
     </div>
@@ -29,7 +29,7 @@
                 <th>{{ label }}</th>
               {% endfor %}
               {% if not user|has_group:"cuidador" %}
-                 <th style="min-width:8rem">Acões</th>
+                <th style="min-width:8rem">Acões</th>
               {% endif %}
             </tr>
           </thead>
@@ -39,7 +39,7 @@
                 <th>{{ label }}</th>
               {% endfor %}
               {% if not user|has_group:"cuidador" %}
-                 <th style="min-width:8rem">Acões</th>
+                <th style="min-width:8rem">Acões</th>
               {% endif %}
             </tr>
           </tfoot>
@@ -58,10 +58,10 @@
                 <td>{{ object.data_fim|date:"d/m/Y"  }}</td>
 
                 {% if not user|has_group:"cuidador" %}
-                    <td>
-                      <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
-                      <a class ="btn btn-danger btn-sm" href="{% url 'escalaresponsavel_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar a escala do responsável do dia : {{ object.data_inicio }} ?  ')">Excluir</a>
-                    </td>
+                  <td>
+                    <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
+                    <a class ="btn btn-danger btn-sm" href="{% url 'escalaresponsavel_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar a escala do responsável do dia : {{ object.data_inicio }} ?  ')">Excluir</a>
+                  </td>
                 {% endif %}
               </tr>
             {% endfor %}
