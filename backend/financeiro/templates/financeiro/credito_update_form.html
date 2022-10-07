@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">
+          {% if object.pk %}
+            Editar
+          {% else %}
+            Adicionar
+          {% endif %}
+          Lançamento de Crédito</h6>
+        <a href="{% url 'credito_list' %}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
+      </div>
+    </div>
+    <div class="card-body col-6 offset-3">
+      <form action="." method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for field in form.visible_fields %}
+          <div class="mb-3 form-group{% if field.errors %} has-error {% endif %}">
+            <label for="{{ field.id_for_label }}">
+              {% if field.field.required %}
+                <span class="required">{{ field.label }}</span>
+              {% else %}
+                {{ field.label }}
+              {% endif %}
+            </label>
+
+            {% render_field field class="form-control" %}
+
+            {% for error in field.errors %}
+              <span class="text-muted">{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+        {{ formset_comprovante.management_form }}
+
+        <div class="row">
+          <div class="col">
+
+            <legend>Comprovantes</legend>
+
+            {% for comprovante_form in formset_comprovante %}
+              <div id="comprovante" class="form-inline">
+                <div id="item-{{ forloop.counter0 }}" class="form-group">
+                  {{ comprovante_form.credito }}
+                  {{ comprovante_form.id }}
+
+                  {% if comprovante_form.comprovante.value %}
+                    {{ comprovante_form.comprovante.label }}
+                    {{ comprovante_form.comprovante }}
+                    <a
+                      class="close"
+                      type="button"
+                      hx-delete="{% url 'comprovante_delete' comprovante_form.id.value %}"
+                      hx-target="closest div"
+                      hx-swap="outerHTML"
+                    >
+                      <span aria-hidden="true">
+                        <i class="fa fa-times fa-2x text-danger"></i>
+                      </span>
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+
+            <div>
+              <a
+                class="btn btn-success"
+                data-toggle="modal"
+                data-target="#comprovanteAddModal"
+                hx-get="{% url 'comprovante_add_form' object.pk %}"
+                hx-target="#comprovanteModalBody"
+              >
+                <i class="fa fa-plus"></i> Adicionar
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="float-right">
+          <button class="btn btn-primary" type="submit">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Comprovante Modal-->
+  <div class="modal fade" id="comprovanteAddModal" tabindex="-1" role="dialog" aria-labelledby="comprovanteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="comprovanteModalLabel">Adicionar Nova Comprovante</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <form action="{% url 'comprovante_add_form' object.pk %}" method="POST" enctype="multipart/form-data">
+          <div id="comprovanteModalBody" class="modal-body">
+            <!-- O novo conteúdo será inserido aqui. -->
+            <!-- Formulário de Comprovante -->
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Salvar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock content %}
+
+{% block js %}
+  <script>
+    document.body.addEventListener('htmx:configRequest', (event) => {
+      event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+    });
+  </script>
+{% endblock js %}

@@ -8,20 +8,23 @@ contasbancarias_urlpatterns = [
     path('add/', v.ContasBancariasCreateView.as_view(), name='contasbancarias_add'),  # noqa E501
     path('<int:pk>/edit/', v.ContasBancariasUpdateView.as_view(), name='contasbancarias_edit'),  # noqa E501
     path('<int:pk>/delete/', v.contas_bancarias_delete, name='contas_bancarias_delete'),  # noqa E501
-
 ]
 
 credito_urlpatterns = [
     path('', v.CreditoListView.as_view(), name='credito_list'),  # noqa E501
     path('<int:pk>/', v.CreditoDetailView.as_view(), name='credito_detail'),  # noqa E501
     path('add/', v.CreditoCreateView.as_view(), name='credito_add'),  # noqa E501
-    path('<int:pk>/edit/', v.CreditoUpdateView.as_view(), name='credito_edit'),  # noqa E501
+    path('<int:pk>/edit/', v.credito_update, name='credito_edit'),  # noqa E501
     path('<int:pk>/delete/', v.credito_delete, name='credito_delete'),  # noqa E501
+    path('<int:credito_pk>/comprovante-add/', v.comprovante_add_form, name='comprovante_add_form'),  # noqa E501
+]
 
+comprovante_urlpatterns = [
+    path('<int:pk>/delete/', v.comprovante_delete, name='comprovante_delete'),  # noqa E501
 ]
 
 urlpatterns = [
     path('contasbancarias/', include(contasbancarias_urlpatterns)),
     path('credito/', include(credito_urlpatterns)),
-
+    path('comprovante/', include(comprovante_urlpatterns)),
 ]

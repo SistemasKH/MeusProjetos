@@ -28,7 +28,7 @@
                 <th>{{ label }}</th>
               {% endfor %}
               {% if not user|has_group:"cuidador" %}
-              <th style="min-width:8rem">Acões</th>
+                <th style="min-width:8rem">Acões</th>
               {% endif %}
             </tr>
           </thead>
@@ -46,11 +46,11 @@
                 <td>{{ object.observacao }}</td>
                 {% if not user|has_group:"cuidador" %}
                   <td>
-                  <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
-                  <a class ="btn btn-danger btn-sm" href="{% url 'jornadatrabalho_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar a jornada de trabalho de : {{ object.dh_entrada }} ?  ')">Excluir</a>
+                    <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
+                    <a class ="btn btn-danger btn-sm" href="{% url 'jornadatrabalho_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar a jornada de trabalho de : {{ object.dh_entrada }} ?  ')">Excluir</a>
 
-                </td>
-               {% endif %}
+                  </td>
+                {% endif %}
               </tr>
             {% endfor %}
           </tbody>

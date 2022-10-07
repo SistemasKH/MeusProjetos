@@ -17,14 +17,14 @@
     Famílias
   </div>-->
   {% if not user|has_group:"cuidador" %}
-  <li class="nav-item" >
-    <a class="nav-link" href="{% url 'familia_list' %}">
-      <i class="fas fa-fw fa-table"></i>
-      <span>Famílias</span></a>
-  </li>
+    <li class="nav-item" >
+      <a class="nav-link" href="{% url 'familia_list' %}">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Famílias</span></a>
+    </li>
 
-  <!-- Divider -->
-  <hr class="sidebar-divider">
+    <!-- Divider -->
+    <hr class="sidebar-divider">
   {% endif %}
   <!-- Heading
   <div class="sidebar-heading">
@@ -124,25 +124,25 @@
 
   <!-- Divider -->
   {% if not user|has_group:"cuidador" %}
-  <hr class="sidebar-divider">
+    <hr class="sidebar-divider">
 
 
 
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinanceiro"
-      aria-expanded="true" aria-controls="collapse">
-      <i class="fas fa-fw fa-cog"></i>
-      <span>Controle Financeiro</span>
-    </a>
-    <div id="collapseFinanceiro" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="{% url 'contasbancarias_list' %}">Contas Bancárias</a>
-        <a class="collapse-item" href="{% url 'credito_list' %}">Créditos</a>
-        <a class="collapse-item" href="#">Débitos</a>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinanceiro"
+        aria-expanded="true" aria-controls="collapse">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Controle Financeiro</span>
+      </a>
+      <div id="collapseFinanceiro" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" href="{% url 'contasbancarias_list' %}">Contas Bancárias</a>
+          <a class="collapse-item" href="{% url 'credito_list' %}">Créditos</a>
+          <a class="collapse-item" href="#">Débitos</a>
+        </div>
       </div>
-    </div>
-  </li>
-{% endif %}
+    </li>
+  {% endif %}
 
   <!-- Nav Item - Tables
   {% if debug %}

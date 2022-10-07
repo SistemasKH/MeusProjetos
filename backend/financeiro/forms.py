@@ -1,6 +1,7 @@
 from django import forms
-from django.forms.widgets import ClearableFileInput
+from django.forms import inlineformset_factory
 
+from backend.core.forms import ImagePreviewWidget
 from backend.crm.models import Dependente, Responsavel, Usuario
 
 from .models import Comprovante, ContasBancarias, Credito
@@ -83,3 +84,65 @@ class CreditoForm(forms.ModelForm):
 
         queryset_responsavel = Responsavel.objects.filter(familia=familia)
         self.fields['responsavel_lancamento'].queryset = queryset_responsavel
+
+
+class CreditoUpdateForm(forms.ModelForm):
+    required_css_class = 'required'
+
+    class Meta:
+        model = Credito
+        fields = (
+            'data_entrada',
+            'referencia',
+            'depositante',
+            'valor',
+            'conta_credito',
+            'responsavel_lancamento',
+            'observacao',
+        )
+
+
+class ComprovanteAddForm(forms.ModelForm):
+    '''
+    Insere vários Comprovantes ao editar um crédito.
+    '''
+    comprovante = forms.ImageField(
+        widget=forms.ClearableFileInput(attrs={'multiple': True})
+    )
+
+    class Meta:
+        model = Comprovante
+        fields = ('credito', 'comprovante')
+
+    def __init__(self, credito_pk=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        queryset = Credito.objects.filter(pk=credito_pk)
+        self.fields['credito'].queryset = queryset
+
+        if len(queryset) == 1:
+            # Remove os tracinhos.
+            self.fields['credito'].empty_label = None
+            self.fields['credito'].widget = forms.HiddenInput()
+
+
+class ComprovanteForm(forms.ModelForm):
+    '''
+    Comprovantes do Crédito.
+    '''
+    comprovante = forms.ImageField(widget=ImagePreviewWidget,)
+
+    class Meta:
+        model = Comprovante
+        fields = ('credito', 'id', 'comprovante')
+
+
+ComprovantesFormset = inlineformset_factory(
+    Credito,
+    Comprovante,
+    form=ComprovanteForm,
+    extra=0,
+    can_delete=False,
+    min_num=1,
+    validate_min=True,
+)

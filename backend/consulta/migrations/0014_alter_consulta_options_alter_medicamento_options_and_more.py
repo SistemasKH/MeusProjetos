@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='medicamento',
             name='fornecedor_principal',
-            field=models.CharField(choices=[('1', 'Farmácia Hospital'), ('2', 'Farmácia Popular'), ('3', 'Farmácia - Drogaria'), ('4', 'Farmácia de Manipulação'), ('5', 'Drogaria - Site'), ('6', 'Mercado Livre'), ('7', 'Outros')], max_length=20, verbose_name='Fornecedor'),
+            field=models.CharField(choices=[('1', 'Farmácia Hospital'), ('2', 'Farmácia Popular'), ('3', 'Farmácia - Drogaria'), ('4',
+                                   'Farmácia de Manipulação'), ('5', 'Drogaria - Site'), ('6', 'Mercado Livre'), ('7', 'Outros')], max_length=20, verbose_name='Fornecedor'),
         ),
     ]

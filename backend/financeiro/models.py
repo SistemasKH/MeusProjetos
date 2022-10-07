@@ -1,7 +1,5 @@
-from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse, reverse_lazy
-from django.utils.safestring import mark_safe
 
 from backend.core.constants import (
     CREDITO_REF_CHOICES,
@@ -62,7 +60,6 @@ class ContasBancarias(models.Model):
 
 
 class Credito(models.Model):
-
     data_entrada = models.DateField('Data Entrada')  # noqa E501
     referencia = models.CharField('Referência', max_length=30, choices=CREDITO_REF_CHOICES)  # noqa E501
     depositante = models.CharField('Depositante', max_length=100, blank=True, null=True)  # noqa E501
@@ -123,7 +120,12 @@ class Comprovante(models.Model):
         null=True,
         blank=True
     )
-    comprovante = models.ImageField('Upload Comprovante', upload_to='creditos/', blank=True, null=True)  # noqa E501
+    comprovante = models.ImageField(
+        'Upload Comprovante',
+        upload_to='creditos/',
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
         return f'{self.credito}-{self.comprovante}'

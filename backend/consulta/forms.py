@@ -1,13 +1,11 @@
 import calendar
-from datetime import date, datetime, timedelta
+from datetime import timedelta
 
 from django import forms
-from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.forms import inlineformset_factory
-from django.shortcuts import redirect, render, resolve_url
-from django.utils.safestring import mark_safe
 
+from backend.core.forms import ImagePreviewWidget
 from backend.crm.models import Cuidador, Dependente, Responsavel, Usuario
 
 from .models import (
@@ -146,14 +144,6 @@ class PosConsultaUpdateForm(forms.ModelForm):
             'tratamento',
             'observacao',
         )
-
-
-class ImagePreviewWidget(forms.widgets.FileInput):
-
-    def render(self, name, value, attrs=None, **kwargs):
-        input_html = super().render(name, value, attrs=None, **kwargs)
-        img_html = mark_safe(f'<br><br><img src="{value.url}" style="max-width:500px"/>')
-        return f'{input_html}{img_html}'
 
 
 class ReceitaForm(forms.ModelForm):

@@ -1,11 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
-from django.db.models import F
-from django.forms import modelformset_factory
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from backend.core.mixins import PermissaoFamiliaMixin
@@ -163,7 +160,7 @@ def pos_consulta_update(request, pk):
     Edita os dados da pós-consulta.
     '''
     template_name = 'consulta/posconsulta_update_form.html'
-    instance = PosConsulta.objects.get(pk=pk)
+    instance = get_object_or_404(PosConsulta, pk=pk)
 
     # Edita os dados da pós-consulta.
     form = PosConsultaUpdateForm(request.POST or None, instance=instance, prefix='main')
@@ -304,7 +301,7 @@ class MedicamentoListView(LRM, PermissaoFamiliaMixin, ListView):
         user = self.request.user
         context['form'] = DependentesDaFamiliaForm(user)
         context['labels'] = (
-            'Dependente'
+            'Dependente',
             'Medicamento',
             'Substância',
             'Indicações',
