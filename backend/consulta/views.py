@@ -515,7 +515,7 @@ class JornadaTrabalhoListView(LRM, PermissaoFamiliaMixin, ListView):
             'Prestador Serviço',
             'Data/Hora Entrada',
             'Data/Hora Saída',
-            'Quant horas dia',
+            'Horas diarias',
             'Acumulado semanal',
             'Acumulado mensal',
             'Responsavel dia',
