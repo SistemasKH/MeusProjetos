@@ -35,8 +35,12 @@
               <td>{{object.taxa_glicose|default:"0"}}</td>
             </tr>
             <tr>
-              <td>Alimentos ingeridos</td>
-              <td>{{object.alimentos|default:"---"}}</td>
+              <td>Tipo Insulina</td>
+              <td>{{object.get_tipo_insulina_display|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Qt Insulina</td>
+              <td>{{object.qt_insulina|default:"---"}}</td>
             </tr>
             <tr>
               <td>Media diária</td>
@@ -54,10 +58,7 @@
               <td>Responsável</td>
               <td>{{object.responsavel|default:"---"}}</td>
             </tr>
-            <tr>
-              <td>Observação</td>
-              <td>{{ object.observacao|default:"---" }}</td>
-            </tr>
+
           </tbody>
         </table>
       </div>
