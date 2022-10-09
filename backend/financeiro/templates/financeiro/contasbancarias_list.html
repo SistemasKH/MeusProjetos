@@ -34,19 +34,21 @@
               <tr>
                 <td>{{object.data_abertura|date:"d/m/Y"|default:"---" }}</td>
                 <td>{{object.numero_banco|default:"---"}}</td>
-                <td>{{object.nome_banco|default:"---"}}</td>
+                <td><a href="{{ object.get_absolute_url }}">{{object.nome_banco|default:"---"}}</a></td>
                 <td>{{object.agencia|default:"---"}}</td>
                 <td>{{object.cidade|default:"---"}}</td>
                 <td>{{object.get_conta_display|default:"---"}}</td>
                 <td>{{object.numero_conta|default:"---"}}</td>
-                <td><a href="{{ object.get_absolute_url }}">{{ object.titular_dependente }}</a> </td>
+                <td>{{ object.titular_dependente }} </td>
                 <td>{{object.get_conjunta_display|default:"---"}}</td>
                 <td>{{object.saldo_inicial|default:"---"}}</td>
                 <td>{{object.saldo_atual|default:"---"}}</td>
                 <td>{{object.data_encerramento|date:"d/m/Y"|default:"---"}}</td>
 
-                <td><a class ="btn btn-warning btn-sm" href="{% url 'contasbancarias_edit' object.id %}">Editar</a>
-                  <a class ="btn btn-danger btn-sm" href="{% url 'contas_bancarias_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar a conta : {{ object.nome_banco }} ?  ')">Excluir</a></td>
+                <td>
+                    <a class ="btn btn-warning btn-sm" href="{% url 'contasbancarias_edit' object.id %}">Editar</a>
+                    <a class ="btn btn-danger btn-sm" href="{% url 'contas_bancarias_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar a conta : {{ object.nome_banco }} ?  ')">Excluir</a>
+                </td>
 
               </tr>
             {% endfor %}

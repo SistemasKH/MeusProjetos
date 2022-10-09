@@ -145,7 +145,7 @@ class Exame(models.Model):
     exame = models.ImageField('Upload Exames',  upload_to='exames/', blank=True, null=True)  # noqa E501
 
     def __str__(self):
-        return f'{self.pos_consulta}-{self.exame}'
+        return f'{self.pos_consulta} - {self.exame}'
 
 
 class Medicamento(models.Model):
