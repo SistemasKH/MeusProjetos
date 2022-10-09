@@ -47,7 +47,7 @@ class Consulta(models.Model):
         ordering = ('-data_consulta', '-hora')
 
     def __str__(self):
-        return f'{self.pk} - {self.dependente} - {self.data_consulta} - {self.hora} - {self.nome_especialista} - {self.especialidade}'  # noqa E501
+        return f'{self.pk} - {self.dependente} - {self.nome_especialista} - {self.especialidade}'  # noqa E501
 
     def get_absolute_url(self):
         return reverse("consulta_detail", kwargs={"pk": self.id})
