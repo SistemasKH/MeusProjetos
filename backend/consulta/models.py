@@ -86,6 +86,7 @@ class PosConsulta(models.Model):
     tratamento = models.TextField('Tratamento', blank=True, null=True)  # noqa E501
     observacao = models.TextField('Observação', blank=True, null=True)  # noqa E501
 
+
     def __str__(self):
         return f'{self.pk} - {self.consulta.dependente}'
 
