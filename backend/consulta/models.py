@@ -44,7 +44,7 @@ class Consulta(models.Model):
     motivo_cancelamento = models.CharField('Motivo Cancelamento', max_length=30, choices=CANCELAMENTO_CONSULTA_CHOICES, blank=True, null=True)  # noqa E501
 
     class Meta:
-        ordering = ('data_consulta', 'hora')
+        ordering = ('-data_consulta', '-hora')
 
     def __str__(self):
         return f'{self.pk} - {self.dependente} - {self.data_consulta} - {self.hora} - {self.nome_especialista} - {self.especialidade}'  # noqa E501
