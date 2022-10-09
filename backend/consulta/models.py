@@ -225,7 +225,7 @@ class Glicose(models.Model):
     )
 
     class Meta:
-        ordering = ('data_medicao', 'hora')
+        ordering = ('-data_medicao', '-hora')
 
     def __str__(self):
         return f'{self.cuidador} - {self.dependente} - {self.responsavel}'
