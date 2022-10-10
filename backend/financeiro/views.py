@@ -11,26 +11,26 @@ from backend.core.mixins import PermissaoFamiliaMixin
 from .forms import (
     ComprovanteAddForm,
     ComprovantesFormset,
-    ContasBancariasForm,
+    ContaBancariaForm,
     CreditoForm,
     CreditoUpdateForm
 )
-from .models import Comprovante, ContasBancarias, Credito
+from .models import Comprovante, ContaBancaria, Credito
 
 
-class ContasBancariasListView(LRM, PermissaoFamiliaMixin, ListView):
-    model = ContasBancarias
+class ContaBancariaListView(LRM, PermissaoFamiliaMixin, ListView):
+    model = ContaBancaria
 
     def get_queryset(self):
         dependente = self.request.GET.get('titular_dependente')
 
         if dependente:
-            queryset = ContasBancarias.objects.filter(titular_dependente=dependente)  # noqa E501
+            queryset = ContaBancaria.objects.filter(titular_dependente=dependente)  # noqa E501
             return queryset
 
         usuario = self.request.user.usuarios.first()
         familia = usuario.familia
-        queryset = ContasBancarias.objects.filter(titular_dependente__familia__nome=familia)  # noqa E501
+        queryset = ContaBancaria.objects.filter(titular_dependente__familia__nome=familia)  # noqa E501
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -54,23 +54,13 @@ class ContasBancariasListView(LRM, PermissaoFamiliaMixin, ListView):
         return context
 
 
-class ContasBancariasDetailView(LRM, PermissaoFamiliaMixin, DetailView):
-    model = ContasBancarias
+class ContaBancariaDetailView(LRM, PermissaoFamiliaMixin, DetailView):
+    model = ContaBancaria
 
 
-class ContasBancariasCreateView(LRM, CreateView):
-    model = ContasBancarias
-    form_class = ContasBancariasForm
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs.update({'user': self.request.user})
-        return kwargs
-
-
-class ContasBancariasUpdateView(LRM, UpdateView):
-    model = ContasBancarias
-    form_class = ContasBancariasForm
+class ContaBancariaCreateView(LRM, CreateView):
+    model = ContaBancaria
+    form_class = ContaBancariaForm
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -78,12 +68,22 @@ class ContasBancariasUpdateView(LRM, UpdateView):
         return kwargs
 
 
-def contas_bancarias_delete(request, pk):
-    obj = get_object_or_404(ContasBancarias, pk=pk)
+class ContaBancariaUpdateView(LRM, UpdateView):
+    model = ContaBancaria
+    form_class = ContaBancariaForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
+
+def conta_bancaria_delete(request, pk):
+    obj = get_object_or_404(ContaBancaria, pk=pk)
     obj.delete()
     msg = 'Excluído com sucesso!'
     messages.add_message(request, messages.SUCCESS, msg)
-    return redirect('contasbancarias_list')
+    return redirect('contabancaria_list')
 
 
 class CreditoListView(LRM, PermissaoFamiliaMixin, ListView):

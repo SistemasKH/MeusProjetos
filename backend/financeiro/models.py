@@ -9,7 +9,7 @@ from backend.core.constants import (
 from backend.crm.models import Dependente, Responsavel
 
 
-class ContasBancarias(models.Model):
+class ContaBancaria(models.Model):
     titular_dependente = models.ForeignKey(
         Dependente,
         on_delete=models.CASCADE,
@@ -35,27 +35,27 @@ class ContasBancarias(models.Model):
         verbose_name_plural = 'Contas Bancárias'
 
     def __str__(self):
-        return f'{self.titular_dependente} - {self.nome_banco} - {self.conta} - {self.saldo_inicial}- {self.saldo_atual}'
+        return f'{self.titular_dependente} - {self.nome_banco} - {self.conta}'
 
     def get_absolute_url(self):
-        return reverse("contasbancarias_detail", kwargs={"pk": self.id})
+        return reverse("contabancaria_detail", kwargs={"pk": self.id})
 
     @property
     def list_url(self):
-        return reverse_lazy('contasbancarias_list')
+        return reverse_lazy('contabancaria_list')
 
     @property
     def update_url(self):
         if self.pk:
             kw = {'pk': self.pk}
-            return reverse_lazy('contasbancarias_edit', kwargs=kw)
+            return reverse_lazy('contabancaria_edit', kwargs=kw)
         return None
 
     @property
     def delete_url(self):
         if self.pk:
             kw = {'pk': self.pk}
-            return reverse_lazy('contas_bancarias_delete', kwargs=kw)
+            return reverse_lazy('conta_bancaria_delete', kwargs=kw)
         return None
 
 
@@ -65,7 +65,7 @@ class Credito(models.Model):
     depositante = models.CharField('Depositante', max_length=100, blank=True, null=True)  # noqa E501
     valor = models.DecimalField('Valor',  max_digits=15, decimal_places=2, default=0)  # noqa E501
     conta_credito = models.ForeignKey(
-        ContasBancarias,
+        ContaBancaria,
         on_delete=models.CASCADE,
         verbose_name='Conta Crédito'
     )

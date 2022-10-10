@@ -4,10 +4,10 @@ from django.forms import inlineformset_factory
 from backend.core.forms import ImagePreviewWidget
 from backend.crm.models import Dependente, Responsavel, Usuario
 
-from .models import Comprovante, ContasBancarias, Credito
+from .models import Comprovante, ContaBancaria, Credito
 
 
-class ContasBancariasForm(forms.ModelForm):
+class ContaBancariaForm(forms.ModelForm):
     required_css_class = 'required'
 
     data_abertura = forms.DateField(
@@ -34,7 +34,7 @@ class ContasBancariasForm(forms.ModelForm):
     )
 
     class Meta:
-        model = ContasBancarias
+        model = ContaBancaria
         fields = '__all__'
 
     def __init__(self, user=None, *args, **kwargs):

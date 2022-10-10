@@ -36,12 +36,13 @@
           </thead>
           <tbody>
             {%  for object in object_list %}
+
               <tr>
-                <td><a href="{{ object.get_absolute_url }}">{{ object.data_consulta|date:"d/m/Y" }}</a></td>
+                <td>{{ object.data_consulta|date:"d/m/Y" }}</td>
                 <td>{{ object.hora }}</td>
                 <td>{{ object.dependente }}</td>
                 <td>{{ object.get_especialidade_display|default:"---" }} </td>
-                <td>{{ object.nome_especialista|default:"---" }} </td>
+                <td><a href="{{ object.get_absolute_url }}">{{ object.nome_especialista|default:"---" }} </a></td>
                 <td>{{ object.acompanhante_responsavel|default:"---" }} </td>
                 <td>{{ object.cancelamento|date:"d/m/Y"}}</td>
 

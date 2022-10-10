@@ -74,6 +74,7 @@ class ConsultaForm(forms.ModelForm):
         model = Consulta
         fields = '__all__'
 
+
     def __init__(self, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['hora'].widget.attrs.update({'class': 'mask-hora'})
