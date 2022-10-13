@@ -326,7 +326,7 @@ class JornadaTrabalho(models.Model):
     observacao = models.TextField('Observação', blank=True, null=True)  # noqa E501
 
     class Meta:
-        ordering = 'dh_entrada',
+        ordering = 'dh_entrada','cuidador'
         verbose_name = 'Jornada de Trabalho',
         verbose_name_plural = 'Jornadas de Trabalho'
 
