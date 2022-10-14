@@ -520,7 +520,7 @@ class JornadaTrabalhoListView(LRM, PermissaoFamiliaMixin, ListView):
             'Acumulado semanal',
             'Acumulado mensal',
             'Responsavel dia',
-            'Observação',
+
         )
         return context
 

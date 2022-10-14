@@ -43,7 +43,7 @@
                 <td>{{ object.soma_horas_semanal|duration_to_hours }}</td>
                 <td>{{ object.soma_horas_mensal|duration_to_hours }}</td>
                 <td>{{ object.responsavel_dia }}</td>
-                <td>{{ object.observacao }}</td>
+
                 {% if not user|has_group:"cuidador" %}
                   <td>
                     <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
