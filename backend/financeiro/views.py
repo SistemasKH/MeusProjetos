@@ -9,14 +9,14 @@ from backend.core.mixins import PermissaoFamiliaMixin
 
 from .forms import (
     ComprovanteAddForm,
+    ComprovanteDespesaAddForm,
+    ComprovantesDespesaFormset,
     ComprovantesFormset,
     ContaBancariaForm,
     CreditoForm,
     CreditoUpdateForm,
     DespesaForm,
-    DespesaUpdateForm,
-    ComprovanteDespesaAddForm,
-    ComprovantesDespesaFormset,
+    DespesaUpdateForm
 )
 from .models import Comprovante, ContaBancaria, Credito, Despesa, ComprovanteDespesa
 
@@ -136,11 +136,17 @@ class CreditoCreateView(LRM, CreateView):
         credito = self.object
         comprovantes = self.request.FILES.getlist('comprovante')
 
+        # Salva os comprovantes
         for comprovante in comprovantes:
             Comprovante.objects.create(
                 credito=credito,
                 comprovante=comprovante
             )
+
+        # Atualiza o saldo atual
+        conta_bancaria = ContaBancaria.objects.get(pk=self.object.conta_credito.pk)
+        conta_bancaria.saldo_atual += self.object.valor
+        conta_bancaria.save()
 
         return super().form_valid(form)
 

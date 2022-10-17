@@ -16,47 +16,47 @@
           <tbody>
             <tr>
               <td>Dependente</td>
-              <td>{{object.titular_dependente|default:"---"}}</td>
+              <td>{{ object.titular_dependente|default:"---" }}</td>
             </tr>
 
             <tr>
               <td>Data da abertura</td>
-              <td>{{object.data_abertura|date:"d/m/Y"|default:"---" }}</td>
+              <td>{{ object.data_abertura|date:"d/m/Y"|default:"---" }}</td>
             </tr>
             <tr>
               <td>Tipo de conta</td>
-              <td>{{object.get_conta_display|default:"---"}}</td>
+              <td>{{ object.get_conta_display|default:"---" }}</td>
             </tr>
             <tr>
               <td>Número do banco</td>
-              <td>{{object.numero_banco|default:"---"}}</td>
+              <td>{{ object.numero_banco|default:"---" }}</td>
             </tr>
             <tr>
               <td>Nome do banco</td>
-              <td>{{object.nome_banco|default:"---"}}</td>
+              <td>{{ object.nome_banco|default:"---" }}</td>
             </tr>
             <tr>
               <td>Agência</td>
-              <td>{{object.agencia|default:"---"}}</td>
+              <td>{{ object.agencia|default:"---" }}</td>
             </tr>
             <tr>
               <td>Número da Conta</td>
-              <td>{{object.numero_conta|default:"---"}}</td>
+              <td>{{ object.numero_conta|default:"---" }}</td>
             </tr>
             <tr>
               <td>Conjunta</td>
-              <td>{{object.get_conjunta_display|default:"---"}}</td>
+              <td>{{ object.get_conjunta_display|default:"---" }}</td>
             </tr>
             <tr>
               <td>Saldo Inicial</td>
-              <td>{{object.saldo_inicial|default:"---"}}</td>
+              <td>{{ object.saldo_inicial }}</td>
             </tr>
             <tr>
               <td>Saldo Atual</td>
-              <td>{{object.saldo_inicial|default:"---"}}</td>
+              <td>{{ object.saldo_inicial }}</td>
               <tr>
                 <td>Data Encerramento</td>
-                <td>{{object.data_encerramento|date:"d/m/Y"|default:"---"}}</td>
+                <td>{{ object.data_encerramento|date:"d/m/Y"|default:"---" }}</td>
               </tr>
             </tbody>
           </table>

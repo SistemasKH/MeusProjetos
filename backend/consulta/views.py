@@ -48,7 +48,6 @@ class ConsultaListView(LRM, PermissaoFamiliaMixin, ListView):
         queryset = Consulta.objects.filter(dependente__familia__nome=familia)  # noqa E501
         return queryset
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
@@ -369,7 +368,6 @@ class GlicoseListView(LRM, PermissaoFamiliaMixin, ListView):
         user = self.request.user
         context['form'] = DependentesDaFamiliaForm(user)
         context['labels'] = (
-
             'Dependente',
             'Data',
             'Hora',

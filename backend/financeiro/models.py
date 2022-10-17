@@ -3,10 +3,10 @@ from django.urls import reverse, reverse_lazy
 
 from backend.core.constants import (
     CREDITO_REF_CHOICES,
-    TIPO_CONJUNTA_CHOICES,
-    TIPO_CONTA_CHOICES,
     DESPESA_CHOICES,
     FORMA_PAGAMENTO_CHOICES,
+    TIPO_CONJUNTA_CHOICES,
+    TIPO_CONTA_CHOICES
 )
 from backend.crm.models import Dependente, Responsavel
 
@@ -182,6 +182,7 @@ class Despesa(models.Model):
             kw = {'pk': self.pk}
             return reverse_lazy('despesa_delete', kwargs=kw)
         return None
+
 
 class ComprovanteDespesa(models.Model):
     '''

@@ -4,7 +4,13 @@ from django.forms import inlineformset_factory
 from backend.core.forms import ImagePreviewWidget
 from backend.crm.models import Dependente, Responsavel, Usuario
 
-from .models import Comprovante, ComprovanteDespesa, ContaBancaria, Credito, Despesa
+from .models import (
+    Comprovante,
+    ComprovanteDespesa,
+    ContaBancaria,
+    Credito,
+    Despesa
+)
 
 
 class ContaBancariaForm(forms.ModelForm):
@@ -146,6 +152,7 @@ ComprovantesFormset = inlineformset_factory(
     min_num=1,
     validate_min=True,
 )
+
 
 class DespesaForm(forms.ModelForm):
     required_css_class = 'required'
