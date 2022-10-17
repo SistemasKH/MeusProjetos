@@ -7,7 +7,7 @@
     <div class="card-header py-3">
       <div class="d-sm-flex align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Detalhes da Medição de Glicose</h6>
-        <a href="{{ object.list_url }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
+        <a href="{% url 'glicose_list' %}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
       </div>
     </div>
     <div class="card-body">
@@ -35,8 +35,16 @@
               <td>{{object.taxa_glicose|default:"0"}}</td>
             </tr>
             <tr>
-              <td>Alimentos ingeridos</td>
-              <td>{{object.alimentos|default:"---"}}</td>
+              <td>Alimentação</td>
+              <td>{{object.alimentos|default:"0"}}</td>
+            </tr>
+            <tr>
+              <td>Tipo Insulina</td>
+              <td>{{object.get_tipo_insulina_display|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Qt Insulina</td>
+              <td>{{object.qt_insulina|default:"---"}}</td>
             </tr>
             <tr>
               <td>Media diária</td>
@@ -54,9 +62,9 @@
               <td>Responsável</td>
               <td>{{object.responsavel|default:"---"}}</td>
             </tr>
-            <tr>
+             <tr>
               <td>Observação</td>
-              <td>{{ object.observacao|default:"---" }}</td>
+              <td>{{object.observacao|default:"---"}}</td>
             </tr>
           </tbody>
         </table>

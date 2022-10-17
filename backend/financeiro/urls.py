@@ -2,12 +2,12 @@ from django.urls import include, path
 
 from backend.financeiro import views as v
 
-contasbancarias_urlpatterns = [
-    path('', v.ContasBancariasListView.as_view(), name='contasbancarias_list'),  # noqa E501
-    path('<int:pk>/', v.ContasBancariasDetailView.as_view(), name='contasbancarias_detail'),  # noqa E501
-    path('add/', v.ContasBancariasCreateView.as_view(), name='contasbancarias_add'),  # noqa E501
-    path('<int:pk>/edit/', v.ContasBancariasUpdateView.as_view(), name='contasbancarias_edit'),  # noqa E501
-    path('<int:pk>/delete/', v.contas_bancarias_delete, name='contas_bancarias_delete'),  # noqa E501
+contabancaria_urlpatterns = [
+    path('', v.ContaBancariaListView.as_view(), name='contabancaria_list'),  # noqa E501
+    path('<int:pk>/', v.ContaBancariaDetailView.as_view(), name='contabancaria_detail'),  # noqa E501
+    path('add/', v.ContaBancariaCreateView.as_view(), name='contabancaria_add'),  # noqa E501
+    path('<int:pk>/edit/', v.ContaBancariaUpdateView.as_view(), name='contabancaria_edit'),  # noqa E501
+    path('<int:pk>/delete/', v.conta_bancaria_delete, name='conta_bancaria_delete'),  # noqa E501
 ]
 
 credito_urlpatterns = [
@@ -24,7 +24,7 @@ comprovante_urlpatterns = [
 ]
 
 urlpatterns = [
-    path('contasbancarias/', include(contasbancarias_urlpatterns)),
+    path('contabancaria/', include(contabancaria_urlpatterns)),
     path('credito/', include(credito_urlpatterns)),
     path('comprovante/', include(comprovante_urlpatterns)),
 ]

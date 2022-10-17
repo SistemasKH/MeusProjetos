@@ -45,8 +45,9 @@ class ConsultaListView(LRM, PermissaoFamiliaMixin, ListView):
 
         usuario = self.request.user.usuarios.first()
         familia = usuario.familia
-        queryset = Consulta.objects.filter(dependente__familia__nome=familia)  # noqa E501
+        queryset = Consulta.objects.filter(dependente__familia__nome=familia) # noqa E501
         return queryset
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -301,6 +302,7 @@ class MedicamentoListView(LRM, PermissaoFamiliaMixin, ListView):
         user = self.request.user
         context['form'] = DependentesDaFamiliaForm(user)
         context['labels'] = (
+            'Dependente',
             'Medicamento',
             'Substância',
             'Indicações',
@@ -514,11 +516,11 @@ class JornadaTrabalhoListView(LRM, PermissaoFamiliaMixin, ListView):
             'Prestador Serviço',
             'Data/Hora Entrada',
             'Data/Hora Saída',
-            'Quant horas dia',
+            'Horas diarias',
             'Acumulado semanal',
             'Acumulado mensal',
             'Responsavel dia',
-            'Observação',
+
         )
         return context
 

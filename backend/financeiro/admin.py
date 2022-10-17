@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from .models import Comprovante, ContasBancarias, Credito
+from .models import Comprovante, ContaBancaria, Credito
 
 
-@admin.register(ContasBancarias)
-class ContasBancariasAdmin(admin.ModelAdmin):
+@admin.register(ContaBancaria)
+class ContaBancariaAdmin(admin.ModelAdmin):
     list_display = (
         '__str__',
 

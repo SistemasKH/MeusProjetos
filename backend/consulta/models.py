@@ -44,10 +44,10 @@ class Consulta(models.Model):
     motivo_cancelamento = models.CharField('Motivo Cancelamento', max_length=30, choices=CANCELAMENTO_CONSULTA_CHOICES, blank=True, null=True)  # noqa E501
 
     class Meta:
-        ordering = ('data_consulta', 'hora')
+        ordering = ('-data_consulta', '-hora')
 
     def __str__(self):
-        return f'{self.pk} - {self.dependente} - {self.data_consulta} - {self.hora} - {self.nome_especialista} - {self.especialidade}'  # noqa E501
+        return f'{self.pk} - {self.dependente} - {self.nome_especialista} - {self.especialidade}'  # noqa E501
 
     def get_absolute_url(self):
         return reverse("consulta_detail", kwargs={"pk": self.id})
@@ -85,6 +85,7 @@ class PosConsulta(models.Model):
     diagnostico = models.TextField('Diagnóstico')  # noqa E501
     tratamento = models.TextField('Tratamento', blank=True, null=True)  # noqa E501
     observacao = models.TextField('Observação', blank=True, null=True)  # noqa E501
+
 
     def __str__(self):
         return f'{self.pk} - {self.consulta.dependente}'
@@ -145,7 +146,7 @@ class Exame(models.Model):
     exame = models.ImageField('Upload Exames',  upload_to='exames/', blank=True, null=True)  # noqa E501
 
     def __str__(self):
-        return f'{self.pos_consulta}-{self.exame}'
+        return f'{self.pos_consulta} - {self.exame}'
 
 
 class Medicamento(models.Model):
@@ -225,7 +226,7 @@ class Glicose(models.Model):
     )
 
     class Meta:
-        ordering = ('data_medicao', 'hora')
+        ordering = ('-data_medicao', '-hora')
 
     def __str__(self):
         return f'{self.cuidador} - {self.dependente} - {self.responsavel}'
@@ -325,7 +326,7 @@ class JornadaTrabalho(models.Model):
     observacao = models.TextField('Observação', blank=True, null=True)  # noqa E501
 
     class Meta:
-        ordering = 'dh_entrada',
+        ordering = 'dh_entrada','cuidador'
         verbose_name = 'Jornada de Trabalho',
         verbose_name_plural = 'Jornadas de Trabalho'
 
