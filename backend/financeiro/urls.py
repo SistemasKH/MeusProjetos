@@ -23,8 +23,24 @@ comprovante_urlpatterns = [
     path('<int:pk>/delete/', v.comprovante_delete, name='comprovante_delete'),  # noqa E501
 ]
 
+despesa_urlpatterns = [
+    path('', v.DespesaListView.as_view(), name='despesa_list'),  # noqa E501
+    path('<int:pk>/', v.DespesaDetailView.as_view(), name='despesa_detail'),  # noqa E501
+    path('add/', v.DespesaCreateView.as_view(), name='despesa_add'),  # noqa E501
+    path('<int:pk>/edit/', v.despesa_update, name='despesa_edit'),  # noqa E501
+    path('<int:pk>/delete/', v.despesa_delete, name='despesa_delete'),  # noqa E501
+    path('<int:despesa_pk>/comprovante_despesa-add/', v.comprovante_despesa_add_form, name='comprovante_despesa_add_form'),  # noqa E501
+]
+comprovante_despesa_urlpatterns = [
+    path('<int:pk>/delete/', v.comprovante_despesa_delete, name='comprovante_despesa_delete'),  # noqa E501
+]
+
+
 urlpatterns = [
     path('contabancaria/', include(contabancaria_urlpatterns)),
     path('credito/', include(credito_urlpatterns)),
     path('comprovante/', include(comprovante_urlpatterns)),
+    path('despesa/', include(despesa_urlpatterns)),
+    path('comprovante_despesa/', include(comprovante_despesa_urlpatterns)),
+
 ]

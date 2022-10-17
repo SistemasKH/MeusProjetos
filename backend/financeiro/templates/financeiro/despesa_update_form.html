@@ -11,12 +11,12 @@
           {% else %}
             Adicionar
           {% endif %}
-          Editar Crédito</h6>
-        <a href="{% url 'credito_list' %}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
+          Editar Despesa</h6>
+        <a href="{% url 'despesa_list' %}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
       </div>
     </div>
     <div class="card-body col-6 offset-3">
-      <form action="." method="POST" enctype="multipart/form-data">
+      <form action=".." method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
         {% for field in form.visible_fields %}
@@ -44,19 +44,19 @@
 
             <legend>Comprovantes</legend>
 
-            {% for comprovante_form in formset_comprovante %}
+            {% for comprovante_despesa_form in formset_comprovante_despesa %}
               <div id="comprovante" class="form-inline">
                 <div id="item-{{ forloop.counter0 }}" class="form-group">
-                  {{ comprovante_form.credito }}
-                  {{ comprovante_form.id }}
+                  {{ comprovante_despesa_form }}
+                  {{ comprovante_despesa_form.id }}
 
-                  {% if comprovante_form.comprovante.value %}
-                    {{ comprovante_form.comprovante.label }}
-                    {{ comprovante_form.comprovante }}
+                  {% if comprovante_despesa_form.comprovante.value %}
+                    {{ comprovante_despesa_form.comprovante.label }}
+                    {{ comprovante_despesa_form.comprovante }}
                     <a
                       class="close"
                       type="button"
-                      hx-delete="{% url 'comprovante_delete' comprovante_form.id.value %}"
+                      hx-delete="{% url 'comprovante_despesa_delete' comprovante_despesa_form.id.value %}"
                       hx-target="closest div"
                       hx-swap="outerHTML"
                     >
@@ -73,8 +73,8 @@
               <a
                 class="btn btn-success"
                 data-toggle="modal"
-                data-target="#comprovanteAddModal"
-                hx-get="{% url 'comprovante_add_form' object.pk %}"
+                data-target="#comprovanteDespesaAddModal"
+                hx-get="{% url 'comprovante_despesa_add_form' object.pk %}"
                 hx-target="#comprovanteModalBody"
               >
                 <i class="fa fa-plus"></i> Adicionar
@@ -90,24 +90,24 @@
   </div>
 
   <!-- Comprovante Modal-->
-  <div class="modal fade" id="comprovanteAddModal" tabindex="-1" role="dialog" aria-labelledby="comprovanteModalLabel"
+  <div class="modal fade" id="comprovante_despesa_AddModal" tabindex="-1" role="dialog" aria-labelledby="comprovanteModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="comprovanteModalLabel">Adicionar Nova Comprovante</h5>
+          <h5 class="modal-title" id="comprovanteModalLabel">Adicionar Novo Comprovante</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <form action="{% url 'comprovante_add_form' object.pk %}" method="POST" enctype="multipart/form-data">
+        <form action="{% url 'comprovante__add_form' object.pk %}" method="POST" enctype="multipart/form-data">
           <div id="comprovanteModalBody" class="modal-body">
             <!-- O novo conteúdo será inserido aqui. -->
             <!-- Formulário de Comprovante -->
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <button class="btn btn-primary" type="submit">Salvar</button>
+            <button class="btn btn-primary" type="submit">Salvar</button>
           </div>
         </form>
       </div>

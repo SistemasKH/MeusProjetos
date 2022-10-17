@@ -4,7 +4,9 @@ from django.urls import reverse, reverse_lazy
 from backend.core.constants import (
     CREDITO_REF_CHOICES,
     TIPO_CONJUNTA_CHOICES,
-    TIPO_CONTA_CHOICES
+    TIPO_CONTA_CHOICES,
+    DESPESA_CHOICES,
+    FORMA_PAGAMENTO_CHOICES,
 )
 from backend.crm.models import Dependente, Responsavel
 
@@ -129,3 +131,75 @@ class Comprovante(models.Model):
 
     def __str__(self):
         return f'{self.credito}-{self.comprovante}'
+
+
+class Despesa(models.Model):
+    data_saida = models.DateField('Data Saída')  # noqa E501
+    referencia = models.CharField('Referência', max_length=30, choices=DESPESA_CHOICES)  # noqa E501
+    forma_pagamentocredor = models.CharField('Forma de Pagamento', max_length=40, choices=FORMA_PAGAMENTO_CHOICES)  # noqa E501
+    credor = models.CharField('Pago a ', max_length=150, blank=True, null=True)  # noqa E501
+    valor = models.DecimalField('Valor',  max_digits=15, decimal_places=2, default=0)  # noqa E501
+    conta_bancaria = models.ForeignKey(
+        ContaBancaria,
+        on_delete=models.CASCADE,
+        verbose_name='Conta Bancária'
+    )
+    responsavel_lancamento = models.ForeignKey(
+        Responsavel,
+        on_delete=models.CASCADE,
+        verbose_name='Responsável'
+    )
+    observacao = models.CharField('Observação', max_length=300, blank=True, null=True)  # noqa E501
+
+    class Meta:
+        ordering = ['-data_saida']
+        verbose_name = 'Despesa'
+        verbose_name_plural = 'Despesas'
+
+    def __str__(self):
+        return f'{self.pk} - {self.data_saida} - {self.conta_bancaria} - {self.referencia} - {self.forma_pagamentocredor} - {self.valor} - {self.responsavel_lancamento}'  # noqa E501
+
+    def get_upload_to(instance, filename):
+        return instance.get_upload_to(filename)
+
+    def get_absolute_url(self):
+        return reverse("despesa_detail", kwargs={"pk": self.id})
+
+    @property
+    def list_url(self):
+        return reverse_lazy('despesa_list')
+
+    @property
+    def update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('despesa_edit', kwargs=kw)
+        return None
+
+    @property
+    def delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('despesa_delete', kwargs=kw)
+        return None
+
+class ComprovanteDespesa(models.Model):
+    '''
+    Insere vários comprovantes para a mesma despesa.
+    '''
+    despesa = models.ForeignKey(
+        Despesa,
+        on_delete=models.SET_NULL,
+        related_name='comprovantes',
+        null=True,
+        blank=True
+    )
+    comprovante = models.ImageField(
+        'Upload Comprovante',
+        upload_to='despesa/',
+        blank=True,
+        null=True
+    )
+
+    def __str__(self):
+        return f'{self.despesa}-{self.comprovante}'
