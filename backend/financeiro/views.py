@@ -4,7 +4,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin as LRM
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
-
 from backend.consulta.forms import DependentesDaFamiliaForm
 from backend.core.mixins import PermissaoFamiliaMixin
 
@@ -19,7 +18,7 @@ from .forms import (
     ComprovanteDespesaAddForm,
     ComprovantesDespesaFormset,
 )
-from .models import Comprovante, ContaBancaria, Credito, Despesa
+from .models import Comprovante, ContaBancaria, Credito, Despesa, ComprovanteDespesa
 
 
 class ContaBancariaListView(LRM, PermissaoFamiliaMixin, ListView):
@@ -277,7 +276,7 @@ class DespesaCreateView(LRM, CreateView):
         comprovantes = self.request.FILES.getlist('comprovante')
 
         for comprovante in comprovantes:
-            Comprovante.objects.create(
+            ComprovanteDespesa.objects.create(
                 despesa=despesa,
                 comprovante=comprovante
             )
@@ -293,7 +292,7 @@ def despesa_update(request, pk):
     template_name = 'financeiro/despesa_update_form.html'
     instance = get_object_or_404(Despesa, pk=pk)
 
-    # Edita os dados de crédito.
+    # Edita os dados da despesa.
     form = DespesaUpdateForm(request.POST or None, instance=instance, prefix='main')
     # Edita as imagens dos Comprovantes.
     formset_comprovante_despesa = ComprovantesDespesaFormset(request.POST or None, instance=instance, prefix='items')
@@ -335,8 +334,8 @@ def despesa_delete(request, pk):
 
 def comprovante_despesa_add_form(request, despesa_pk):
     '''
-    Adiciona um formulário de Comprovantes no modal para inserir Comprovantes em Credito.
-    Método acionado via hx-get em credito_update_form.html para alimentar comprovanteAddModal.
+    Adiciona um formulário de Comprovantes no modal para inserir Comprovantes em Despesa.
+    Método acionado via hx-get em debito_update_form.html para alimentar comprovanteAddModal.
     '''
     template_name = 'financeiro/hx/comprovante_despesa_form_hx.html'
     form = ComprovanteDespesaAddForm(despesa_pk, request.POST or None)
@@ -346,7 +345,7 @@ def comprovante_despesa_add_form(request, despesa_pk):
         comprovantes = request.FILES.getlist('comprovante')
 
         for comprovante in comprovantes:
-            Comprovante.objects.create(
+            ComprovanteDespesa.objects.create(
                 despesa=despesa,
                 comprovante=comprovante
             )
@@ -359,7 +358,7 @@ def comprovante_despesa_add_form(request, despesa_pk):
 
 @login_required
 def comprovante_despesa_delete(request, pk):
-    obj = get_object_or_404(Comprovante, pk=pk)
+    obj = get_object_or_404(ComprovanteDespesa, pk=pk)
     obj.delete()
     msg = 'Excluído com sucesso!'
     messages.add_message(request, messages.SUCCESS, msg)

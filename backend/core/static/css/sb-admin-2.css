@@ -2267,9 +2267,9 @@ textarea.form-control {
 }
 
 .form-inline {
-  display: flex;
+  display: inline;
   flex-flow: row wrap;
-  align-items: center;
+  align-items: initial;
 }
 
 .form-inline .form-check {
@@ -5752,10 +5752,10 @@ a.close.disabled {
 }
 
 .modal-content {
-  position: relative;
+  position: center;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
   pointer-events: auto;
   background-color: #fff;
   background-clip: padding-box;
@@ -5769,7 +5769,7 @@ a.close.disabled {
   top: 0;
   left: 0;
   z-index: 1040;
-  width: 100vw;
+  width: 80vw;
   height: 100vh;
   background-color: #000;
 }
@@ -5798,7 +5798,8 @@ a.close.disabled {
 }
 
 .modal-title {
-  margin-bottom: 0;
+  margin-top: 1%;
+  margin-left: 1% ;
   line-height: 1.5;
 }
 

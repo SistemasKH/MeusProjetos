@@ -217,10 +217,10 @@ class ComprovanteDespesaAddForm(forms.ModelForm):
         model = ComprovanteDespesa
         fields = ('despesa', 'comprovante')
 
-    def __init__(self, credito_pk=None, *args, **kwargs):
+    def __init__(self, despesa_pk=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        queryset = Despesa.objects.filter(pk=credito_pk)
+        queryset = Despesa.objects.filter(pk=despesa_pk)
         self.fields['despesa'].queryset = queryset
 
         if len(queryset) == 1:

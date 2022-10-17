@@ -7,15 +7,15 @@
       <div class="d-sm-flex align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">
           {% if object.pk %}
-            Editar
+            Editar Crédito
           {% else %}
-            Adicionar
+            Adicionar Crédito
           {% endif %}
-          Editar Crédito</h6>
+          </h6>
         <a href="{% url 'credito_list' %}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
       </div>
     </div>
-    <div class="card-body col-6 offset-3">
+    <div class="card-body col-10 offset-1">
       <form action="." method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
@@ -45,8 +45,8 @@
             <legend>Comprovantes</legend>
 
             {% for comprovante_form in formset_comprovante %}
-              <div id="comprovante" class="form-inline">
-                <div id="item-{{ forloop.counter0 }}" class="form-group">
+              <div id="comprovante">
+                <div id="item-{{ forloop.counter0 }}" class="form-group" style="width: 50vw">
                   {{ comprovante_form.credito }}
                   {{ comprovante_form.id }}
 
@@ -95,7 +95,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="comprovanteModalLabel">Adicionar Nova Comprovante</h5>
+          <h5 class="modal-title" id="comprovanteModalLabel">Adicionar Novo Comprovante</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
@@ -107,7 +107,7 @@
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <button class="btn btn-primary" type="submit">Salvar</button>
+            <button class="btn btn-primary" type="submit">Salvar</button>
           </div>
         </form>
       </div>

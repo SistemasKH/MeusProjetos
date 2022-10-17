@@ -48,7 +48,7 @@
             <legend>Receitas</legend>
 
             {% for receita_form in formset_receita %}
-              <div id="receita" class="form-inline">
+              <div id="receita">
                 <div id="item-{{ forloop.counter0 }}" class="form-group">
                   {{ receita_form.pos_consulta }}
                   {{ receita_form.id }}
@@ -89,8 +89,8 @@
             <legend>Exames</legend>
 
             {% for exame_form in formset_exame %}
-              <div id="exame" class="form-inline">
-                <div id="item-{{ forloop.counter0 }}" class="form-group">
+              <div id="exame">
+                <div id="item-{{ forloop.counter0 }}" class="form-group" style="width: 50vw">
                   {{ exame_form.pos_consulta }}
                   {{ exame_form.id }}
 
