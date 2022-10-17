@@ -86,7 +86,6 @@ class PosConsulta(models.Model):
     tratamento = models.TextField('Tratamento', blank=True, null=True)  # noqa E501
     observacao = models.TextField('Observação', blank=True, null=True)  # noqa E501
 
-
     def __str__(self):
         return f'{self.pk} - {self.consulta.dependente}'
 
@@ -326,7 +325,7 @@ class JornadaTrabalho(models.Model):
     observacao = models.TextField('Observação', blank=True, null=True)  # noqa E501
 
     class Meta:
-        ordering = 'dh_entrada','cuidador'
+        ordering = 'dh_entrada', 'cuidador'
         verbose_name = 'Jornada de Trabalho',
         verbose_name_plural = 'Jornadas de Trabalho'
 

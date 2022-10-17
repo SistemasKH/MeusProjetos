@@ -12,6 +12,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='jornadatrabalho',
-            options={'ordering': ('dh_entrada', 'cuidador'), 'verbose_name': ('Jornada de Trabalho',), 'verbose_name_plural': 'Jornadas de Trabalho'},
+            options={'ordering': ('dh_entrada', 'cuidador'), 'verbose_name': (
+                'Jornada de Trabalho',), 'verbose_name_plural': 'Jornadas de Trabalho'},
         ),
     ]
