@@ -27,8 +27,10 @@
               {% for label in labels %}
                 <th>{{ label }}</th>
               {% endfor %}
-              {% if not user|has_group:"cuidador" %}
+              {% if object.ultimo %}
                 <th style="min-width:8rem">Acões</th>
+              {% else %}
+                 <th></th>
               {% endif %}
             </tr>
           </thead>
@@ -37,9 +39,12 @@
               {% for label in labels %}
                 <th>{{ label }}</th>
               {% endfor %}
-              {% if not user|has_group:"cuidador" %}
+              {% if object.ultimo %}
                 <th style="min-width:8rem">Acões</th>
+              {% else %}
+              <th></th>
               {% endif %}
+
             </tr>
           </tfoot>
           <tbody>
@@ -54,16 +59,16 @@
                 <td>{{ object.media_mensal }}</td>
                 <td>{{ object.cuidador }}</td>
                 <td>{{ object.responsavel }} </td>
-                {% if not user|has_group:"cuidador" %}
+
                   {% if object.ultimo %}
                     <td>
-                      <a class ="btn btn-warning btn-sm" href="{{ object.update_url }}">Editar</a>
+                      <a class ="btn btn-warning btn-sm" href="{% url 'glicose_edit' object.id %}">Editar</a>
                       <a class ="btn btn-danger btn-sm" href="{% url 'glicose_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar o taxa de glicose de id: {{ object.data_medicao }} ?  ')">Excluir</a>
                     </td>
                   {% else %}
                     <td></td>
                   {% endif %}
-                {% endif %}
+
               </tr>
             {% endfor %}
           </tbody>
