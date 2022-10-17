@@ -1,6 +1,12 @@
 from django.contrib import admin
 
-from .models import Comprovante, ContaBancaria, Credito, Despesa, ComprovanteDespesa
+from .models import (
+    Comprovante,
+    ComprovanteDespesa,
+    ContaBancaria,
+    Credito,
+    Despesa
+)
 
 
 @admin.register(ContaBancaria)
@@ -31,6 +37,7 @@ class ComprovanteInline(admin.TabularInline):
     model = Comprovante
     extra = 0
 
+
 @admin.register(Despesa)
 class DespesaAdmin(admin.ModelAdmin):
     list_display = (
@@ -41,6 +48,7 @@ class DespesaAdmin(admin.ModelAdmin):
     search_fields = ('referencia',)
     # list_filter = ('type',)
     # date_hierarchy = 'created'
+
 
 class ComprovanteDespesaInline(admin.TabularInline):
     model = ComprovanteDespesa
