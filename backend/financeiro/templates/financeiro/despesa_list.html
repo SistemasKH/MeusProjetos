@@ -1,10 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-  </head>
-  <body>
+{% extends 'base.html' %}
 
-  </body>
-</html>
+
+{% block title %} Crédito em Conta {% endblock %}
+
+{% block content %}
+
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Lista de Despesas</h6>
+        <a href="{% url 'despesa_add' %}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+          class="fas fa-plus fa-sm text-white-50"></i> Adicionar</a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive-sm">
+        <table
+          id="dataTable"
+          class="table table-striped"
+          width="100%"
+          cellspacing="0"
+        >
+          <thead>
+            <tr>
+              {% for label in labels %}
+                <th>{{ label }}</th>
+              {% endfor %}
+              <th style="min-width:8rem">Acões</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%  for object in object_list %}
+              <tr>
+                <td>{{object.data_saida|date:"d/m/Y"|default:"---" }}</td>
+                <td>{{object.conta_bancaria|default:"---"}}</td>
+                <td>{{object.get_forma_pagamentocredor_display|default:"---"}}</td>
+                <td><a href="{{ object.get_absolute_url }}">{{object.get_referencia_display|default:"---"}}</a></td>
+                <td>{{object.credor|default:"---"}}</td>
+                <td>R$ {{object.valor|default:"---"}}</td>
+                <td>{{object.responsavel_lancamento|default:"---"}}</td>
+                <td>{{object.observacao|default:"---"}}</td>
+
+
+                <td><a class ="btn btn-warning btn-sm" href="{% url 'despesa_edit' object.id %}">Editar</a>
+                  <a class ="btn btn-danger btn-sm" href="{% url 'despesa_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar a despesa : {{ object.get_referencia_display }} ?  ')">Excluir</a></td>
+
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -29,7 +29,7 @@ despesa_urlpatterns = [
     path('add/', v.DespesaCreateView.as_view(), name='despesa_add'),  # noqa E501
     path('<int:pk>/edit/', v.despesa_update, name='despesa_edit'),  # noqa E501
     path('<int:pk>/delete/', v.despesa_delete, name='despesa_delete'),  # noqa E501
-    path('<int:despesa_pk>/comprovante-add/', v.comprovante_despesa_add_form, name='comprovante_add_form'),  # noqa E501
+    path('<int:despesa_pk>/comprovante_despesa-add/', v.comprovante_despesa_add_form, name='comprovante_despesa_add_form'),  # noqa E501
 ]
 comprovante_despesa_urlpatterns = [
     path('<int:pk>/delete/', v.comprovante_despesa_delete, name='comprovante_despesa_delete'),  # noqa E501

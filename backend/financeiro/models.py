@@ -157,7 +157,7 @@ class Despesa(models.Model):
         verbose_name_plural = 'Despesas'
 
     def __str__(self):
-        return f'{self.pk} - {self.data_saida} - {self.conta_bancaria} - {self.referencia} - {self.forma_pagamento} - {self.valor} - {self.responsavel_lancamento}'  # noqa E501
+        return f'{self.pk} - {self.data_saida} - {self.conta_bancaria} - {self.referencia} - {self.forma_pagamentocredor} - {self.valor} - {self.responsavel_lancamento}'  # noqa E501
 
     def get_upload_to(instance, filename):
         return instance.get_upload_to(filename)

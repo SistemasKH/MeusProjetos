@@ -246,9 +246,9 @@ class DespesaListView(LRM, PermissaoFamiliaMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['labels'] = (
             'Dta Saída',
-            'Conta Bancária'
-            'Referência',
+            'Conta Bancária',
             'Forma de Pagamento',
+            'Referência',
             'Credor',
             'Valor',
             'Responsavel',
@@ -345,8 +345,8 @@ def comprovante_despesa_add_form(request, despesa_pk):
         despesa = Despesa.objects.get(pk=despesa_pk)
         comprovantes = request.FILES.getlist('comprovante')
 
-        for comprovante in comprovantes_despesa:
-            ComprovanteDespesa.objects.create(
+        for comprovante in comprovantes:
+            Comprovante.objects.create(
                 despesa=despesa,
                 comprovante=comprovante
             )

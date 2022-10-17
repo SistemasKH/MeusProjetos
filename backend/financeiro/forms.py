@@ -169,11 +169,11 @@ class DespesaForm(forms.ModelForm):
         model = Despesa
         fields = (
             'data_saida',
+            'conta_bancaria',
             'referencia',
-            'forma_pagamento'
+            'forma_pagamentocredor',
             'credor',
             'valor',
-            'conta_bancaria',
             'responsavel_lancamento',
             'comprovante',
             'observacao',
@@ -195,11 +195,11 @@ class DespesaUpdateForm(forms.ModelForm):
         model = Despesa
         fields = (
             'data_saida',
+            'conta_bancaria',
+            'forma_pagamentocredor',
             'referencia',
-            'forma_pagamento'
             'credor',
             'valor',
-            'conta_bancaria',
             'responsavel_lancamento',
             'observacao',
         )

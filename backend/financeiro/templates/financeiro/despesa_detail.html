@@ -1,10 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %} Lançamento de Despesas {% endblock %}
+
+{% block content %}
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Detalhes da Despesa</h6>
+        <a href="{% url 'despesa_list' %}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">Voltar</a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Data</td>
+              <td>{{object.data_saida|date:"d/m/Y"|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Conta de Débito</td>
+              <td>{{object.conta_bancaria|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Referência</td>
+              <td>{{object.get_referencia_display|default:"---" }}</td>
+            </tr>
+             <tr>
+              <td>Forma de Pagamento</td>
+              <td>{{object.get_forma_pagamentocredor_display|default:"---" }}</td>
+            </tr>
+            <tr>
+              <td>Pago a</td>
+              <td>{{object.credor|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Valor</td>
+              <td>R$ {{object.valor|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Responsável</td>
+              <td>{{object.responsavel_lancamento|default:"---"}}</td>
+            </tr>
+            <tr>
+              <td>Observação</td>
+              <td>{{object.observacao|default:"---"}}</td>
+            </tr>
+            <tr>
+              {% if object.comprovantes.all %}
+                <td>Comprovante</td>
+                <td>
+                  {% for item in object.comprovantes.all %}
+                    {% if item.comprovante %}
+                      <a href="{{ item.comprovante.url }}">
+                        <img src="{{ item.comprovante.url }}" style="width: 20vw" alt="{{ item.comprovante.url }}">
+                      </a>
+                    {% endif %}
+                  {% endfor %}
+                </td>
+              {% endif %}
+
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
