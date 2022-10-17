@@ -38,7 +38,7 @@
           <tbody>
 
             {%  for object in object_list %}
-            <tr>
+             <tr>
                 <td>{{ object.dependente }}</td>
                 <td><a href="{{ object.get_absolute_url }}">{{ object.medicamento_prescrito }}</a> </td>
                 <td> {{ object.principio_ativo }}</td>

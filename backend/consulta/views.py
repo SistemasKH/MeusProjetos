@@ -45,7 +45,7 @@ class ConsultaListView(LRM, PermissaoFamiliaMixin, ListView):
 
         usuario = self.request.user.usuarios.first()
         familia = usuario.familia
-        queryset = Consulta.objects.filter(dependente__familia__nome=familia) # noqa E501
+        queryset = Consulta.objects.filter(dependente__familia__nome=familia)  # noqa E501
         return queryset
 
 
