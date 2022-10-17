@@ -223,6 +223,7 @@ class Glicose(models.Model):
         verbose_name='Cuidador',
         related_name='Cuidador'
     )
+    ultimo = models.BooleanField(default=False)
 
     class Meta:
         ordering = ('-data_medicao', '-hora')

@@ -303,7 +303,7 @@ class GlicoseForm(forms.ModelForm):
     class Meta:
         model = Glicose
         fields = '__all__'
-        exclude = ('media_diaria', 'media_mensal')
+        exclude = ('media_diaria', 'media_mensal', 'ultimo')
 
     def calcula_taxa_media_diaria_de_glicose(self, instance):
         # Filtra pelo dependente e pela data_medicao.
@@ -352,6 +352,11 @@ class GlicoseForm(forms.ModelForm):
         if commit:
             instance.media_diaria = self.calcula_taxa_media_diaria_de_glicose(instance)  # noqa E501
             instance.media_mensal = self.calcula_taxa_media_mensal_de_glicose(instance)  # noqa E501
+
+            # Verifica se é o último registro para cada dependente
+            if Glicose.objects.filter(dependente=instance.dependente).exists():
+                instance.ultimo = True
+
             instance.save()
         return instance
 
