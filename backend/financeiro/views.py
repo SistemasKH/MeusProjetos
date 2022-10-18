@@ -261,8 +261,7 @@ class DespesaListView(LRM, PermissaoFamiliaMixin, ListView):
             'Credor',
             'Valor',
             'Saldo Atual',
-            'Responsavel',
-            'Observação'
+            'Responsavel'
 
         )
         return context
