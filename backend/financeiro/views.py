@@ -49,7 +49,6 @@ class ContaBancariaListView(LRM, PermissaoFamiliaMixin, ListView):
             'Tipo',
             'Conta',
             'Titular',
-            'Conjunta',
             'Inicial',
             'Atual',
             'Encerramento',
@@ -108,10 +107,11 @@ class CreditoListView(LRM, PermissaoFamiliaMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['labels'] = (
             'Dta Entrada',
+            'Conta',
             'Referência',
             'Depositante',
             'Valor',
-            'Conta',
+            'Saldo Atual',
             'Responsavel',
 
         )
@@ -145,11 +145,15 @@ class CreditoCreateView(LRM, CreateView):
 
         # Atualiza o saldo atual
         conta_bancaria = ContaBancaria.objects.get(pk=self.object.conta_credito.pk)
-        conta_bancaria.saldo_atual += self.object.valor
-        conta_bancaria.save()
-
+        if conta_bancaria.saldo_atual == 0:
+            self.object.saldo_atual = conta_bancaria.saldo_inicial + self.object.valor
+            conta_bancaria.saldo_atual = self.object.saldo_atual
+            conta_bancaria.save()
+        else:
+            self.object.saldo_atual = conta_bancaria.saldo_atual + self.object.valor
+            conta_bancaria.saldo_atual = self.object.saldo_atual
+            conta_bancaria.save()
         return super().form_valid(form)
-
 
 @login_required
 def credito_update(request, pk):
@@ -251,11 +255,12 @@ class DespesaListView(LRM, PermissaoFamiliaMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['labels'] = (
             'Dta Saída',
-            'Conta Bancária',
+            'Conta',
             'Forma de Pagamento',
             'Referência',
             'Credor',
             'Valor',
+            'Saldo Atual',
             'Responsavel',
             'Observação'
 
@@ -286,7 +291,16 @@ class DespesaCreateView(LRM, CreateView):
                 despesa=despesa,
                 comprovante=comprovante
             )
-
+       # Atualiza o saldo atual
+        conta_bancaria = ContaBancaria.objects.get(pk=self.object.conta_bancaria.pk)
+        if conta_bancaria.saldo_atual == 0:
+           self.object.saldo_atual = conta_bancaria.saldo_inicial - self.object.valor
+           conta_bancaria.saldo_atual = self.object.saldo_atual
+           conta_bancaria.save()
+        else:
+           self.object.saldo_atual = conta_bancaria.saldo_atual - self.object.valor
+           conta_bancaria.saldo_atual = self.object.saldo_atual
+           conta_bancaria.save()
         return super().form_valid(form)
 
 
@@ -332,7 +346,6 @@ def despesa_update(request, pk):
 def despesa_delete(request, pk):
     obj = get_object_or_404(Despesa, pk=pk)
     obj.delete()
-
     msg = 'Excluído com sucesso!'
     messages.add_message(request, messages.SUCCESS, msg)
     return redirect('despesa_list')

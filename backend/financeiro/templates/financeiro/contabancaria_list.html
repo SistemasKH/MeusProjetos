@@ -40,9 +40,8 @@
                 <td>{{ object.get_conta_display|default:"---" }}</td>
                 <td>{{ object.numero_conta|default:"---" }}</td>
                 <td><a href="{{ object.get_absolute_url }}">{{ object.titular_dependente }}</a> </td>
-                <td>{{ object.get_conjunta_display|default:"---" }}</td>
-                <td>{{ object.saldo_inicial }}</td>
-                <td>{{ object.saldo_atual }}</td>
+                <td>R$ {{ object.saldo_inicial }}</td>
+                <td>R$ {{ object.saldo_atual }}</td>
                 <td>{{ object.data_encerramento|date:"d/m/Y"|default:"---" }}</td>
                 <td>
                   <a class ="btn btn-warning btn-sm" href="{% url 'contabancaria_edit' object.id %}">Editar</a>

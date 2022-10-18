@@ -193,8 +193,9 @@ DESPESA_CHOICES = (
     ('38', 'Reembolso'),
     ('39', 'Roupas'),
     ('40', 'Salários Funcionários'),
-    ('41', 'Supermercado'),
-    ('42', 'Utensílios domésticos'),
+    ('41', 'Saque'),
+    ('42', 'Supermercado'),
+    ('43', 'Utensílios domésticos'),
 )
 
 FORMA_PAGAMENTO_CHOICES = (

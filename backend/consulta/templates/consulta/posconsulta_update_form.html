@@ -139,7 +139,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="receitaModalLabel">Adicionar Nova Receita</h5>
+          <h5 class="modal-title" id="receitaModalLabel">Adicionar Novo Exame</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
@@ -147,7 +147,7 @@
         <form action="{% url 'receita_add_form' object.pk %}" method="POST" enctype="multipart/form-data">
           <div id="receitaModalBody" class="modal-body">
             <!-- O novo conteúdo será inserido aqui. -->
-            <!-- Formulário de Receita -->
+            <!-- Formulário de Exame -->
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
@@ -176,7 +176,7 @@
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <button class="btn btn-primary" type="submit">Salvar</a>
+            <button class="btn btn-primary" type="submit">Salvar</button>
           </div>
         </form>
       </div>

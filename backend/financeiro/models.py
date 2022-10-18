@@ -66,6 +66,7 @@ class Credito(models.Model):
     referencia = models.CharField('Referência', max_length=30, choices=CREDITO_REF_CHOICES)  # noqa E501
     depositante = models.CharField('Depositante', max_length=100, blank=True, null=True)  # noqa E501
     valor = models.DecimalField('Valor',  max_digits=15, decimal_places=2, default=0)  # noqa E501
+    saldo_atual = models.DecimalField('Saldo Atual', max_digits=15, decimal_places=2, default=0) # noqa E501
     conta_credito = models.ForeignKey(
         ContaBancaria,
         on_delete=models.CASCADE,
@@ -79,7 +80,7 @@ class Credito(models.Model):
     observacao = models.CharField('Observação', max_length=300, blank=True, null=True)  # noqa E501
 
     class Meta:
-        ordering = ['-data_entrada']
+        ordering = ['-data_entrada',]
         verbose_name = 'Crédito Bancário'
         verbose_name_plural = 'Creditos Bancários'
 
@@ -139,6 +140,7 @@ class Despesa(models.Model):
     forma_pagamentocredor = models.CharField('Forma de Pagamento', max_length=40, choices=FORMA_PAGAMENTO_CHOICES)  # noqa E501
     credor = models.CharField('Pago a ', max_length=150, blank=True, null=True)  # noqa E501
     valor = models.DecimalField('Valor',  max_digits=15, decimal_places=2, default=0)  # noqa E501
+    saldo_atual = models.DecimalField('Saldo Atual',  max_digits=15, decimal_places=2, default=0)  # noqa E501
     conta_bancaria = models.ForeignKey(
         ContaBancaria,
         on_delete=models.CASCADE,

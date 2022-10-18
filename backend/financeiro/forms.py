@@ -77,6 +77,7 @@ class CreditoForm(forms.ModelForm):
             'referencia',
             'depositante',
             'valor',
+            'saldo_atual',
             'conta_credito',
             'responsavel_lancamento',
             'comprovante',
@@ -99,10 +100,11 @@ class CreditoUpdateForm(forms.ModelForm):
         model = Credito
         fields = (
             'data_entrada',
+            'conta_credito',
             'referencia',
             'depositante',
             'valor',
-            'conta_credito',
+            'saldo_atual',
             'responsavel_lancamento',
             'observacao',
         )
@@ -181,6 +183,7 @@ class DespesaForm(forms.ModelForm):
             'forma_pagamentocredor',
             'credor',
             'valor',
+            'saldo_atual',
             'responsavel_lancamento',
             'comprovante',
             'observacao',
@@ -207,6 +210,7 @@ class DespesaUpdateForm(forms.ModelForm):
             'referencia',
             'credor',
             'valor',
+            'saldo_atual',
             'responsavel_lancamento',
             'observacao',
         )
