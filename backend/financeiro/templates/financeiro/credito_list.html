@@ -32,8 +32,8 @@
           <tbody>
             {%  for object in object_list %}
               <tr>
+                <td>{{ object.conta_credito.nome_banco|default:"---" }}</td>
                 <td>{{ object.data_entrada|date:"d/m/Y"|default:"---" }}</td>
-                <td>{{ object.conta_credito|default:"---" }}</td>
                 <td><a href="{{ object.get_absolute_url }}">{{ object.get_referencia_display|default:"---" }}</a></td>
                 <td>{{ object.depositante|default:"---" }}</td>
                 <td>R$ {{ object.valor|default:"---" }}</td>

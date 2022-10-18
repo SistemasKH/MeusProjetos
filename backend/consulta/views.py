@@ -380,6 +380,15 @@ class GlicoseListView(LRM, PermissaoFamiliaMixin, ListView):
         )
         return context
 
+    #TODO não funciona a função
+    def ultimo(self):
+        dependente = self.request.GET.get('dependente')
+        ultimo = Glicose.objects.filter(dependente=dependente).first()
+        context = {
+            'ultimo': ultimo
+        }
+        return redirect('glicose_list', context)
+
 
 class GlicoseDetailView(LRM, PermissaoFamiliaMixin, DetailView):
     model = Glicose

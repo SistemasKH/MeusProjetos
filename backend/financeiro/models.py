@@ -80,7 +80,7 @@ class Credito(models.Model):
     observacao = models.CharField('Observação', max_length=300, blank=True, null=True)  # noqa E501
 
     class Meta:
-        ordering = ['-data_entrada',]
+        ordering = ('-data_entrada', 'conta_credito')
         verbose_name = 'Crédito Bancário'
         verbose_name_plural = 'Creditos Bancários'
 
@@ -154,7 +154,7 @@ class Despesa(models.Model):
     observacao = models.CharField('Observação', max_length=300, blank=True, null=True)  # noqa E501
 
     class Meta:
-        ordering = ['-data_saida']
+        ordering = ('-data_saida', 'conta_bancaria')
         verbose_name = 'Despesa'
         verbose_name_plural = 'Despesas'
 

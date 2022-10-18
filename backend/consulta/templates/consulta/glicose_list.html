@@ -13,9 +13,8 @@
           class="fas fa-plus fa-sm text-white-50"></i> Adicionar</a>
       </div>
     </div>
-    <div class="card-body">
+     <div class="card-body">
       <div class="table-responsive-sm">
-
         <table
           id="dataTable"
           class="table table-striped"
@@ -27,8 +26,10 @@
               {% for label in labels %}
                 <th>{{ label }}</th>
               {% endfor %}
-              {% if object.ultimo %}
-                <th style="min-width:8rem">Acões</th>
+              {% if not user|has_group:"cuidador" %}
+                  {% if ultimo.id %}
+                     <th style="min-width:8rem">Acões</th>
+                  {% endif %}
               {% else %}
                  <th></th>
               {% endif %}
@@ -39,12 +40,13 @@
               {% for label in labels %}
                 <th>{{ label }}</th>
               {% endfor %}
-              {% if object.ultimo %}
-                <th style="min-width:8rem">Acões</th>
+              {% if not user|has_group:"cuidador" %}
+                  {% if ultimo.id %}
+                     <th style="min-width:8rem">Acões</th>
+                  {% endif %}
               {% else %}
-              <th></th>
+                 <th></th>
               {% endif %}
-
             </tr>
           </tfoot>
           <tbody>
@@ -59,16 +61,14 @@
                 <td>{{ object.media_mensal }}</td>
                 <td>{{ object.cuidador }}</td>
                 <td>{{ object.responsavel }} </td>
-
-                  {% if object.ultimo %}
-                    <td>
-                      <a class ="btn btn-warning btn-sm" href="{% url 'glicose_edit' object.id %}">Editar</a>
-                      <a class ="btn btn-danger btn-sm" href="{% url 'glicose_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar o taxa de glicose de id: {{ object.data_medicao }} ?  ')">Excluir</a>
-                    </td>
-                  {% else %}
-                    <td></td>
+                {% if not user|has_group:"cuidador" %}
+                   {% if ultimo.id %}
+                     <td>
+                          <a class ="btn btn-warning btn-sm" href="{% url 'glicose_edit' object.id %}">Editar</a>
+                          <a class ="btn btn-danger btn-sm" href="{% url 'glicose_delete' object.id %}" onclick="return confirm ('Deseja mesmo deletar o taxa de glicose de id: {{ object.data_medicao }} ?  ')">Excluir</a>
+                     </td>
                   {% endif %}
-
+                {% endif %}
               </tr>
             {% endfor %}
           </tbody>

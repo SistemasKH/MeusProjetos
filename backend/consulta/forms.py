@@ -353,11 +353,12 @@ class GlicoseForm(forms.ModelForm):
             instance.media_diaria = self.calcula_taxa_media_diaria_de_glicose(instance)  # noqa E501
             instance.media_mensal = self.calcula_taxa_media_mensal_de_glicose(instance)  # noqa E501
 
+            # TODO não funciona a função e no form vai gravar no campo
             # Verifica se é o último registro para cada dependente
-            if Glicose.objects.filter(dependente=instance.dependente).exists():
-                instance.ultimo = True
+            #if Glicose.objects.filter(dependente=instance.dependente).exists():
+            #   instance.ultimo = True
 
-            instance.save()
+            #instance.save()
         return instance
 
 
