@@ -317,6 +317,7 @@ class JornadaTrabalho(models.Model):
     horas_trabalhadas_diaria = models.DurationField('Horas Diarias')  # noqa E501
     soma_horas_semanal = models.DurationField('Horas semanais')
     soma_horas_mensal = models.DurationField('Horas mensais')
+    feriado = models.BooleanField('Feriado', default=False)
     responsavel_dia = models.ForeignKey(
         Responsavel,
         on_delete=models.CASCADE,

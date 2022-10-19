@@ -521,6 +521,7 @@ class JornadaTrabalhoListView(LRM, PermissaoFamiliaMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['labels'] = (
             'Prestador Serviço',
+            'Feriado',
             'Data/Hora Entrada',
             'Data/Hora Saída',
             'Horas diarias',
