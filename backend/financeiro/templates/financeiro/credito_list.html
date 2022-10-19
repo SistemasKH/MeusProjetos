@@ -36,8 +36,8 @@
                 <td>{{ object.data_entrada|date:"d/m/Y"|default:"---" }}</td>
                 <td><a href="{{ object.get_absolute_url }}">{{ object.get_referencia_display|default:"---" }}</a></td>
                 <td>{{ object.depositante|default:"---" }}</td>
-                <td>R$ {{ object.valor|default:"---" }}</td>
-                <td>R$ {{ object.saldo_atual|default:"---" }}</td>
+                <td>{{ object.valor|default:"---" }}</td>
+                <td>{{ object.saldo_atual|default:"---" }}</td>
                 <td>{{ object.responsavel_lancamento|default:"---" }}</td>
 
                 <td><a class ="btn btn-warning btn-sm" href="{% url 'credito_edit' object.id %}">Editar</a>

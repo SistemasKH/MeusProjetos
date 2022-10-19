@@ -137,8 +137,8 @@ class Comprovante(models.Model):
 class Despesa(models.Model):
     data_saida = models.DateField('Data Saída')  # noqa E501
     referencia = models.CharField('Referência', max_length=30, choices=DESPESA_CHOICES)  # noqa E501
-    forma_pagamentocredor = models.CharField('Forma de Pagamento', max_length=40, choices=FORMA_PAGAMENTO_CHOICES)  # noqa E501
-    credor = models.CharField('Pago a ', max_length=100, blank=True, null=True)  # noqa E501
+    forma_pagamentocredor = models.CharField('Forma de Pagamento', max_length=15, choices=FORMA_PAGAMENTO_CHOICES)  # noqa E501
+    credor = models.CharField('Pago a ', max_length=70, blank=True, null=True)  # noqa E501
     valor = models.DecimalField('Valor',  max_digits=15, decimal_places=2, default=0)  # noqa E501
     saldo_atual = models.DecimalField('Saldo Atual',  max_digits=15, decimal_places=2, default=0)  # noqa E501
     conta_bancaria = models.ForeignKey(

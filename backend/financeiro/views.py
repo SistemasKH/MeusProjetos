@@ -49,9 +49,9 @@ class ContaBancariaListView(LRM, PermissaoFamiliaMixin, ListView):
             'Tipo',
             'Conta',
             'Titular',
-            'Inicial',
-            'Atual',
-            'Encerramento',
+            'Saldo Inicial RS',
+            'Saldo Atual RS',
+
         )
         return context
 
@@ -110,8 +110,8 @@ class CreditoListView(LRM, PermissaoFamiliaMixin, ListView):
             'Conta',
             'Referência',
             'Depositante',
-            'Valor',
-            'Saldo Atual',
+            'Valor R$',
+            'Saldo Atual R$',
             'Responsavel',
 
         )
@@ -259,8 +259,8 @@ class DespesaListView(LRM, PermissaoFamiliaMixin, ListView):
             'Forma de Pagamento',
             'Referência',
             'Credor',
-            'Valor',
-            'Saldo Atual',
+            'Valor R$',
+            'Saldo Atual R$',
             'Responsavel'
 
         )
