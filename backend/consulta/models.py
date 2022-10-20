@@ -1,7 +1,6 @@
 import datetime
 import decimal
 from datetime import date, time, timedelta
-
 from django.db import models
 from django.urls import reverse, reverse_lazy
 

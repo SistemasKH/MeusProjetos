@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from backend.consulta.forms import DependentesDaFamiliaForm
 from backend.core.mixins import PermissaoFamiliaMixin
+from backend.crm.models import Usuario
 
 from .forms import (
     ComprovanteAddForm,
@@ -16,7 +17,8 @@ from .forms import (
     CreditoForm,
     CreditoUpdateForm,
     DespesaForm,
-    DespesaUpdateForm
+    DespesaUpdateForm,
+    ContasDaFamiliaForm
 )
 from .models import Comprovante, ContaBancaria, Credito, Despesa, ComprovanteDespesa
 
@@ -253,6 +255,8 @@ class DespesaListView(LRM, PermissaoFamiliaMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        #user = self.request.user.usuarios.first()
+        #context['form'] = ContasDaFamiliaForm(user)
         context['labels'] = (
             'Conta',
             'Dta Saída',

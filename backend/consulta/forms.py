@@ -4,7 +4,6 @@ from datetime import timedelta
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import inlineformset_factory
-
 from backend.core.forms import ImagePreviewWidget
 from backend.crm.models import Cuidador, Dependente, Responsavel, Usuario
 

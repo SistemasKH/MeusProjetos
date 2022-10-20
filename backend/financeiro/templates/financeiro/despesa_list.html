@@ -12,9 +12,21 @@
         <a href="{% url 'despesa_add' %}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
           class="fas fa-plus fa-sm text-white-50"></i> Adicionar</a>
       </div>
+
     </div>
     <div class="card-body">
+      <div>
+
+      </div>
       <div class="table-responsive-sm">
+          <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+              <div class="row">
+                  <form id="formBuscar" action="." method="GET">
+                       {{ form.contabancarias.label }}
+                       {{ form.contabancarias.nome_banco }}
+                   </form>
+              </div>
+          </div>
         <table
           id="dataTable"
           class="table table-striped"
@@ -22,6 +34,7 @@
           cellspacing="0"
         >
           <thead>
+
             <tr>
               {% for label in labels %}
                 <th>{{ label }}</th>
@@ -48,7 +61,16 @@
             {% endfor %}
           </tbody>
         </table>
+
       </div>
     </div>
   </div>
 {% endblock content %}
+{% block js %}
+  <script>
+    $('#id_contasbancarias').on('change', function(e){
+      e.preventDefault()
+      $('#formBuscar').submit()
+    })
+  </script>
+{% endblock js %}
