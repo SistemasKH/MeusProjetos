@@ -125,9 +125,6 @@
   <!-- Divider -->
   {% if not user|has_group:"cuidador" %}
     <hr class="sidebar-divider">
-
-
-
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinanceiro"
         aria-expanded="true" aria-controls="collapse">
@@ -143,15 +140,6 @@
       </div>
     </li>
   {% endif %}
-
-  <!-- Nav Item - Tables
-  {% if debug %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'tables' %}">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Tables</span></a>
-    </li>-->
-{% endif %}
 
 <!-- Divider-->
 <hr class="sidebar-divider d-none d-md-block">
