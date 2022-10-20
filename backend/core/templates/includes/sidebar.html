@@ -1,6 +1,7 @@
 {% load static %}
 {% load usergroup_tags %}
 
+
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
@@ -13,7 +14,7 @@
   <hr class="sidebar-divider">
 
   <!-- Heading
-  <div class="sidebar-heading">
+  <div class="sidebar-toggled toggled">
     Famílias
   </div>-->
   {% if not user|has_group:"cuidador" %}
