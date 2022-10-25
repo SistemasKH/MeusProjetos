@@ -4,7 +4,6 @@
    font-size: large;
    color: #090909;
    margin: 3%;
-
 }
 .table-responsive{
     scrollbar-width: none;
@@ -67,6 +66,15 @@ thead{
 }
 
 #menu-h ul li a:hover {
-    background-color: #64D8F3;
+    background-color: #1795AE;
+    color:#ffefef;
 }
 
+@media (min-width: 768px) {
+.corpo-texto{
+   text-align: Left;
+   font-size: medium;
+   color: #090909;
+   margin: 3%;
+}
+}
