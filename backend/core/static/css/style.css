@@ -1,4 +1,7 @@
 
+.p {
+    color: #000000;
+}
 .corpo-texto{
    text-align: justify;
    font-size: large;
@@ -37,9 +40,7 @@ thead{
 .card-body{
   background-color: #F5F5F5;
 }
-.usuario{
-  color: #4D72DE;
-}
+
 #menu-h{
     margin: 0 auto;
     text-align: center;
@@ -70,7 +71,11 @@ thead{
     color:#ffefef;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 576px) {
+.p {
+   color: #090909;
+   font-size: medium;
+}
 .corpo-texto{
    text-align: Left;
    font-size: medium;
