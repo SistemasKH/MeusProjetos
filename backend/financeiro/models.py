@@ -36,8 +36,9 @@ class ContaBancaria(models.Model):
         verbose_name = 'Conta Bancária'
         verbose_name_plural = 'Contas Bancárias'
 
+
     def __str__(self):
-        return f'{self.titular_dependente} - {self.nome_banco} - {self.conta}'
+        return f'{self.titular_dependente} -  {self.nome_banco} '
 
     def get_absolute_url(self):
         return reverse("contabancaria_detail", kwargs={"pk": self.id})

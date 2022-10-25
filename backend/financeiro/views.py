@@ -29,6 +29,7 @@ class ContaBancariaListView(LRM, PermissaoFamiliaMixin, ListView):
     def get_queryset(self):
         dependente = self.request.GET.get('titular_dependente')
 
+
         if dependente:
             queryset = ContaBancaria.objects.filter(titular_dependente=dependente)  # noqa E501
             return queryset
@@ -52,7 +53,7 @@ class ContaBancariaListView(LRM, PermissaoFamiliaMixin, ListView):
             'Conta',
             'Titular',
             'Saldo Inicial RS',
-            'Saldo Atual RS',
+            'Saldo Atual RS'
 
         )
         return context
@@ -108,8 +109,8 @@ class CreditoListView(LRM, PermissaoFamiliaMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['labels'] = (
-            'Dta Entrada',
             'Conta',
+            'Dta Entrada',
             'Referência',
             'Depositante',
             'Valor R$',
@@ -242,21 +243,21 @@ class DespesaListView(LRM, PermissaoFamiliaMixin, ListView):
     model = Despesa
 
     def get_queryset(self):
-        conta_bancaria = self.request.GET.get('conta_bancária')
+        conta = self.request.GET.get('conta_bancária')
 
-        if conta_bancaria:
-            queryset = ContasBancarias.objects.filter(conta=conta_bancaria)  # noqa E501
+        if conta:
+            queryset = ContasBancarias.objects.filter(nome_banco=conta)  # noqa E501
             return queryset
 
         usuario = self.request.user.usuarios.first()
         familia = usuario.familia
-        queryset = Despesa.objects.filter(responsavel_lancamento__familia__nome=familia)  # noqa E501
+        queryset = Despesa.objects.filter(conta_bancaria__titular_dependente__familia=familia)  # noqa E501
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        #user = self.request.user.usuarios.first()
-        #context['form'] = ContasDaFamiliaForm(user)
+        user = self.request.user
+        context['form'] = ContasDaFamiliaForm(user)
         context['labels'] = (
             'Conta',
             'Dta Saída',

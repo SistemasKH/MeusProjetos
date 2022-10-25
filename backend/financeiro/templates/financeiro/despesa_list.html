@@ -20,13 +20,15 @@
       </div>
       <div class="table-responsive-sm">
           <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-              <div class="row">
+             <!-- <div class="row">
                   <form id="formBuscar" action="." method="GET">
-                       {{ form.contabancarias.label }}
-                       {{ form.contabancarias.nome_banco }}
-                   </form>
-              </div>
+                       {{ form.conta_bancaria.label }}
+                       {{ form.conta_bancaria }}
+                  </form>
+
+              </div>-->
           </div>
+          </br>
         <table
           id="dataTable"
           class="table table-striped"
@@ -61,14 +63,13 @@
             {% endfor %}
           </tbody>
         </table>
-
       </div>
     </div>
   </div>
 {% endblock content %}
 {% block js %}
-  <script>
-    $('#id_contasbancarias').on('change', function(e){
+ <script>
+    $('#id_conta_bancaria').on('change', function(e){
       e.preventDefault()
       $('#formBuscar').submit()
     })

@@ -4,5 +4,6 @@ from backend.core import views as v
 
 urlpatterns = [
     path('', v.home, name='home'),
-    path('table/', v.tables, name='tables'),
+    path('desenvolvedores',v.tables, name='desenvolvedores'),
+    #path('table/', v.tables, name='tables'),
 ]

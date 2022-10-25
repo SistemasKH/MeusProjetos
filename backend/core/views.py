@@ -25,5 +25,5 @@ def home(request):
 
 
 def tables(request):
-    template_name = 'tables.html'
+    template_name = 'quem_somos.html'
     return render(request, template_name)

@@ -1,3 +1,16 @@
+
+.corpo-texto{
+   text-align: justify;
+   font-size: large;
+   color: #090909;
+   margin: 3%;
+
+}
+.table-responsive{
+    scrollbar-width: none;
+    overflow-x: hidden;
+ }
+
 td {
   color: #2B2B2C;
 }
@@ -8,15 +21,16 @@ thead{
   color: #2B2B2C;
 }
 .bg-grafico-image {
-   display: block;
-   margin: 5% auto;
-   text-align : center;
+   margin:auto;
+   width: 50vm;
+
 }
 .bg-login-image {
   background: url("../img/my_img/idosos3.jpg");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+
 }
 .logo {
     background: url("../../static/img/my_img/casal_rosto.png");
@@ -28,3 +42,32 @@ thead{
 .usuario{
   color: #4D72DE;
 }
+#menu-h{
+    margin: 0 auto;
+    text-align: center;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #CFE8E5;
+}
+
+#menu-h ul {
+    list-style: none;
+    padding: 0;
+}
+
+#menu-h ul li {
+    display: inline;
+}
+
+#menu-h ul li a {
+    color: #3d3c3c;
+    padding: 8px;
+    display: inline-block;
+    text-decoration: none;
+    transition: background .4s;
+}
+
+#menu-h ul li a:hover {
+    background-color: rgb(156, 202, 226);
+}
+

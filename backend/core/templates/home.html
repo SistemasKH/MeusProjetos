@@ -4,6 +4,14 @@
 {% block titulo %} Home {% endblock %}
 
 {% block content %}
+  <nav id="menu-h">
+    <ul class="table table-responsive">
+        <li><a href="{% url 'home' %}">Home |</a></li>
+        <li><a href="{% url 'desenvolvedores' %}">Desenvolvedores |</a></li>
+        <li><a href=#"> Tutorial |</a></li>
+        <li><a href="#">Fale Conosco</a></li>
+    </ul>
+  </nav>
   <div class ="card-body">
     <h5 style="color:#363638">Olá <b>{{ user.get_full_name }}</b></h5>
     {% if not familia %}
@@ -12,8 +20,49 @@
           <i class="fas fa-plus fa-sm text-white-50"></i>Adicionar Família</a>
       </div>
     {% endif %}
-    <div class="bg-grafico-image">
-      <img src="../../static/img/my_img/brasileiros_idosos.jpg" style="width: 50vw"/>
+    <div class="table-responsive">
+        <div class="row">
+            <div class="corpo-texto">
+                  <p>O objetivo deste projeto é de apresentar o
+                  desenvolvimento de um sistema Web, que teve como proposta automatizar
+                  a maneira como os cuidadores familiares realizam as tarefas aos idosos
+                  em condição de dependência, auxiliando os Responsáveis e Cuidadores
+                  na integração das informações especialmente na área da saúde,
+                  persistindo em banco de dados:
+                      <ul>
+                      <li>Cadastro da Família, Dependentes e Responsáveis;</li>
+                      <li>Agenda de consultas médicas guardando as informações de diagnósticos, tratamento, upload de receitas e exames ; </li>
+                      <li>Medicamentos prescritos de uso continuo ou temporário, com indicação do fornecedor; </li>
+                      <li>Controle de medições de glicose, calculando a média diária, mensal e relacionando os alimentos ingeridos
+                      e a quantidade de insulina aplicada;</li>
+                      <li>Cálculo da jornada dos cuidadores, calculando a carga horária diária, semanal e mensal; </li>
+                      <li>Escala dos responsáveis, calculando as horas presenciais; </li>
+                      <li>Movimentação financeira com controle das contas bancárias, créditos e despesas; </li>
+                      </ul>
+                  <p>Com isso proporcionar aos médicos, que assistem a esse
+                      dependente o histórico de informações necessárias
+                      para tratamento mais assertivo e um gerenciamento de
+                      pessoal e financeiro  por parte dos responsáveis. </p>
+                  <p>E de acordo com o Ministério da Saúde, o cuidado no
+                      domicílio proporciona o convívio familiar, diminui o
+                      tempo de internação hospitalar e reduzas complicações
+                      decorrentes de longos períodos de internações
+                      hospitalares.</p>
+            </div>
+        </div>
+        <div class="row">
+           <div class="bg-grafico-image">
+               <img width="100%" src="../static/img/my_img/brasileiros_idosos.jpg"/>
+           </div>
+               <div class="corpo-texto">
+                  <p>O envelhecimento populacional é considerado um fenômeno
+                      mundial decorrente da queda da fecundidade e mortalidade,
+                      controle das doenças infecciosas, avanço científico e
+                      crescimento das tecnologias na assistência à saúde. </p>
+
+               </div>
+        </div>
+
     </div>
   </div>
 {% endblock %}

@@ -12,6 +12,24 @@ from .models import (
     Despesa
 )
 
+class ContasDaFamiliaForm(forms.Form):
+    conta_bancaria = forms.ModelChoiceField(
+        label='Conta Bancária',
+        widget=forms.Select(
+            attrs={'class': 'form-control'},
+
+        ),
+        queryset=ContaBancaria.objects.all()
+    )
+
+    def __init__(self, user=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        user = user.usuarios.first()
+        familia = user.familia
+        queryset = ContaBancaria.objects.filter(titular_dependente__familia__nome=familia)
+        self.fields['conta_bancaria'].queryset = queryset
+
 
 class ContaBancariaForm(forms.ModelForm):
     required_css_class = 'required'
@@ -49,23 +67,6 @@ class ContaBancariaForm(forms.ModelForm):
         usuario = Usuario.objects.filter(user=user).first()
         familia = usuario.familia
         queryset = Dependente.objects.filter(familia=familia)
-        self.fields['titular_dependente'].queryset = queryset
-
-
-class ContasDaFamiliaForm(forms.Form):
-    contasbancarias = forms.ModelChoiceField(
-        label='Conta Bancaria',
-        widget=forms.Select(
-            attrs={'class': 'form-control'},
-        ),
-        queryset=ContaBancaria.objects.all()
-    )
-
-    def __init__(self, user=None, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        usuario = Usuario.objects.filter(user=user).first()
-        familia = usuario.familia
-        queryset = ContaBancaria.objects.filter(titular_dependente__familia=familia)
         self.fields['titular_dependente'].queryset = queryset
 
 
