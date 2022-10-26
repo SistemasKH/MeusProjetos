@@ -71,14 +71,14 @@ thead{
     color:#ffefef;
 }
 
-@media (min-width: 576px) {
+@media (max-width: 600px) {
 .p {
    color: #090909;
-   font-size: medium;
+   font-size: small;
 }
 .corpo-texto{
    text-align: Left;
-   font-size: medium;
+   font-size: small;
    color: #090909;
    margin: 3%;
 }
